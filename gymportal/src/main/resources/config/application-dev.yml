@@ -1,13 +1,13 @@
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/myunivaq?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: myunivaq
-    password: myunivaq
+    url: jdbc:mysql://localhost:8889/gymportal?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: gymportal
+    password: gymportal
     driver-class-name: com.mysql.cj.jdbc.Driver
   
 
 ###############################################
-########### MYUNIVAQ PROPERTIES ###############
+########### GYMPORTAL PROPERTIES ###############
 ###############################################
 

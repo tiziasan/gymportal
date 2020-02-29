@@ -1,10 +1,10 @@
 server:
   servlet:
-    context-path: /myunivaq
+    context-path: /gymportal
 
 spring:
   application:
-    name: MyUnivaq
+    name: GymPortal
   profiles:
     active: dev
   #jackson:
@@ -17,8 +17,8 @@ spring:
     use-code-as-default-message: true
     
 ###############################################
-############# MYUNIVAQ PROPERTIES #############
+############# GYMPORTAL PROPERTIES #############
 ###############################################
 
-myunivaq:
+gymportal:
   dateformat: dd/MM/yyyy
