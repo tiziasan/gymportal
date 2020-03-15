@@ -38,6 +38,9 @@ public class Gym {
 	private String PI;
 	
 	@OneToMany(mappedBy="gym")
-	private List<Feedback> feedback;
+	private List<FeedbackGym> feedbackGym;
+	
+	@OneToMany(mappedBy="gym")
+	private List<FavoriteGym> favoriteGym;
 
 }

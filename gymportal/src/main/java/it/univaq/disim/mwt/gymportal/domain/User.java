@@ -1,6 +1,5 @@
 package it.univaq.disim.mwt.gymportal.domain;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -39,20 +38,6 @@ public class User {
 	private String email;
 	
 	@NotBlank
-	@Column(name="BIRTHDAY")
-	private Date birthday;
-	
-	@NotBlank
-	@Size(max=20)
-	@Column(name="CODEFISCALE")
-	private String codeFiscale;
-	
-	@NotBlank
-	@Size(max=20)
-	@Column(name="PHONE")
-	private String phone;
-	
-	@NotBlank
 	@Size(max=50)
 	@Column(name="USERNAME")
 	private String username;
@@ -63,12 +48,17 @@ public class User {
 	private String password;
 	
 	@OneToMany(mappedBy="user")
-	private List<Feedback> feedback;
+	private List<FeedbackCourse> feedbackCourse;
 	
 	@OneToMany(mappedBy="user")
 	private List<FavoriteGym> favoriteGym;
 	
 	@OneToMany(mappedBy="user")
 	private List<FavoriteCourse> favoriteCourse;
+	
+	@OneToMany(mappedBy="user")
+	private List<FeedbackGym> feedbackGym;
+	
+	
 	
 }

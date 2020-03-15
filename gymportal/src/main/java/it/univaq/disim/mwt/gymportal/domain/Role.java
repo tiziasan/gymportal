@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -29,6 +30,9 @@ public class Role {
 	@Size(max=200)
 	@Column(name="DESCRIPTION")
 	private String description;
+	
+	@OneToOne
+	private User user;
 
 }
 
