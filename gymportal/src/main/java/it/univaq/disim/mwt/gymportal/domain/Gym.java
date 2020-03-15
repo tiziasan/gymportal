@@ -33,11 +33,6 @@ public class Gym {
 	private String address;
 	
 	@NotBlank
-	@Size(max=11)
-	@Column(name="PI")
-	private String PI;
-	
-	@NotBlank
 	@Size(max=50)
 	@Column(name="PROVINCE")
 	private String province;
