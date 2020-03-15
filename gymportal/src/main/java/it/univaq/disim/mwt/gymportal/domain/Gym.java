@@ -37,10 +37,23 @@ public class Gym {
 	@Column(name="PI")
 	private String PI;
 	
+	@NotBlank
+	@Size(max=50)
+	@Column(name="PROVINCE")
+	private String province;
+	
+	@NotBlank
+	@Size(max=50)
+	@Column(name="REGION")
+	private String region;
+	
 	@OneToMany(mappedBy="gym")
 	private List<FeedbackGym> feedbackGym;
 	
 	@OneToMany(mappedBy="gym")
 	private List<FavoriteGym> favoriteGym;
+	
+	@OneToMany(mappedBy="gym")
+	private List<Course> course;
 
 }
