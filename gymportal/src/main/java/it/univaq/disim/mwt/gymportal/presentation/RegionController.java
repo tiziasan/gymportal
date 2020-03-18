@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("")
 
 public class RegionController {
+	
      
      @GetMapping("/abruzzo")
      public String listAb(Model model) {

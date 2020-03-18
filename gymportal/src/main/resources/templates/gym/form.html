@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+
+<head>
+<script type="text/javascript">
+	function regione(reg) {
+
+		if (reg == "")
+			return;
+
+		var province = new Array();
+		var selProv = document.getElementById('province');
+		while (selProv.options.length > 0)
+			selProv.removeChild(selProv.options[0]);
+
+		switch (reg) {
+
+		case 'abruzzo':
+			province.push("L'Aquila");
+			province.push('Chieti');
+			province.push('Pescara');
+			province.push('Teramo');
+
+			break;
+		case 'basilicata':
+			province.push('Matera');
+			province.push('Potenza');
+			break;
+
+		case 'calabria':
+			province.push('Catanzaro');
+			province.push('Cosenza');
+			province.push('Crotone');
+			province.push('Reggio Calabria');
+			province.push('Vibo Valentia');
+
+			break;
+
+		case 'campania':
+			province.push('Avellino');
+			province.push('Benevento');
+			province.push('Caserta');
+			province.push('Napoli');
+			province.push('Salerno');
+
+			break;
+
+		case 'emilia':
+			province.push('Bologna');
+			province.push('Ferrara');
+			province.push('Forli Cesena');
+			province.push('Modena');
+			province.push('Parma');
+			province.push('Piacenza');
+			province.push('Ravenna');
+			province.push('Reggio Emilia');
+			province.push('Rimini');
+			break;
+
+		case 'friuli':
+			province.push('Gorizia');
+			province.push('Pordenone');
+			province.push('Trieste');
+			province.push('Udine');
+			
+			break;
+
+		case 'lazio':
+			province.push('Frosinone');
+			province.push('Latina');
+			province.push('Rieti');
+			province.push('Roma');
+			province.push('Viterbo');
+			break;
+
+		case 'liguria':
+			province.push('Genova');
+			province.push('Imperia');
+			province.push('Spezia');
+			province.push('Savona');
+			
+			break;
+
+		case 'lombardia':
+			province.push('Bergamo');
+			province.push('Brescia');
+			province.push('Como');
+			province.push('Cremona');
+			province.push('Lecco');
+			province.push('Lodi');
+			province.push('Mantova');
+			province.push('Milano');
+			province.push('Monza Brianza');
+			province.push('Pavia');
+			province.push('Sondrio');
+			province.push('Varese');
+			break;
+
+		case 'marche':
+			province.push('Ancona');
+			province.push('Ascoli Piceno');
+			province.push('Fermo');
+			province.push('Macerata');
+			province.push('Pesaro Urbino');
+			break;
+
+		case 'molise':
+			province.push('Campobasso');
+			province.push('Isernia');
+			break;
+
+		case 'piemonte':
+			province.push('Alessandria');
+			province.push('Asti');
+			province.push('Biella');
+			province.push('Cuneo');
+			province.push('Novara');
+			province.push('Torino');
+			province.push('Verbano Cusio Ossola');
+			province.push('Vercelli');
+			break;
+
+		case 'puglia':
+			province.push('Bari');
+			province.push('Barletta-Andria-Trani');
+			province.push('Brindisi');
+			province.push('Foggia');
+			province.push('Lecce');
+			province.push('Taranto');
+
+
+			break;
+
+		case 'sardegna':
+			province.push('Cagliari');
+			province.push('Carbonia-Iglesias');
+			province.push('Medio Campidano');
+			province.push('Nuoro ');
+			province.push('Ogliastra');
+			province.push('Olbia-Tempio');
+			province.push('Oristano');
+			province.push('Sassari');
+
+			break;
+
+		case 'sicilia':
+			province.push('Agrigento');
+			province.push('Caltanissetta');
+			province.push('Catania');
+			province.push('Enna');
+			province.push('Messina');
+			province.push('Palermo');
+			province.push('Ragusa');
+			province.push('Siracusa');
+			province.push('Trapani');
+			break;
+
+		case 'toscana':
+			province.push('Arezzo');
+			province.push('Firenze');
+			province.push('Grosseto');
+			province.push('Livorno');
+			province.push('Lucca');
+			province.push('Massa Carrara');
+			province.push('Pisa');
+			province.push('Pistoia');
+			province.push('Prato');
+			province.push('Siena');
+			
+			break;
+
+		case 'trentino':
+			province.push('Bolzano');
+			province.push('Trento');
+			break;
+
+		case 'umbria':
+			province.push('Perugia');
+			province.push('Terni');
+			break;
+
+		case 'valle':
+			province.push("Valle D'Aosta");
+			break;
+
+		case 'veneto':
+			province.push('Belluno');
+			province.push('Padova');
+			province.push('Rovigo');
+			province.push('Treviso');
+			province.push('Venezia');
+			province.push('Verona');
+			province.push('Vicenza');
+			
+			break;
+
+		default:
+		}
+
+		for (i = 0; i < province.length; i++) {
+			opt = document.createElement('option');
+			opt.setAttribute('value', province[i]);
+			opt.setAttribute('text', province[i]);
+			opt.innerHTML = province[i];
+			selProv.appendChild(opt);
+		}
+	}
+</script>
+</head>
+
+<body>
+	<div layout:fragment="content">
+		<div class="box box-info" id="form-orizzontale">
+
+			<form class="form-horizontal">
+				<div class="box-body">
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-2 control-label">Nome</label>
+
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="inputEmail3"
+								placeholder="Nome">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputPassword3" class="col-sm-2 control-label">Indirizzo</label>
+
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="inputPassword3"
+								placeholder="Indirizzo">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-2 control-label">Regione</label>
+
+						<div class="col-sm-10">
+							<select id="regioni" onchange="regione(this.value)">
+								<option value="">Scegli regione</option>
+								<option value="abruzzo">Abruzzo</option>
+								<option value="basilicata">Basilicata</option>
+								<option value="calabria">Calabria</option>
+								<option value="campania">Campania</option>
+								<option value="emilia">Emilia Romagna</option>
+								<option value="friuli">Friuli Venezia giulia</option>
+								<option value="lazio">Lazio</option>
+								<option value="liguria">Liguria</option>
+								<option value="lombardia">Lombardia</option>
+								<option value="marche">Marche</option>
+								<option value="molise">Molise</option>
+								<option value="piemonte">Piemonte</option>
+								<option value="puglia">Puglia</option>
+								<option value="sardegna">Sardegna</option>
+								<option value="sicilia">Sicilia</option>
+								<option value="toscana">Toscana</option>
+								<option value="trentino">Trentino alto adige</option>
+								<option value="umbria">Umbria</option>
+								<option value="valle">Valle D'Aosta</option>
+								<option value="veneto">Veneto</option>
+
+
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="inputEmail3" class="col-sm-2 control-label">Provincia</label>
+						<div class="col-sm-10">
+							<select id="province"></select>
+						</div>
+					</div>
+
+				</div>
+				<!-- /.box-body -->
+				<div class="box-footer">
+					<button type="submit" class="btn btn-info pull-right">Crea
+						Palestra</button>
+				</div>
+				<!-- /.box-footer -->
+			</form>
+		</div>
+	</div>
+
+
+</body>
+</html>

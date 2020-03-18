@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/layout}">
+<body>
+<div layout:fragment="content">
+          <div class="box box-info" id="form-orizzontale">
+
+<form class="form-horizontal">
+              <div class="box-body">
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Codice Corso</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputEmail3" placeholder="Codice">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">Nome Palestra</label>
+
+                  <div class="col-sm-10">
+                    <input type="Text" class="form-control" id="inputPassword3" placeholder="nome">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">Descrizione</label>
+
+                  <div class="col-sm-10">
+<textarea id="w3mission" rows="4" cols="83" placeholder="Massimo 400 caratteri">
+</textarea ></div>
+                </div>
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                <button type="submit" class="btn btn-info pull-right">Aggiungi Palestra</button>
+              </div>
+              <!-- /.box-footer -->
+            </form>
+</div>
+</div>
+</body>
+</html>
+
+
+
+
+

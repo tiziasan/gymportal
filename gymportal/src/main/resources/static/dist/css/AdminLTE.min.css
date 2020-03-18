@@ -26,6 +26,10 @@ body {
 	overflow-x: hidden;
 	overflow-y: auto
 }
+#form-orizzontale{
+	width: 40%;
+	margin-left: 30%;
+}
 
 .wrapper {
 	height: 100%;

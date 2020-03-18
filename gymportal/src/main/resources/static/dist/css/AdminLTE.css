@@ -25,6 +25,12 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
 }
+.form-horizontal {
+	max-height: 20px !important;
+	max-width: 20px !important;
+	height: 200px !important;
+	width: 200px;
+}
 /* Layout */
 .wrapper {
   height: 100%;
