@@ -14,5 +14,15 @@ public class GymController {
 		return "/gym/form";
    	 
     }
+	@GetMapping("/update")
+    public String createUpdate() {
+		return "/gym/form";
+   	 
+    }
+	@GetMapping("/list")
+    public String list() {
+		return "/gym/list";
+   	 
+    }
 
 }

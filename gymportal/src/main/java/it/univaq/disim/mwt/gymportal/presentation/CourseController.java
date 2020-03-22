@@ -14,5 +14,15 @@ public class CourseController {
 		return "/course/form";
    	 
     }
+	@GetMapping("/update")
+    public String updateStart() {
+		return "/course/form";
+   	 
+    }
+	@GetMapping("/list")
+    public String list() {
+		return "/course/list";
+   	 
+    }
 
 }

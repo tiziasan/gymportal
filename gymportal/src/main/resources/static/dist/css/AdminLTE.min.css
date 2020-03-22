@@ -10,7 +10,27 @@ html,
 body {
 	height: 100%
 }
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
 
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  margin: 10px;
+  background-color: #f1f1f1;
+}
 .layout-boxed html,
 .layout-boxed body {
 	height: 100%, background-color: #cccccc;
@@ -2639,7 +2659,8 @@ a:focus {
 
 .btn-primary {
 	background-color: #3c8dbc;
-	border-color: #367fa9
+	border-color: #367fa9;
+	margin-bottom: 10px;
 }
 
 .btn-primary:hover,
