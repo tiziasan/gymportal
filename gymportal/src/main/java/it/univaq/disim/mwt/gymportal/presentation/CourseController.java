@@ -29,20 +29,15 @@ public class CourseController {
 	@Autowired
 	private GymBO serviceGym;
 	
-	
 	@GetMapping("/create")
     public String createStart(Model model) {
 		Course course = new Course();
 		model.addAttribute("course", course);
-
-		return "/course/form";
-   	 
+		return "/course/form"; 
     }
 	
 	@PostMapping("/create")
 	public String create(@Valid @ModelAttribute("course") Course course, Errors errors) throws BusinessException {
-		
-		
 		serviceCourse.createCourse(course);
 		return "redirect:/course/list";
 	}

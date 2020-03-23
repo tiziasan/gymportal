@@ -21,7 +21,7 @@ import it.univaq.disim.mwt.gymportal.domain.Gym;
 public class GymController {
 	
 	@Autowired
-	private GymBO service;
+	private GymBO gymBOImpl;
 	
 	@GetMapping("/create")
     public String createStart(Model model) {
@@ -30,29 +30,23 @@ public class GymController {
 		return "/gym/form";
     }
 	
-	
-
-	
 	@PostMapping("/create")
 	public String create(@Valid @ModelAttribute("gym") Gym gym, Errors errors) throws BusinessException {
 		if (errors.hasErrors()) {
 			return "/gym/form";
 		}
-		
-		service.createGym(gym);
+		gymBOImpl.createGym(gym);
 		return "redirect:/gym/list";
 	}
-	
 	
 	@GetMapping("/update")
     public String createUpdate() {
 		return "/gym/form";
-   	 
     }
+	
 	@GetMapping("/list")
     public String list() {
-		return "/region/index";
-   	 
+		return "/region/index"; 
     }
-
+	
 }
