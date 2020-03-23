@@ -213,14 +213,16 @@
 	<div layout:fragment="content">
 		<div class="box box-info" id="form-orizzontale">
 
-			<form class="form-horizontal">
+			<form th:action="${#request.getRequestURI()}" th:object="${gym}" class="form-horizontal" method="post">
+					  <input type="hidden" th:field="*{id}"/>
+			
 				<div class="box-body">
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">Nome</label>
 
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="inputEmail3"
-								placeholder="Nome">
+								placeholder="Nome" th:field="*{name}">
 						</div>
 					</div>
 					<div class="form-group">
@@ -228,7 +230,7 @@
 
 						<div class="col-sm-10">
 							<input type="text" class="form-control" id="inputPassword3"
-								placeholder="Indirizzo">
+								placeholder="Indirizzo" th:field="*{address}">
 						</div>
 					</div>
 
@@ -236,7 +238,7 @@
 						<label for="inputEmail3" class="col-sm-2 control-label">Regione</label>
 
 						<div class="col-sm-10">
-							<select id="regioni" onchange="regione(this.value)">
+							<select id="regioni" onchange="regione(this.value)" th:field="*{region}">
 								<option value="">Scegli regione</option>
 								<option value="abruzzo">Abruzzo</option>
 								<option value="basilicata">Basilicata</option>
@@ -266,7 +268,7 @@
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">Provincia</label>
 						<div class="col-sm-10">
-							<select id="province"></select>
+							<select id="province" th:field="*{province}"></select>
 						</div>
 					</div>
 
