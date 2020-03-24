@@ -9,7 +9,7 @@ import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 
 @Repository
-public interface CourseRepository extends CrudRepository<Course, Integer>{
+public interface CourseRepository extends CrudRepository<Course, Long>{
 	public List<Course> findCourseByGymId(long gym_id);
 
 

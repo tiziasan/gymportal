@@ -3,8 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
 <body>
 	<div layout:fragment="content">
-
-		<h1 th:text="${region}"></h1>
+	<h1 th:text="${gym.name}"></h1>
 		<div class="column" th:each="course : ${courseList}">
 			<div class="card">
 				<h3 th:text="${course.name}"></h3>
@@ -14,9 +13,6 @@
 				<button class="btn-primary">Lascia una recensione</button>
 				<a href="/gymportal/course/update"><button class="btn-primary">Modifica</button></a>
 				<button class="btn-primary">Elimina</button>
-
-
-
 			</div>
 		</div>
 	</div>

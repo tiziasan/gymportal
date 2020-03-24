@@ -19,7 +19,7 @@ public class CourseBOImpl implements CourseBO {
 	private CourseRepository courseRepository;
 
 	@Override
-	public void deleteCourse(int id) throws BusinessException {
+	public void deleteCourse(Long id) throws BusinessException {
 		courseRepository.deleteById(id);
 	}
 

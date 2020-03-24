@@ -1,6 +1,7 @@
 package it.univaq.disim.mwt.gymportal.business.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class GymBOImpl implements GymBO{
 	private GymRepository gymRepository;
 
 	@Override
-	public void deleteGym(int id) throws BusinessException {
+	public void deleteGym(Long id) throws BusinessException {
 		gymRepository.deleteById(id);
 	}
 
@@ -42,5 +43,12 @@ public class GymBOImpl implements GymBO{
 	public List<Gym> findByRegion(String region) throws BusinessException {
 		return gymRepository.findByRegionName(region);
 	}
+
+	@Override
+	public Gym findByID(Long id) throws BusinessException {
+		return gymRepository.findByID(id);
+	}
+
+	
 
 }

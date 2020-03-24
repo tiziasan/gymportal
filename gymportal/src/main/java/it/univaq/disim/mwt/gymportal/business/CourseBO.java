@@ -6,7 +6,7 @@ import it.univaq.disim.mwt.gymportal.domain.Course;
 
 public interface CourseBO {
 	
-	void deleteCourse (int id) throws BusinessException;
+	void deleteCourse (Long id) throws BusinessException;
 
 	void createCourse (Course course) throws BusinessException;
 	

@@ -1,6 +1,7 @@
 package it.univaq.disim.mwt.gymportal.presentation;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -57,7 +58,10 @@ public class CourseController {
 	@GetMapping("/gym")
 	public String listCo(@RequestParam long id, Model model) throws BusinessException {
 		List<Course> courseList = serviceCourse.findCourseByGymId(id);
+		Gym gym = serviceGym.findByID(id);
         model.addAttribute("courseList", courseList);
+        model.addAttribute("gym", gym);
+
 		return "/course/list";
 
 	}

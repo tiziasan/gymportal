@@ -10,4 +10,7 @@ public interface GymBOImplCustom {
 	@Query(value = "FROM Gym AS g WHERE g.region = :region")
 	public List<Gym> findByRegionName(String region);
 	
+	@Query(value = "FROM Gym AS g WHERE g.id = :id")
+	public Gym findByID(Long id);
+	
 }
