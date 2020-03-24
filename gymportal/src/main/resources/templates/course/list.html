@@ -5,109 +5,11 @@
 	<div layout:fragment="content">
 
 		<h1 th:text="${region}"></h1>
-		<div class="column">
+		<div class="column" th:each="course : ${courseList}">
 			<div class="card">
-				<h3>Nome Corso</h3>
-				<h4>Codice</h4>
-				<p>Descrizione</p>
-				<button class="btn-primary">Aggiungi ai preferiti!</button>
-				<button class="btn-primary">Lascia una recensione</button>
-				<a href="/gymportal/course/update"><button class="btn-primary">Modifica</button></a>
-				<button class="btn-primary">Elimina</button>
-
-
-
-			</div>
-		</div>
-		<div class="column">
-			<div class="card">
-				<h3>Nome Corso</h3>
-				<h4>Codice</h4>
-				<p>Descrizione</p>
-				<button class="btn-primary">Aggiungi ai preferiti!</button>
-				<button class="btn-primary">Lascia una recensione</button>
-				<a href="/gymportal/course/update"><button class="btn-primary">Modifica</button></a>
-				<button class="btn-primary">Elimina</button>
-
-
-
-			</div>
-		</div>
-		<div class="column">
-			<div class="card">
-				<h3>Nome Corso</h3>
-				<h4>Codice</h4>
-				<p>Descrizione</p>
-				<button class="btn-primary">Aggiungi ai preferiti!</button>
-				<button class="btn-primary">Lascia una recensione</button>
-				<a href="/gymportal/course/update"><button class="btn-primary">Modifica</button></a>
-				<button class="btn-primary">Elimina</button>
-
-
-
-			</div>
-		</div>
-		<div class="column">
-			<div class="card">
-				<h3>Nome Corso</h3>
-				<h4>Codice</h4>
-				<p>Descrizione</p>
-				<button class="btn-primary">Aggiungi ai preferiti!</button>
-				<button class="btn-primary">Lascia una recensione</button>
-				<a href="/gymportal/course/update"><button class="btn-primary">Modifica</button></a>
-				<button class="btn-primary">Elimina</button>
-
-
-
-			</div>
-		</div>
-		<div class="column">
-			<div class="card">
-				<h3>Nome Corso</h3>
-				<h4>Codice</h4>
-				<p>Descrizione</p>
-				<button class="btn-primary">Aggiungi ai preferiti!</button>
-				<button class="btn-primary">Lascia una recensione</button>
-				<a href="/gymportal/course/update"><button class="btn-primary">Modifica</button></a>
-				<button class="btn-primary">Elimina</button>
-
-
-
-			</div>
-		</div>
-		<div class="column">
-			<div class="card">
-				<h3>Nome Corso</h3>
-				<h4>Codice</h4>
-				<p>Descrizione</p>
-				<button class="btn-primary">Aggiungi ai preferiti!</button>
-				<button class="btn-primary">Lascia una recensione</button>
-				<a href="/gymportal/course/update"><button class="btn-primary">Modifica</button></a>
-				<button class="btn-primary">Elimina</button>
-
-
-
-			</div>
-		</div>
-		<div class="column">
-			<div class="card">
-				<h3>Nome Corso</h3>
-				<h4>Codice</h4>
-				<p>Descrizione</p>
-				<button class="btn-primary">Aggiungi ai preferiti!</button>
-				<button class="btn-primary">Lascia una recensione</button>
-				<a href="/gymportal/course/update"><button class="btn-primary">Modifica</button></a>
-				<button class="btn-primary">Elimina</button>
-
-
-
-			</div>
-		</div>
-		<div class="column">
-			<div class="card">
-				<h3>Nome Corso</h3>
-				<h4>Codice</h4>
-				<p>Descrizione</p>
+				<h3 th:text="${course.name}"></h3>
+				<h4 th:text="${course.code}"></h4>
+				<p th:text="${course.description}"></p>
 				<button class="btn-primary">Aggiungi ai preferiti!</button>
 				<button class="btn-primary">Lascia una recensione</button>
 				<a href="/gymportal/course/update"><button class="btn-primary">Modifica</button></a>

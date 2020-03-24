@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.CourseBO;
@@ -52,6 +53,14 @@ public class CourseController {
 		return "/course/list";
    	 
     }
+	
+	@GetMapping("/gym")
+	public String listCo(@RequestParam long id, Model model) throws BusinessException {
+		List<Course> courseList = serviceCourse.findCourseByGymId(id);
+        model.addAttribute("courseList", courseList);
+		return "/course/list";
+
+	}
 	
 	@ModelAttribute
 	public void addAllAree(Model model) throws BusinessException {

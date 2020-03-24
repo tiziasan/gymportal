@@ -13,4 +13,9 @@ public interface CourseBO {
 	void updateCourse (Course course) throws BusinessException;
 	
 	List<Course> findAllCourse() throws BusinessException;
+	
+	List<Course> findCourseByGymId(long id) throws BusinessException;
+
+
+
 }

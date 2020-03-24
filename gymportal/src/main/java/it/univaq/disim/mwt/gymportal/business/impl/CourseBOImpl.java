@@ -37,5 +37,12 @@ public class CourseBOImpl implements CourseBO {
 	public List<Course> findAllCourse() throws BusinessException {
 		return (List<Course>) courseRepository.findAll();
 	}
+
+	@Override
+	public List<Course> findCourseByGymId(long gym_id) throws BusinessException {
+		return courseRepository.findCourseByGymId(gym_id);
+	}
+
+	
 		
 }

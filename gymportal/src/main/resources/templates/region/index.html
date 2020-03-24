@@ -13,9 +13,8 @@
 
 				<button class="btn-primary">Aggiungi ai preferiti!</button>
 				<button class="btn-primary">Lascia una recensione</button>
-				<a href="/gymportal/course/list"><button class="btn-primary">Vai
-						ai corsi</button></a> <a href="/gymportal/gym/update"><button
-						class="btn-primary">Modifica</button></a>
+				<a th:href="@{/course/gym(id=${gym.id})}"><button class="btn-primary">Vai ai corsi</button></a> <a href="/gymportal/gym/update">
+				<button class="btn-primary">Modifica</button></a>
 				<button class="btn-primary">Elimina</button>
 
 
