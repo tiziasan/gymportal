@@ -5,120 +5,18 @@
 	<div layout:fragment="content">
 
 		<h1 th:text="${region}"></h1>
-		<div class="column">
+		<div class="column" th:each="gym : ${gymList}">
 			<div class="card">
-				<h3>Nome Palestra</h3>
-				<h4>Indirizzo</h4>
-				
+				<h3 th:text="${gym.name}"></h3>
+				<h4 th:text="${gym.province}"></h4>
+				<h4 th:text="${gym.address}"></h4>
+
 				<button class="btn-primary">Aggiungi ai preferiti!</button>
 				<button class="btn-primary">Lascia una recensione</button>
 				<a href="/gymportal/course/list"><button class="btn-primary">Vai
 						ai corsi</button></a> <a href="/gymportal/gym/update"><button
-						class="btn-primary">Modifica</button></a>				<button class="btn-primary">Elimina</button>
-						
-
-			</div>
-		</div>
-
-		<div class="column">
-			<div class="card">
-				<h3>Nome Palestra</h3>
-				<h4>Indirizzo</h4>
-				<button class="btn-primary">Aggiungi ai preferiti!</button>
-				<button class="btn-primary">Lascia una recensione</button>
-				<a href="/gymportal/course/list"><button class="btn-primary">Vai
-						ai corsi</button></a> <a href="/gymportal/gym/update"><button
-						class="btn-primary">Modifica</button></a>				<button class="btn-primary">Elimina</button>
-						
-
-
-			</div>
-		</div>
-
-		<div class="column">
-			<div class="card">
-				<h3>Nome Palestra</h3>
-				<h4>Indirizzo</h4>
-				<button class="btn-primary">Aggiungi ai preferiti!</button>
-				<button class="btn-primary">Lascia una recensione</button>
-				<a href="/gymportal/course/list"><button class="btn-primary">Vai
-						ai corsi</button></a> <a href="/gymportal/gym/update"><button
-						class="btn-primary">Modifica</button></a>				<button class="btn-primary">Elimina</button>
-						
-
-
-			</div>
-		</div>
-
-		<div class="column">
-			<div class="card">
-				<h3>Nome Palestra</h3>
-				<h4>Indirizzo</h4>
-				<button class="btn-primary">Aggiungi ai preferiti!</button>
-				<button class="btn-primary">Lascia una recensione</button>
-				<a href="/gymportal/course/list"><button class="btn-primary">Vai
-						ai corsi</button></a> <a href="/gymportal/gym/update"><button
-						class="btn-primary">Modifica</button></a>				<button class="btn-primary">Elimina</button>
-						
-
-
-			</div>
-		</div>
-		<div class="column">
-			<div class="card">
-				<h3>Nome Palestra</h3>
-				<h4>Indirizzo</h4>
-				<button class="btn-primary">Aggiungi ai preferiti!</button>
-				<button class="btn-primary">Lascia una recensione</button>
-				<a href="/gymportal/course/list"><button class="btn-primary">Vai
-						ai corsi</button></a> <a href="/gymportal/gym/update"><button
-						class="btn-primary">Modifica</button></a>				<button class="btn-primary">Elimina</button>
-						
-
-
-			</div>
-		</div>
-
-		<div class="column">
-			<div class="card">
-				<h3>Nome Palestra</h3>
-				<h4>Indirizzo</h4>
-				<button class="btn-primary">Aggiungi ai preferiti!</button>
-				<button class="btn-primary">Lascia una recensione</button>
-				<a href="/gymportal/course/list"><button class="btn-primary">Vai
-						ai corsi</button></a> <a href="/gymportal/gym/update"><button
-						class="btn-primary">Modifica</button></a>				<button class="btn-primary">Elimina</button>
-						
-
-
-			</div>
-		</div>
-
-		<div class="column">
-			<div class="card">
-				<h3>Nome Palestra</h3>
-				<h4>Indirizzo</h4>
-				<button class="btn-primary">Aggiungi ai preferiti!</button>
-				<button class="btn-primary">Lascia una recensione</button>
-				<a href="/gymportal/course/list"><button class="btn-primary">Vai
-						ai corsi</button></a> <a href="/gymportal/gym/update"><button
-						class="btn-primary">Modifica</button></a>				<button class="btn-primary">Elimina</button>
-						
-
-
-			</div>
-		</div>
-
-		<div class="column">
-			<div class="card">
-				<h3>Nome Palestra</h3>
-				<h4>Indirizzo</h4>
-				<button class="btn-primary">Aggiungi ai preferiti!</button>
-				<button class="btn-primary">Lascia una recensione</button>
-				<a href="/gymportal/course/list"><button class="btn-primary">Vai
-						ai corsi</button></a> <a href="/gymportal/gym/update"><button
-						class="btn-primary">Modifica</button></a>				<button class="btn-primary">Elimina</button>
-						
+						class="btn-primary">Modifica</button></a>
+				<button class="btn-primary">Elimina</button>
 
 
 			</div>
@@ -126,3 +24,4 @@
 	</div>
 </body>
 </html>
+

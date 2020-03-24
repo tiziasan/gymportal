@@ -1,154 +1,208 @@
 package it.univaq.disim.mwt.gymportal.presentation;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import it.univaq.disim.mwt.gymportal.business.BusinessException;
+import it.univaq.disim.mwt.gymportal.business.GymBO;
+import it.univaq.disim.mwt.gymportal.domain.Gym;
 
 @Controller
 @RequestMapping("")
 
 public class RegionController {
 	
-     
-     @GetMapping("/abruzzo")
-     public String listAb(Model model) {
- 		model.addAttribute("region", "Abruzzo");
-		return "/region/index";
-    	 
-     }
-     @GetMapping("/basilicata")
-     public String listBa(Model model) {
-  		model.addAttribute("region", "Basilicata");
-		return "/region/index";
-    	 
-     }
-     @GetMapping("/calabria")
-     public String listCal(Model model) {
-  		model.addAttribute("region", "Calabria");
+	
+	@Autowired
+	private GymBO gymBOImpl;
 
+	@GetMapping("/Abruzzo")
+	public String listAb(Model model) throws BusinessException {
+		String abruzzo = "Abruzzo";
+		List<Gym> gymList = gymBOImpl.findByRegion(abruzzo);
+		model.addAttribute("region", abruzzo);
+        model.addAttribute("gymList", gymList);
 		return "/region/index";
-    	 
-     }
-     @GetMapping("/campania")
-     public String listCam(Model model) {
-  		model.addAttribute("region", "Campania");
 
-		return "/region/index";
-    	 
-     }
-     @GetMapping("/emilia")
-     public String listEm(Model model) {
-  		model.addAttribute("region", "Emilia Romagna");
+	}
 
+	@GetMapping("/Basilicata")
+	public String listBa(Model model) throws BusinessException {
+		String basilicata = "Basilicata";
+		List<Gym> gymList = gymBOImpl.findByRegion(basilicata);
+		model.addAttribute("region", basilicata);
+        model.addAttribute("gymList", gymList);
 		return "/region/index";
-    	 
-     }
-     @GetMapping("/friuli")
-     public String listFr(Model model) {
-  		model.addAttribute("region", "Friuli-Venezia-Giulia");
 
-		return "/region/index";
-    	 
-     }
-     @GetMapping("/lazio")
-     public String listLa(Model model) {
-  		model.addAttribute("region", "Lazio");
+	}
 
+	@GetMapping("/Calabria")
+	public String listCa(Model model) throws BusinessException {
+		String calabria = "Calabria";
+		List<Gym> gymList = gymBOImpl.findByRegion(calabria);
+		model.addAttribute("region", calabria);
+        model.addAttribute("gymList", gymList);
 		return "/region/index";
-    	 
-     }
-     @GetMapping("/liguria")
-     public String listLi(Model model) {
-  		model.addAttribute("region", "Liguria");
+	}
 
+	@GetMapping("/Campania")
+	public String listCam(Model model) throws BusinessException {
+		String campania = "Campania";
+		List<Gym> gymList = gymBOImpl.findByRegion(campania);
+		model.addAttribute("region", campania);
+        model.addAttribute("gymList", gymList);
 		return "/region/index";
-    	 
-     }
-     @GetMapping("/lombardia")
-     public String listLo(Model model) {
-  		model.addAttribute("region", "Lombardia");
+	}
 
+	@GetMapping("/Emilia")
+	public String listEm(Model model) throws BusinessException {
+		String emilia = "Emilia Romagna";
+		List<Gym> gymList = gymBOImpl.findByRegion(emilia);
+		model.addAttribute("region", emilia);
+        model.addAttribute("gymList", gymList);
 		return "/region/index";
-    	 
-     }
-     @GetMapping("/marche")
-     public String listMa(Model model) {
-  		model.addAttribute("region", "Marche");
+	}
 
+	@GetMapping("/Friuli")
+	public String listFr(Model model) throws BusinessException {
+		String friuli = "Friuli Venezia Giulia";
+		List<Gym> gymList = gymBOImpl.findByRegion(friuli);
+		model.addAttribute("region", friuli);
+        model.addAttribute("gymList", gymList);
 		return "/region/index";
-    	 
-     }
-     @GetMapping("/molise")
-     public String listMo(Model model) {
-  		model.addAttribute("region", "Molise");
+	}
 
+	@GetMapping("/Lazio")
+	public String listLa(Model model) throws BusinessException {
+		String lazio = "Lazio";
+		List<Gym> gymList = gymBOImpl.findByRegion(lazio);
+		model.addAttribute("region", lazio);
+        model.addAttribute("gymList", gymList);
 		return "/region/index";
-    	 
-     }
-     @GetMapping("/piemonte")
-     public String listPi(Model model) {
-  		model.addAttribute("region", "Piemonte");
+	}
 
+	@GetMapping("/Liguria")
+	public String listLi(Model model) throws BusinessException {
+		String liguria = "Liguria";
+		List<Gym> gymList = gymBOImpl.findByRegion(liguria);
+		model.addAttribute("region", liguria);
+        model.addAttribute("gymList", gymList);
 		return "/region/index";
-    	 
-     }
-     @GetMapping("/puglia")
-     public String listPu(Model model) {
-  		model.addAttribute("region", "Puglia");
+	}
 
+	@GetMapping("/Lombardia")
+	public String listLo(Model model) throws BusinessException {
+		String lombardia = "Lombardia";
+		List<Gym> gymList = gymBOImpl.findByRegion(lombardia);
+		model.addAttribute("region", lombardia);
+        model.addAttribute("gymList", gymList);
 		return "/region/index";
-    	 
-     }
-     @GetMapping("/sardegna")
-     public String listSa(Model model) {
-  		model.addAttribute("region", "Sardegna");
+	}
 
+	@GetMapping("/Marche")
+	public String listMa(Model model) throws BusinessException {
+		String marche = "Marche";
+		List<Gym> gymList = gymBOImpl.findByRegion(marche);
+		model.addAttribute("region", marche);
+        model.addAttribute("gymList", gymList);
 		return "/region/index";
-    	 
-     }
-     @GetMapping("/sicilia")
-     public String listSi(Model model) {
-  		model.addAttribute("region", "Sicilia");
+	}
 
+	@GetMapping("/Molise")
+	public String listMo(Model model) throws BusinessException {
+		String molise = "Molise";
+		List<Gym> gymList = gymBOImpl.findByRegion(molise);
+		model.addAttribute("region", molise);
+        model.addAttribute("gymList", gymList);
 		return "/region/index";
-    	 
-     }
-     @GetMapping("/toscana")
-     public String listTo(Model model) {
-  		model.addAttribute("region", "Toscana");
+	}
 
+	@GetMapping("/Piemonte")
+	public String listPi(Model model) throws BusinessException {
+		String piemonte = "Piemonte";
+		List<Gym> gymList = gymBOImpl.findByRegion(piemonte);
+		model.addAttribute("region", piemonte);
+        model.addAttribute("gymList", gymList);
 		return "/region/index";
-    	 
-     }
-     @GetMapping("/trentino")
-     public String listTr(Model model) {
-  		model.addAttribute("region", "Trentino Alto Adige");
+	}
 
+	@GetMapping("/Puglia")
+	public String listPu(Model model) throws BusinessException {
+		String puglia = "Puglia";
+		List<Gym> gymList = gymBOImpl.findByRegion(puglia);
+		model.addAttribute("region", puglia);
+        model.addAttribute("gymList", gymList);
 		return "/region/index";
-    	 
-     }
-     @GetMapping("/umbria")
-     public String listUm(Model model) {
-  		model.addAttribute("region", "Umbria");
+	}
 
+	@GetMapping("/Sardegna")
+	public String listSa(Model model) throws BusinessException {
+		String sardegna = "Sardegna";
+		List<Gym> gymList = gymBOImpl.findByRegion(sardegna);
+		model.addAttribute("region", sardegna);
+        model.addAttribute("gymList", gymList);
 		return "/region/index";
-    	 
-     }
-     @GetMapping("/valledaosta")
-     public String listAO(Model model) {
-  		model.addAttribute("region", "Valle D'Aosta");
 
-		return "/region/index";
-    	 
-     }
-     @GetMapping("/veneto")
-     public String listVe(Model model) {
-  		model.addAttribute("region", "Veneto");
+	}
 
+	@GetMapping("/Sicilia")
+	public String listSi(Model model) throws BusinessException {
+		String sicilia = "Sicilia";
+		List<Gym> gymList = gymBOImpl.findByRegion(sicilia);
+		model.addAttribute("region", sicilia);
+        model.addAttribute("gymList", gymList);
 		return "/region/index";
-    	 
-     }
-     
-     
+	}
+
+	@GetMapping("/Toscana")
+	public String listTo(Model model) throws BusinessException {
+		String toscana = "Toscana";
+		List<Gym> gymList = gymBOImpl.findByRegion(toscana);
+		model.addAttribute("region", toscana);
+        model.addAttribute("gymList", gymList);
+		return "/region/index";
+	}
+
+	@GetMapping("/Trentino")
+	public String listTr(Model model) throws BusinessException {
+		String trentino = "Trentino Alto Adige";
+		List<Gym> gymList = gymBOImpl.findByRegion(trentino);
+		model.addAttribute("region", trentino);
+        model.addAttribute("gymList", gymList);
+		return "/region/index";
+	}
+
+	@GetMapping("/Umbria")
+	public String listUm(Model model) throws BusinessException {
+		String umbria = "Umbria";
+		List<Gym> gymList = gymBOImpl.findByRegion(umbria);
+		model.addAttribute("region", umbria);
+        model.addAttribute("gymList", gymList);
+		return "/region/index";
+	}
+
+	@GetMapping("/Valledaosta")
+	public String listVa(Model model) throws BusinessException {
+		String valle = "Valle D'Aosta";
+		List<Gym> gymList = gymBOImpl.findByRegion(valle);
+		model.addAttribute("region", valle);
+        model.addAttribute("gymList", gymList);
+		return "/region/index";
+
+	}
+
+	@GetMapping("/Veneto")
+	public String listVe(Model model) throws BusinessException {
+		String veneto = "Veneto";
+		List<Gym> gymList = gymBOImpl.findByRegion(veneto);
+		model.addAttribute("region", veneto);
+        model.addAttribute("gymList", gymList);
+		return "/region/index";
+	}
+
 }
