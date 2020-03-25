@@ -36,7 +36,7 @@ public class GymController {
 			return "/gym/form";
 		}
 		serviceGym.createGym(gym);
-		return "redirect:/gym/list";
+		return "redirect:/course/create";
 	}
 	
 	@GetMapping("/update")

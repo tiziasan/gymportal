@@ -35,23 +35,28 @@ public class CourseController {
     public String createStart(Model model) {
 		Course course = new Course();
 		model.addAttribute("course", course);
+
+		
 		return "/course/form"; 
     }
 	
 	@PostMapping("/create")
-	public String create(@Valid @ModelAttribute("course") Course course, Errors errors) throws BusinessException {
+	public String create(@Valid @ModelAttribute("course") Course course, Errors errors, Model model) throws BusinessException {
+		if (errors.hasErrors()) {
+			String message = "Errore nell'inserimento";
+			model.addAttribute("message", message);
+
+			return "/course/form";
+		}
 		serviceCourse.createCourse(course);
-		return "redirect:/course/list";
+		String message = "Operazione andata a buon fine, aggiungi un altro corso!";
+		model.addAttribute("message", message);
+		return "/course/form";
 	}
 	
 	@GetMapping("/update")
     public String updateStart() {
 		return "/course/form";
-   	 
-    }
-	@GetMapping("/list")
-    public String list() {
-		return "/course/list";
    	 
     }
 	

@@ -6,11 +6,10 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import it.univaq.disim.mwt.gymportal.domain.Course;
-import it.univaq.disim.mwt.gymportal.domain.Gym;
 
 @Repository
-public interface CourseRepository extends CrudRepository<Course, Long>{
-	public List<Course> findCourseByGymId(long gym_id);
+public interface CourseRepository extends CrudRepository<Course, Long>, CourseBOImplCustom{
+	List<Course> findCourseByGymId(long gym_id);
 
 
 }
