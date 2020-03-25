@@ -19,8 +19,8 @@ public class CourseBOImpl implements CourseBO {
 	private CourseRepository courseRepository;
 
 	@Override
-	public void deleteCourse(Long id) throws BusinessException {
-		courseRepository.deleteById(id);
+	public void deleteCourse(Course course) throws BusinessException {
+		courseRepository.delete(course);
 	}
 
 	@Override
@@ -41,6 +41,11 @@ public class CourseBOImpl implements CourseBO {
 	@Override
 	public List<Course> findCourseByGymId(long gym_id) throws BusinessException {
 		return courseRepository.findCourseByGymId(gym_id);
+	}
+
+	@Override
+	public Course findByID(Long id) throws BusinessException {
+		return courseRepository.findByID(id);
 	}
 
 	

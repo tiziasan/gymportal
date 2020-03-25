@@ -20,8 +20,8 @@ public class GymBOImpl implements GymBO{
 	private GymRepository gymRepository;
 
 	@Override
-	public void deleteGym(Long id) throws BusinessException {
-		gymRepository.deleteById(id);
+	public void deleteGym(Gym gym) throws BusinessException {
+		gymRepository.delete(gym);
 	}
 
 	@Override

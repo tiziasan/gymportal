@@ -211,12 +211,13 @@
 
 <body>
 	<div layout:fragment="content">
-	<h1>Aggiungi Palestra</h1>
+		<h1>Aggiungi Palestra</h1>
 		<div class="box box-info" id="form-orizzontale">
 
-			<form th:action="${#request.getRequestURI()}" th:object="${gym}" class="form-horizontal" method="post">
-					  <input type="hidden" th:field="*{id}"/>
-			
+			<form th:action="${#request.getRequestURI()}" th:object="${gym}"
+				class="form-horizontal" method="post">
+				<input type="hidden" th:field="*{id}" />
+
 				<div class="box-body">
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">Nome</label>
@@ -230,7 +231,7 @@
 						<label for="inputPassword3" class="col-sm-2 control-label">Indirizzo</label>
 
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="inputPassword3"
+							<input type="text" class="form-control" id="inputEmail3"
 								placeholder="Indirizzo" th:field="*{address}">
 						</div>
 					</div>
@@ -238,8 +239,9 @@
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">Regione</label>
 
-						<div class="col-sm-10">
-							<select id="regioni" onchange="regione(this.value)" th:field="*{region}">
+						<div class="col-sm-10" id="inputEmail3">
+							<select id="regioni" onchange="regione(this.value)"
+								th:field="*{region}">
 								<option value="">Scegli regione</option>
 								<option value="Abruzzo">Abruzzo</option>
 								<option value="Basilicata">Basilicata</option>
@@ -276,8 +278,8 @@
 				</div>
 				<!-- /.box-body -->
 				<div class="box-footer">
-					<button type="submit" class="btn btn-info pull-right">Crea
-						Palestra</button>
+					<button type="submit" class="btn btn-info pull-right" >Crea Palestra
+						</button>
 				</div>
 				<!-- /.box-footer -->
 			</form>

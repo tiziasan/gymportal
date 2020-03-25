@@ -12,9 +12,29 @@
 				<button class="btn-primary">Aggiungi ai preferiti!</button>
 				<button class="btn-primary">Lascia una recensione</button>
 				<a href="/gymportal/course/update"><button class="btn-primary">Modifica</button></a>
-				<button class="btn-primary">Elimina</button>
+				<a th:href="@{/course/delete/(id=${course.id})}"><button class="btn-primary">Elimina</button></a>
 			</div>
 		</div>
+		<div class="col-md-12"></div>
+		<div class="col-md-4" >
+          <!-- Widget: user widget style 1 -->
+          <div class="box box-widget widget-user-2">
+            <!-- Add the bg color to the header using any of the bg-* classes -->
+            <div class="widget-user-header bg-yellow">
+              <div class="widget-user-image">
+                <img class="img-circle" src="../dist/img/user7-128x128.jpg" alt="User Avatar">
+              </div>
+              <!-- /.widget-user-image -->
+              <h3 class="widget-user-username">Nadia Carmichael</h3>
+            </div>
+            <div class="box-footer no-padding">
+              <ul class="nav nav-stacked">
+                <h3>Valutazione</h3>
+                <h3>Recensione</h3>
+            </div>
+          </div>
+          <!-- /.widget-user -->
+        </div>
 	</div>
 </body>
 </html>

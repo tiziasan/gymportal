@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.GymBO;
@@ -36,6 +37,22 @@ public class GymController {
 			return "/gym/form";
 		}
 		serviceGym.createGym(gym);
+		return "redirect:/course/create";
+	}
+	
+	@GetMapping("/delete")
+    public String deleteStart(@RequestParam Long id, Model model) throws BusinessException {
+		Gym gym = serviceGym.findByID(id);
+		model.addAttribute("gym", gym);
+		return "/gym/delete";
+    }
+	
+	@PostMapping("/delete")
+	public String delete(@ModelAttribute("gym") Gym gym, Errors errors) throws BusinessException {
+		if (errors.hasErrors()) {
+			return "/gym/form";
+		}
+		serviceGym.deleteGym(gym);
 		return "redirect:/course/create";
 	}
 	

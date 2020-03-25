@@ -10,7 +10,7 @@ import it.univaq.disim.mwt.gymportal.domain.Gym;
 @Service
 public interface GymBO {
 
-	void deleteGym (Long id) throws BusinessException;
+	void deleteGym (Gym gym) throws BusinessException;
 
 	void createGym (Gym gym) throws BusinessException;
 	

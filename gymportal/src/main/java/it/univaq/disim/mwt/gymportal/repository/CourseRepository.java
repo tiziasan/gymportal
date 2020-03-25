@@ -11,5 +11,7 @@ import it.univaq.disim.mwt.gymportal.domain.Course;
 public interface CourseRepository extends CrudRepository<Course, Long>, CourseBOImplCustom{
 	List<Course> findCourseByGymId(long gym_id);
 
+	Course findByID(Long id);
+
 
 }

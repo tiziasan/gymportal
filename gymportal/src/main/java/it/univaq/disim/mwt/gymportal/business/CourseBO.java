@@ -5,11 +5,12 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import it.univaq.disim.mwt.gymportal.domain.Course;
+import it.univaq.disim.mwt.gymportal.domain.Gym;
 
 @Service
 public interface CourseBO {
 	
-	void deleteCourse (Long id) throws BusinessException;
+	void deleteCourse (Course course) throws BusinessException;
 
 	void createCourse (Course course) throws BusinessException;
 	
@@ -18,6 +19,9 @@ public interface CourseBO {
 	List<Course> findAllCourse() throws BusinessException;
 	
 	List<Course> findCourseByGymId(long id) throws BusinessException;
+	
+	Course findByID(Long id) throws BusinessException;
+
 
 
 

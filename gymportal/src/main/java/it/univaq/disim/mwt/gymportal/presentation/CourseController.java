@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.CourseBO;
@@ -41,7 +42,7 @@ public class CourseController {
     }
 	
 	@PostMapping("/create")
-	public String create(@Valid @ModelAttribute("course") Course course, Errors errors, Model model) throws BusinessException {
+	public String create(@Valid @ModelAttribute("course") Course course, Errors errors, Model model, RedirectAttributes ra) throws BusinessException {
 		if (errors.hasErrors()) {
 			String message = "Errore nell'inserimento";
 			model.addAttribute("message", message);
@@ -50,8 +51,8 @@ public class CourseController {
 		}
 		serviceCourse.createCourse(course);
 		String message = "Operazione andata a buon fine, aggiungi un altro corso!";
-		model.addAttribute("message", message);
-		return "/course/form";
+		ra.addFlashAttribute("message", message);
+		return "redirect:/course/create";
 	}
 	
 	@GetMapping("/update")
@@ -69,6 +70,25 @@ public class CourseController {
 
 		return "/course/list";
 
+	}
+	@GetMapping("/delete")
+    public String deleteStart(@RequestParam Long id, Model model) throws BusinessException {
+		Course course = serviceCourse.findByID(id);
+		model.addAttribute("course", course);
+		return "/course/delete";
+    }
+	
+	@PostMapping("/delete")
+	public String delete(@ModelAttribute("course") Course course, Errors errors) throws BusinessException {
+		Course courseComplete = serviceCourse.findByID(course.getId());
+
+		if (errors.hasErrors()) {
+			return "/common/error";
+		}
+		long id = courseComplete.getGym().getId();
+		String redirect = "redirect:/course/gym?id=" + id;
+		serviceCourse.deleteCourse(course);
+		return redirect;
 	}
 	
 	@ModelAttribute
