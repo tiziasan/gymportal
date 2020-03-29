@@ -2,7 +2,9 @@ package it.univaq.disim.mwt.gymportal.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import it.univaq.disim.mwt.gymportal.domain.Course;
 
@@ -13,6 +15,13 @@ import it.univaq.disim.mwt.gymportal.domain.Course;
 		@Query(value = "FROM Course AS c WHERE c.id = :id")
 		public Course findByID(Long id);
 		
+		@Modifying
+		@Query(value = "INSERT INTO FavoriteCourse (course_id, user_id) VALUES (:course_id, :user_id)", nativeQuery = true)
+		public void addFavoriteCourse(@Param("course_id") Long course_id, @Param("user_id") Long user_id);
+		
+		@Modifying
+		@Query(value = "INSERT INTO FeedbackCourse (feed, rating, course_id, user_id) VALUES (:feed, :rating, :course_id, :user_id)", nativeQuery = true)
+		public void addFeedbackCourse(@Param("feed") String feed, @Param("rating") int rating, @Param("course_id") Long course_id, @Param("user_id") Long user_id);
 	}
 
 

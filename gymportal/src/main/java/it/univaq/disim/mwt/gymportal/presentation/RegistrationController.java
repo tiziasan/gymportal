@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.UserBO;
-import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.User;
 
 @Controller

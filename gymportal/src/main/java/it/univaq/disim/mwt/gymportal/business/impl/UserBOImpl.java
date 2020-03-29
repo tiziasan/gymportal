@@ -11,7 +11,6 @@ import it.univaq.disim.mwt.gymportal.domain.User;
 import it.univaq.disim.mwt.gymportal.repository.UserRepository;
 
 @Service
-
 @Transactional
 
 public class UserBOImpl implements UserBO {
