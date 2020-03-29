@@ -2,83 +2,6 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
 <head>
-<style>
-input[name="c4l-rating"] {
-	display: none;
-}
-
-input[name="c4l-rating"]+label:after {
-	content: none;
-}
-
-input[name="c4l-rating"]+label {
-	font-family: 'FontAwesome';
-}
-
-input[name="c4l-rating"]+label:before {
-	background-color: transparent;
-	border: none !important;
-	color: #ffc107;
-	content: '\f005';
-	font-size: 1.33333333em;
-	transition: none;
-}
-
-input[name="c4l-rating"]:checked ~ label:before {
-	background-color: transparent;
-	border: none !important;
-	color: #607d8b;
-}
-
-input[name="c4l-rating"]:checked+label:before {
-	color: #ffc107;
-}
-
-input[name="c4l-rating"]+label:hover ~ input+label:before {
-	opacity: 0.6;
-}
-
-/* Demo style only */
-.demo-content {
-	margin-bottom: 70px;
-	text-align: center;
-}
-
-/* Credits */
-@import url( 'https://fonts.googleapis.com/css?family=Roboto:300' );
-
-.credits {
-	background: #F3F5F6;
-	border: solid 1px #CFD6D9;
-	bottom: 40px;
-	left: 0;
-	padding: 10px;
-	position: fixed;
-	right: 0;
-	text-align: center;
-	z-index: 1000;
-}
-
-.btn-credits {
-	border: 2px solid #33b5e5;
-	border-radius: 10em;
-	color: #33b5e5 !important;
-	display: inline-block;
-	font-family: 'Roboto', sans-serif;
-	font-size: .8rem;
-	line-height: 1.25;
-	padding: .85rem 2.13rem;
-	text-decoration: none;
-	text-transform: uppercase;
-	transition: .2s ease-out;
-	vertical-align: middle;
-}
-
-.btn-credits:hover {
-	background-color: #33b5e5;
-	color: #fff !important;
-}
-</style>
 </head>
 <body>
 	<div layout:fragment="content">
@@ -93,35 +16,18 @@ input[name="c4l-rating"]+label:hover ~ input+label:before {
 							<div class="box box-primary">
 								<!-- /.box-body -->
 								<div class="profile-sidebar">
-									<!-- SIDEBAR USERPIC -->
-									<div class="widget-user-image">
-										<img class="img-circle"
-											src="static/dist/img/user7-128x128.jpg" alt="User Avatar">
-									</div>
-									<!-- END SIDEBAR USERPIC -->
-									<!-- SIDEBAR USER TITLE -->
 									<div class="profile-usertitle">
 										<div class="profile-usertitle-name">
-											<h3>Marcus Doe</h3>
-										</div>
-										<div class="profile-usertitle-job">
-											<h5>Developer</h5>
+											<h1>Marcus Doe</h1>
 										</div>
 									</div>
 									<div class="profile-usermenu">
 										<ul class="nav">
-											<li class="active"><a href="#"> <i
-													class="glyphicon glyphicon-home"></i> Overview
-											</a></li>
-											<li><a href="#"> <i class="glyphicon glyphicon-user"></i>
-													Account Settings
-											</a></li>
-											<li><a href="#" target="_blank"> <i
-													class="glyphicon glyphicon-ok"></i> Tasks
-											</a></li>
-											<li><a href="#"> <i class="glyphicon glyphicon-flag"></i>
-													Help
-											</a></li>
+											<li><h4>Email</h4></li>
+											<li><h5>aaaaaa@gmail.com</h5></li>
+											<li><h4>Username</h4></li>
+											<li><h5>aaaaaa@gmail.com</h5></li>
+								
 										</ul>
 									</div>
 								</div>
@@ -188,16 +94,11 @@ input[name="c4l-rating"]+label:hover ~ input+label:before {
 														<span class="username">Valutazione</span>
 														<div class="username">
 														<div class="c4l-rating">
-															<input name="c4l-rating" type="radio" 
-																value="1" /> <label for="c4l-rate1"></label> <input
-																name="c4l-rating" type="radio"  value="2" />
-															<label for="c4l-rate2"></label> <input name="c4l-rating"
-																type="radio"  value="3" /> <label
-																for="c4l-rate3"></label> <input name="c4l-rating"
-																type="radio"  value="4" /> <label
-																for="c4l-rate4"></label> <input name="c4l-rating"
-																type="radio"  value="5" checked /> <label
-																for="c4l-rate5"></label>
+															<input name="c4l-rating" type="radio" id="c4l-rate1" value="1"/> <label for="c4l-rate1"></label> 
+															<input name="c4l-rating" type="radio" id="c4l-rate2" value="2"/> <label for="c4l-rate2"></label> 
+															<input name="c4l-rating" type="radio" id="c4l-rate3" value="3" /> <label for="c4l-rate3"></label> 
+															<input name="c4l-rating" type="radio" id="c4l-rate4" value="4" /> <label for="c4l-rate4"></label> 
+															<input name="c4l-rating" type="radio" id="c4l-rate5" value="5" /> <label for="c4l-rate5"></label>
 														</div>
 													</div>
 													<span class="username">Recensione</span>
@@ -214,11 +115,11 @@ input[name="c4l-rating"]+label:hover ~ input+label:before {
 														<span class="username">Valutazione</span>
 														<div class="username">
 														<div class="c4l-rating">
-															<input name="c4l-rating" type="radio"  value="1" /> <label for="c4l-rate1"></label> 
-															<input name="c4l-rating" type="radio"  value="2" /> <label for="c4l-rate2"></label>
-															<input name="c4l-rating" type="radio"  value="3" /> <label for="c4l-rate3"></label> 
-															<input name="c4l-rating" type="radio"  value="4" /> <label for="c4l-rate4"></label> 
-															<input name="c4l-rating" type="radio"  value="5" /> <label for="c4l-rate5"></label>		
+															<input name="c4l-rating" type="radio" id="c4l-rate6" value="6" /> <label for="c4l-rate6"></label> 
+															<input name="c4l-rating" type="radio" id="c4l-rate7" value="7" /> <label for="c4l-rate7"></label>
+															<input name="c4l-rating" type="radio" id="c4l-rate8" value="8" /> <label for="c4l-rate8"></label> 
+															<input name="c4l-rating" type="radio" id="c4l-rate9" value="9" /> <label for="c4l-rate9"></label> 
+															<input name="c4l-rating" type="radio" id="c4l-rate10" value="10"/> <label for="c4l-rate10"></label>		
 														</div>
 													</div>
 													<span class="username">Recensione</span>
