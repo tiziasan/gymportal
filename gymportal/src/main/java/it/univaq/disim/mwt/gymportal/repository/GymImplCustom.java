@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 
-public interface GymBOImplCustom {
+public interface GymImplCustom {
 	@Query(value = "FROM Gym AS g WHERE g.region = :region")
 	public List<Gym> findByRegionName(String region);
 	
