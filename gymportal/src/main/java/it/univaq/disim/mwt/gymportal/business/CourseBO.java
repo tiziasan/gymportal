@@ -21,6 +21,8 @@ public interface CourseBO {
 	List<Course> findCourseByGymId(long id) throws BusinessException;
 	
 	Course findByID(Long id) throws BusinessException;
+	
+	void deleteAllCourseByGymId (Long id) throws BusinessException;
 
 
 

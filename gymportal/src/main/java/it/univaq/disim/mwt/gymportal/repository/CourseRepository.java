@@ -13,5 +13,7 @@ public interface CourseRepository extends CrudRepository<Course, Long>, CourseBO
 
 	Course findByID(Long id);
 
+	void deleteAllCourseByGymId(Long id);
+
 
 }

@@ -48,6 +48,12 @@ public class CourseBOImpl implements CourseBO {
 		return courseRepository.findByID(id);
 	}
 
+	@Override
+	public void deleteAllCourseByGymId(Long id) throws BusinessException {
+		 courseRepository.deleteAllCourseByGymId(id);
+
+	}
+
 	
 		
 }

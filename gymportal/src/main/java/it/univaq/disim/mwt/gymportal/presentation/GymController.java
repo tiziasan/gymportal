@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
+import it.univaq.disim.mwt.gymportal.business.CourseBO;
 import it.univaq.disim.mwt.gymportal.business.GymBO;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 
@@ -23,6 +24,9 @@ public class GymController {
 	
 	@Autowired
 	private GymBO serviceGym;
+	
+	@Autowired
+	private CourseBO serviceCourse;
 	
 	@GetMapping("/create")
     public String createStart(Model model) {
@@ -52,8 +56,9 @@ public class GymController {
 		if (errors.hasErrors()) {
 			return "/gym/form";
 		}
+		serviceCourse.deleteAllCourseByGymId(gym.getId());
 		serviceGym.deleteGym(gym);
-		return "redirect:/course/create";
+		return "redirect:/";
 	}
 	
 	@GetMapping("/update")
