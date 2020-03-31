@@ -11,7 +11,6 @@ import it.univaq.disim.mwt.gymportal.domain.User;
 import it.univaq.disim.mwt.gymportal.repository.UserRepository;
 
 @Service
-
 @Transactional
 
 public class UserBOImpl implements UserBO {
@@ -34,6 +33,42 @@ public class UserBOImpl implements UserBO {
 	public void updateUser(User user) throws BusinessException {
 		userRepository.save(user);
 
+	}
+
+	@Override
+	public void removeFavoriteCourse(Long id) throws BusinessException {
+		userRepository.removeFavoriteCourse(id);
+		
+	}
+
+	@Override
+	public void removeFavoriteGym(Long id) throws BusinessException {
+		userRepository.removeFavoriteGym(id);
+		
+	}
+
+	@Override
+	public void updateFeedbackCourse(String feed, int rating, Long course_id, Long user_id, Long id) throws BusinessException {
+		userRepository.updateFeedbackCourse(feed, rating, course_id, user_id, id);
+		
+	}
+
+	@Override
+	public void updateFeedbackGym(String feed, int rating, Long gym_id, Long user_id, Long id) throws BusinessException {
+		userRepository.updateFeedbackGym(feed, rating, gym_id, user_id, id);
+		
+	}
+
+	@Override
+	public void removeFeedbackCourse(Long id) throws BusinessException {
+		userRepository.removeFeedbackCourse(id);
+		
+	}
+
+	@Override
+	public void removeFeedbackGym(Long id) throws BusinessException {
+		userRepository.removeFeedbackGym(id);
+		
 	}
 
 }
