@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.CourseBO;
 import it.univaq.disim.mwt.gymportal.business.GymBO;
+import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 
 @Controller
@@ -62,9 +63,22 @@ public class GymController {
 	}
 	
 	@GetMapping("/update")
-    public String createUpdate() {
+	public String updateStart(@RequestParam Long id, Model model) throws BusinessException {
+		Gym gym = serviceGym.findByID(id);
+		gym.setRegion("");
+		model.addAttribute("gym", gym);
 		return "/gym/form";
-    }
+	}
+
+	@PostMapping("/update")
+	public String update(@ModelAttribute("gym") Gym gym, Errors errors) throws BusinessException {
+		if (errors.hasErrors()) {
+			return "/gym/form";
+		}
+		serviceGym.updateGym(gym);
+		return "redirect:/";
+	}
+	
 	
 	@GetMapping("/list")
     public String list() {

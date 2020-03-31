@@ -11,7 +11,7 @@
 				<p th:text="${course.description}"></p>
 				<button class="btn-primary">Aggiungi ai preferiti!</button>
 				<button class="btn-primary">Lascia una recensione</button>
-				<a href="/gymportal/course/update"><button class="btn-primary">Modifica</button></a>
+				<a th:href="@{/course/update/(id=${course.id})}"><button class="btn-primary">Modifica</button></a>
 				<a th:href="@{/course/delete/(id=${course.id})}"><button class="btn-primary">Elimina</button></a>
 			</div>
 		</div>

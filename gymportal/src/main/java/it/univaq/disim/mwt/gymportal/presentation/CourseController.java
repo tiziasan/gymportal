@@ -55,11 +55,7 @@ public class CourseController {
 		return "redirect:/course/create";
 	}
 	
-	@GetMapping("/update")
-    public String updateStart() {
-		return "/course/form";
-   	 
-    }
+	
 	
 	@GetMapping("/gym")
 	public String listCo(@RequestParam long id, Model model) throws BusinessException {
@@ -88,6 +84,26 @@ public class CourseController {
 		long id = courseComplete.getGym().getId();
 		String redirect = "redirect:/course/gym?id=" + id;
 		serviceCourse.deleteCourse(course);
+		return redirect;
+	}
+	
+	@GetMapping("/update")
+	public String updateStart(@RequestParam Long id, Model model) throws BusinessException {
+		Course course = serviceCourse.findByID(id);
+		model.addAttribute("course", course);
+		return "/course/form";
+	}
+
+	@PostMapping("/update")
+	public String update(@Valid @ModelAttribute("course") Course course , Errors errors) throws BusinessException {
+		Course courseComplete = serviceCourse.findByID(course.getId());
+
+		if (errors.hasErrors()) {
+			return "/common/error";
+		}
+		long id = courseComplete.getGym().getId();
+		String redirect = "redirect:/course/gym?id=" + id;
+		serviceCourse.updateCourse(course);
 		return redirect;
 	}
 	
