@@ -40,6 +40,12 @@ public class FeedbackGymBOImpl implements FeedbackGymBO {
 	public List<FeedbackGym> findAllFeedbackGym(Long id) throws BusinessException {
 		return feedbackGymRepository.findAllFeedbackGym(id);
 	}
+
+	@Override
+	public List<FeedbackGym> findAllFeedbackByGym(Long id) throws BusinessException {
+		return feedbackGymRepository.findAllFeedbackByGym(id);
+
+	}
 	
 
 }

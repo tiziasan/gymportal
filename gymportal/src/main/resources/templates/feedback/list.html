@@ -3,19 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
 <body>
 	<div layout:fragment="content">
-	<h1 th:text="${gym.name}"></h1>
-		<div class="column" th:each="course : ${courseList}">
-			<div class="card">
-				<h3 th:text="${course.name}"></h3>
-				<h4 th:text="${course.code}"></h4>
-				<p th:text="${course.description}"></p>
-				<button class="btn-primary">Aggiungi ai preferiti!</button>
-				<button class="btn-primary">Recensisci Corso</button>
-				<a th:href="@{/feedback/(id=${course.id})}"><button class="btn-primary">Vedi le recensioni del corso</button></a>
-				<a th:href="@{/course/update/(id=${course.id})}"><button class="btn-primary">Modifica</button></a>
-				<a th:href="@{/course/delete/(id=${course.id})}"><button class="btn-primary">Elimina</button></a>
-			</div>
-		</div>
+	
 		<div class="col-md-12"></div>
 		<div class="col-md-4"  th:each="feedback : ${feedbackList}">
           <!-- Widget: user widget style 1 -->

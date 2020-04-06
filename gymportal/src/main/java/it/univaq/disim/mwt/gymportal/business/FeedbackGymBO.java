@@ -16,5 +16,7 @@ public interface FeedbackGymBO {
 	void deleteFeedbackGym (FeedbackGym feedbackGym) throws BusinessException;
 	
 	List <FeedbackGym> findAllFeedbackGym (Long id) throws BusinessException;
+	
+	List <FeedbackGym> findAllFeedbackByGym (Long id) throws BusinessException;
 
 }

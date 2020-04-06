@@ -41,4 +41,10 @@ public class FeedbackCourseBOImpl implements FeedbackCourseBO{
 		return feedbackCourseRepository.findAllFeedbackCourse(id);
 	}
 
+	@Override
+	public List<FeedbackCourse> findAllFeedbackByCourse(Long id) throws BusinessException {
+		return feedbackCourseRepository.findAllFeedbackByCourse(id);
+
+	}
+
 }

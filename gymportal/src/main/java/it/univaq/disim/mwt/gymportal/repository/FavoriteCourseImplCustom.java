@@ -8,7 +8,7 @@ import it.univaq.disim.mwt.gymportal.domain.FavoriteCourse;
 
 public interface FavoriteCourseImplCustom {
 	
-	@Query(value="FROM FavoriteCourse as F WHERE f.id = :id")
+	@Query(value="FROM FavoriteCourse as f WHERE f.id = :id")
 	public List<FavoriteCourse> findAllFavoriteCourse(Long id);
 
 }

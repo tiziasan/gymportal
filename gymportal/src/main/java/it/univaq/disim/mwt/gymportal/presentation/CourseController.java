@@ -18,8 +18,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.CourseBO;
+import it.univaq.disim.mwt.gymportal.business.FeedbackGymBO;
 import it.univaq.disim.mwt.gymportal.business.GymBO;
 import it.univaq.disim.mwt.gymportal.domain.Course;
+import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 
 @Controller
@@ -31,6 +33,9 @@ public class CourseController {
 	
 	@Autowired
 	private GymBO serviceGym;
+	
+	@Autowired
+	private FeedbackGymBO serviseFeedbackGym;
 	
 	@GetMapping("/create")
     public String createStart(Model model) {
@@ -60,13 +65,18 @@ public class CourseController {
 	@GetMapping("/gym")
 	public String listCo(@RequestParam long id, Model model) throws BusinessException {
 		List<Course> courseList = serviceCourse.findCourseByGymId(id);
+		List<FeedbackGym> feedbackList = serviseFeedbackGym.findAllFeedbackByGym(id);
 		Gym gym = serviceGym.findByID(id);
         model.addAttribute("courseList", courseList);
+        model.addAttribute("feedbackList", feedbackList);
         model.addAttribute("gym", gym);
 
 		return "/course/list";
 
 	}
+	
+	
+	
 	@GetMapping("/delete")
     public String deleteStart(@RequestParam Long id, Model model) throws BusinessException {
 		Course course = serviceCourse.findByID(id);

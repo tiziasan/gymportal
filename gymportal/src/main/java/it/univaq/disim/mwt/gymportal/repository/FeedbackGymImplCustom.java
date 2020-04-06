@@ -8,6 +8,12 @@ import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
 
 public interface FeedbackGymImplCustom {
 	
-	@Query(value="FROM FeedbackGym as F WHERE f.id = :id")
+	@Query(value="FROM FeedbackGym as f WHERE f.id = :id")
 	public List<FeedbackGym> findAllFeedbackGym(Long id);
+	
+	@Query(value="FROM FeedbackGym AS f INNER JOIN User AS u ON f.gym.id= :id AND f.user.id = u.id")
+	public List<FeedbackGym> findAllFeedbackByGym(Long id);
 }
+
+
+
