@@ -13,7 +13,7 @@ import it.univaq.disim.mwt.gymportal.business.GymBO;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 
 @Controller
-@RequestMapping("")
+@RequestMapping("region")
 
 public class RegionController {
 	

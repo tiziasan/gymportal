@@ -1,19 +1,21 @@
 package it.univaq.disim.mwt.gymportal.domain;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.UniqueElements;
+
 import lombok.Data;
 
 @Data
@@ -42,6 +44,7 @@ public class User {
 	
 	@NotBlank
 	@Size(max=50)
+	@UniqueElements
 	@Column(name="USERNAME")
 	private String username;
 	
@@ -62,11 +65,5 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<FeedbackGym> feedbackGym;
 	
-	@ManyToOne
-	@JoinTable(name = "role_user",             
-	joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id") ,             
-	inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-	
-	private Role role;
-	
+
 }
