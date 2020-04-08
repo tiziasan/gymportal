@@ -20,18 +20,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-	}
+		auth.userDetailsService(userDetailsService);
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
 	}
-
+	
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
+
 		httpSecurity.headers().disable().csrf().disable().formLogin().loginPage("/login").loginProcessingUrl("/login")
-				.failureUrl("/?error=invalidlogin").defaultSuccessUrl("/common/welcome", false).and().logout()
+				.failureUrl("/?error=invalidlogin").defaultSuccessUrl("/", false).and().logout()
 				.logoutSuccessUrl("/").and().exceptionHandling().accessDeniedPage("/common/accessdenied").and()
 				.authorizeRequests()
 				.antMatchers("/profile/**").authenticated()
