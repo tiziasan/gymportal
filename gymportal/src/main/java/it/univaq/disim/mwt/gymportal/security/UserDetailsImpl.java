@@ -12,10 +12,9 @@ import it.univaq.disim.mwt.gymportal.domain.User;
 
 
 public class UserDetailsImpl implements UserDetails {
-	/**
-	 * 
-	 */
+	
 	private static final String ROLE_PREFIX = "ROLE_";
+
 	private static final SimpleGrantedAuthority ROLE_GESTORE = new SimpleGrantedAuthority(ROLE_PREFIX + "gestore");
 	private static final SimpleGrantedAuthority ROLE_UTENTE = new SimpleGrantedAuthority(ROLE_PREFIX + "utente");
 	

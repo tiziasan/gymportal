@@ -24,7 +24,10 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 			role = serviceUser.findUserRole(user.getId());
 			user.setRole(role.getName());
 		} catch (BusinessException e) {
+			System.out.println("PorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodio");	
+
 			throw new UsernameNotFoundException("utente non trovato");
+			
 		}
 		
 
