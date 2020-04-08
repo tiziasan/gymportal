@@ -35,4 +35,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/gym/**","/course/create","/course/delete", "/course/update").hasAnyRole("gestore");
 
 	}
+	
+	
 }

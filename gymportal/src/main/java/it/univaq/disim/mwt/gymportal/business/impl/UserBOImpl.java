@@ -1,7 +1,4 @@
-
 package it.univaq.disim.mwt.gymportal.business.impl;
-
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

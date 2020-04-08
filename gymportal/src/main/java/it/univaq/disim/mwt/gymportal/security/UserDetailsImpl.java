@@ -23,13 +23,11 @@ public class UserDetailsImpl implements UserDetails {
 	public UserDetailsImpl(User user) {
 		super();
 		this.user = user;
-		System.out.println("PorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodio"+user);	
 
 	}
 
 	@Override
 	public Collection<GrantedAuthority> getAuthorities() {
-		System.out.println("PorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodioPorcodio"+user);	
 
 		List<GrantedAuthority> result = new ArrayList<GrantedAuthority>();
 		
