@@ -83,12 +83,12 @@
 
 							</li>
 							<li class="dropdown user user-menu">
-								 <a href="/gymportal/login">Login</a>
+								 <a href="/gymportal/login" sec:authorize="!hasAnyAuthority('utente','gestore')">Login</a>
 								 
 
 							</li>
 							<li class="dropdown user user-menu">
-								 <a href="/gymportal/registration">Registrazione</a>
+								 <a href="/gymportal/registration" sec:authorize="!hasAnyAuthority('utente','gestore')">Registrazione</a>
 								 
 
 							</li>
