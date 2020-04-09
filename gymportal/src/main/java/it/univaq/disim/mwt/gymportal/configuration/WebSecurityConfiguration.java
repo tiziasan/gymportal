@@ -32,11 +32,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		httpSecurity.headers().disable().csrf().disable().formLogin().loginPage("/login")
 				.failureUrl("/login?error=true").defaultSuccessUrl("/profile", false).usernameParameter("user_name")
                 .passwordParameter("password").and().logout()
-				.logoutSuccessUrl("/").and().exceptionHandling().accessDeniedPage("/common/accessdenied").and()
+				.logoutSuccessUrl("/").and().exceptionHandling().accessDeniedPage("/login").and()
 				.authorizeRequests() // Specificare le url che
-				.antMatchers("/", "/static/**", "/favicon.ico").permitAll().antMatchers("/common/**").authenticated()
-				.antMatchers("/gym/**","/course/create","/course/update","/course/delete","/profile").hasAuthority("gestore")
-				.antMatchers("/profile/**").hasAuthority("utente");
+				.antMatchers("/", "/static/**", "/favicon.ico","/login").permitAll().antMatchers("/common/**").authenticated()
+				.antMatchers("/gym/**","/course/create","/course/update","/course/delete","/gym/delete","/gym/delete","/gym/delete").hasAuthority("gestore")
+		        .antMatchers("/gym/region").hasAuthority("utente");
+
 
 	}
 

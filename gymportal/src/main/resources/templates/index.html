@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -72,13 +72,13 @@
 							<!-- Tasks Menu -->
 
 							<!-- User Account Menu -->
-							<li class="dropdown user user-menu">
+							<li class="dropdown user user-menu" sec:authorize="hasAuthority('gestore')">
 								 <a href="/gymportal/gym/create">Aggiungi Palestra</a>
 								 
 
 							</li>
 							<li class="dropdown user user-menu">
-								 <a href="/gymportal/course/create">Aggiungi Corso</a>
+								 <a href="/gymportal/course/create" sec:authorize="hasAuthority('gestore')">Aggiungi Corso</a>
 								 
 
 							</li>
@@ -93,7 +93,7 @@
 
 							</li>
 							<li class="dropdown user user-menu">
-								 <a href="/gymportal/profile">Profilo</a>
+								 <a href="/gymportal/profile" sec:authorize="hasAnyAuthority('utente','gestore')">Profilo</a>
 
 							</li>
 							<li class="dropdown user user-menu">

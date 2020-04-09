@@ -55,7 +55,7 @@ public class GymController {
 	@PostMapping("/delete")
 	public String delete(@ModelAttribute("gym") Gym gym, Errors errors) throws BusinessException {
 		if (errors.hasErrors()) {
-			return "/gym/form";
+			return "/common/error";
 		}
 		serviceCourse.deleteAllCourseByGymId(gym.getId());
 		serviceGym.deleteGym(gym);

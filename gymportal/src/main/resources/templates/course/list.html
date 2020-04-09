@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 	<div layout:fragment="content">
 	<h1 th:text="${gym.name}"></h1>
@@ -9,8 +9,8 @@
 				<h3 th:text="${course.name}"></h3>
 				<h4 th:text="${course.code}"></h4>
 				<p th:text="${course.description}"></p>
-				<button class="btn-primary">Aggiungi ai preferiti!</button>
-				<button class="btn-primary">Recensisci Corso</button>
+				<button class="btn-primary" sec:authorize="hasAuthority('utente')">Aggiungi ai preferiti!</button>
+				<button class="btn-primary" sec:authorize="hasAuthority('utente')">Recensisci Corso</button>
 				<a th:href="@{/feedback/(id=${course.id})}"><button class="btn-primary">Vedi le recensioni del corso</button></a>
 				<a th:href="@{/course/update/(id=${course.id})}"><button class="btn-primary">Modifica</button></a>
 				<a th:href="@{/course/delete/(id=${course.id})}"><button class="btn-primary">Elimina</button></a>
