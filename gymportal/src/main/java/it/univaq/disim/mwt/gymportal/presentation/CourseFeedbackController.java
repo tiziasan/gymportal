@@ -17,15 +17,14 @@ import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
 @Controller
 @RequestMapping("feedback")
 public class CourseFeedbackController {
-	
 	@Autowired
-	private FeedbackCourseBO serviceFeedbackCourse;
+	private FeedbackCourseBO serviseFeedbackCourse;
 	
 	
 	@GetMapping("")
 	public String listCo(@RequestParam long id, Model model) throws BusinessException {
 		
-		List<FeedbackCourse> feedbackList = serviceFeedbackCourse.findAllFeedbackByCourse(id);
+		List<FeedbackCourse> feedbackList = serviseFeedbackCourse.findAllFeedbackByCourse(id);
 		model.addAttribute("feedbackList", feedbackList);
 		return "/feedback/list";
 

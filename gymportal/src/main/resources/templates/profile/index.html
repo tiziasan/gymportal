@@ -18,15 +18,15 @@
 								<div class="profile-sidebar">
 									<div class="profile-usertitle">
 										<div class="profile-usertitle-name">
-											<h1></h1>
+											<h1 th:utext="${user.name}"></h1>
 										</div>
 									</div>
 									<div class="profile-usermenu">
 										<ul class="nav">
 											<li><h4>Email</h4></li>
-											<li><h5>aaaaaa@gmail.com</h5></li>
+											<li><h5 th:utext="${user.email}"></h5></li>
 											<li><h4>Username</h4></li>
-											<li><h5>aaaaaa@gmail.com</h5></li>
+											<li><h5 th:utext="${user.userName}" >aaaaaa@gmail.com</h5></li>
 								
 										</ul>
 									</div>

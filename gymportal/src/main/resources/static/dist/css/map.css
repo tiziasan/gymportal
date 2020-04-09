@@ -1,3 +1,5 @@
+
+
 .map svg {
   height: auto;
   width: 550px;
@@ -29,6 +31,6 @@
   white-space: nowrap;
 }
 
-.info_panel:first-line {
+.info_panel::first-line {
   font-weight: bold;
 }
