@@ -1,8 +1,6 @@
 
 package it.univaq.disim.mwt.gymportal.presentation;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,24 +16,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
-import it.univaq.disim.mwt.gymportal.business.FeedbackGymBO;
-import it.univaq.disim.mwt.gymportal.business.GymBO;
+import it.univaq.disim.mwt.gymportal.business.CourseBO;
+import it.univaq.disim.mwt.gymportal.business.FeedbackCourseBO;
 import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.domain.Course;
+import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
-import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.domain.User;
 
 @Controller
 
-@RequestMapping("feedback")
-public class FeedbackGymController {
+@RequestMapping("feedbackCourse")
+public class FeedbackCourseController {
 
 	@Autowired
-	private FeedbackGymBO serviceFeedbackGym;
+	private FeedbackCourseBO serviceFeedbackCourse;
 
 	@Autowired
-	private GymBO serviceGym;
+	private CourseBO serviceCourse;
 
 	@Autowired
 	private UserService userService;
@@ -46,34 +44,34 @@ public class FeedbackGymController {
 	
 	@GetMapping("/create")
 	public String createStart(Model model,@RequestParam long id) throws BusinessException {
-		Gym gym = serviceGym.findByID(id);
+		Course course = serviceCourse.findByID(id);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUserName(auth.getName());
-		model.addAttribute("gym", gym);
+		model.addAttribute("course", course);
 		model.addAttribute("user", user);
 		
-		FeedbackGym feedback = new FeedbackGym();
+		FeedbackGym feedbackCourse = new FeedbackGym();
 
-		model.addAttribute("feedback", feedback);
+		model.addAttribute("feedbackCourse", feedbackCourse);
 
-		return "/feedback/form";
-	}
+		return "/feedbackCourse/form";
+	} 
 	
 
 	@PostMapping("/create")
-	public String create(@Valid @ModelAttribute("feedback") FeedbackGym feedback, Errors errors, Model model)
+	public String create(@Valid @ModelAttribute("feedback") FeedbackCourse feedbackCourse, Errors errors, Model model)
 			throws BusinessException {
 		
 		if (errors.hasErrors()) {
 			String message = "Errore nell'inserimento";
 			model.addAttribute("message", message);
-			return "/feedback/form";
+			return "/feedbackCourse/form";
 		}
-		serviceFeedbackGym.createFeedbackGym(feedback);
+		serviceFeedbackCourse.createFeedbackCourse(feedbackCourse);
 		
-		long id = feedback.getGym().getId();
+		long id = feedbackCourse.getCourse().getId();
 
-		String redirect = "redirect:/course/gym?id=" + id;
+		String redirect = "redirect:/feedback?id=" + id;
 
 		return redirect;
 	}
