@@ -1,6 +1,7 @@
 package it.univaq.disim.mwt.gymportal.presentation;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -79,7 +80,6 @@ public class GymController {
 		return "redirect:/";
 	}
 	
-	
 	@GetMapping("/list")
     public String list() {
 		return "/region/index"; 
@@ -89,5 +89,6 @@ public class GymController {
     public String listByRegion() {
 		return "/region/index"; 
     }
+	
 	
 }

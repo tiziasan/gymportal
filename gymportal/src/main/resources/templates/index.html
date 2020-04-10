@@ -30,7 +30,6 @@
 <link rel="stylesheet" href="" th:href="@{/dist/css/map.css}">
 
 
-
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -72,6 +71,12 @@
 							<!-- Tasks Menu -->
 
 							<!-- User Account Menu -->
+							
+							<li class="dropdown user user-menu" >
+							<input style="background-color:white; color:black;" type="text" name="search" id="search" placeholder="ricerca"  th:value="${search}" sec:authorize="!hasAnyAuthority('utente','gestore')"/>
+							</li>
+							
+							
 							<li class="dropdown user user-menu" sec:authorize="hasAuthority('gestore')">
 								 <a href="/gymportal/gym/create">Aggiungi Palestra</a>
 								 

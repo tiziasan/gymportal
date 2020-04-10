@@ -11,6 +11,4 @@ import it.univaq.disim.mwt.gymportal.domain.Gym;
 public interface GymRepository extends CrudRepository<Gym, Long>, GymImplCustom{
 	
 	
-
-	
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html th:with="region=${region}" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 <header class="main-header" th:fragment="footer">
     <nav class="navbar navbar-static-top">
@@ -28,34 +28,29 @@
 							
 							<li class="dropdown user user-menu" sec:authorize="hasAuthority('gestore')">
 								 <a href="/gymportal/gym/create">Aggiungi Palestra</a>
-								 
-
 							</li>
+							
 							<li class="dropdown user user-menu" sec:authorize="hasAuthority('gestore')">
 								 <a href="/gymportal/course/create">Aggiungi Corso</a>
-								 
-
 							</li>
+							
 							<li class="dropdown user user-menu">
 								 <a href="/gymportal/login" sec:authorize="!hasAnyAuthority('utente','gestore')">Login</a>
-								 
-
 							</li>
+							
+							
 							<li class="dropdown user user-menu">
 								 <a href="/gymportal/registration" sec:authorize="!hasAnyAuthority('utente','gestore')">Registrazione</a>
-								 
-
 							</li>
+							
 							<li class="dropdown user user-menu">
 								 <a href="/gymportal/profile" sec:authorize="hasAnyAuthority('utente','gestore')" >Profilo</a>
-
 							</li>
+							
 							<li class="dropdown user user-menu">
 								 <form th:action="@{/logout}" method="get">
         								<a><button  name="registration" type="Submit">Logout</button></a>
-    </form>
-								 
-
+    							 </form>
 							</li>
 						</ul>
 					</div>

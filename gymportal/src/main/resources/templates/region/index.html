@@ -5,6 +5,13 @@
 	<div layout:fragment="content">
 
 		<h1 th:text="${region}"></h1>
+		<h1 th:text="${search}"></h1>
+		
+		<form th:action="@{'/region/'+ ${region}+ '/'}" method="post">
+		<input style="background-color:white; color:black;" type="text" name="search" id="search" placeholder="ricerca"  th:value="${search}"/>
+        <a><button type="Submit">Cerca</button></a>
+        </form>
+						
 		<div class="column" th:each="gym : ${gymList}">
 			<div class="card">
 				<h3 th:text="${gym.name}"></h3>
