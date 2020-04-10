@@ -36,7 +36,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.authorizeRequests() // Specificare le url che
 				.antMatchers("/", "/static/**", "/favicon.ico","/login").permitAll().antMatchers("/common/**").authenticated()
 				.antMatchers("/gym/**","/course/create","/course/update","/course/delete","/gym/delete","/gym/delete","/gym/delete").hasAuthority("gestore")
-		        .antMatchers("/gym/region").hasAuthority("utente");
+		        .antMatchers("/gym/region","/feedback/**").hasAuthority("utente");
 
 
 	}

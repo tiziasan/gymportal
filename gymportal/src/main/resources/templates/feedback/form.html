@@ -3,17 +3,28 @@
 	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
 <body>
 	<div layout:fragment="content">
-	<H1>Aggiungi Corso</H1>
+	<H1>Aggiungi Recensione</H1>
 		<div class="box box-info" id="form-orizzontale">
 
 			<form
-				class="form-horizontal" method="post" th:action="@{feedback/create}" th:object="${feedback}">
+				class="form-horizontal" method="post" th:action="@{/feedback/create}" th:object="${feedback}">
 				<input type="hidden" th:field="*{id}" />
-				<input type="hidden" th:field="*{user.id}" />
-				<input type="hidden" th:field="*{gym.id}" />
+				
+				
+				<select type="hidden"  id="areassd_select2" th:field="*{user.id}" class="form-control">
+					<option th:value="${user.id}" th:text="${user.id}"></option>
+				</select>
+				
+				<select id="areassd_select2" th:field="*{gym.id}" class="form-control">
+					<option th:value="${gym.id}" th:text="${gym.id}" ></option>
+				</select>
+				
+				
 				
 
 				<div class="box-body">
+				
+				
 					<div class="form-group">
 						<label for="inputEmail3" class="col-sm-2 control-label">Feed
 							</label>

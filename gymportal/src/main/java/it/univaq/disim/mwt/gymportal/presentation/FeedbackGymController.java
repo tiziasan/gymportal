@@ -1,6 +1,8 @@
 
 package it.univaq.disim.mwt.gymportal.presentation;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.FeedbackGymBO;
 import it.univaq.disim.mwt.gymportal.business.GymBO;
 import it.univaq.disim.mwt.gymportal.business.UserService;
+import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.domain.User;
@@ -37,34 +40,56 @@ public class FeedbackGymController {
 	@Autowired
 	private UserService userService;
 
+//	@GetMapping("/create")
+//	public String createStart(Model model,@RequestParam long id) throws BusinessException {
+//		Gym gym = serviceGym.findByID(id);
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//		User user = userService.findUserByUserName(auth.getName());
+//		model.addAttribute("gym", gym);
+//		model.addAttribute("user", user);
+//
+//		FeedbackGym feedback = new FeedbackGym();
+//
+//		model.addAttribute("feedback", feedback);
+//
+//		return "/feedback/form";
+//	}
+	
+	
+	
 	@GetMapping("/create")
-	public String createStart(Model model, @RequestParam long id) throws BusinessException {
+	public String createStart(Model model,@RequestParam long id) throws BusinessException {
 		Gym gym = serviceGym.findByID(id);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUserName(auth.getName());
-		FeedbackGym feedback = new FeedbackGym();
-		System.out.println("porcodio"+feedback);
 		model.addAttribute("gym", gym);
 		model.addAttribute("user", user);
+		
+		FeedbackGym feedback = new FeedbackGym();
 
 		model.addAttribute("feedback", feedback);
 
-		return "/review/form";
+		return "/feedback/form";
 	}
+	
 
 	@PostMapping("/create")
 	public String create(@Valid @ModelAttribute("feedback") FeedbackGym feedback, Errors errors, Model model)
 			throws BusinessException {
+		
 		if (errors.hasErrors()) {
 			String message = "Errore nell'inserimento";
 			model.addAttribute("message", message);
-
-
-			return "/review/form";
+			return "/feedback/form";
 		}
 		serviceFeedbackGym.createFeedbackGym(feedback);
-		String message = "Operazione andata a buon fine, aggiungi un altro corso!";
-		return "/";
+		
+		long id = feedback.getGym().getId();
+
+		String redirect = "redirect:/course/gym?id=" + id;
+
+		return redirect;
 	}
+	
 
 }
