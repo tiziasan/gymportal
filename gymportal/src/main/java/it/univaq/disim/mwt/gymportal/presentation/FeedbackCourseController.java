@@ -1,6 +1,8 @@
 
 package it.univaq.disim.mwt.gymportal.presentation;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +41,14 @@ public class FeedbackCourseController {
 	private UserService userService;
 
 
-	
+	@GetMapping("")
+	public String listCo(@RequestParam long id, Model model) throws BusinessException {
+		
+		List<FeedbackCourse> feedbackList = serviceFeedbackCourse.findAllFeedbackByCourse(id);
+		model.addAttribute("feedbackList", feedbackList);
+		return "/feedback/list";
+
+	}
 	
 	
 	@GetMapping("/create")
@@ -71,7 +80,7 @@ public class FeedbackCourseController {
 		
 		long id = feedbackCourse.getCourse().getId();
 
-		String redirect = "redirect:/feedback?id=" + id;
+		String redirect = "redirect:/feedbackCourse?id=" + id;
 
 		return redirect;
 	}

@@ -70,15 +70,6 @@ public class LoginController {
 		return modelAndView;
 	}
 
-	@GetMapping(value = "/profile")
-	public ModelAndView home() {
-		ModelAndView modelAndView = new ModelAndView();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByUserName(auth.getName());
-		modelAndView.addObject("user",user);
-		modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
-		modelAndView.setViewName("/profile/index");
-		return modelAndView;
-	}
+	
 
 }

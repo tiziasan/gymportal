@@ -47,5 +47,11 @@ public class FeedbackGymBOImpl implements FeedbackGymBO {
 
 	}
 	
+	@Override
+	public List<FeedbackGym> findAllFeedbackByUserId(Long id) throws BusinessException {
+		return feedbackGymRepository.findAllFeedbackByUserId(id);
+
+	}
+	
 
 }

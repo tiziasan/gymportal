@@ -19,4 +19,6 @@ public interface FeedbackGymBO {
 	
 	List <FeedbackGym> findAllFeedbackByGym (Long id) throws BusinessException;
 
+	List <FeedbackGym> findAllFeedbackByUserId (Long id) throws BusinessException;
+
 }

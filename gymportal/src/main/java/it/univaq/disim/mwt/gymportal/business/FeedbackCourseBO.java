@@ -19,6 +19,9 @@ public interface FeedbackCourseBO {
 	List <FeedbackCourse> findAllFeedbackCourse (Long id) throws BusinessException;
 	
 	List <FeedbackCourse> findAllFeedbackByCourse (Long id) throws BusinessException;
+	
+	List <FeedbackCourse> findAllFeedbackByUserId (Long id) throws BusinessException;
+
 
 
 }
