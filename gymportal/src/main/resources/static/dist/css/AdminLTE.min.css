@@ -6501,3 +6501,16 @@ input[name="c4l-rating"]+label:hover ~ input+label:before {
 	background-color: #33b5e5;
 	color: #fff !important;
 }
+
+
+.search-bar{
+	position: absolute;
+	right: 20px;
+}
+.search-bar form{
+	background-color: white;
+}
+.plr-5{
+	padding-left: 5px;
+	padding-right: 5px;
+}

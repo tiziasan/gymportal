@@ -6,9 +6,9 @@
 
 	<div>
 		<div class="search-bar">
-			<form th:action="${#request.getRequestURI()}" method="get">
-				<input style="background-color:white; color:black;" type="text" name="search" id="search" placeholder="ricerca" th:value="${search}"/>
-				<button type="Submit">Cerca</button>
+			<form class="plr-5" th:action="${#request.getRequestURI()}" method="get">
+				<input type="text" name="search" id="search" placeholder="Ricerca" th:value="${search}"/>
+				<button class="btn-primary" type="Submit">Cerca</button>
 			</form>
 		</div>
 
