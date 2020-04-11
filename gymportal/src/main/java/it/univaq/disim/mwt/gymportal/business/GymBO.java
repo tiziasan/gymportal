@@ -22,6 +22,8 @@ public interface GymBO {
 	List<Gym> findByRegion(String region) throws BusinessException;
 	
 	Gym findByID(Long id) throws BusinessException;
+	
+	List<Gym> searchByRegionAndName(String region, String name) throws BusinessException;
 
 	
 }
