@@ -2,8 +2,11 @@ package it.univaq.disim.mwt.gymportal.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
+import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
 
 public interface FeedbackCourseImplCustom {
@@ -16,5 +19,10 @@ public interface FeedbackCourseImplCustom {
 	
 	@Query(value="FROM FeedbackCourse as f WHERE f.user.id = :id")
 	public List<FeedbackCourse> findAllFeedbackByUserId(Long id);
+	
+	@Query(value = "FROM FeedbackCourse AS c WHERE c.id = :id")
+	public FeedbackCourse findByID(Long id);
+	
+	
 
 }

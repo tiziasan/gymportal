@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.FeedbackGymBO;
+import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
 import it.univaq.disim.mwt.gymportal.repository.FeedbackGymRepository;
 
@@ -51,6 +52,11 @@ public class FeedbackGymBOImpl implements FeedbackGymBO {
 	public List<FeedbackGym> findAllFeedbackByUserId(Long id) throws BusinessException {
 		return feedbackGymRepository.findAllFeedbackByUserId(id);
 
+	}
+	
+	@Override
+	public FeedbackGym findByID(Long id) throws BusinessException {
+		return feedbackGymRepository.findByID(id);
 	}
 	
 

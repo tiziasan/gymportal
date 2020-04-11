@@ -85,5 +85,38 @@ public class FeedbackCourseController {
 		return redirect;
 	}
 	
+	@GetMapping("/delete")
+    public String deleteStart(@RequestParam Long id, Model model) throws BusinessException {
+		return "/feedback/delete";
+    }
+	
+	@PostMapping("/delete")
+	public String delete(@ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, Errors errors) throws BusinessException {
+
+		if (errors.hasErrors()) {
+			return "/common/error";
+		}
+		serviceFeedbackCourse.deleteFeedbackCourse(feedbackCourse);;
+		return "redirect:/profile";
+	}
+	
+	@GetMapping("/update")
+	public String updateStart(@RequestParam Long id, Model model) throws BusinessException {
+		FeedbackCourse feedback = serviceFeedbackCourse.findByID(id);
+		model.addAttribute("feedbackCourse", feedback);
+		return "/feedbackCourse/update";
+	}
+
+	@PostMapping("/update")
+	public String update(@Valid @ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse , Errors errors) throws BusinessException {
+
+		if (errors.hasErrors()) {
+			return "/common/error";
+		}
+		
+		serviceFeedbackCourse.updateFeedbackCourse(feedbackCourse);
+		return "redirect:/profile";
+	}
+	
 
 }

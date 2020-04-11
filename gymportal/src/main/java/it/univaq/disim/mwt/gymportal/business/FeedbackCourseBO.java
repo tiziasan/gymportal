@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
 
@@ -15,6 +16,9 @@ public interface FeedbackCourseBO {
 	void updateFeedbackCourse (FeedbackCourse feedbackCourse) throws BusinessException;
 	
 	void deleteFeedbackCourse (FeedbackCourse feedbackCourse) throws BusinessException;
+	
+	FeedbackCourse findByID(Long id) throws BusinessException;
+
 	
 	List <FeedbackCourse> findAllFeedbackCourse (Long id) throws BusinessException;
 	

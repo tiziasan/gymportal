@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 
+import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
 
 public interface FeedbackGymImplCustom {
@@ -16,6 +17,9 @@ public interface FeedbackGymImplCustom {
 	
 	@Query(value="FROM FeedbackGym as f WHERE f.user.id = :id")
 	public List<FeedbackGym> findAllFeedbackByUserId(Long id);
+	
+	@Query(value = "FROM FeedbackGym AS c WHERE c.id = :id")
+	public FeedbackGym findByID(Long id);
 	
 }
 

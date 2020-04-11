@@ -22,6 +22,7 @@ import it.univaq.disim.mwt.gymportal.business.FeedbackGymBO;
 import it.univaq.disim.mwt.gymportal.business.GymBO;
 import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.domain.Course;
+import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.domain.User;
@@ -76,6 +77,39 @@ public class FeedbackGymController {
 		String redirect = "redirect:/course/gym?id=" + id;
 
 		return redirect;
+	}
+	
+	@GetMapping("/delete")
+    public String deleteStart(@RequestParam Long id, Model model) throws BusinessException {
+		return "/feedback/delete";
+    }
+	
+	@PostMapping("/delete")
+	public String delete(@ModelAttribute("feedback") FeedbackGym feedback, Errors errors) throws BusinessException {
+
+		if (errors.hasErrors()) {
+			return "/common/error";
+		}
+		serviceFeedbackGym.deleteFeedbackGym(feedback);;
+		return "redirect:/profile";
+	}
+	
+	@GetMapping("/update")
+	public String updateStart(@RequestParam Long id, Model model) throws BusinessException {
+		FeedbackGym feedback = serviceFeedbackGym.findByID(id);
+		model.addAttribute("feedback", feedback);
+		return "/feedback/update";
+	}
+
+	@PostMapping("/update")
+	public String update(@Valid @ModelAttribute("feedback") FeedbackGym feedback , Errors errors) throws BusinessException {
+
+		if (errors.hasErrors()) {
+			return "/common/error";
+		}
+		
+		serviceFeedbackGym.updateFeedbackGym(feedback);
+		return "redirect:/profile";
 	}
 	
 

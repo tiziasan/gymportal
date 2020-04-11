@@ -90,6 +90,11 @@
 
 									<!-- /.tab-pane -->
 									<div class="tab-pane" id="timeline">
+									
+									
+									
+									
+									
 										<!-- The timeline -->
 
 										<div class="col-md-4" th:each="feedbackCourse : ${feedbackCourseList}">
@@ -113,10 +118,17 @@
 														<h4 th:text="'Recenzione: '+${feedbackCourse.feed}"></h4>
 														
 													</ul>
+			<a th:href="@{/feedbackCourse/update/(id=${feedbackCourse.id})}" class="btn btn-default float-left" >Modifica</a>
+			<a th:href="@{/feedbackCourse/delete/(id=${feedbackCourse.id})}" class="btn btn-default float-right" id="eliminadestra">Elimina</a>
+			
 												</div>
 											</div>
 											<!-- /.widget-user -->
 										</div>
+										
+										
+										
+										
 										<br>
 					
 										<div class="col-md-4" th:each="feedbackGym : ${feedbackGymList}">
@@ -139,6 +151,11 @@
 														<h4 th:text="'Recenzione: '+${feedbackGym.feed}"></h4>
 
 													</ul>
+							<a th:href="@{/feedback/update/(id=${feedbackGym.id})}" class="btn btn-default float-left" >Modifica</a>
+													
+							<a th:href="@{/feedback/delete/(id=${feedbackGym.id})}" class="btn btn-default float-right" id="eliminadestra">Elimina</a>
+													
+													
 												</div>
 											</div>
 											<!-- /.widget-user -->
