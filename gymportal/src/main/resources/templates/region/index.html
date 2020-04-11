@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	  xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
-	<div layout:fragment="content">
+<div layout:fragment="content">
+
+	<div>
+		<div class="search-bar">
+			<form th:action="${#request.getRequestURI()}" method="get">
+				<input style="background-color:white; color:black;" type="text" name="search" id="search" placeholder="ricerca" th:value="${search}"/>
+				<button type="Submit">Cerca</button>
+			</form>
+		</div>
 
 		<h1 th:text="${region}"></h1>
+	</div>
+	<div class="column" th:each="gym : ${gymList}">
+		<div class="card">
+			<h3 th:text="${gym.name}"></h3>
+			<h4 th:text="${gym.province}"></h4>
+			<h4 th:text="${gym.address}"></h4>
 
-		<form th:action="@{'/region/'+ ${region}}" method="get">
-			<input style="background-color:white; color:black;" type="text" name="search" id="search" placeholder="ricerca"  th:value="${search}"/>
-			<a><button type="Submit">Cerca</button></a>
-		</form>
-		
-		<div class="column" th:each="gym : ${gymList}">
-			<div class="card">
-				<h3 th:text="${gym.name}"></h3>
-				<h4 th:text="${gym.province}"></h4>
-				<h4 th:text="${gym.address}"></h4>
-
-				<button class="btn-primary" sec:authorize="hasAuthority('utente')">Aggiungi ai preferiti!</button>
-				<a th:href="@{/feedback/create(id=${gym.id})}" sec:authorize="hasAuthority('utente')"><button class="btn-primary">Recensisci Palestra</button></a>
-				<a th:href="@{/course/gym(id=${gym.id})}"><button class="btn-primary">Vai ai corsi</button></a>
-				<a th:href="@{/gym/update/(id=${gym.id})}"><button class="btn-primary">Modifica</button></a>
-				<a th:href="@{/gym/delete/(id=${gym.id})}"><button class="btn-primary">Elimina</button></a>
+			<button class="btn-primary" sec:authorize="hasAuthority('utente')">Aggiungi ai preferiti!</button>
+			<a th:href="@{/feedback/create(id=${gym.id})}" sec:authorize="hasAuthority('utente')"><button class="btn-primary">Recensisci Palestra</button></a>
+			<a th:href="@{/course/gym(id=${gym.id})}"><button class="btn-primary">Vai ai corsi</button></a>
+			<a th:href="@{/gym/update/(id=${gym.id})}"><button class="btn-primary">Modifica</button></a>
+			<a th:href="@{/gym/delete/(id=${gym.id})}"><button class="btn-primary">Elimina</button></a>
 
 
-			</div>
 		</div>
 	</div>
+</div>
 </body>
 </html>
 
