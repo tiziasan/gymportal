@@ -7,19 +7,16 @@ import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-<<<<<<< HEAD
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-=======
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
->>>>>>> branch 'master' of https://github.com/tiziasan/gymportal.git
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.GymBO;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("region")
@@ -29,11 +26,6 @@ public class RegionController {
 	@Autowired
 	private GymBO serviceGym;
 
-<<<<<<< HEAD
-	@GetMapping("/{region}")
-	public String listG(@PathVariable String region, Model model) throws BusinessException {
-		List<Gym> gymList = serviceGym.findByRegion(region);
-=======
 	//https://stackoverflow.com/questions/60528613/rest-api-with-mix-of-path-param-and-requestparam
 	@GetMapping(value = {"/{region}","/{region}?search={search}"})
 	public String listGym(@PathVariable String region, @RequestParam(required = false) String search, Model model) throws BusinessException{
@@ -44,7 +36,6 @@ public class RegionController {
 		} else {
 			gymList = serviceGym.findByRegion(region);
 		}
->>>>>>> branch 'master' of https://github.com/tiziasan/gymportal.git
 		model.addAttribute("region", region);
 		model.addAttribute("gymList", gymList);
 		return "/region/index";
