@@ -23,7 +23,6 @@ public class RegionController {
 	@Autowired
 	private GymBO serviceGym;
 
-
 	//https://stackoverflow.com/questions/60528613/rest-api-with-mix-of-path-param-and-requestparam
 	@GetMapping(value = {"/{region}","/{region}?search={search}"})
 	public String listGym(@PathVariable String region, @RequestParam(required = false) String search, Model model) throws BusinessException{
