@@ -23,20 +23,18 @@ public class RegionController {
 	@Autowired
 	private GymBO serviceGym;
 
-	@GetMapping("/{region}")
-	public String listGym(@PathVariable String region, Model model) throws BusinessException {
-		List<Gym> gymList = serviceGym.findByRegion(region);
-		model.addAttribute("region", region);
-		model.addAttribute("gymList", gymList);
-		return "/region/index";
-	}
 
-	@GetMapping("/{region}?search={search}")
-	public String listSearch(@PathVariable String region, @RequestParam(required = false) String search, Model model) throws BusinessException{
-		List<Gym> gymList = serviceGym.searchByRegionAndName(region,search);
+	//https://stackoverflow.com/questions/60528613/rest-api-with-mix-of-path-param-and-requestparam
+	@GetMapping(value = {"/{region}","/{region}?search={search}"})
+	public String listGym(@PathVariable String region, @RequestParam(required = false) String search, Model model) throws BusinessException{
+		List<Gym> gymList;
+		if (search != null){
+			gymList = serviceGym.searchByRegionAndName(region,search);
+			model.addAttribute("search", search);
+		} else {
+			gymList = serviceGym.findByRegion(region);
+		}
 		model.addAttribute("region", region);
-		model.addAttribute("search", search);
-
 		model.addAttribute("gymList", gymList);
 		return "/region/index";
 	}
