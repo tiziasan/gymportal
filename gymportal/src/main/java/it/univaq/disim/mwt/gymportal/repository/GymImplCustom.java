@@ -13,4 +13,7 @@ public interface GymImplCustom {
 	@Query(value = "FROM Gym AS g WHERE g.id = :id")
 	public Gym findByID(Long id);
 	
+	@Query(value = "FROM Gym AS g WHERE g.region = :region AND g.name LIKE CONCAT('%',:name,'%')")
+	public List<Gym> searchByRegionAndName(String region, String name);
+	
 }
