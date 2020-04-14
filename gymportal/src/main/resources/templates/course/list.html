@@ -3,7 +3,16 @@
 	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 	<div layout:fragment="content">
-	<h1 th:text="${gym.name}"></h1>
+	<div>
+		<div class="search-bar">
+			<form class="plr-5" th:action="${#request.getRequestURI()}" method="get">
+				<input type="text" name="search" id="search" placeholder="Ricerca" th:value="${search}"/>
+				<button class="btn-primary" type="Submit">Cerca</button>
+			</form>
+		</div>
+
+		<h1 th:text="${gym.name}"></h1>
+	</div>
 		<div class="column" th:each="course : ${courseList}">
 			<div class="card">
 				<h3 th:text="${course.name}"></h3>

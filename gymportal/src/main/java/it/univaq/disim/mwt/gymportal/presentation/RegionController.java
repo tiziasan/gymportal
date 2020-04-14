@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("region")
-@Slf4j
 public class RegionController {
 
 	@Autowired

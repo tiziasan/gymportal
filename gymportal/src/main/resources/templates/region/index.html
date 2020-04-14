@@ -6,9 +6,9 @@
 
 	<div>
 		<div class="search-bar">
-			<form th:action="${#request.getRequestURI()}" method="get">
-				<input style="background-color:white; color:black;" type="text" name="search" id="search" placeholder="ricerca" th:value="${search}"/>
-				<button type="Submit">Cerca</button>
+			<form class="plr-5" th:action="${#request.getRequestURI()}" method="get">
+				<input type="text" name="search" id="search" placeholder="Ricerca" th:value="${search}"/>
+				<button class="btn-primary" type="Submit">Cerca</button>
 			</form>
 		</div>
 
@@ -22,7 +22,7 @@
 
 			<button class="btn-primary" sec:authorize="hasAuthority('utente')">Aggiungi ai preferiti!</button>
 			<a th:href="@{/feedback/create(id=${gym.id})}" sec:authorize="hasAuthority('utente')"><button class="btn-primary">Recensisci Palestra</button></a>
-			<a th:href="@{/course/gym(id=${gym.id})}"><button class="btn-primary">Vai ai corsi</button></a>
+			<a th:href="@{'/course/gym/' + ${gym.id}}"><button class="btn-primary">Vai ai corsi</button></a>
 			<a th:href="@{/gym/update/(id=${gym.id})}"><button class="btn-primary">Modifica</button></a>
 			<a th:href="@{/gym/delete/(id=${gym.id})}"><button class="btn-primary">Elimina</button></a>
 
