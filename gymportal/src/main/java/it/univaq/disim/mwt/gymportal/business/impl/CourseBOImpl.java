@@ -51,8 +51,14 @@ public class CourseBOImpl implements CourseBO {
 	@Override
 	public void deleteAllCourseByGymId(Long id) throws BusinessException {
 		 courseRepository.deleteAllCourseByGymId(id);
-
 	}
+
+	@Override
+	public List<Course> searchByIdAndName(Long id, String name) throws BusinessException {
+		 return courseRepository.searchByIdAndName(id, name);
+	}
+	
+	
 
 	
 		

@@ -24,6 +24,7 @@ public interface CourseBO {
 	
 	void deleteAllCourseByGymId (Long id) throws BusinessException;
 
+	List<Course> searchByIdAndName(Long id, String name) throws BusinessException;
 
 
 

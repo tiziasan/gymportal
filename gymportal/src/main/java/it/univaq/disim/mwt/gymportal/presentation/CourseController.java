@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
+import javax.xml.ws.RequestWrapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,10 +63,15 @@ public class CourseController {
 	}
 	
 	
-	
-	@GetMapping("/gym")
-	public String listCo(@RequestParam long id, Model model) throws BusinessException {
-		List<Course> courseList = serviceCourse.findCourseByGymId(id);
+	@GetMapping(value= {"/gym/{id}", "/gym/{id}?search={search}"})
+	public String listCo(@PathVariable long id, @RequestParam(required = false) String search, Model model) throws BusinessException {
+		List<Course> courseList;
+		if(search != null) {
+			courseList=serviceCourse.searchByIdAndName(id, search);
+			model.addAttribute("search", search);
+		}else {
+			courseList=serviceCourse.findCourseByGymId(id);
+		}
 		List<FeedbackGym> feedbackList = serviseFeedbackGym.findAllFeedbackByGym(id);
 		Gym gym = serviceGym.findByID(id);
         model.addAttribute("courseList", courseList);
@@ -72,10 +79,7 @@ public class CourseController {
         model.addAttribute("gym", gym);
 
 		return "/course/list";
-
 	}
-	
-	
 	
 	@GetMapping("/delete")
     public String deleteStart(@RequestParam Long id, Model model) throws BusinessException {
@@ -122,5 +126,7 @@ public class CourseController {
 		List<Gym> gyms = serviceGym.findAllGym();
 		model.addAttribute("gyms", gyms);
 	}
+	
+	
 
 }
