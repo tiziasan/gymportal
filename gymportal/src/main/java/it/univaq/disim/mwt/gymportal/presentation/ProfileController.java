@@ -67,6 +67,7 @@ public class ProfileController {
 		User user = userService.findUserByUserName(auth.getName());
 		model.addAttribute("user", user);
 		return "/profile/update";
+		
 	}
 
 	@PostMapping("/update")
