@@ -15,11 +15,11 @@ public class Message {
 
     @Id
     private Long Id;
-
+/*
     @Field("date")
     //controlla tipo
     private LocalDateTime date;
-
+*/
     @Field("message")
     private String message;
 
