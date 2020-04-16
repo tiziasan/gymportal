@@ -5,10 +5,21 @@ spring:
     password: gymportal
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+  data:
+    mongodb:
+      authentication-database: admin
+      username: gymportal
+      password: gymportal
+      database: gymportal
+      port: 27017
+      host: localhost
+
   jpa:
     show-sql: true
-    hibernate:      ddl-auto: update 
-    properties:      hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update 
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
   
 ###############################################
 ########### GYMPORTAL PROPERTIES ###############
