@@ -1,12 +1,8 @@
 package it.univaq.disim.mwt.gymportal.business;
 
 import java.util.List;
-
-import org.springframework.stereotype.Service;
-
 import it.univaq.disim.mwt.gymportal.domain.FavoriteCourse;
 
-@Service
 public interface FavoriteCourseBO {
 	
 	void createFavoriteCourse (FavoriteCourse favoriteCourse) throws BusinessException;
