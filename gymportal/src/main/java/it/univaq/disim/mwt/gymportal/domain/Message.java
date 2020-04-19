@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 import java.time.LocalDateTime;
 
 @Data
@@ -15,16 +17,16 @@ public class Message {
     @Id
     private Long Id;
 
-    @Field("mittente")
-    private Long idMittente;
-
-    @Field("destinatario")
-    private Long idDestinatario;
-
-    @Field("message")
-    private String message;
+    @Field("text")
+    private String text;
 
     @Field("date")
     //controlla tipo
     private LocalDateTime date;
+    
+    @Field("user_id")
+    private Long user_id;
+    
+    @Field("gym_id")
+    private Long gym_id; 
 }

@@ -55,4 +55,5 @@ public class Gym {
 	@NotBlank
 	@ManyToOne
 	private User owner;
+	
 }
