@@ -7,6 +7,7 @@ import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.domain.Message;
 import it.univaq.disim.mwt.gymportal.domain.User;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.authenticator.SpnegoAuthenticator.AuthenticateAction;
 import org.apache.catalina.authenticator.jaspic.AuthConfigFactoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +26,15 @@ import org.springframework.web.servlet.ModelAndView;
 import java.time.LocalDateTime;
 
 import javax.validation.Valid;
-
 @Controller
 @RequestMapping("chat")
 public class MessageController {
 
     @Autowired
     private MessageBO serviceMessage;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("")
     
@@ -46,18 +49,16 @@ public class MessageController {
     @PostMapping("/create")
 
     public String create(@Valid @ModelAttribute("message") Message message, Errors errors) throws BusinessException {
-    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    
-    	System.out.println(authentication.getPrincipal());
-    	
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
         if (errors.hasErrors()) {
             return "/chat/index";
         }
-        message.setUser_id(1L);
+        message.setUser_id(user.getId());
         message.setDate(LocalDateTime.now());
         serviceMessage.createMessage(message);
         
-        return "redirect:/gymportal";
+        return "redirect:/";
     }
 
 }
