@@ -18,10 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
+import it.univaq.disim.mwt.gymportal.business.FavoriteCourseBO;
+import it.univaq.disim.mwt.gymportal.business.FavoriteGymBO;
 import it.univaq.disim.mwt.gymportal.business.FeedbackCourseBO;
 import it.univaq.disim.mwt.gymportal.business.FeedbackGymBO;
 import it.univaq.disim.mwt.gymportal.business.UserService;
-import it.univaq.disim.mwt.gymportal.domain.Course;
+import it.univaq.disim.mwt.gymportal.domain.FavoriteCourse;
+import it.univaq.disim.mwt.gymportal.domain.FavoriteGym;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
 import it.univaq.disim.mwt.gymportal.domain.User;
@@ -42,6 +45,13 @@ public class ProfileController {
 	@Autowired
 	private FeedbackGymBO serviceFeedbackGym;
 	
+	@Autowired
+	private FavoriteGymBO serviceFavoriteGym;
+	
+	@Autowired
+	private FavoriteCourseBO serviceFavoriteCourse;
+	
+	
 	@GetMapping("")
 	public ModelAndView home(Model model) throws BusinessException {
 		ModelAndView modelAndView = new ModelAndView();
@@ -49,6 +59,10 @@ public class ProfileController {
 		User user = userService.findUserByUserName(auth.getName());
 		List<FeedbackCourse> feedbackCourseList = serviceFeedbackCourse.findAllFeedbackByUserId(user.getId());
 		List<FeedbackGym> feedbackGymList = serviceFeedbackGym.findAllFeedbackByUserId(user.getId());
+		List<FavoriteGym> favoriteGymList = serviceFavoriteGym.findAllFavoriteByUserId(user.getId());
+		List<FavoriteCourse> favoriteCourseList = serviceFavoriteCourse.findAllFavoriteByUserId(user.getId());
+
+
 		System.out.println("kadjgVCKadvckagjVCKgha"+feedbackCourseList.size());
 
 
@@ -56,6 +70,10 @@ public class ProfileController {
 		model.addAttribute("adminMessage", "Content Available Only for Users with Admin Role");
 		model.addAttribute("feedbackCourseList",feedbackCourseList);
 		model.addAttribute("feedbackGymList",feedbackGymList);
+		model.addAttribute("favoriteGymList",favoriteGymList);
+		model.addAttribute("favoriteCourseList",favoriteCourseList);
+
+
 
 		modelAndView.setViewName("/profile/index");
 		return modelAndView;

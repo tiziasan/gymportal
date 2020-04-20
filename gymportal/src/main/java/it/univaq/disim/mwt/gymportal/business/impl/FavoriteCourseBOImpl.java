@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.FavoriteCourseBO;
 import it.univaq.disim.mwt.gymportal.domain.FavoriteCourse;
+import it.univaq.disim.mwt.gymportal.domain.FavoriteGym;
 import it.univaq.disim.mwt.gymportal.repository.FavoriteCourseRepository;
 
 @Service
@@ -40,5 +41,10 @@ public class FavoriteCourseBOImpl implements FavoriteCourseBO{
 	public List<FavoriteCourse> findAllFavoriteCourse(Long id) throws BusinessException {
 		return favoriteCourseRepository.findAllFavoriteCourse(id);
 	}
+	
+	@Override
+	public List<FavoriteCourse> findAllFavoriteByUserId(Long id) throws BusinessException {
+		return favoriteCourseRepository.findAllFavoriteByUserId(id);
 
+	}
 }

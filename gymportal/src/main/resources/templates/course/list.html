@@ -18,7 +18,7 @@
 				<h3 th:text="${course.name}"></h3>
 				<h4 th:text="${course.code}"></h4>
 				<p th:text="${course.description}"></p>
-				<button class="btn-primary" sec:authorize="hasAuthority('utente')">Aggiungi ai preferiti!</button>
+				<a th:href="@{/favoriteCourse/create(id=${course.id})}" sec:authorize="hasAuthority('utente')"><button class="btn-primary" sec:authorize="hasAuthority('utente')">Aggiungi ai preferiti!</button></a>
 				<a th:href="@{/feedbackCourse/create(id=${course.id})}" sec:authorize="hasAuthority('utente')"><button class="btn-primary" >Recensisci Corso</button></a>
 				<a th:href="@{/feedbackCourse/(id=${course.id})}"><button class="btn-primary">Vedi le recensioni del corso</button></a>
 				<a th:href="@{/course/update/(id=${course.id})}"><button class="btn-primary">Modifica</button></a>

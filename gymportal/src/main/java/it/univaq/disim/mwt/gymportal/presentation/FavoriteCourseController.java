@@ -1,8 +1,6 @@
 
 package it.univaq.disim.mwt.gymportal.presentation;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,25 +16,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
-import it.univaq.disim.mwt.gymportal.business.FeedbackGymBO;
-import it.univaq.disim.mwt.gymportal.business.GymBO;
+import it.univaq.disim.mwt.gymportal.business.CourseBO;
+import it.univaq.disim.mwt.gymportal.business.FavoriteCourseBO;
 import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.domain.Course;
-import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
-import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
-import it.univaq.disim.mwt.gymportal.domain.Gym;
+import it.univaq.disim.mwt.gymportal.domain.FavoriteCourse;
+import it.univaq.disim.mwt.gymportal.domain.FavoriteGym;
 import it.univaq.disim.mwt.gymportal.domain.User;
 
 @Controller
 
-@RequestMapping("feedback")
-public class FeedbackGymController {
+@RequestMapping("favoriteCourse")
+public class FavoriteCourseController {
 
 	@Autowired
-	private FeedbackGymBO serviceFeedbackGym;
+	private FavoriteCourseBO serviceFavoriteCourse;
 
 	@Autowired
-	private GymBO serviceGym;
+	private CourseBO serviceCourse;
 
 	@Autowired
 	private UserService userService;
@@ -47,22 +44,22 @@ public class FeedbackGymController {
 	
 	@GetMapping("/create")
 	public String createStart(Model model,@RequestParam long id) throws BusinessException {
-		Gym gym = serviceGym.findByID(id);
+		Course course = serviceCourse.findByID(id);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUserName(auth.getName());
-		model.addAttribute("gym", gym);
+		model.addAttribute("course", course);
 		model.addAttribute("user", user);
 		
-		FeedbackGym feedback = new FeedbackGym();
+		FavoriteCourse favoriteCourse = new FavoriteCourse();
 
-		model.addAttribute("feedback", feedback);
+		model.addAttribute("favoriteCourse", favoriteCourse);
 
-		return "/feedback/form";
+		return "/favoriteCourse/create";
 	}
 	
 
 	@PostMapping("/create")
-	public String create(@Valid @ModelAttribute("feedback") FeedbackGym feedback, Errors errors, Model model)
+	public String create(@Valid @ModelAttribute("favoriteCourse") FavoriteCourse favoriteCourse, Errors errors, Model model)
 			throws BusinessException {
 		
 		if (errors.hasErrors()) {
@@ -70,11 +67,10 @@ public class FeedbackGymController {
 			model.addAttribute("message", message);
 			return "/feedback/form";
 		}
-		serviceFeedbackGym.createFeedbackGym(feedback);
+		serviceFavoriteCourse.createFavoriteCourse(favoriteCourse);
 		
-		long id = feedback.getGym().getId();
 
-		String redirect = "redirect:/course/gym/" + id;
+		String redirect = "redirect:/profile";
 
 		return redirect;
 	}
@@ -85,32 +81,15 @@ public class FeedbackGymController {
     }
 	
 	@PostMapping("/delete")
-	public String delete(@ModelAttribute("feedback") FeedbackGym feedback, Errors errors) throws BusinessException {
+	public String delete(@ModelAttribute("favoriteCourse") FavoriteCourse favoriteCourse, Errors errors) throws BusinessException {
 
 		if (errors.hasErrors()) {
 			return "/common/error";
 		}
-		serviceFeedbackGym.deleteFeedbackGym(feedback);;
+		serviceFavoriteCourse.deleteFavoriteCourse(favoriteCourse);
 		return "redirect:/profile";
 	}
 	
-	@GetMapping("/update")
-	public String updateStart(@RequestParam Long id, Model model) throws BusinessException {
-		FeedbackGym feedback = serviceFeedbackGym.findByID(id);
-		model.addAttribute("feedback", feedback);
-		return "/feedback/update";
-	}
-
-	@PostMapping("/update")
-	public String update(@Valid @ModelAttribute("feedback") FeedbackGym feedback , Errors errors) throws BusinessException {
-
-		if (errors.hasErrors()) {
-			return "/common/error";
-		}
-		
-		serviceFeedbackGym.updateFeedbackGym(feedback);
-		return "redirect:/profile";
-	}
 	
 
 }

@@ -52,7 +52,7 @@ public class Gym {
 	@OneToMany(mappedBy="gym")
 	private List<Course> course;
 
-	@NotBlank
+
 	@ManyToOne
-	private User owner;
+	private User user;
 }
