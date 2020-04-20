@@ -79,7 +79,7 @@ public class User {
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
 	
-	@OneToMany(mappedBy="owner")
-	private List<Gym> ownerOf;
+	@OneToMany(mappedBy="user")
+	private List<Gym> gym;
 
  }

@@ -1,8 +1,6 @@
 
 package it.univaq.disim.mwt.gymportal.presentation;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,22 +16,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
-import it.univaq.disim.mwt.gymportal.business.FeedbackGymBO;
+import it.univaq.disim.mwt.gymportal.business.FavoriteGymBO;
 import it.univaq.disim.mwt.gymportal.business.GymBO;
 import it.univaq.disim.mwt.gymportal.business.UserService;
-import it.univaq.disim.mwt.gymportal.domain.Course;
-import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
-import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
+import it.univaq.disim.mwt.gymportal.domain.FavoriteGym;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.domain.User;
 
 @Controller
 
-@RequestMapping("feedback")
-public class FeedbackGymController {
+@RequestMapping("favoriteGym")
+public class FavoriteGymController {
 
 	@Autowired
-	private FeedbackGymBO serviceFeedbackGym;
+	private FavoriteGymBO serviceFavoriteGym;
 
 	@Autowired
 	private GymBO serviceGym;
@@ -53,16 +49,16 @@ public class FeedbackGymController {
 		model.addAttribute("gym", gym);
 		model.addAttribute("user", user);
 		
-		FeedbackGym feedback = new FeedbackGym();
+		FavoriteGym favoriteGym = new FavoriteGym();
 
-		model.addAttribute("feedback", feedback);
+		model.addAttribute("favoriteGym", favoriteGym);
 
-		return "/feedback/form";
+		return "/favoriteGym/create";
 	}
 	
 
 	@PostMapping("/create")
-	public String create(@Valid @ModelAttribute("feedback") FeedbackGym feedback, Errors errors, Model model)
+	public String create(@Valid @ModelAttribute("favoriteGym") FavoriteGym favoriteGym, Errors errors, Model model)
 			throws BusinessException {
 		
 		if (errors.hasErrors()) {
@@ -70,11 +66,10 @@ public class FeedbackGymController {
 			model.addAttribute("message", message);
 			return "/feedback/form";
 		}
-		serviceFeedbackGym.createFeedbackGym(feedback);
+		serviceFavoriteGym.createFavoriteGym(favoriteGym);
 		
-		long id = feedback.getGym().getId();
 
-		String redirect = "redirect:/course/gym/" + id;
+		String redirect = "redirect:/profile";
 
 		return redirect;
 	}
@@ -85,32 +80,15 @@ public class FeedbackGymController {
     }
 	
 	@PostMapping("/delete")
-	public String delete(@ModelAttribute("feedback") FeedbackGym feedback, Errors errors) throws BusinessException {
+	public String delete(@ModelAttribute("favoriteGym") FavoriteGym favoriteGym, Errors errors) throws BusinessException {
 
 		if (errors.hasErrors()) {
 			return "/common/error";
 		}
-		serviceFeedbackGym.deleteFeedbackGym(feedback);;
+		serviceFavoriteGym.deleteFavoriteGym(favoriteGym);
 		return "redirect:/profile";
 	}
 	
-	@GetMapping("/update")
-	public String updateStart(@RequestParam Long id, Model model) throws BusinessException {
-		FeedbackGym feedback = serviceFeedbackGym.findByID(id);
-		model.addAttribute("feedback", feedback);
-		return "/feedback/update";
-	}
-
-	@PostMapping("/update")
-	public String update(@Valid @ModelAttribute("feedback") FeedbackGym feedback , Errors errors) throws BusinessException {
-
-		if (errors.hasErrors()) {
-			return "/common/error";
-		}
-		
-		serviceFeedbackGym.updateFeedbackGym(feedback);
-		return "redirect:/profile";
-	}
 	
 
 }

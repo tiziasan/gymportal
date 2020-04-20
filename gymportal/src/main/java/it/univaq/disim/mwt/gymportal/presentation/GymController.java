@@ -3,6 +3,8 @@ package it.univaq.disim.mwt.gymportal.presentation;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -15,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.CourseBO;
 import it.univaq.disim.mwt.gymportal.business.GymBO;
+import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
+import it.univaq.disim.mwt.gymportal.domain.User;
 
 @Controller
 @RequestMapping("gym")
@@ -29,8 +33,14 @@ public class GymController {
 	@Autowired
 	private CourseBO serviceCourse;
 	
+	@Autowired
+	private UserService userService;
+	
 	@GetMapping("/create")
     public String createStart(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUserName(auth.getName());
+		model.addAttribute("user", user);
 		Gym gym = new Gym();
 		model.addAttribute("gym", gym);
 		return "/gym/form";
@@ -64,6 +74,9 @@ public class GymController {
 	
 	@GetMapping("/update")
 	public String updateStart(@RequestParam Long id, Model model) throws BusinessException {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.findUserByUserName(auth.getName());
+		model.addAttribute("user", user);
 		Gym gym = serviceGym.findByID(id);
 		gym.setRegion("");
 		model.addAttribute("gym", gym);
