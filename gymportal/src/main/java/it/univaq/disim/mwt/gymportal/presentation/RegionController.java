@@ -52,7 +52,7 @@ public class RegionController {
 
 		}
 
-		if (search != null && auth.toString().contains("utente")) {
+		if (search != null && (auth.toString().contains("utente") || auth.toString().contains("ROLE_ANONYMOUS") )) {
 			gymList = serviceGym.searchByRegionAndName(region, search);
 			model.addAttribute("search", search);
 		}
