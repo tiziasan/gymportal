@@ -77,7 +77,7 @@ public class FavoriteCourseController {
 	
 	@GetMapping("/delete")
     public String deleteStart(@RequestParam Long id, Model model) throws BusinessException {
-		return "/feedback/delete";
+		return "/favoriteCourse/delete";
     }
 	
 	@PostMapping("/delete")

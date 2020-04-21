@@ -58,6 +58,11 @@ public class CourseBOImpl implements CourseBO {
 		 return courseRepository.searchByIdAndName(id, name);
 	}
 	
+	@Override
+	public List<Course> searchByIdAndNameAndUser(Long id, String name, Long idUtente) throws BusinessException {
+		 return courseRepository.searchByIdAndNameAndUser(id, name, idUtente);
+	}
+	
 	
 
 	

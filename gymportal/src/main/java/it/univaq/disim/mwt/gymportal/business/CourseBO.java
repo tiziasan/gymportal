@@ -21,6 +21,7 @@ public interface CourseBO {
 
 	List<Course> searchByIdAndName(Long id, String name) throws BusinessException;
 
+	List<Course> searchByIdAndNameAndUser(Long id, String name, Long idUser) throws BusinessException;
 
 
 }
