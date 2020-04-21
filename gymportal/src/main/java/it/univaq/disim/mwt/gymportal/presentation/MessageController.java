@@ -37,19 +37,19 @@ public class MessageController {
     public ModelAndView createStart(@PathVariable Long idGym) {
 		ModelAndView modelAndView = new ModelAndView();
 		Message message = new Message();
-		message.setGym_id(idGym);
 		modelAndView.addObject("message", message);
 		modelAndView.setViewName("chat/index");
 		return modelAndView;
 	}
 
     @PostMapping("")
-    public String create(@Valid @ModelAttribute("message") Message message, Errors errors) throws BusinessException {
+    public String create(@PathVariable Long idGym, @Valid @ModelAttribute("message") Message message, Errors errors) throws BusinessException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         if (errors.hasErrors()) {
             return "/chat/index";
         }
+        message.setGym_id(idGym);
         message.setUser_id(user.getId());
         message.setDate(LocalDateTime.now());
         serviceMessage.createMessage(message);
