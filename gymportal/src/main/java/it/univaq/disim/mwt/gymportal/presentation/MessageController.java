@@ -7,27 +7,24 @@ import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.domain.Message;
 import it.univaq.disim.mwt.gymportal.domain.User;
 
-import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.authenticator.SpnegoAuthenticator.AuthenticateAction;
-import org.apache.catalina.authenticator.jaspic.AuthConfigFactoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.AuthenticatedPrincipal;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
 
 import javax.validation.Valid;
+
 @Controller
-@RequestMapping("chat")
+@RequestMapping("gym/{idGym}/chat")
 public class MessageController {
 
     @Autowired
@@ -37,17 +34,16 @@ public class MessageController {
     private UserService userService;
 
     @GetMapping("")
-    
-    public ModelAndView chat() {
+    public ModelAndView createStart(@PathVariable Long idGym) {
 		ModelAndView modelAndView = new ModelAndView();
 		Message message = new Message();
+		message.setGym_id(idGym);
 		modelAndView.addObject("message", message);
 		modelAndView.setViewName("chat/index");
 		return modelAndView;
 	}
 
-    @PostMapping("/create")
-
+    @PostMapping("")
     public String create(@Valid @ModelAttribute("message") Message message, Errors errors) throws BusinessException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
@@ -58,7 +54,7 @@ public class MessageController {
         message.setDate(LocalDateTime.now());
         serviceMessage.createMessage(message);
         
-        return "redirect:/";
+        return "/chat/index";
     }
 
 }

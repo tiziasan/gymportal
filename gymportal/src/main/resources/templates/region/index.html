@@ -22,10 +22,10 @@
 
 			<a th:href="@{/favoriteGym/create(id=${gym.id})}" sec:authorize="hasAuthority('utente')"><button class="btn-primary" sec:authorize="hasAuthority('utente')">Aggiungi ai preferiti!</button></a>
 			<a th:href="@{/feedback/create(id=${gym.id})}" sec:authorize="hasAuthority('utente')"><button class="btn-primary">Recensisci Palestra</button></a>
+			<a th:href="@{/gym/{gymId}/chat(gymId=${gym.id})}"><button class="btn-primary">Chat</button></a>
 			<a th:href="@{/course/gym/{gymId}(gymId=${gym.id})}"><button class="btn-primary">Vai ai corsi</button></a>
 			<a th:href="@{/gym/update/(id=${gym.id})}"><button class="btn-primary">Modifica</button></a>
 			<a th:href="@{/gym/delete/(id=${gym.id})}"><button class="btn-primary">Elimina</button></a>
-
 
 		</div>
 	</div>
