@@ -81,9 +81,5 @@ public class User {
 	
 	@OneToMany(mappedBy="user")
 	private List<Gym> gym;
-/*
-	//join table => chat
-	@ManyToMany
-	private List<Gym> chats;
-*/
+
  }
