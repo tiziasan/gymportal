@@ -3,36 +3,120 @@
 	  xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
 <body>
 <div layout:fragment="content">
+
 	<div class="row">
-		<div class="col-12">
 
-			<form autocomplete="off" action="#" th:action="${#request.getRequestURI()}" th:object="${message}" method="post" role="form">
+		<div class="col-md-3">
+			<!-- /. box -->
+			<div class="box box-solid">
+				<div class="box-header with-border">
+					<h3 class="box-title">Labels</h3>
 
-				<div class="form-group has-feedback">
-					<label class="validation-message"></label>
-					<input type="text" placeholder="message" class="form-control" th:field="*{text}" />
-
-					<input type="hidden" class="form-control" th:field="*{gym_id}" th:value="*{gym_id}" />
-
-				</div>
-				
-				
-				
-				<div class="row">
-
-					<!-- /.col -->
-					<div class="col-xs-4">
-						<button type="submit" class="btn btn-primary btn-block btn-flat">invia</button>
-
+					<div class="box-tools">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+						</button>
 					</div>
-					<!-- /.col -->
 				</div>
-
-			</form>
-
-
-
+				<div class="box-body no-padding">
+					<ul class="nav nav-pills nav-stacked">
+						<li><a href="#"><i class="fa fa-circle-o text-red"></i> Important</a></li>
+						<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> Promotions</a></li>
+						<li><a href="#"><i class="fa fa-circle-o text-light-blue"></i> Social</a></li>
+					</ul>
+				</div>
+				<!-- /.box-body -->
+			</div>
+			<!-- /.box -->
 		</div>
+		<!-- /.col -->
+
+
+		<div class="col-md-9">
+			<!-- DIRECT CHAT WARNING -->
+			<div class="box box-warning direct-chat direct-chat-warning">
+				<div class="box-header with-border">
+					<h3 class="box-title">Direct Chat</h3>
+
+					<div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<!-- Conversations are loaded here -->
+					<div class="direct-chat-messages">
+						<!-- Message. Default to the left -->
+						<div class="direct-chat-msg">
+							<div class="direct-chat-info clearfix">
+								<span class="direct-chat-name pull-left">Alexander Pierce</span>
+								<span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
+							</div>
+							<!-- /.direct-chat-info -->
+							<img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" th:src="@{/dist/img/avatar5.png}" alt="Message User Image"><!-- /.direct-chat-img -->
+							<div class="direct-chat-text">
+								Is this template really for free? That's unbelievable!
+							</div>
+							<!-- /.direct-chat-text -->
+						</div>
+						<!-- /.direct-chat-msg -->
+
+						<!-- Message to the right -->
+						<div class="direct-chat-msg right">
+							<div class="direct-chat-info clearfix">
+								<span class="direct-chat-name pull-right">Sarah Bullock</span>
+								<span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
+							</div>
+							<!-- /.direct-chat-info -->
+							<img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" th:src="@{/dist/img/avatar5.png}" alt="Message User Image"><!-- /.direct-chat-img -->
+							<div class="direct-chat-text">
+								You better believe it!
+							</div>
+							<!-- /.direct-chat-text -->
+						</div>
+						<!-- /.direct-chat-msg -->
+					</div>
+					<!--/.direct-chat-messages-->
+
+					<!-- Contacts are loaded here -->
+					<div class="direct-chat-contacts">
+						<ul class="contacts-list">
+							<li>
+								<a href="#">
+									<img class="contacts-list-img" src="../dist/img/user1-128x128.jpg" th:src="@{/dist/img/avatar5.png}" alt="User Image">
+
+									<div class="contacts-list-info">
+                            <span class="contacts-list-name">
+                              Count Dracula
+                              <small class="contacts-list-date pull-right">2/28/2015</small>
+                            </span>
+										<span class="contacts-list-msg">How have you been? I was...</span>
+									</div>
+									<!-- /.contacts-list-info -->
+								</a>
+							</li>
+							<!-- End Contact Item -->
+						</ul>
+						<!-- /.contatcts-list -->
+					</div>
+					<!-- /.direct-chat-pane -->
+				</div>
+				<!-- /.box-body -->
+				<div class="box-footer">
+					<form action="#" method="post" th:action="${#request.getRequestURI()}" th:object="${message}">
+						<div class="input-group">
+							<input type="text" name="message" placeholder="Type Message ..." class="form-control" th:field="*{text}" >
+							<span class="input-group-btn">
+                        <button type="submit" class="btn btn-warning btn-flat">Send</button>
+                      </span>
+						</div>
+					</form>
+				</div>
+				<!-- /.box-footer-->
+			</div>
+			<!--/.direct-chat -->
+		</div>
+		<!-- /.col -->
+
 	</div>
 </div>
 </body>
