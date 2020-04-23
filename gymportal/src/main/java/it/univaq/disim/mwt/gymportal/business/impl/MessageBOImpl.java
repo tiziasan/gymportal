@@ -14,7 +14,7 @@ public class MessageBOImpl implements MessageBO {
     MessageRepository messageRepository;
 
     @Override
-    public void createMessage(Message msg) throws BusinessException {
-        messageRepository.save(msg);
+    public Message createMessage(Message msg) throws BusinessException {
+        return messageRepository.save(msg);
     }
 }

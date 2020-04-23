@@ -13,7 +13,7 @@ import java.util.Set;
 public class Chat {
 
     @Id
-    private Long Id;
+    private String Id;
 
     private Long user_id;
 
@@ -22,4 +22,7 @@ public class Chat {
     @DBRef
     private Set<Message> messages;
 
+    public void addMessage(Message msg){
+        messages.add(msg);
+    }
 }
