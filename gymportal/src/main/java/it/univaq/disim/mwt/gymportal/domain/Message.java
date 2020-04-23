@@ -15,6 +15,8 @@ public class Message {
 
     private String text;
 
+    private String sender;
+
     private LocalDateTime date;
 
     private boolean isGym;

@@ -1,11 +1,11 @@
 package it.univaq.disim.mwt.gymportal.domain;
 
 import lombok.Data;
+
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
-import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -20,6 +20,6 @@ public class Chat {
     private Long gym_id;
 
     @DBRef
-    private Set<Message> messages = new HashSet();
+    private Set<Message> messages;
 
 }

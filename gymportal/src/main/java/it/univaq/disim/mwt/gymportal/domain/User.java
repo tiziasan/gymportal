@@ -82,4 +82,16 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<Gym> gym;
 
+
+
+	public boolean isGestore(){
+		Set<Role> roles = this.getRoles();
+		for (Role r: roles) {
+			if (r.getRole().equals("gestore")){
+				return true;
+			}
+		}
+		return false;
+	}
+
  }
