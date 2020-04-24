@@ -84,8 +84,7 @@ public class MessageController {
         //chat.setUser_id(user.getId());
         chat.setUser_id(1L);
         chat.addMessage(message);
-
-        System.out.println(serviceChat.createChat(chat));
+        
 
         return "/chat/index";
     }
