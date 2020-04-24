@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -20,7 +21,7 @@ public class Chat {
     private Long gym_id;
 
     @DBRef
-    private Set<Message> messages;
+    private Set<Message> messages = new HashSet();
 
     public void addMessage(Message msg){
         messages.add(msg);

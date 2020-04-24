@@ -77,20 +77,15 @@ public class MessageController {
         message.setSender("utente1");
         message = serviceMessage.createMessage(message);
 
-        System.out.println("metodo");
-
         System.out.println(message);
-
 
         Chat chat = new Chat();
         chat.setGym_id(1L);
         //chat.setUser_id(user.getId());
         chat.setUser_id(1L);
+        chat.addMessage(message);
 
-
-        serviceChat.createChat(chat);
-        
-
+        System.out.println(serviceChat.createChat(chat));
 
         return "/chat/index";
     }
