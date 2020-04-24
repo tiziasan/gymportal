@@ -13,7 +13,7 @@ import java.util.Set;
 public class Chat {
 
     @Id
-    private String Id;
+    private String id;
 
     private Long user_id;
 

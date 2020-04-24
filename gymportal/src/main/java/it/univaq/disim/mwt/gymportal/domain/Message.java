@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class Message {
 
     @Id
-    private String Id;
+    private String id;
 
     private String text;
 
