@@ -40,7 +40,11 @@ public class MessageController {
 
     @GetMapping("")
     public ModelAndView createStart(@RequestParam(required = false) Long idGym) {
-/*
+    	
+//    	System.out.println("<----------LISTA CHAT ");
+//    	System.out.println(serviceChat.findByUser_id(1L));
+
+    	
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         //se gestore restituisco lista delle palestre e la lista delle chat per ogni palestra che gli appartiene
@@ -57,7 +61,7 @@ public class MessageController {
         } else {
 
         }
-*/
+
 		ModelAndView modelAndView = new ModelAndView();
 		Message message = new Message();
 		modelAndView.addObject("message", message);
@@ -80,10 +84,12 @@ public class MessageController {
         System.out.println(message);
 
         Chat chat = new Chat();
-        chat.setGym_id(1L);
+        chat.setGym_id(2L);
         //chat.setUser_id(user.getId());
         chat.setUser_id(1L);
         chat.addMessage(message);
+        
+        serviceChat.createChat(chat);
         
 
         return "/chat/index";
