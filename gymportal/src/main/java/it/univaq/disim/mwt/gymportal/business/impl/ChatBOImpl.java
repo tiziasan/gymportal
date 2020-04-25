@@ -17,13 +17,18 @@ public class ChatBOImpl implements ChatBO {
     ChatRepository chatRepository;
 
     @Override
-    public void createChat(Chat chat) throws BusinessException {
-        chatRepository.save(chat);
+    public Chat createChat(Chat chat) throws BusinessException {
+        return chatRepository.save(chat);
     }
 
 	@Override
-	public List<Chat> findByUser_id(Long user_id) throws BusinessException {
-		return chatRepository.findByUser_id(user_id); 
+	public List<Chat> findByUserId(Long user_id) throws BusinessException {
+		return chatRepository.findByUserId(user_id); 
+	}
+
+	@Override
+	public List<Chat> findByGymId(Long gymId) throws BusinessException {
+		return chatRepository.findByGymId(gymId);
 	}
 	
 }
