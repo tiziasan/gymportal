@@ -2,6 +2,7 @@ package it.univaq.disim.mwt.gymportal.business;
 
 import java.util.List;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
+import it.univaq.disim.mwt.gymportal.domain.User;
 
 public interface GymBO {
 
@@ -18,6 +19,8 @@ public interface GymBO {
 	Gym findByID(Long id) throws BusinessException;
 	
 	List<Gym> searchByRegionAndName(String region, String name) throws BusinessException;
+	
+	Gym findByUser(User user);
 
 	
 }
