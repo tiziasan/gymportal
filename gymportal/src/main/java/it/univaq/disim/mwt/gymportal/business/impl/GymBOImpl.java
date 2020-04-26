@@ -56,7 +56,7 @@ public class GymBOImpl implements GymBO{
 	}
 
 	@Override
-	public Gym findByUser(User user) {
+	public List<Gym> findByUser(User user) throws BusinessException {
 		return gymRepository.findByUser(user);
 	}
 
