@@ -5,6 +5,8 @@ import java.util.List;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.GymBO;
+import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
+import it.univaq.disim.mwt.gymportal.domain.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,18 +28,42 @@ public class RegionController {
 
 	@Autowired
 	private GymBO serviceGym;
-	
 
-	//https://stackoverflow.com/questions/60528613/rest-api-with-mix-of-path-param-and-requestparam
-	@GetMapping(value = {"/{region}","/{region}?search={search}"})
-	public String listGym(@PathVariable String region, @RequestParam(required = false) String search, Model model) throws BusinessException{
-		List<Gym> gymList;
-		if (search != null){
-			gymList = serviceGym.searchByRegionAndName(region,search);
-			model.addAttribute("search", search);
-		} else {
-			gymList = serviceGym.findByRegion(region);
+	@Autowired
+	private UserService userService;
+
+	// https://stackoverflow.com/questions/60528613/rest-api-with-mix-of-path-param-and-requestparam
+	@GetMapping(value = { "/{region}", "/{region}?search={search}" })
+	public String listGym(@PathVariable String region, @RequestParam(required = false) String search, Model model)
+			throws BusinessException {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		List<Gym> gymList = null;
+
+		if (auth.toString().contains("gestore")) {
+			User user = userService.findUserByUserName(auth.getName());
+			Long id = user.getId();
+			gymList = serviceGym.searchByRegionAndUser(region, id);
+
 		}
+
+		if (auth.toString().contains("ROLE_ANONYMOUS") || auth.toString().contains("utente")) {
+
+			gymList = serviceGym.findByRegion(region);
+
+		}
+
+		if (search != null && (auth.toString().contains("utente") || auth.toString().contains("ROLE_ANONYMOUS") )) {
+			gymList = serviceGym.searchByRegionAndName(region, search);
+			model.addAttribute("search", search);
+		}
+
+		if (search != null && auth.toString().contains("gestore")) {
+			User user = userService.findUserByUserName(auth.getName());
+			Long id = user.getId();
+			gymList = serviceGym.searchByRegionAndNameAndUser(region, search, id);
+			model.addAttribute("search", search);
+		}
+
 		model.addAttribute("region", region);
 		model.addAttribute("gymList", gymList);
 		return "/region/index";

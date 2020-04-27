@@ -11,4 +11,5 @@ import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
 @Repository
 public interface FeedbackGymRepository extends CrudRepository<FeedbackGym, Long>, FeedbackGymImplCustom{
 
+	
 }

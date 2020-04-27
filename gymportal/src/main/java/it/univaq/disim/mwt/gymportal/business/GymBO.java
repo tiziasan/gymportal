@@ -19,6 +19,15 @@ public interface GymBO {
 	Gym findByID(Long id) throws BusinessException;
 	
 	List<Gym> searchByRegionAndName(String region, String name) throws BusinessException;
+	
+	List<Gym> searchByRegionAndUser(String region, Long id) throws BusinessException;
+
+	List<Gym> searchByRegionAndNameAndUser(String region, String name, Long id) throws BusinessException;
+
+	List<Gym> searchByUser(Long id) throws BusinessException;
+
+	
+	
 
 	List<Gym> findByUser(User user)  throws BusinessException ;
 
