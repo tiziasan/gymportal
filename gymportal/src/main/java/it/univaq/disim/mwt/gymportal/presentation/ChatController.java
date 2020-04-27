@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.ChatBO;
@@ -29,9 +28,7 @@ import it.univaq.disim.mwt.gymportal.domain.Chat;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.domain.Message;
 import it.univaq.disim.mwt.gymportal.domain.User;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Controller
 @RequestMapping("chat")
 public class ChatController {
@@ -60,27 +57,28 @@ public class ChatController {
 
         Map<String, List<Chat>> chatMap;
         List<Chat> chatList;
+        List<Message> messageList;
 
-        if (user.isGestore()){ //se gestore restituisco lista delle palestre e la lista delle chat per ogni palestra che gli appartiene
+        if (auth.toString().contains("gestore")){ //se gestore restituisco lista delle palestre e la lista delle chat per ogni palestra che gli appartiene
 
-            List<Gym> gyms = serviceGym.searchByUsername(user.getUserName());
+            List<Gym> gyms = serviceGym.searchByUser(user.getId());
             chatMap = new HashMap<>();
             for (Gym g: gyms ) {
                 chatMap.put(g.getName(), serviceChat.findByGymId(g.getId()));
             }
-            System.out.println(chatMap);
             model.addAttribute("chatMap", chatMap);
 
         } else { //se utente restituisco lista chat dell'utente con le palestre
 
-            chatList = serviceChat.findByUsername(user.getUserName());
+            chatList = serviceChat.findByUserId(user.getId());
             model.addAttribute("chatList", chatList);
 
             if(idGym != null){ //se id gym settato restituisci la chat che fa match con idGym e username e restituisci la lista dei messaggi di quella specifica chat
-                //se chat non esiste -> creala
-
-            } else {
-
+                //se chat non esiste non bisogna crearla qui ma nel metodo che crea i messaggi
+//                messageList = serviceMessage.findByChat_UserIdAndChat_GymId(user.getId(), idGym);
+//                model.addAttribute("messageList", messageList);
+//
+//                System.out.println(messageList);
             }
 
         }
@@ -91,16 +89,22 @@ public class ChatController {
     }
 
     @PostMapping("")
-    public String create(@Valid @ModelAttribute("message") Message message, Errors errors) throws BusinessException {
+    public String create(@RequestParam(required = false) Long idGym, @Valid @ModelAttribute("message") Message message, Errors errors) throws BusinessException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
+        User user = userService.findUserByUserName(auth.getName());
+        //Gym gym = serviceGym.findByID(idGym);
         if (errors.hasErrors()) {
             return "/chat/index";
         }
 
         Chat chat = new Chat();
-        chat.setUsername(auth.getName());
+        chat.setUserId(user.getId());
+        chat.setUserName(user.getLastName() + " " + user.getName());
+        //chat.setGymId(gym.getId());
         chat.setGymId(2L);
+        //chat.setGymName(gym.getName());
+        chat.setGymName("palestra da cancellare");
+
         chat = serviceChat.createChat(chat);
 
         System.out.println("<--------------CHAT");

@@ -34,14 +34,14 @@
 								</div>
 								<div class="box-body no-padding">
 									<ul class="nav nav-pills nav-stacked" th:each="chat : ${gym.value}">
-										<li><a href="#" th:text="${chat.username}"><i class="fa fa-circle-o text-red"></i> Important</a></li>
+										<li><a href="#" th:text="${chat.userName}"><i class="fa fa-circle-o text-red"></i> Important</a></li>
 									</ul>
 								</div>
 							</div>
 						</li>
 
 
-						<li th:each="chat : ${chatList}"><a href="#" th:text="${chat.gymId}"><i class="fa fa-circle-o text-red"></i> Important</a></li>
+						<li th:each="chat : ${chatList}"><a href="#" th:text="${chat.gymName}"><i class="fa fa-circle-o text-red"></i> Important</a></li>
 
 
 					</ul>
