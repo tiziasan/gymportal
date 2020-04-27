@@ -11,8 +11,7 @@ import java.util.List;
 @Repository
 public interface GymRepository extends CrudRepository<Gym, Long>, GymImplCustom{
 
-	List<Gym> findByUser(User user);
-	
+
 
 	
 }
