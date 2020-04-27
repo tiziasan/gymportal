@@ -22,4 +22,7 @@ public interface GymImplCustom {
 	@Query(value = "FROM Gym AS g WHERE g.region = :region AND g.user.id = :id")
 	public List<Gym> searchByRegionAndUser(String region, Long id);
 	
+	@Query(value = "FROM Gym AS g WHERE g.user.id = :id")
+	public List<Gym> searchByUser(Long id);
+	
 }

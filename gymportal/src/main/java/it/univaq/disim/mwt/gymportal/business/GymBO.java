@@ -23,6 +23,8 @@ public interface GymBO {
 
 	List<Gym> searchByRegionAndNameAndUser(String region, String name, Long id) throws BusinessException;
 
+	List<Gym> searchByUser(Long id) throws BusinessException;
+
 	
 	
 

@@ -63,6 +63,11 @@ public class GymBOImpl implements GymBO{
 	public List<Gym> searchByRegionAndNameAndUser(String region, String name, Long id) throws BusinessException {
 		return gymRepository.searchByRegionAndNameAndUser(region, name, id);
 	}
+	
+	@Override
+	public List<Gym> searchByUser(Long id) throws BusinessException {
+		return gymRepository.searchByUser(id);
+	}
 
 	
 
