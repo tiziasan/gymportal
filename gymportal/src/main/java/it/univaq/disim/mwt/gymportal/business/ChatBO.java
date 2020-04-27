@@ -8,7 +8,7 @@ public interface ChatBO {
 
     Chat createChat(Chat chat) throws BusinessException;
     
-    List<Chat> findByUsername(String username) throws BusinessException;
+    List<Chat> findByUserId(Long userId) throws BusinessException;
     List<Chat> findByGymId(Long gymId) throws BusinessException;
 
 }

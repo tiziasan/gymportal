@@ -70,10 +70,5 @@ public class GymBOImpl implements GymBO{
 		return gymRepository.searchByUser(id);
 	}
 
-	@Override
-	public List<Gym> searchByUsername(String username) throws BusinessException {
-		return gymRepository.searchByUsername(username);
-	}
-
 
 }

@@ -26,5 +26,4 @@ public interface GymBO {
 
 	List<Gym> searchByUser(Long id) throws BusinessException;
 
-	public List<Gym> searchByUsername(String username) throws BusinessException;
 }

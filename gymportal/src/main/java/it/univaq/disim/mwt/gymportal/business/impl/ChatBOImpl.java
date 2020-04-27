@@ -22,13 +22,13 @@ public class ChatBOImpl implements ChatBO {
     }
 
 	@Override
-	public List<Chat> findByUsername(String username) throws BusinessException {
-		return chatRepository.findByUsername(username);
+	public List<Chat> findByUserId(Long userId) throws BusinessException {
+		return chatRepository.findByUserId(userId);
 	}
 
 	@Override
 	public List<Chat> findByGymId(Long gymId) throws BusinessException {
 		return chatRepository.findByGymId(gymId);
 	}
-	
+
 }

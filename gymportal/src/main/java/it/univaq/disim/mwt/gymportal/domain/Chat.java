@@ -16,8 +16,11 @@ public class Chat {
     @Id
     private String id;
 
-    private String username;    //forse meglio username che è sempre disponibile e non si deve fare chiamata su db
+    private Long userId;
+
+    private String userName;
     
     private Long gymId;
-    
+
+    private String gymName;
 }

@@ -24,8 +24,5 @@ public interface GymImplCustom {
 	
 	@Query(value = "FROM Gym AS g WHERE g.user.id = :id")
 	public List<Gym> searchByUser(Long id);
-
-	@Query(value = "FROM Gym AS g WHERE g.user.userName = :username")
-	public List<Gym> searchByUsername(String username);
 	
 }
