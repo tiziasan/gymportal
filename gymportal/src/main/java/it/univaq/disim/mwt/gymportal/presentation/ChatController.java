@@ -41,50 +41,53 @@ public class ChatController {
 
     @Autowired
     private GymBO serviceGym;
-    
+
     @Autowired
     private ChatBO serviceChat;
 
     @Autowired
     private UserService userService;
-    
+
     //se utente restituisco lista chat dell'utente
     //se id gym restituisci la chat che fa match con idGym e idUtente erestituisci la lista dei messaggi di quella specifica chatù
-        //se chat non esiste -> creala
-
+    //se chat non esiste -> creala
 
     @GetMapping("")
-    public ModelAndView viewStart(@RequestParam(required = false) Long idGym) throws BusinessException {
-        ModelAndView modelAndView = new ModelAndView();
+    public String createStart(@RequestParam(required = false) Long idGym, Model model) throws BusinessException {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
 
-        System.out.println(user);
+        Map<String, List<Chat>> chatMap;
+        List<Chat> chatList;
 
-        if (user.isGestore()){  //se gestore restituisco lista delle palestre e la lista delle chat per ogni palestra che gli appartiene
-//        	List<Gym> gyms = serviceGym.findByUser(user);
-//
-//            System.out.println(gyms);
-//
-//            Map<Gym, List<Chat>> chatMap = new HashMap<>();
-//            for (Gym g: gyms ) {
-//                chatMap.put(g, serviceChat.findByGymId(g.getId()));
-//            }
-//            System.out.println(chatMap);
-//
-//            modelAndView.addObject("chatMap", chatMap);
-        } else {
-//            List<Chat> chatList = serviceChat.findByUsername(auth.getName());
-//            modelAndView.addObject("chatList", chatList);
+        if (user.isGestore()){ //se gestore restituisco lista delle palestre e la lista delle chat per ogni palestra che gli appartiene
+
+            List<Gym> gyms = serviceGym.searchByUsername(user.getUserName());
+            chatMap = new HashMap<>();
+            for (Gym g: gyms ) {
+                chatMap.put(g.getName(), serviceChat.findByGymId(g.getId()));
+            }
+            System.out.println(chatMap);
+            model.addAttribute("chatMap", chatMap);
+
+        } else { //se utente restituisco lista chat dell'utente con le palestre
+
+            chatList = serviceChat.findByUsername(user.getUserName());
+            model.addAttribute("chatList", chatList);
+
+            if(idGym != null){ //se id gym settato restituisci la chat che fa match con idGym e username e restituisci la lista dei messaggi di quella specifica chat
+                //se chat non esiste -> creala
+
+            } else {
+
+            }
+
         }
 
         Message message = new Message();
-        modelAndView.addObject("message", message);
-
-        modelAndView.setViewName("chat/index");
-        return modelAndView;
-
+        model.addAttribute("message", message);
+        return "chat/index";
     }
 
     @PostMapping("")

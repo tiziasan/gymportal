@@ -20,11 +20,11 @@
 				<div class="box-body no-padding" >
 					<ul class="nav nav-pills nav-stacked">
 
-						<li>
+						<li th:each="gym : ${chatMap}">
 							<div class="box box-solid">
 								<div class="box-header with-border">
 
-									<a href="#"><i class="fa fa-circle-o text-light-blue"></i> Social Important</a>
+									<a href="#" th:text="${gym.key}"><i class="fa fa-circle-o text-light-blue"></i> Social Important</a>
 
 									<div class="box-tools">
 										<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -33,12 +33,15 @@
 
 								</div>
 								<div class="box-body no-padding">
-									<ul class="nav nav-pills nav-stacked">
-										<li><a href="#"><i class="fa fa-circle-o text-red"></i> Important</a></li>
+									<ul class="nav nav-pills nav-stacked" th:each="chat : ${gym.value}">
+										<li><a href="#" th:text="${chat.username}"><i class="fa fa-circle-o text-red"></i> Important</a></li>
 									</ul>
 								</div>
 							</div>
 						</li>
+
+
+						<li th:each="chat : ${chatList}"><a href="#" th:text="${chat.gymId}"><i class="fa fa-circle-o text-red"></i> Important</a></li>
 
 
 					</ul>
