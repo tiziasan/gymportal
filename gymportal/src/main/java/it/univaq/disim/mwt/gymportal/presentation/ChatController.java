@@ -50,8 +50,8 @@ public class ChatController {
     //se id gym restituisci la chat che fa match con idGym e idUtente erestituisci la lista dei messaggi di quella specifica chatù
     //se chat non esiste -> creala
 
-    @GetMapping("")
-    public String createStart(@RequestParam(required = false) Long idGym, Model model) throws BusinessException {
+    @GetMapping(value = {"", "/{idChat}", "?idGym={idGym}"})
+    public String createStart(@PathVariable(required = false) String idChat, @RequestParam(required = false) Long idGym, Model model) throws BusinessException {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
@@ -80,35 +80,15 @@ public class ChatController {
 
         }
 
-        Message message = new Message();
-        model.addAttribute("message", message);
-        return "chat/index";
-    }
-
-    @GetMapping("/{idChat}")
-    public String showChat(@PathVariable String idChat, Model model) throws BusinessException {
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUserName(auth.getName());
-
-        if (auth.toString().contains("gestore")){ //se gestore restituisco lista delle palestre e la lista delle chat per ogni palestra che gli appartiene
-
-            List<Gym> gyms = serviceGym.searchByUser(user.getId());
-            Map<String, List<Chat>> chatMap = new HashMap<>();
-            for (Gym g: gyms ) {
-                chatMap.put(g.getName(), serviceChat.findByGymId(g.getId()));
-            }
-            model.addAttribute("chatMap", chatMap);
-
-        } else { //se utente restituisco lista chat dell'utente con le palestre
-
-            List<Chat> chatList = serviceChat.findByUserId(user.getId());
-            model.addAttribute("chatList", chatList);
-
+        if(idChat != null){
+            List<Message> messageList = serviceMessage.findByChat(serviceChat.findChatById(idChat));
+            model.addAttribute("messageList", messageList);
         }
 
-        List<Message> messageList = serviceMessage.findByChat(serviceChat.findChatById(idChat));
-        model.addAttribute("messageList", messageList);
+        System.out.println(idChat);
+        System.out.println(idGym);
+
+
 
         Message message = new Message();
         model.addAttribute("message", message);
@@ -117,6 +97,7 @@ public class ChatController {
 
     @PostMapping("")
     public String create(@RequestParam(required = false) Long idGym, @Valid @ModelAttribute("message") Message message, Errors errors) throws BusinessException {
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
         //Gym gym = serviceGym.findByID(idGym);
