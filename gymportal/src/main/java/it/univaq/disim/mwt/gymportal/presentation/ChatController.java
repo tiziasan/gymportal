@@ -75,10 +75,10 @@ public class ChatController {
 
             if(idGym != null){ //se id gym settato restituisci la chat che fa match con idGym e username e restituisci la lista dei messaggi di quella specifica chat
                 //se chat non esiste non bisogna crearla qui ma nel metodo che crea i messaggi
-//                messageList = serviceMessage.findByChat_UserIdAndChat_GymId(user.getId(), idGym);
-//                model.addAttribute("messageList", messageList);
-//
-//                System.out.println(messageList);
+
+                messageList = serviceMessage.findByChat(serviceChat.findByUserIdAndGymId(user.getId(), idGym));
+                model.addAttribute("messageList", messageList);
+
             }
 
         }
