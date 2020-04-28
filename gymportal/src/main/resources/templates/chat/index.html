@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	  xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
 <body>
 <div layout:fragment="content">
@@ -67,61 +67,40 @@
 				<!-- /.box-header -->
 				<div class="box-body">
 					<!-- Conversations are loaded here -->
-					<div class="direct-chat-messages">
+					<div class="direct-chat-messages" th:each="message : ${messageList}">
+
 						<!-- Message. Default to the left -->
-						<div class="direct-chat-msg">
+						<div class="direct-chat-msg " sec:authorize="hasAuthority('gestore')" th:classappend="${message.isGym()} ? right : ''">
 							<div class="direct-chat-info clearfix">
-								<span class="direct-chat-name pull-left">Alexander Pierce</span>
-								<span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
+								<span class="direct-chat-name " th:text="${message.getSender()}" th:classappend="${message.isGym()} ? 'pull-right' : 'pull-left'">Alexander Pierce</span>
+								<span class="direct-chat-timestamp " th:text="${message.getDate()}" th:classappend="${message.isGym()} ? 'pull-left' : 'pull-right'">23 Jan 2:00 pm</span>
 							</div>
 							<!-- /.direct-chat-info -->
-							<img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" th:src="@{/dist/img/avatar5.png}" alt="Message User Image"><!-- /.direct-chat-img -->
-							<div class="direct-chat-text">
-								Is this template really for free? That's unbelievable!
+							<img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" th:src="@{/dist/img/avatar5.png}" alt="Message User Image"><!-- /.direct-chat-img -->
+							<div class="direct-chat-text" th:text="${message.getText()}">
+								You better believe it!
 							</div>
 							<!-- /.direct-chat-text -->
 						</div>
 						<!-- /.direct-chat-msg -->
 
 						<!-- Message to the right -->
-						<div class="direct-chat-msg right">
+						<div class="direct-chat-msg " sec:authorize="hasAuthority('utente')" th:classappend="${message.isGym()} ? '' : right">
 							<div class="direct-chat-info clearfix">
-								<span class="direct-chat-name pull-right">Sarah Bullock</span>
-								<span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
+								<span class="direct-chat-name " th:text="${message.getSender()}" th:classappend="${message.isGym()} ? 'pull-left' : 'pull-right'">Sarah Bullock</span>
+								<span class="direct-chat-timestamp " th:text="${message.getDate()}" th:classappend="${message.isGym()} ? 'pull-right' : 'pull-left'">23 Jan 2:05 pm</span>
 							</div>
 							<!-- /.direct-chat-info -->
 							<img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" th:src="@{/dist/img/avatar5.png}" alt="Message User Image"><!-- /.direct-chat-img -->
-							<div class="direct-chat-text">
+							<div class="direct-chat-text" th:text="${message.getText()}">
 								You better believe it!
 							</div>
 							<!-- /.direct-chat-text -->
 						</div>
 						<!-- /.direct-chat-msg -->
+
 					</div>
 					<!--/.direct-chat-messages-->
-
-					<!-- Contacts are loaded here -->
-					<div class="direct-chat-contacts">
-						<ul class="contacts-list">
-							<li>
-								<a href="#">
-									<img class="contacts-list-img" src="../dist/img/user1-128x128.jpg" th:src="@{/dist/img/avatar5.png}" alt="User Image">
-
-									<div class="contacts-list-info">
-                            <span class="contacts-list-name">
-                              Count Dracula
-                              <small class="contacts-list-date pull-right">2/28/2015</small>
-                            </span>
-										<span class="contacts-list-msg">How have you been? I was...</span>
-									</div>
-									<!-- /.contacts-list-info -->
-								</a>
-							</li>
-							<!-- End Contact Item -->
-						</ul>
-						<!-- /.contatcts-list -->
-					</div>
-					<!-- /.direct-chat-pane -->
 				</div>
 				<!-- /.box-body -->
 				<div class="box-footer">
