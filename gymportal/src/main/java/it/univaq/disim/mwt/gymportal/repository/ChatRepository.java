@@ -14,7 +14,8 @@ public interface ChatRepository extends CrudRepository <Chat, String>{
 	List<Chat> findByUserId(Long userId);
 	
 	List<Chat> findByGymId(Long gymId);
-	
+
+	Chat findByUserIdAndGymId(Long userId, Long gymId);
 	
 	
 }

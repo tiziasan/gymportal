@@ -10,5 +10,7 @@ public interface ChatBO {
     
     List<Chat> findByUserId(Long userId) throws BusinessException;
     List<Chat> findByGymId(Long gymId) throws BusinessException;
+    Chat findByUserIdAndGymId(Long userId, Long gymId) throws BusinessException;
+
 
 }

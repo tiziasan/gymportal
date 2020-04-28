@@ -31,4 +31,10 @@ public class ChatBOImpl implements ChatBO {
 		return chatRepository.findByGymId(gymId);
 	}
 
+	@Override
+	public Chat findByUserIdAndGymId(Long userId, Long gymId) throws BusinessException {
+		return chatRepository.findByUserIdAndGymId(userId, gymId);
+
+	}
+
 }
