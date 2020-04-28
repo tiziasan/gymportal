@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ChatRepository extends CrudRepository <Chat, String>{
 
+	Chat findChatById(String id);
+
 	List<Chat> findByUserId(Long userId);
 	
 	List<Chat> findByGymId(Long gymId);

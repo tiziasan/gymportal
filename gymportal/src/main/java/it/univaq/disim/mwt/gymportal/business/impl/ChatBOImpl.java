@@ -22,6 +22,11 @@ public class ChatBOImpl implements ChatBO {
     }
 
 	@Override
+	public Chat findChatById(String id) throws BusinessException {
+		return chatRepository.findChatById(id);
+	}
+
+	@Override
 	public List<Chat> findByUserId(Long userId) throws BusinessException {
 		return chatRepository.findByUserId(userId);
 	}
