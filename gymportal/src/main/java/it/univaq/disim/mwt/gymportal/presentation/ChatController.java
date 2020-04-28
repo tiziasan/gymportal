@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.ChatBO;
@@ -55,14 +56,10 @@ public class ChatController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
 
-        Map<String, List<Chat>> chatMap;
-        List<Chat> chatList;
-        List<Message> messageList;
-
         if (auth.toString().contains("gestore")){ //se gestore restituisco lista delle palestre e la lista delle chat per ogni palestra che gli appartiene
 
             List<Gym> gyms = serviceGym.searchByUser(user.getId());
-            chatMap = new HashMap<>();
+            Map<String, List<Chat>> chatMap = new HashMap<>();
             for (Gym g: gyms ) {
                 chatMap.put(g.getName(), serviceChat.findByGymId(g.getId()));
             }
@@ -70,18 +67,48 @@ public class ChatController {
 
         } else { //se utente restituisco lista chat dell'utente con le palestre
 
-            chatList = serviceChat.findByUserId(user.getId());
+            List<Chat> chatList = serviceChat.findByUserId(user.getId());
             model.addAttribute("chatList", chatList);
 
             if(idGym != null){ //se id gym settato restituisci la chat che fa match con idGym e username e restituisci la lista dei messaggi di quella specifica chat
                 //se chat non esiste non bisogna crearla qui ma nel metodo che crea i messaggi
 
-                messageList = serviceMessage.findByChat(serviceChat.findByUserIdAndGymId(user.getId(), idGym));
+                List<Message> messageList = serviceMessage.findByChat(serviceChat.findByUserIdAndGymId(user.getId(), idGym));
                 model.addAttribute("messageList", messageList);
 
             }
 
         }
+
+        Message message = new Message();
+        model.addAttribute("message", message);
+        return "chat/index";
+    }
+
+    @GetMapping("/{idChat}")
+    public String showChat(@PathVariable String idChat, Model model) throws BusinessException {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUserName(auth.getName());
+
+        if (auth.toString().contains("gestore")){ //se gestore restituisco lista delle palestre e la lista delle chat per ogni palestra che gli appartiene
+
+            List<Gym> gyms = serviceGym.searchByUser(user.getId());
+            Map<String, List<Chat>> chatMap = new HashMap<>();
+            for (Gym g: gyms ) {
+                chatMap.put(g.getName(), serviceChat.findByGymId(g.getId()));
+            }
+            model.addAttribute("chatMap", chatMap);
+
+        } else { //se utente restituisco lista chat dell'utente con le palestre
+
+            List<Chat> chatList = serviceChat.findByUserId(user.getId());
+            model.addAttribute("chatList", chatList);
+
+        }
+
+        List<Message> messageList = serviceMessage.findByChat(serviceChat.findChatById(idChat));
+        model.addAttribute("messageList", messageList);
 
         Message message = new Message();
         model.addAttribute("message", message);
