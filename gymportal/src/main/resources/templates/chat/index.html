@@ -67,10 +67,10 @@
 				<!-- /.box-header -->
 				<div class="box-body">
 					<!-- Conversations are loaded here -->
-					<div class="direct-chat-messages" th:each="message : ${messageList}">
+					<div class="direct-chat-messages">
 
 						<!-- Message. Default to the left -->
-						<div class="direct-chat-msg " sec:authorize="hasAuthority('gestore')" th:classappend="${message.isGym()} ? right : ''">
+						<div class="direct-chat-msg " th:each="message : ${messageList}" sec:authorize="hasAuthority('gestore')" th:classappend="${message.isGym()} ? right : ''">
 							<div class="direct-chat-info clearfix">
 								<span class="direct-chat-name " th:text="${message.sender}" th:classappend="${message.isGym()} ? 'pull-right' : 'pull-left'">Alexander Pierce</span>
 								<span class="direct-chat-timestamp " th:text="${message.date}" th:classappend="${message.isGym()} ? 'pull-left' : 'pull-right'">23 Jan 2:00 pm</span>
@@ -85,7 +85,7 @@
 						<!-- /.direct-chat-msg -->
 
 						<!-- Message to the right -->
-						<div class="direct-chat-msg " sec:authorize="hasAuthority('utente')" th:classappend="${message.isGym()} ? '' : right">
+						<div class="direct-chat-msg " th:each="message : ${messageList}" sec:authorize="!hasAuthority('gestore')" th:classappend="${message.isGym()} ? '' : right">
 							<div class="direct-chat-info clearfix">
 								<span class="direct-chat-name " th:text="${message.sender}" th:classappend="${message.isGym()} ? 'pull-left' : 'pull-right'">Sarah Bullock</span>
 								<span class="direct-chat-timestamp " th:text="${message.date}" th:classappend="${message.isGym()} ? 'pull-right' : 'pull-left'">23 Jan 2:05 pm</span>
@@ -104,7 +104,7 @@
 				</div>
 				<!-- /.box-body -->
 				<div class="box-footer">
-					<form action="#" method="post" th:action="${#request.getRequestURI()}" th:object="${message}">
+					<form action="#" method="post" th:action="${#request.getRequestURI() + '?' + #request.getQueryString()}" th:object="${message}">
 						<div class="input-group">
 							<input type="text" name="message" placeholder="Type Message ..." class="form-control" th:field="*{text}" >
 							<span class="input-group-btn">
