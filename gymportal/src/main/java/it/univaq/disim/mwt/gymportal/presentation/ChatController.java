@@ -51,6 +51,8 @@ public class ChatController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
 
+        String chatTitle = "Seleziona una Chat";
+
         if (auth.toString().contains("gestore")){ //se gestore restituisco mappa delle palestre e la lista delle chat per ognuna di esse
 
             List<Gym> gyms = serviceGym.searchByUser(user.getId());
@@ -64,6 +66,8 @@ public class ChatController {
                 Chat chat = serviceChat.findChatById(idChat);
                 List<Message> messageList = serviceMessage.findByChat(chat);
                 model.addAttribute("messageList", messageList);
+
+                chatTitle = chat.getGymName() + " - " + chat.getUserName();
             }
 
         } else { //se utente restituisco lista chat dell'utente con le palestre
@@ -75,14 +79,18 @@ public class ChatController {
                 Chat chat = serviceChat.findChatById(idChat);
                 List<Message> messageList = serviceMessage.findByChat(chat);
                 model.addAttribute("messageList", messageList);
+
+                chatTitle = chat.getGymName();
             }
             if(idChat == null && idGym != null){    //se id gym settato restituisci la chat che fa match con idGym e username e restituisci la lista dei messaggi di quella specifica chat
                 Chat chat = serviceChat.findByUserIdAndGymId(user.getId(), idGym);     //se chat non esiste non bisogna crearla qui ma nel metodo che fa inserimento dei messaggi
                 List<Message> messageList = serviceMessage.findByChat(chat);
                 model.addAttribute("messageList", messageList);
-            }
 
+                chatTitle = chat.getGymName();
+            }
         }
+        model.addAttribute("chatTitle", chatTitle);
 
         Message message = new Message();
         model.addAttribute("message", message);
