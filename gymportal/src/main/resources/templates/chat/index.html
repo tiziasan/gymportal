@@ -67,7 +67,7 @@
 				<!-- /.box-header -->
 				<div class="box-body">
 					<!-- Conversations are loaded here -->
-					<div class="direct-chat-messages">
+					<div class="direct-chat-messages chat-height">
 
 						<!-- Message. Default to the left -->
 						<div class="direct-chat-msg " th:each="message : ${messageList}" sec:authorize="hasAuthority('gestore')" th:classappend="${message.isGym()} ? right : ''">
