@@ -102,20 +102,14 @@ public class ChatController {
             if(idChat != null && idGym == null){    //se ho idChat prendo la chat, faccio inserimento del messaggio e aggiorno solo la lista dei messaggi e ritorno a /chat/idchat
                 chat = serviceChat.findChatById(idChat);
                 Gym gym = serviceGym.findByID(chat.getGymId());
-                message.setChat(chat);
                 message.setSender(gym.getName());
                 message.setGym(true);
-                message.setDate(LocalDateTime.now());
-                serviceMessage.createMessage(message);
             }
         } else {
             if(idChat != null && idGym == null){    //se ho idChat prendo la chat, faccio inserimento del messaggio e aggiorno solo la lista dei messaggi e ritorno a /chat/idchat
                 chat = serviceChat.findChatById(idChat);
-                message.setChat(chat);
                 message.setSender(user.getLastName() + " " + user.getName());
                 message.setGym(false);
-                message.setDate(LocalDateTime.now());
-                serviceMessage.createMessage(message);
             }
             if(idChat == null && idGym != null){    //se ho idGYm prendo la chat che fa match con userId
                 chat = serviceChat.findByUserIdAndGymId(user.getId(), idGym);
@@ -128,13 +122,14 @@ public class ChatController {
                     chat.setGymName(gym.getName());
                     chat = serviceChat.createChat(chat);
                 }
-                message.setChat(chat);
                 message.setSender(user.getLastName() + " " + user.getName());
                 message.setGym(false);
-                message.setDate(LocalDateTime.now());
-                serviceMessage.createMessage(message);
             }
         }
+        message.setChat(chat);
+        message.setDate(LocalDateTime.now());
+        serviceMessage.createMessage(message);
+
         return "redirect:/chat/" + chat.getId();
     }
 
