@@ -19,7 +19,6 @@ import it.univaq.disim.mwt.gymportal.business.GymBO;
 import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.domain.User;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -47,9 +46,7 @@ public class RegionController {
 		}
 
 		if (auth.toString().contains("ROLE_ANONYMOUS") || auth.toString().contains("utente")) {
-
 			gymList = serviceGym.findByRegion(region);
-
 		}
 
 		if (search != null && (auth.toString().contains("utente") || auth.toString().contains("ROLE_ANONYMOUS") )) {

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	  xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+<div layout:fragment="content">
+
+	<div class="row">
+
+		<div class="col-md-3">
+			<!-- /. box -->
+			<div class="box box-solid">
+				<div class="box-header with-border">
+					<h3 class="box-title">Lista Palestre </h3>
+
+					<div class="box-tools">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+						</button>
+					</div>
+				</div>
+				<div class="box-body no-padding" >
+					<ul class="nav nav-pills nav-stacked">
+
+						<li th:each="gym : ${chatMap}">
+							<div class="box box-solid">
+								<div class="box-header with-border">
+
+									<a href="#" th:text="${gym.key}"><i class="fa fa-circle-o text-light-blue"></i> Social Important</a>
+
+									<div class="box-tools">
+										<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+										</button>
+									</div>
+
+								</div>
+								<div class="box-body no-padding">
+									<ul class="nav nav-pills nav-stacked" th:each="chat : ${gym.value}">
+										<li><a href="#" th:text="${chat.userName}" th:href="@{/chat/{chatId}(chatId=${chat.id})}"><i class="fa fa-circle-o text-red"></i> Important</a></li>
+									</ul>
+								</div>
+							</div>
+						</li>
+
+
+						<li th:each="chat : ${chatList}"><a href="#" th:text="${chat.gymName}" th:href="@{/chat/{chatId}(chatId=${chat.id})}"><i class="fa fa-circle-o text-red"></i> Important</a></li>
+
+
+					</ul>
+				</div>
+				<!-- /.box-body -->
+
+			</div>
+			<!-- /.box -->
+		</div>
+		<!-- /.col -->
+
+
+		<div class="col-md-9">
+			<!-- DIRECT CHAT WARNING -->
+			<div class="box box-warning direct-chat direct-chat-warning">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="${chatTitle}">Direct Chat</h3>
+
+					<div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<!-- Conversations are loaded here -->
+					<div class="direct-chat-messages chat-height">
+
+						<!-- Message. Default to the left -->
+						<div class="direct-chat-msg " th:each="message : ${messageList}" sec:authorize="hasAuthority('gestore')" th:classappend="${message.isGym()} ? right : ''">
+							<div class="direct-chat-info clearfix">
+								<span class="direct-chat-name " th:text="${message.sender}" th:classappend="${message.isGym()} ? 'pull-right' : 'pull-left'">Alexander Pierce</span>
+								<span class="direct-chat-timestamp " th:text="${message.date}" th:classappend="${message.isGym()} ? 'pull-left' : 'pull-right'">23 Jan 2:00 pm</span>
+							</div>
+							<!-- /.direct-chat-info -->
+							<img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" th:src="@{/dist/img/avatar5.png}" alt="Message User Image"><!-- /.direct-chat-img -->
+							<div class="direct-chat-text" th:text="${message.text}">
+								You better believe it!
+							</div>
+							<!-- /.direct-chat-text -->
+						</div>
+						<!-- /.direct-chat-msg -->
+
+						<!-- Message to the right -->
+						<div class="direct-chat-msg " th:each="message : ${messageList}" sec:authorize="!hasAuthority('gestore')" th:classappend="${message.isGym()} ? '' : right">
+							<div class="direct-chat-info clearfix">
+								<span class="direct-chat-name " th:text="${message.sender}" th:classappend="${message.isGym()} ? 'pull-left' : 'pull-right'">Sarah Bullock</span>
+								<span class="direct-chat-timestamp " th:text="${message.date}" th:classappend="${message.isGym()} ? 'pull-right' : 'pull-left'">23 Jan 2:05 pm</span>
+							</div>
+							<!-- /.direct-chat-info -->
+							<img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" th:src="@{/dist/img/avatar5.png}" alt="Message User Image"><!-- /.direct-chat-img -->
+							<div class="direct-chat-text" th:text="${message.text}">
+								You better believe it!
+							</div>
+							<!-- /.direct-chat-text -->
+						</div>
+						<!-- /.direct-chat-msg -->
+
+					</div>
+					<!--/.direct-chat-messages-->
+				</div>
+				<!-- /.box-body -->
+				<div class="box-footer">
+					<form action="#" method="post" th:action="${#request.getRequestURI() + '?' + #request.getQueryString()}" th:object="${message}">
+						<div class="input-group">
+							<input type="text" name="message" placeholder="Type Message ..." class="form-control" th:field="*{text}" >
+							<span class="input-group-btn">
+                        <button type="submit" class="btn btn-warning btn-flat">Send</button>
+                      </span>
+						</div>
+					</form>
+				</div>
+				<!-- /.box-footer-->
+			</div>
+			<!--/.direct-chat -->
+		</div>
+		<!-- /.col -->
+
+	</div>
+</div>
+</body>
+</html>

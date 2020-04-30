@@ -21,6 +21,7 @@ public class Gym {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "gym_id")
 	private Long id;
 	
 	@NotBlank
@@ -52,7 +53,7 @@ public class Gym {
 	@OneToMany(mappedBy="gym")
 	private List<Course> course;
 
-
 	@ManyToOne
 	private User user;
+
 }

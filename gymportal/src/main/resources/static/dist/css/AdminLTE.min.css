@@ -6514,3 +6514,11 @@ input[name="c4l-rating"]+label:hover ~ input+label:before {
 	padding-left: 5px;
 	padding-right: 5px;
 }
+
+
+
+.chat-height{
+	min-height: 30vh;
+	max-height: 40vh;
+	height: 70%;
+}
