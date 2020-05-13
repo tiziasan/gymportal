@@ -37,6 +37,10 @@ public class UserService {
         return userRepository.findByUserName(userName);
     }
 
+    public User findUserById(Long id) {
+        return userRepository.findUserById(id);
+    }
+
     public User saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(true);
