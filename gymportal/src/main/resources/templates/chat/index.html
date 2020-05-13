@@ -34,14 +34,14 @@
 								</div>
 								<div class="box-body no-padding">
 									<ul class="nav nav-pills nav-stacked" th:each="chat : ${gym.value}">
-										<li><a href="#" th:text="${chat.userName}" th:href="@{/chat/{chatId}(chatId=${chat.id})}"><i class="fa fa-circle-o text-red"></i> Important</a></li>
+										<li><a href="#" th:text="${chat.id}" th:href="@{/chat/{chatId}(chatId=${chat.id})}"><i class="fa fa-circle-o text-red"></i> Important</a></li>
 									</ul>
 								</div>
 							</div>
 						</li>
 
 
-						<li th:each="chat : ${chatList}"><a href="#" th:text="${chat.gymName}" th:href="@{/chat/{chatId}(chatId=${chat.id})}"><i class="fa fa-circle-o text-red"></i> Important</a></li>
+						<li th:each="chat : ${chatList}"><a href="#" th:text="${chat.id}" th:href="@{/chat/{chatId}(chatId=${chat.id})}"><i class="fa fa-circle-o text-red"></i> Important</a></li>
 
 
 					</ul>
@@ -71,10 +71,13 @@
 
 						<!-- Message. Default to the left -->
 						<div class="direct-chat-msg " th:each="message : ${messageList}" sec:authorize="hasAuthority('gestore')" th:classappend="${message.isGym()} ? right : ''">
+
 							<div class="direct-chat-info clearfix">
-								<span class="direct-chat-name " th:text="${message.sender}" th:classappend="${message.isGym()} ? 'pull-right' : 'pull-left'">Alexander Pierce</span>
+								<span class="direct-chat-name pull-right" th:if="${message.isGym()}" th:text="${gym.name}">Alexander Pierce</span>
+								<span class="direct-chat-name pull-left" th:if="${!message.isGym()}" th:text="${client.name}">Alexander Pierce</span>
 								<span class="direct-chat-timestamp " th:text="${message.date}" th:classappend="${message.isGym()} ? 'pull-left' : 'pull-right'">23 Jan 2:00 pm</span>
 							</div>
+
 							<!-- /.direct-chat-info -->
 							<img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" th:src="@{/dist/img/avatar5.png}" alt="Message User Image"><!-- /.direct-chat-img -->
 							<div class="direct-chat-text" th:text="${message.text}">
@@ -86,10 +89,13 @@
 
 						<!-- Message to the right -->
 						<div class="direct-chat-msg " th:each="message : ${messageList}" sec:authorize="!hasAuthority('gestore')" th:classappend="${message.isGym()} ? '' : right">
+
 							<div class="direct-chat-info clearfix">
-								<span class="direct-chat-name " th:text="${message.sender}" th:classappend="${message.isGym()} ? 'pull-left' : 'pull-right'">Sarah Bullock</span>
-								<span class="direct-chat-timestamp " th:text="${message.date}" th:classappend="${message.isGym()} ? 'pull-right' : 'pull-left'">23 Jan 2:05 pm</span>
+								<span class="direct-chat-name pull-left" th:if="${message.isGym()}" th:text="${gym.name}">Alexander Pierce</span>
+								<span class="direct-chat-name pull-right" th:if="${!message.isGym()}" th:text="${client.name}">Alexander Pierce</span>
+								<span class="direct-chat-timestamp " th:text="${message.date}" th:classappend="${message.isGym()} ? 'pull-left' : 'pull-right'">23 Jan 2:00 pm</span>
 							</div>
+
 							<!-- /.direct-chat-info -->
 							<img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" th:src="@{/dist/img/avatar5.png}" alt="Message User Image"><!-- /.direct-chat-img -->
 							<div class="direct-chat-text" th:text="${message.text}">

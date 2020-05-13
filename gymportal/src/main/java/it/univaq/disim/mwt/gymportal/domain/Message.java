@@ -17,8 +17,6 @@ public class Message {
 
     private String text;
 
-    private String sender;
-    
     @DBRef
     private Chat chat;
 

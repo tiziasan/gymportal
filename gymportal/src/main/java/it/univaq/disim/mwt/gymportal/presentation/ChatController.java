@@ -67,28 +67,40 @@ public class ChatController {
                 List<Message> messageList = serviceMessage.findByChat(chat);
                 model.addAttribute("messageList", messageList);
 
-                chatTitle = chat.getGymName() + " - " + chat.getUserName();
+                Gym gym = serviceGym.findByID(chat.getGymId());
+                User client = userService.findUserById(chat.getUserId());
+
+                model.addAttribute("gym", gym);
+                model.addAttribute("client", client);
+
+                chatTitle = gym.getName() + " - " + client.getName() + " " + client.getLastName();
             }
 
         } else { //se utente restituisco lista chat dell'utente con le palestre
 
             List<Chat> chatList = serviceChat.findByUserId(user.getId());
             model.addAttribute("chatList", chatList);
+            List<Message> messageList = null;
+            Gym gym = null;
 
             if(idChat != null && idGym == null){    //se idchat settata allora già esiste
                 Chat chat = serviceChat.findChatById(idChat);
-                List<Message> messageList = serviceMessage.findByChat(chat);
-                model.addAttribute("messageList", messageList);
-
-                chatTitle = chat.getGymName();
+                messageList = serviceMessage.findByChat(chat);
+                gym = serviceGym.findByID(chat.getGymId());
+                chatTitle = gym.getName();
             }
             if(idChat == null && idGym != null){    //se id gym settato restituisci la chat che fa match con idGym e username e restituisci la lista dei messaggi di quella specifica chat
                 Chat chat = serviceChat.findByUserIdAndGymId(user.getId(), idGym);     //se chat non esiste non bisogna crearla qui ma nel metodo che fa inserimento dei messaggi
-                List<Message> messageList = serviceMessage.findByChat(chat);
-                model.addAttribute("messageList", messageList);
-
-                chatTitle = chat.getGymName();
+                messageList = serviceMessage.findByChat(chat);
+                gym = serviceGym.findByID(idGym);
+                chatTitle = gym.getName();
             }
+
+            model.addAttribute("messageList", messageList);
+
+            model.addAttribute("gym", gym);
+            model.addAttribute("client", user);
+
         }
         model.addAttribute("chatTitle", chatTitle);
 
@@ -109,28 +121,22 @@ public class ChatController {
         if (auth.toString().contains("gestore")){
             if(idChat != null && idGym == null){    //se ho idChat prendo la chat, faccio inserimento del messaggio e aggiorno solo la lista dei messaggi e ritorno a /chat/idchat
                 chat = serviceChat.findChatById(idChat);
-                Gym gym = serviceGym.findByID(chat.getGymId());
-                message.setSender(gym.getName());
                 message.setGym(true);
             }
         } else {
             if(idChat != null && idGym == null){    //se ho idChat prendo la chat, faccio inserimento del messaggio e aggiorno solo la lista dei messaggi e ritorno a /chat/idchat
                 chat = serviceChat.findChatById(idChat);
-                message.setSender(user.getLastName() + " " + user.getName());
                 message.setGym(false);
             }
             if(idChat == null && idGym != null){    //se ho idGYm prendo la chat che fa match con userId
                 chat = serviceChat.findByUserIdAndGymId(user.getId(), idGym);
                 if (chat == null){  //se non esiste la creo
                     chat = new Chat();
-                    chat.setUserId(user.getId());
-                    chat.setUserName(user.getUserName());
                     Gym gym = serviceGym.findByID(idGym);
                     chat.setGymId(gym.getId());
-                    chat.setGymName(gym.getName());
+                    chat.setUserId(user.getId());
                     chat = serviceChat.createChat(chat);
                 }
-                message.setSender(user.getLastName() + " " + user.getName());
                 message.setGym(false);
             }
         }
