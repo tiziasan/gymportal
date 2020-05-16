@@ -23,7 +23,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.UniqueElements;
 
 @Data
 @Builder
@@ -41,7 +40,6 @@ public class User {
 	@Column(name = "user_name")
 	@Length(min = 5, message = "*Your user name must have at least 5 characters")
 	@NotEmpty(message = "*Please provide a user name")
-	@UniqueElements(message = "username usato")
 	private String userName;
 	
 	@Column(name = "email")
