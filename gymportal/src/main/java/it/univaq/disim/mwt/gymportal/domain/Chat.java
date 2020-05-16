@@ -15,6 +15,10 @@ public class Chat {
 
     private Long userId;
 
+    private String userName;
+
     private Long gymId;
+
+    private String gymName;
 
 }

@@ -10,7 +10,7 @@
 			<!-- /. box -->
 			<div class="box box-solid">
 				<div class="box-header with-border">
-					<h3 class="box-title">Lista Palestre </h3>
+					<h3 class="box-title">Lista Chat</h3>
 
 					<div class="box-tools">
 						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -34,14 +34,14 @@
 								</div>
 								<div class="box-body no-padding">
 									<ul class="nav nav-pills nav-stacked" th:each="chat : ${gym.value}">
-										<li><a href="#" th:text="${chat.id}" th:href="@{/chat/{chatId}(chatId=${chat.id})}"><i class="fa fa-circle-o text-red"></i> Important</a></li>
+										<li><a href="#" th:text="${chat.userName}" th:href="@{/chat/{chatId}(chatId=${chat.id})}"><i class="fa fa-circle-o text-red"></i> Important</a></li>
 									</ul>
 								</div>
 							</div>
 						</li>
 
 
-						<li th:each="chat : ${chatList}"><a href="#" th:text="${chat.id}" th:href="@{/chat/{chatId}(chatId=${chat.id})}"><i class="fa fa-circle-o text-red"></i> Important</a></li>
+						<li th:each="chat : ${chatList}"><a href="#" th:text="${chat.gymName}" th:href="@{/chat/{chatId}(chatId=${chat.id})}"><i class="fa fa-circle-o text-red"></i> Important</a></li>
 
 
 					</ul>
@@ -58,7 +58,9 @@
 			<!-- DIRECT CHAT WARNING -->
 			<div class="box box-warning direct-chat direct-chat-warning">
 				<div class="box-header with-border">
-					<h3 class="box-title" th:text="${chatTitle}">Direct Chat</h3>
+					<h3 class="box-title" th:if="${chat == null}" >Seleziona una Chat</h3>
+					<h3 class="box-title" th:if="${chat != null}" th:text="${chat.gymName + ' - ' + chat.userName}" sec:authorize="hasAuthority('gestore')" >Seleziona una Chat</h3>
+					<h3 class="box-title" th:if="${chat != null}" th:text="${chat.gymName}"  sec:authorize="!hasAuthority('gestore')" >Seleziona una Chat</h3>
 
 					<div class="box-tools pull-right">
 						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -73,8 +75,8 @@
 						<div class="direct-chat-msg " th:each="message : ${messageList}" sec:authorize="hasAuthority('gestore')" th:classappend="${message.isGym()} ? right : ''">
 
 							<div class="direct-chat-info clearfix">
-								<span class="direct-chat-name pull-right" th:if="${message.isGym()}" th:text="${gym.name}">Alexander Pierce</span>
-								<span class="direct-chat-name pull-left" th:if="${!message.isGym()}" th:text="${client.name}">Alexander Pierce</span>
+								<span class="direct-chat-name pull-right" th:if="${message.isGym()}" th:text="${chat.gymName}">Alexander Pierce</span>
+								<span class="direct-chat-name pull-left" th:if="${!message.isGym()}" th:text="${chat.userName}">Alexander Pierce</span>
 								<span class="direct-chat-timestamp " th:text="${message.date}" th:classappend="${message.isGym()} ? 'pull-left' : 'pull-right'">23 Jan 2:00 pm</span>
 							</div>
 
@@ -91,8 +93,8 @@
 						<div class="direct-chat-msg " th:each="message : ${messageList}" sec:authorize="!hasAuthority('gestore')" th:classappend="${message.isGym()} ? '' : right">
 
 							<div class="direct-chat-info clearfix">
-								<span class="direct-chat-name pull-left" th:if="${message.isGym()}" th:text="${gym.name}">Alexander Pierce</span>
-								<span class="direct-chat-name pull-right" th:if="${!message.isGym()}" th:text="${client.name}">Alexander Pierce</span>
+								<span class="direct-chat-name pull-left" th:if="${message.isGym()}" th:text="${chat.gymName}">Alexander Pierce</span>
+								<span class="direct-chat-name pull-right" th:if="${!message.isGym()}" th:text="${chat.userName}">Alexander Pierce</span>
 								<span class="direct-chat-timestamp " th:text="${message.date}" th:classappend="${message.isGym()} ? 'pull-left' : 'pull-right'">23 Jan 2:00 pm</span>
 							</div>
 
