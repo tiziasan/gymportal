@@ -119,7 +119,7 @@ public class ChatController {
                     Gym gym = serviceGym.findByID(idGym);
                     chat.setGymId(gym.getId());
                     chat.setGymName(gym.getName());
-                    chat = serviceChat.createChat(chat);
+                    chat = serviceChat.saveChat(chat);
                 }
                 message.setGym(false);
             }

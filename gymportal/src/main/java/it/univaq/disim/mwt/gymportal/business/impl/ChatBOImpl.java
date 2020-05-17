@@ -17,9 +17,19 @@ public class ChatBOImpl implements ChatBO {
     ChatRepository chatRepository;
 
     @Override
-    public Chat createChat(Chat chat) throws BusinessException {
+    public Chat saveChat(Chat chat) throws BusinessException {
         return chatRepository.save(chat);
     }
+
+	@Override
+	public void saveAllChats(List<Chat> chatList) throws BusinessException {
+		chatRepository.saveAll(chatList);
+	}
+
+	@Override
+	public void deleteChatsByGymId(Long gymId) throws BusinessException {
+		chatRepository.deleteChatsByGymId(gymId);
+	}
 
 	@Override
 	public Chat findChatById(String id) throws BusinessException {
