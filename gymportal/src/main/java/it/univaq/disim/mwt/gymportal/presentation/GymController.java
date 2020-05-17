@@ -18,9 +18,13 @@ import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.CourseBO;
 import it.univaq.disim.mwt.gymportal.business.GymBO;
 import it.univaq.disim.mwt.gymportal.business.UserService;
+import it.univaq.disim.mwt.gymportal.business.ChatBO;
 import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.domain.User;
+import it.univaq.disim.mwt.gymportal.domain.Chat;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("gym")
@@ -35,6 +39,9 @@ public class GymController {
 	
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private ChatBO serviceChat;
 	
 	@GetMapping("/create")
     public String createStart(Model model) {
@@ -69,6 +76,9 @@ public class GymController {
 		}
 		serviceCourse.deleteAllCourseByGymId(gym.getId());
 		serviceGym.deleteGym(gym);
+
+		serviceChat.deleteChatsByGymId(gym.getId());
+
 		return "redirect:/";
 	}
 	
@@ -89,6 +99,13 @@ public class GymController {
 			return "/gym/form";
 		}
 		serviceGym.updateGym(gym);
+
+		List<Chat> chatList = serviceChat.findByGymId(gym.getId());
+		for ( Chat c: chatList ) {
+			c.setGymName(gym.getName());
+		}
+		serviceChat.saveAllChats(chatList);
+
 		return "redirect:/";
 	}
 	

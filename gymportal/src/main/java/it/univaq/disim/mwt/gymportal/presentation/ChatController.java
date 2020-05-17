@@ -51,8 +51,6 @@ public class ChatController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
 
-        String chatTitle = "Seleziona una Chat";
-
         if (auth.toString().contains("gestore")){ //se gestore restituisco mappa delle palestre e la lista delle chat per ognuna di esse
 
             List<Gym> gyms = serviceGym.searchByUser(user.getId());
@@ -64,10 +62,9 @@ public class ChatController {
 
             if(idChat != null && idGym == null){
                 Chat chat = serviceChat.findChatById(idChat);
+                model.addAttribute("chat", chat);
                 List<Message> messageList = serviceMessage.findByChat(chat);
                 model.addAttribute("messageList", messageList);
-
-                chatTitle = chat.getGymName() + " - " + chat.getUserName();
             }
 
         } else { //se utente restituisco lista chat dell'utente con le palestre
@@ -77,20 +74,17 @@ public class ChatController {
 
             if(idChat != null && idGym == null){    //se idchat settata allora già esiste
                 Chat chat = serviceChat.findChatById(idChat);
+                model.addAttribute("chat", chat);
                 List<Message> messageList = serviceMessage.findByChat(chat);
                 model.addAttribute("messageList", messageList);
-
-                chatTitle = chat.getGymName();
             }
             if(idChat == null && idGym != null){    //se id gym settato restituisci la chat che fa match con idGym e username e restituisci la lista dei messaggi di quella specifica chat
                 Chat chat = serviceChat.findByUserIdAndGymId(user.getId(), idGym);     //se chat non esiste non bisogna crearla qui ma nel metodo che fa inserimento dei messaggi
+                model.addAttribute("chat", chat);
                 List<Message> messageList = serviceMessage.findByChat(chat);
                 model.addAttribute("messageList", messageList);
-
-                chatTitle = chat.getGymName();
             }
         }
-        model.addAttribute("chatTitle", chatTitle);
 
         Message message = new Message();
         model.addAttribute("message", message);
@@ -109,14 +103,11 @@ public class ChatController {
         if (auth.toString().contains("gestore")){
             if(idChat != null && idGym == null){    //se ho idChat prendo la chat, faccio inserimento del messaggio e aggiorno solo la lista dei messaggi e ritorno a /chat/idchat
                 chat = serviceChat.findChatById(idChat);
-                Gym gym = serviceGym.findByID(chat.getGymId());
-                message.setSender(gym.getName());
                 message.setGym(true);
             }
         } else {
             if(idChat != null && idGym == null){    //se ho idChat prendo la chat, faccio inserimento del messaggio e aggiorno solo la lista dei messaggi e ritorno a /chat/idchat
                 chat = serviceChat.findChatById(idChat);
-                message.setSender(user.getLastName() + " " + user.getName());
                 message.setGym(false);
             }
             if(idChat == null && idGym != null){    //se ho idGYm prendo la chat che fa match con userId
@@ -124,13 +115,12 @@ public class ChatController {
                 if (chat == null){  //se non esiste la creo
                     chat = new Chat();
                     chat.setUserId(user.getId());
-                    chat.setUserName(user.getUserName());
+                    chat.setUserName(user.getLastName() + " " + user.getName());
                     Gym gym = serviceGym.findByID(idGym);
                     chat.setGymId(gym.getId());
                     chat.setGymName(gym.getName());
-                    chat = serviceChat.createChat(chat);
+                    chat = serviceChat.saveChat(chat);
                 }
-                message.setSender(user.getLastName() + " " + user.getName());
                 message.setGym(false);
             }
         }

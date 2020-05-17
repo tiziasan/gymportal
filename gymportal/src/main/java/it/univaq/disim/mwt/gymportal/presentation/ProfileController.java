@@ -22,16 +22,17 @@ import it.univaq.disim.mwt.gymportal.business.FavoriteCourseBO;
 import it.univaq.disim.mwt.gymportal.business.FavoriteGymBO;
 import it.univaq.disim.mwt.gymportal.business.FeedbackCourseBO;
 import it.univaq.disim.mwt.gymportal.business.FeedbackGymBO;
+import it.univaq.disim.mwt.gymportal.business.ChatBO;
 import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.domain.FavoriteCourse;
 import it.univaq.disim.mwt.gymportal.domain.FavoriteGym;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
 import it.univaq.disim.mwt.gymportal.domain.User;
+import it.univaq.disim.mwt.gymportal.domain.Chat;
 
 
 @RequestMapping("/profile")
-
 
 @Controller
 public class ProfileController {
@@ -50,6 +51,9 @@ public class ProfileController {
 	
 	@Autowired
 	private FavoriteCourseBO serviceFavoriteCourse;
+
+	@Autowired
+	private ChatBO serviceChat;
 	
 	
 	@GetMapping("")
@@ -73,8 +77,6 @@ public class ProfileController {
 		model.addAttribute("favoriteGymList",favoriteGymList);
 		model.addAttribute("favoriteCourseList",favoriteCourseList);
 
-
-
 		modelAndView.setViewName("/profile/index");
 		return modelAndView;
 	}
@@ -90,14 +92,27 @@ public class ProfileController {
 
 	@PostMapping("/update")
 	public String update(@Valid @ModelAttribute("user") User user , Errors errors) throws BusinessException {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 		if (errors.hasErrors()) {
 			return "/common/error";
 		}
-		userService.saveUser(user);
-		return "redirect:/login";
-	}
-	
 
+		if(auth.toString().contains("utente")) {
+			userService.updateUser(user);
+		}
+		if(auth.toString().contains("gestore")) {
+			userService.updateGestore(user);
+		}
+
+		List<Chat> chatList = serviceChat.findByUserId(user.getId());
+		for ( Chat c: chatList ) {
+			c.setUserName(user.getName() + " " + user.getLastName());
+		}
+		serviceChat.saveAllChats(chatList);
+
+		return "redirect:/login";
+
+	}
 	
 }

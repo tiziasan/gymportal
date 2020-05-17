@@ -19,5 +19,5 @@ public interface ChatRepository extends CrudRepository <Chat, String>{
 
 	Chat findByUserIdAndGymId(Long userId, Long gymId);
 	
-	
+	void deleteChatsByGymId(Long gymId);
 }
