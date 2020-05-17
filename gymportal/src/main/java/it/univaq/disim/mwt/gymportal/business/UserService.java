@@ -45,6 +45,24 @@ public class UserService {
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         return userRepository.save(user);
     }
+
+    public User updateUser(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setActive(true);
+        Role userRole = roleRepository.findByRole("utente");
+        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+
+        return userRepository.save(user);
+    }
+
+    public User updateGestore(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setActive(true);
+        Role userRole = roleRepository.findByRole("gestore");
+        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+
+        return userRepository.save(user);
+    }
     
     
 

@@ -98,6 +98,12 @@ public class ProfileController {
 			return "/common/error";
 		}
 
+		if(auth.toString().contains("utente")) {
+			userService.updateUser(user);
+		}
+		if(auth.toString().contains("gestore")) {
+			userService.updateGestore(user);
+		}
 
 		List<Chat> chatList = serviceChat.findByUserId(user.getId());
 		for ( Chat c: chatList ) {
