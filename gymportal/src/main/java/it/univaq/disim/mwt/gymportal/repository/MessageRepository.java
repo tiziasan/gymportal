@@ -12,6 +12,6 @@ import org.springframework.stereotype.Repository;
 public interface MessageRepository extends CrudRepository<Message, String> {
 	
 	List<Message> findByChat(Chat chat);
-	
 
+	void deleteMessagesByChat(Chat chat);
 }

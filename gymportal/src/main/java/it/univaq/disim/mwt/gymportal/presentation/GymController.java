@@ -19,7 +19,7 @@ import it.univaq.disim.mwt.gymportal.business.CourseBO;
 import it.univaq.disim.mwt.gymportal.business.GymBO;
 import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.business.ChatBO;
-import it.univaq.disim.mwt.gymportal.domain.Course;
+import it.univaq.disim.mwt.gymportal.business.MessageBO;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.domain.User;
 import it.univaq.disim.mwt.gymportal.domain.Chat;
@@ -42,6 +42,9 @@ public class GymController {
 
 	@Autowired
 	private ChatBO serviceChat;
+
+	@Autowired
+	private MessageBO serviceMessage;
 	
 	@GetMapping("/create")
     public String createStart(Model model) {
@@ -77,6 +80,10 @@ public class GymController {
 		serviceCourse.deleteAllCourseByGymId(gym.getId());
 		serviceGym.deleteGym(gym);
 
+		List<Chat> chats = serviceChat.findByGymId(gym.getId());
+		for ( Chat c: chats ) {
+			serviceMessage.deleteMessagesByChat(c);
+		}
 		serviceChat.deleteChatsByGymId(gym.getId());
 
 		return "redirect:/";

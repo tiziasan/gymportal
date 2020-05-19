@@ -26,4 +26,9 @@ public class MessageBOImpl implements MessageBO {
 	public List<Message> findByChat(Chat chat) throws BusinessException {
 		return messageRepository.findByChat(chat);
 	}
+
+    @Override
+    public void deleteMessagesByChat(Chat chat) throws BusinessException {
+        messageRepository.deleteMessagesByChat(chat);
+    }
 }
