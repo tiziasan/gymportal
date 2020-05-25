@@ -77,7 +77,7 @@
 							<div class="direct-chat-info clearfix">
 								<span class="direct-chat-name pull-right" th:if="${message.isGym()}" th:text="${chat.gymName}">Alexander Pierce</span>
 								<span class="direct-chat-name pull-left" th:if="${!message.isGym()}" th:text="${chat.userName}">Alexander Pierce</span>
-								<span class="direct-chat-timestamp " th:text="${message.date}" th:classappend="${message.isGym()} ? 'pull-left' : 'pull-right'">23 Jan 2:00 pm</span>
+								<span class="direct-chat-timestamp " th:text="${#temporals.format(message.date, 'dd-MM-yyyy HH:mm')}" th:classappend="${message.isGym()} ? 'pull-left' : 'pull-right'">23 Jan 2:00 pm</span>
 							</div>
 
 							<!-- /.direct-chat-info -->
@@ -95,7 +95,8 @@
 							<div class="direct-chat-info clearfix">
 								<span class="direct-chat-name pull-left" th:if="${message.isGym()}" th:text="${chat.gymName}">Alexander Pierce</span>
 								<span class="direct-chat-name pull-right" th:if="${!message.isGym()}" th:text="${chat.userName}">Alexander Pierce</span>
-								<span class="direct-chat-timestamp " th:text="${message.date}" th:classappend="${message.isGym()} ? 'pull-left' : 'pull-right'">23 Jan 2:00 pm</span>
+
+								<span class="direct-chat-timestamp " th:text="${#temporals.format(message.date, 'dd-MM-yyyy HH:mm')}" th:classappend="${message.isGym()} ? 'pull-right' : 'pull-left'">23 Jan 2:00 pm</span>
 							</div>
 
 							<!-- /.direct-chat-info -->
