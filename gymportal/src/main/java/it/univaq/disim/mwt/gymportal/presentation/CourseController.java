@@ -114,13 +114,13 @@ public class CourseController {
 			return "/common/error";
 		}
 		long id = courseComplete.getGym().getId();
-		String redirect = "redirect:/course/gym?id=" + id;
+		String redirect = "redirect:/course/gym/" + id;
 		serviceCourse.updateCourse(course);
 		return redirect;
 	}
 	
 	@ModelAttribute
-	public void addAllAree(Model model) throws BusinessException {
+	public void addAll(Model model) throws BusinessException {
 		List<Gym> gyms = serviceGym.findAllGym();
 		model.addAttribute("gyms", gyms);
 	}
