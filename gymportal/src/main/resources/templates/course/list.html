@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	  xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
-	<div layout:fragment="content">
+
+<div layout:fragment="content">
 	<div>
 		<div class="search-bar">
 			<form class="plr-5" th:action="${#request.getRequestURI()}" method="get">
@@ -13,39 +14,69 @@
 
 		<h1 th:text="${gym.name}"></h1>
 	</div>
-		<div class="column" th:each="course : ${courseList}">
-			<div class="card">
-				<h3 th:text="${course.name}"></h3>
-				<h4 th:text="${course.code}"></h4>
-				<p th:text="${course.description}"></p>
-				<a th:href="@{/favoriteCourse/create(id=${course.id})}" sec:authorize="hasAuthority('utente')"><button class="btn-primary" sec:authorize="hasAuthority('utente')">Aggiungi ai preferiti!</button></a>
-				<a th:href="@{/feedbackCourse/create(id=${course.id})}" sec:authorize="hasAuthority('utente')"><button class="btn-primary" >Recensisci Corso</button></a>
-				<a th:href="@{/feedbackCourse/(id=${course.id})}"><button class="btn-primary">Vedi le recensioni del corso</button></a>
-				<a th:href="@{/course/update/(id=${course.id})}"><button class="btn-primary">Modifica</button></a>
-				<a th:href="@{/course/delete/(id=${course.id})}"><button class="btn-primary">Elimina</button></a>
+	<div class="row">
+		<div class="col-md-9">
+			<div class="column" th:each="course : ${courseList}">
+				<div class="card">
+					<h3 th:text="${course.name}"></h3>
+					<h4 th:text="${course.code}"></h4>
+					<p th:text="${course.description}"></p>
+					<a th:href="@{/favoriteCourse/create(id=${course.id})}" sec:authorize="hasAuthority('utente')"><button class="btn-primary" sec:authorize="hasAuthority('utente')">Aggiungi ai preferiti!</button></a>
+					<a th:href="@{/feedbackCourse/create(id=${course.id})}" sec:authorize="hasAuthority('utente')"><button class="btn-primary" >Recensisci Corso</button></a>
+					<a th:href="@{/feedbackCourse/(id=${course.id})}"><button class="btn-primary">Vedi le recensioni del corso</button></a>
+					<a th:href="@{/course/update/(id=${course.id})}"><button class="btn-primary">Modifica</button></a>
+					<a th:href="@{/course/delete/(id=${course.id})}"><button class="btn-primary">Elimina</button></a>
+				</div>
 			</div>
 		</div>
-		<div class="col-md-12"></div>
-		<div class="col-md-4"  th:each="feedback : ${feedbackList}">
-          <!-- Widget: user widget style 1 -->
-          <div class="box box-widget widget-user-2">
-            <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header bg-yellow">
-              <div class="widget-user-image">
-                <img class="img-circle" src="../dist/img/user7-128x128.png" alt="User Avatar">
-              </div>
-              <!-- /.widget-user-image -->
-              <h3 class="widget-user-username" th:text="${feedback.user.name}">Nadia Carmichael</h3>
-            </div>
-            <div class="box-footer no-padding">
-              <ul class="nav nav-stacked">
-                <h3 th:text="${feedback.rating}"></h3>
-                <h3 th:text="${feedback.feed}"></h3>
-                </ul>
-            </div>
-          </div>
-          <!-- /.widget-user -->
-        </div>
+
+		<div class="col-md-3" >
+
+			<div class="box box-warning">
+				<div class="box-header with-border">
+					<h3 class="box-title">Recensioni</h3>
+
+					<div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+						</button>
+					</div>
+					<!-- /.box-tools -->
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+
+					<!-- Widget: user widget style 1 -->
+					<div class="box box-widget widget-user-2" th:each="feedback : ${feedbackList}">
+						<!-- Add the bg color to the header using any of the bg-* classes -->
+						<div class="widget-user-header bg-yellow">
+							<div class="widget-user-image">
+								<img class="img-circle" src="../dist/img/user7-128x128.png" th:src="@{/dist/img/avatar5.png}" alt="User Avatar">
+							</div>
+							<!-- /.widget-user-image -->
+							<h3 class="widget-user-username" th:text="${feedback.user.name}">Nadia Carmichael</h3>
+
+						</div>
+						<div class="box-footer no-padding">
+							<ul class="nav nav-stacked">
+								<h3 th:text="${feedback.rating}"></h3>
+								<h3 th:text="${feedback.feed}"></h3>
+							</ul>
+						</div>
+					</div>
+					<!-- /.widget-user -->
+
+
+
+
+
+				</div>
+				<!-- /.box-body -->
+			</div>
+
+
+		</div>
+
 	</div>
+</div>
 </body>
 </html>
