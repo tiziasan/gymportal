@@ -55,7 +55,7 @@
 							</li>
 
 							<li class="dropdown user user-menu" sec:authorize="hasAnyAuthority('utente','gestore')">
-								<a href="/gymportal/login" th:href="@{/chat}" th:text="#{header.chat}" >Chat</a>
+								<a href="/gymportal/login" th:href="@{/chat}" th:text="#{chat}" >Chat</a>
 							</li>
 
 							<li class="dropdown user user-menu" sec:authorize="!hasAnyAuthority('utente','gestore')">
