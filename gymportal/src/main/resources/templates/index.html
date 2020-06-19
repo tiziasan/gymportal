@@ -64,19 +64,29 @@
 					<!-- Navbar Right Menu -->
 					<div class="navbar-custom-menu">
 						<ul class="nav navbar-nav">
-							<!-- Tasks Menu -->
-							<li class="dropdown">
-								<a class="nav-link" data-toggle="dropdown" href="#">
-									<i th:classappend="'flag-icon flag-icon-'+ (${#locale.language}=='en' ? 'gb' : ${#locale.language})"></i>
+							<!-- Lang Menu -->
+							<li class="dropdown notifications-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<i class="fa fa-flag-o"></i>
 								</a>
-								<div class="dropdown-menu dropdown-menu-right p-0">
-									<a href="#" th:href="@{?lang=en}" class="dropdown-item active">
-										<i class="flag-icon flag-icon-gb mr-2"></i> [[#{common.english}]]
-									</a>
-									<a href="#" th:href="@{?lang=it}" class="dropdown-item">
-										<i class="flag-icon flag-icon-it mr-2"></i> [[#{common.italian}]]
-									</a>
-								</div>
+								<ul class="dropdown-menu">
+									<li>
+										<!-- inner menu: contains the actual data -->
+										<ul class="menu">
+											<li>
+												<a href="#" th:href="@{?lang=en}" >
+													<i class="flag-icon flag-icon-gb mr-2"></i> [[#{common.english}]]
+												</a>
+											</li>
+											<li>
+												<a href="#" th:href="@{?lang=it}" >
+													<i class="flag-icon flag-icon-it mr-2"></i> [[#{common.italian}]]
+												</a>
+											</li>
+
+										</ul>
+									</li>
+								</ul>
 							</li>
 							<!-- User Account Menu -->
 							<li class="dropdown user user-menu" sec:authorize="hasAuthority('gestore')">
