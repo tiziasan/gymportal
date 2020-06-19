@@ -12,7 +12,7 @@ spring:
     #serialization:
       #write-dates-as-timestamps: true
   messages:
-    basename: i18n/common, i18n/myunivaq
+    basename: i18n/common, i18n/gymportal
     encoding: UTF-8
     use-code-as-default-message: true
     
