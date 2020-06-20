@@ -5,7 +5,6 @@
 <div layout:fragment="content">
 	<h1 th:text="${course.name}"></h1>
 	<div class="box box-info" id="form-orizzontale">
-
 		<form method="post">
 			<h1 th:text="#{course.favorite.add.checkMessage}">|Sicuro di voler aggiungere il corso ai preferiti?|</h1>
 			<div class="box-footer">
@@ -13,13 +12,11 @@
 					   th:value="${user.id}" th:attr="name='user.id'" /> <input
 					type="hidden" th:value="${course.id}" th:attr="name='course.id'" />
 				<button type="submit" class="btn btn-info pull-right" th:text="#{common.confirm}">Conferma</button>
-				<a href="#" th:href="@{/}" class="btn btn-default float-left" th:text="#{common.cancel}">annulla</a>
-
+				<a href="#" th:href="@{/}" class="btn btn-default float-left" th:text="#{common.cancel}">Annulla</a>
 			</div>
 			<!-- /.box-footer -->
 		</form>
 	</div>
-
 </div>
 </body>
 </html>
