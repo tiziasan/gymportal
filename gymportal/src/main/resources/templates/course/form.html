@@ -15,24 +15,24 @@
 						<label for="code" class="col-sm-2 control-label" th:text="#{course.code}">Codice Corso</label>
 
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="code"
-								placeholder="Codice" th:field="*{code}">
+							<input type="text" class="form-control" id="code" th:field="*{code}"
+								placeholder="Codice" th:placeholder="#{course.code}">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="name" class="col-sm-2 control-label" th:text="#{course.name}">Nome corso</label>
 
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="name"
-								placeholder="Nome" th:field="*{name}">
+							<input type="text" class="form-control" id="name" th:field="*{name}"
+								placeholder="Nome" th:placeholder="#{course.name}">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="desc" class="col-sm-2 control-label" th:text="#{course.description}">Descrizione</label>
 
 						<div class="col-sm-10">
-							<input id="desc"
-								placeholder="Massimo 400 caratteri" th:field="*{description}">
+							<textarea id="desc" th:field="*{description}" class="form-control"
+									  placeholder="Massimo 400 caratteri" th:placeholder="#{course.description.placehorder}"></textarea>
 						</div>
 					</div>
 					<div class="form-group">
