@@ -6,7 +6,7 @@
 	<h1 th:text="${course.name}"></h1>
 	<div class="box box-info" id="form-orizzontale">
 		<form method="post">
-			<h1 th:text="#{course.favorite.add.checkMessage}">|Sicuro di voler aggiungere il corso ai preferiti?|</h1>
+			<h1 th:text="#{favorite.course.add.checkMessage}">|Sicuro di voler aggiungere il corso ai preferiti?|</h1>
 			<div class="box-footer">
 				<input type="hidden"
 					   th:value="${user.id}" th:attr="name='user.id'" /> <input
