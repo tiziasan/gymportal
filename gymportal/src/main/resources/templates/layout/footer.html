@@ -2,10 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 <footer class="main-footer" th:fragment="footer">
-    <div class="container">
-      
-      <strong>Copyright &copy; 2014-2020 Gym Portal</strong> All rights
-      reserved.
+    <div class="container" >
+        <div class="row">
+            <div class="col-md-3">
+                <strong >Copyright &copy; 2014-2020 Gym Portal</strong>
+            </div>
+            <div class="col-md-3">
+                <span th:text="#{common.allrightreserved}">All rights reserved.</span>
+            </div>
+        </div>
     </div>
     <!-- /.container -->
   </footer>
