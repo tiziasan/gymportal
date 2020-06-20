@@ -1,23 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+	  xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
 <body>
-	<div layout:fragment="content">
+<div layout:fragment="content">
 	<h1 th:text="${course.name}"></h1>
 	<div class="box box-info" id="form-orizzontale">
-	
 		<form  method="post">
-
-				<h1 th:text="|Sicuro di voler eliminare il corso ${course.name}?|"></h1>
-				<div class="box-footer">
-					<button type="submit" class="btn btn-info pull-right">Elimina</button>
-			<a href="#" th:href="@{/}" class="btn btn-default float-left" >annulla</a>	
-					
-				</div>
-				<!-- /.box-footer -->
-			</form>
+			<h1 th:text="#{course.delete.checkMessage}"></h1>
+			<div class="box-footer">
+				<button type="submit" class="btn btn-info pull-right" th:text="#{common.delete}">Elimina</button>
+				<a href="#" th:href="@{/}" class="btn btn-default float-left" th:text="#{common.cancel}" >Annulla</a>
 			</div>
-		
-        </div>
+			<!-- /.box-footer -->
+		</form>
+	</div>
+
+</div>
 </body>
 </html>
