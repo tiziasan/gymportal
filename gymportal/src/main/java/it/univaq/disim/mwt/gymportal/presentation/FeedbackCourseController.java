@@ -96,8 +96,8 @@ public class FeedbackCourseController {
 		if (errors.hasErrors()) {
 			return "/common/error";
 		}
-		serviceFeedbackCourse.deleteFeedbackCourse(feedbackCourse);;
-		return "redirect:/profile";
+		serviceFeedbackCourse.deleteFeedbackCourse(feedbackCourse);
+        return "redirect:/profile";
 	}
 	
 	@GetMapping("/update")

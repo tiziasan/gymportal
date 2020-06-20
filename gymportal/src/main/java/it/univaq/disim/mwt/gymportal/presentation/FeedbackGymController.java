@@ -42,9 +42,6 @@ public class FeedbackGymController {
 	private UserService userService;
 
 
-	
-	
-	
 	@GetMapping("/create")
 	public String createStart(Model model,@RequestParam long id) throws BusinessException {
 		Gym gym = serviceGym.findByID(id);
@@ -59,7 +56,6 @@ public class FeedbackGymController {
 
 		return "/feedback/form";
 	}
-	
 
 	@PostMapping("/create")
 	public String create(@Valid @ModelAttribute("feedback") FeedbackGym feedback, Errors errors, Model model)
@@ -90,8 +86,8 @@ public class FeedbackGymController {
 		if (errors.hasErrors()) {
 			return "/common/error";
 		}
-		serviceFeedbackGym.deleteFeedbackGym(feedback);;
-		return "redirect:/profile";
+		serviceFeedbackGym.deleteFeedbackGym(feedback);
+        return "redirect:/profile";
 	}
 	
 	@GetMapping("/update")
