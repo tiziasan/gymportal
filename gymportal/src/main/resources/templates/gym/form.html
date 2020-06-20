@@ -1,292 +1,288 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+	  xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
 
 <head>
-<script type="text/javascript">
-	function regione(reg) {
+	<script type="text/javascript">
+		function regione(reg) {
 
-		if (reg == "")
-			return;
+			if (reg == "")
+				return;
 
-		var province = new Array();
-		var selProv = document.getElementById('province');
-		while (selProv.options.length > 0)
-			selProv.removeChild(selProv.options[0]);
+			var province = new Array();
+			var selProv = document.getElementById('province');
+			while (selProv.options.length > 0)
+				selProv.removeChild(selProv.options[0]);
 
-		switch (reg) {
+			switch (reg) {
 
-		case 'Abruzzo':
-			province.push("L'Aquila");
-			province.push('Chieti');
-			province.push('Pescara');
-			province.push('Teramo');
+				case 'Abruzzo':
+					province.push("L'Aquila");
+					province.push('Chieti');
+					province.push('Pescara');
+					province.push('Teramo');
 
-			break;
-		case 'Basilicata':
-			province.push('Matera');
-			province.push('Potenza');
-			break;
+					break;
+				case 'Basilicata':
+					province.push('Matera');
+					province.push('Potenza');
+					break;
 
-		case 'Calabria':
-			province.push('Catanzaro');
-			province.push('Cosenza');
-			province.push('Crotone');
-			province.push('Reggio Calabria');
-			province.push('Vibo Valentia');
+				case 'Calabria':
+					province.push('Catanzaro');
+					province.push('Cosenza');
+					province.push('Crotone');
+					province.push('Reggio Calabria');
+					province.push('Vibo Valentia');
 
-			break;
+					break;
 
-		case 'Campania':
-			province.push('Avellino');
-			province.push('Benevento');
-			province.push('Caserta');
-			province.push('Napoli');
-			province.push('Salerno');
+				case 'Campania':
+					province.push('Avellino');
+					province.push('Benevento');
+					province.push('Caserta');
+					province.push('Napoli');
+					province.push('Salerno');
 
-			break;
+					break;
 
-		case 'Emilia':
-			province.push('Bologna');
-			province.push('Ferrara');
-			province.push('Forli Cesena');
-			province.push('Modena');
-			province.push('Parma');
-			province.push('Piacenza');
-			province.push('Ravenna');
-			province.push('Reggio Emilia');
-			province.push('Rimini');
-			break;
+				case 'Emilia':
+					province.push('Bologna');
+					province.push('Ferrara');
+					province.push('Forli Cesena');
+					province.push('Modena');
+					province.push('Parma');
+					province.push('Piacenza');
+					province.push('Ravenna');
+					province.push('Reggio Emilia');
+					province.push('Rimini');
+					break;
 
-		case 'Friuli':
-			province.push('Gorizia');
-			province.push('Pordenone');
-			province.push('Trieste');
-			province.push('Udine');
-			
-			break;
+				case 'Friuli':
+					province.push('Gorizia');
+					province.push('Pordenone');
+					province.push('Trieste');
+					province.push('Udine');
 
-		case 'Lazio':
-			province.push('Frosinone');
-			province.push('Latina');
-			province.push('Rieti');
-			province.push('Roma');
-			province.push('Viterbo');
-			break;
+					break;
 
-		case 'Liguria':
-			province.push('Genova');
-			province.push('Imperia');
-			province.push('Spezia');
-			province.push('Savona');
-			
-			break;
+				case 'Lazio':
+					province.push('Frosinone');
+					province.push('Latina');
+					province.push('Rieti');
+					province.push('Roma');
+					province.push('Viterbo');
+					break;
 
-		case 'Lombardia':
-			province.push('Bergamo');
-			province.push('Brescia');
-			province.push('Como');
-			province.push('Cremona');
-			province.push('Lecco');
-			province.push('Lodi');
-			province.push('Mantova');
-			province.push('Milano');
-			province.push('Monza Brianza');
-			province.push('Pavia');
-			province.push('Sondrio');
-			province.push('Varese');
-			break;
+				case 'Liguria':
+					province.push('Genova');
+					province.push('Imperia');
+					province.push('Spezia');
+					province.push('Savona');
 
-		case 'Marche':
-			province.push('Ancona');
-			province.push('Ascoli Piceno');
-			province.push('Fermo');
-			province.push('Macerata');
-			province.push('Pesaro Urbino');
-			break;
+					break;
 
-		case 'Molise':
-			province.push('Campobasso');
-			province.push('Isernia');
-			break;
+				case 'Lombardia':
+					province.push('Bergamo');
+					province.push('Brescia');
+					province.push('Como');
+					province.push('Cremona');
+					province.push('Lecco');
+					province.push('Lodi');
+					province.push('Mantova');
+					province.push('Milano');
+					province.push('Monza Brianza');
+					province.push('Pavia');
+					province.push('Sondrio');
+					province.push('Varese');
+					break;
 
-		case 'Piemonte':
-			province.push('Alessandria');
-			province.push('Asti');
-			province.push('Biella');
-			province.push('Cuneo');
-			province.push('Novara');
-			province.push('Torino');
-			province.push('Verbano Cusio Ossola');
-			province.push('Vercelli');
-			break;
+				case 'Marche':
+					province.push('Ancona');
+					province.push('Ascoli Piceno');
+					province.push('Fermo');
+					province.push('Macerata');
+					province.push('Pesaro Urbino');
+					break;
 
-		case 'Puglia':
-			province.push('Bari');
-			province.push('Barletta-Andria-Trani');
-			province.push('Brindisi');
-			province.push('Foggia');
-			province.push('Lecce');
-			province.push('Taranto');
+				case 'Molise':
+					province.push('Campobasso');
+					province.push('Isernia');
+					break;
+
+				case 'Piemonte':
+					province.push('Alessandria');
+					province.push('Asti');
+					province.push('Biella');
+					province.push('Cuneo');
+					province.push('Novara');
+					province.push('Torino');
+					province.push('Verbano Cusio Ossola');
+					province.push('Vercelli');
+					break;
+
+				case 'Puglia':
+					province.push('Bari');
+					province.push('Barletta-Andria-Trani');
+					province.push('Brindisi');
+					province.push('Foggia');
+					province.push('Lecce');
+					province.push('Taranto');
 
 
-			break;
+					break;
 
-		case 'Sardegna':
-			province.push('Cagliari');
-			province.push('Carbonia-Iglesias');
-			province.push('Medio Campidano');
-			province.push('Nuoro ');
-			province.push('Ogliastra');
-			province.push('Olbia-Tempio');
-			province.push('Oristano');
-			province.push('Sassari');
+				case 'Sardegna':
+					province.push('Cagliari');
+					province.push('Carbonia-Iglesias');
+					province.push('Medio Campidano');
+					province.push('Nuoro ');
+					province.push('Ogliastra');
+					province.push('Olbia-Tempio');
+					province.push('Oristano');
+					province.push('Sassari');
 
-			break;
+					break;
 
-		case 'Sicilia':
-			province.push('Agrigento');
-			province.push('Caltanissetta');
-			province.push('Catania');
-			province.push('Enna');
-			province.push('Messina');
-			province.push('Palermo');
-			province.push('Ragusa');
-			province.push('Siracusa');
-			province.push('Trapani');
-			break;
+				case 'Sicilia':
+					province.push('Agrigento');
+					province.push('Caltanissetta');
+					province.push('Catania');
+					province.push('Enna');
+					province.push('Messina');
+					province.push('Palermo');
+					province.push('Ragusa');
+					province.push('Siracusa');
+					province.push('Trapani');
+					break;
 
-		case 'Toscana':
-			province.push('Arezzo');
-			province.push('Firenze');
-			province.push('Grosseto');
-			province.push('Livorno');
-			province.push('Lucca');
-			province.push('Massa Carrara');
-			province.push('Pisa');
-			province.push('Pistoia');
-			province.push('Prato');
-			province.push('Siena');
-			
-			break;
+				case 'Toscana':
+					province.push('Arezzo');
+					province.push('Firenze');
+					province.push('Grosseto');
+					province.push('Livorno');
+					province.push('Lucca');
+					province.push('Massa Carrara');
+					province.push('Pisa');
+					province.push('Pistoia');
+					province.push('Prato');
+					province.push('Siena');
 
-		case 'Trentino':
-			province.push('Bolzano');
-			province.push('Trento');
-			break;
+					break;
 
-		case 'Umbria':
-			province.push('Perugia');
-			province.push('Terni');
-			break;
+				case 'Trentino':
+					province.push('Bolzano');
+					province.push('Trento');
+					break;
 
-		case 'Valle':
-			province.push("Valle D'Aosta");
-			break;
+				case 'Umbria':
+					province.push('Perugia');
+					province.push('Terni');
+					break;
 
-		case 'Veneto':
-			province.push('Belluno');
-			province.push('Padova');
-			province.push('Rovigo');
-			province.push('Treviso');
-			province.push('Venezia');
-			province.push('Verona');
-			province.push('Vicenza');
-			
-			break;
+				case 'Valle':
+					province.push("Valle D'Aosta");
+					break;
 
-		default:
+				case 'Veneto':
+					province.push('Belluno');
+					province.push('Padova');
+					province.push('Rovigo');
+					province.push('Treviso');
+					province.push('Venezia');
+					province.push('Verona');
+					province.push('Vicenza');
+
+					break;
+
+				default:
+			}
+
+			for (i = 0; i < province.length; i++) {
+				opt = document.createElement('option');
+				opt.setAttribute('value', province[i]);
+				opt.setAttribute('text', province[i]);
+				opt.innerHTML = province[i];
+				selProv.appendChild(opt);
+			}
 		}
-
-		for (i = 0; i < province.length; i++) {
-			opt = document.createElement('option');
-			opt.setAttribute('value', province[i]);
-			opt.setAttribute('text', province[i]);
-			opt.innerHTML = province[i];
-			selProv.appendChild(opt);
-		}
-	}
-</script>
+	</script>
 </head>
 
 <body>
-	<div layout:fragment="content">
-		<h1>Aggiungi Palestra</h1>
-		<div class="box box-info" id="form-orizzontale">
+<div layout:fragment="content">
+	<h1 th:text="#{gym.add}">Aggiungi Palestra</h1>
+	<div class="box box-info" id="form-orizzontale">
 
-			<form th:action="${#request.getRequestURI()}" th:object="${gym}"
-				class="form-horizontal" method="post">
-				<input type="hidden" th:field="*{id}" />
-				<input type="hidden" th:value="${user.id}" th:attr="name='user.id'" />
-				
+		<form th:action="${#request.getRequestURI()}" th:object="${gym}"
+			  class="form-horizontal" method="post">
+			<input type="hidden" th:field="*{id}" />
+			<input type="hidden" th:value="${user.id}" th:attr="name='user.id'" />
 
-				<div class="box-body">
-					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">Nome</label>
+			<div class="box-body">
+				<div class="form-group">
+					<label for="name" class="col-sm-2 control-label" th:text="#{gym.name}">Nome</label>
 
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="inputEmail3"
-								placeholder="Nome" th:field="*{name}">
-						</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="name"
+							   placeholder="Nome" th:placeholder="#{}" th:field="*{name}">
 					</div>
-					<div class="form-group">
-						<label for="inputPassword3" class="col-sm-2 control-label">Indirizzo</label>
+				</div>
+				<div class="form-group">
+					<label for="address" class="col-sm-2 control-label" th:text="#{gym.address}">Indirizzo</label>
 
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="inputEmail3"
-								placeholder="Indirizzo" th:field="*{address}">
-						</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="address"
+							   placeholder="Indirizzo" th:placeholder="#{gym.address.placehorder}" th:field="*{address}">
 					</div>
+				</div>
 
-					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">Regione</label>
+				<div class="form-group">
+					<label for="region" class="col-sm-2 control-label" th:text="#{gym.region}">Regione</label>
 
-						<div class="col-sm-10" id="inputEmail3">
-							<select id="regioni" onchange="regione(this.value)"
+					<div class="col-sm-10" id="region">
+						<select id="regioni" onchange="regione(this.value)"
 								th:field="*{region}">
-								<option value="">Scegli regione</option>
-								<option value="Abruzzo">Abruzzo</option>
-								<option value="Basilicata">Basilicata</option>
-								<option value="Calabria">Calabria</option>
-								<option value="Campania">Campania</option>
-								<option value="Emilia">Emilia Romagna</option>
-								<option value="Friuli">Friuli Venezia giulia</option>
-								<option value="Lazio">Lazio</option>
-								<option value="Liguria">Liguria</option>
-								<option value="Lombardia">Lombardia</option>
-								<option value="Marche">Marche</option>
-								<option value="Molise">Molise</option>
-								<option value="Piemonte">Piemonte</option>
-								<option value="Puglia">Puglia</option>
-								<option value="Sardegna">Sardegna</option>
-								<option value="Sicilia">Sicilia</option>
-								<option value="Toscana">Toscana</option>
-								<option value="Trentino">Trentino alto adige</option>
-								<option value="Umbria">Umbria</option>
-								<option value="Valle">Valle D'Aosta</option>
-								<option value="Veneto">Veneto</option>
-
-
-							</select>
-						</div>
+							<option value="">Scegli regione</option>
+							<option value="Abruzzo">Abruzzo</option>
+							<option value="Basilicata">Basilicata</option>
+							<option value="Calabria">Calabria</option>
+							<option value="Campania">Campania</option>
+							<option value="Emilia">Emilia Romagna</option>
+							<option value="Friuli">Friuli Venezia giulia</option>
+							<option value="Lazio">Lazio</option>
+							<option value="Liguria">Liguria</option>
+							<option value="Lombardia">Lombardia</option>
+							<option value="Marche">Marche</option>
+							<option value="Molise">Molise</option>
+							<option value="Piemonte">Piemonte</option>
+							<option value="Puglia">Puglia</option>
+							<option value="Sardegna">Sardegna</option>
+							<option value="Sicilia">Sicilia</option>
+							<option value="Toscana">Toscana</option>
+							<option value="Trentino">Trentino alto adige</option>
+							<option value="Umbria">Umbria</option>
+							<option value="Valle">Valle D'Aosta</option>
+							<option value="Veneto">Veneto</option>
+						</select>
 					</div>
-					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">Provincia</label>
-						<div class="col-sm-10">
-							<select id="province" th:field="*{province}"></select>
-						</div>
+				</div>
+				<div class="form-group">
+					<label for="province" class="col-sm-2 control-label" th:text="#{gym.province}">Provincia</label>
+					<div class="col-sm-10">
+						<select id="province" th:field="*{province}"></select>
 					</div>
+				</div>
 
-				</div>
-				<!-- /.box-body -->
-				<div class="box-footer">
-					<button type="submit" class="btn btn-info pull-right" >Salva
-						</button>
-				</div>
-				<!-- /.box-footer -->
-			</form>
-		</div>
+			</div>
+			<!-- /.box-body -->
+			<div class="box-footer">
+				<button type="submit" class="btn btn-info pull-right" th:text="#{common.submit}">Salva</button>
+			</div>
+			<!-- /.box-footer -->
+		</form>
 	</div>
+</div>
 
 
 </body>
