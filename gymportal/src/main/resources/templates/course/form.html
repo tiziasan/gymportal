@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
 <body>
 	<div layout:fragment="content">
-	<H1>Aggiungi Corso</H1>
+	<H1 th:text="#{course.add}">Aggiungi Corso</H1>
 		<div class="box box-info" id="form-orizzontale">
 
 			<form th:action="${#request.getRequestURI()}" th:object="${course}"

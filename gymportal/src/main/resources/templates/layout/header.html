@@ -47,11 +47,11 @@
 
 							<!-- User Account Menu -->
 							<li class="dropdown user user-menu" sec:authorize="hasAuthority('gestore')">
-								<a href="/gymportal/gym/create" th:text="#{manager.gym.add}" >Aggiungi Palestra</a>
+								<a href="/gymportal/gym/create" th:text="#{gym.add}" >Aggiungi Palestra</a>
 							</li>
 
 							<li class="dropdown user user-menu" sec:authorize="hasAuthority('gestore')">
-								<a href="/gymportal/course/create" th:text="#{manager.course.add}" >Aggiungi Corso</a>
+								<a href="/gymportal/course/create" th:text="#{course.add}" >Aggiungi Corso</a>
 							</li>
 
 							<li class="dropdown user user-menu" sec:authorize="hasAnyAuthority('utente','gestore')">
