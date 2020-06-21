@@ -1,152 +1,195 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
 <head>
 </head>
 <body>
-<div layout:fragment="content">
-	<div class="row">
-		<div class="col-12">
-			<section class="content">
+	<div layout:fragment="content">
+		<div class="row">
+			<div class="col-12">
+				<section class="content">
 
-				<div class="row">
-					<div class="col-md-3">
-						<!-- Profile Image -->
-						<div class="box box-primary">
-							<!-- /.box-body -->
-							<div class="profile-sidebar">
-								<div class="profile-usertitle">
-									<div class="profile-usertitle-name">
-										<h1 th:text="${user.name}"></h1>
+					<div class="row">
+						<div class="col-md-3">
+
+							<!-- Profile Image -->
+							<div class="box box-primary">
+								<!-- /.box-body -->
+								<div class="profile-sidebar">
+									<div class="profile-usertitle">
+										<div class="profile-usertitle-name">
+											<h1 th:text="${user.name}"></h1>
+										</div>
+									</div>
+									<div class="profile-usermenu">
+										<ul class="nav">
+											<li><h4>Email</h4></li>
+											<li><h5 th:text="${user.email}"></h5></li>
+											<li><h4>Username</h4></li>
+											<li><h5 th:text="${user.userName}">aaaaaa@gmail.com</h5></li>
+										    <li><a th:href="@{/profile/update/(id=${user.id})}"><b>Modifica Profilo</b></a></li>
+
+										</ul>
 									</div>
 								</div>
-								<div class="profile-usermenu">
-									<ul class="nav">
-										<li><h4>Email</h4></li>
-										<li><h5 th:text="${user.email}"></h5></li>
-										<li><h4>Username</h4></li>
-										<li><h5 th:text="${user.userName}">aaaaaa@gmail.com</h5></li>
-										<li><a th:href="@{/profile/update/(id=${user.id})}"><b th:text="#{profile.edit}">Modifica Profilo</b></a></li>
-									</ul>
-								</div>
+
 							</div>
+							<!-- /.box -->
 						</div>
-						<!-- /.box -->
-					</div>
-					<!-- /.col -->
-					<div class="col-md-9">
-						<div class="nav-tabs-custom">
-							<ul class="nav nav-tabs">
-								<li class="active"><a href="#activity" data-toggle="tab" th:text="#{favorites}">Preferiti</a></li>
-								<li><a href="#timeline" data-toggle="tab" th:text="#{feedbacks}">Recensioni</a></li>
-							</ul>
-							<div class="tab-content">
-								<div class="active tab-pane" id="activity">
-									<!-- Post -->
-									<span class="username">
-											<h3 th:text="#{courses}">Corsi</h3>
+						<!-- /.col -->
+						<div class="col-md-9">
+							<div class="nav-tabs-custom">
+								<ul class="nav nav-tabs">
+									<li class="active"><a href="#activity" data-toggle="tab">Preferiti</a></li>
+									<li><a href="#timeline" data-toggle="tab">Recensioni</a></li>
+									
+								</ul>
+								<div class="tab-content">
+									<div class="active tab-pane" id="activity">
+										<!-- Post -->
+										<span class="username">
+											<h3>Corsi</h3>
 										</span>
-									<div class="post" th:each="favoriteCourse : ${favoriteCourseList}">
-										<div class="user-block">
-											<span class="username"> <a href="#" th:text="#{course}+': '+${favoriteCourse.course.name}">Zumba Fitness</a></span>
-											<span class="description"> <a href="#" th:text="#{gym}+': '+${favoriteCourse.course.gym.name}">Sagittario</a></span>
-											<a th:href="@{/favoriteCourse/delete/(id=${favoriteCourse.id})}" class="btn btn-default float-right" id="eliminadestra" th:text="#{common.delete}">Elimina</a>
+										<div class="post" th:each="favoriteCourse : ${favoriteCourseList}">
+											<div class="user-block">
+												<span class="username"> <a href="#" th:text="'Corso: '+${favoriteCourse.course.name}">Zumba Fitness</a>
+												</span> <span class="description"><a href="#" th:text="'Palestra: '+${favoriteCourse.course.gym.name}">Sagittario</a>
+												</span>
+												<a
+														th:href="@{/favoriteCourse/delete/(id=${favoriteCourse.id})}"
+														class="btn btn-default float-right" id="eliminadestra">Elimina</a>
+											</div>
 										</div>
-									</div>
 
-									<!-- Post -->
+										<!-- Post -->
+										
+										<!-- /.post -->
 
-									<!-- /.post -->
 
-									<span class="username">
-											<h3 th:text="#{gyms}">Palestre</h3>
+										<span class="username">
+											<h3>Palestre</h3>
 										</span>
-									<div class="post" th:each="favoriteGym : ${favoriteGymList}">
-										<div class="user-block">
-											<span class="username"> <a href="#" th:text="#{gym}+': '+${favoriteGym.gym.name}">Sagittario</a></span>
-											<span class="description" th:text="#{gym.address}+': '+${favoriteGym.gym.address}"> villa rasicci, Bellante64020 TE </span>
-											<a th:href="@{/favoriteGym/delete/(id=${favoriteGym.id})}" class="btn btn-default float-right" id="eliminadestra" th:text="#{common.delete}">Elimina</a>
+										<div class="post" th:each="favoriteGym : ${favoriteGymList}">
+											<div class="user-block">
+												<span class="username"> <a href="#" th:text="'Palestra: '+${favoriteGym.gym.name}">Sagittario</a>
+												</span> <span class="description" th:text="'indirizzo: '+${favoriteGym.gym.address}"> villa rasicci, Bellante
+													64020 TE </span>
+													<a
+														th:href="@{/favoriteGym/delete/(id=${favoriteGym.id})}"
+														class="btn btn-default float-right" id="eliminadestra">Elimina</a>
+											</div>
 										</div>
+										
 									</div>
 
-								</div>
+									<!-- /.tab-pane -->
+									<div class="tab-pane" id="timeline">
 
-								<!-- /.tab-pane -->
-								<div class="tab-pane" id="timeline">
-									<!-- The timeline -->
-									<div class="col-md-4"
-										 th:each="feedbackCourse : ${feedbackCourseList}">
-										<!-- Widget: user widget style 1 -->
-										<div class="box box-widget widget-user-2">
-											<!-- Add the bg color to the header using any of the bg-* classes -->
-											<div class="widget-user-header bg-yellow">
-												<div class="widget-user-image">
-													<img class="img-circle" src="./dist/img/user7-128x128.png"
-														 alt="User Avatar">
+
+
+
+
+										<!-- The timeline -->
+
+										<div class="col-md-4"
+											th:each="feedbackCourse : ${feedbackCourseList}">
+											<!-- Widget: user widget style 1 -->
+											<div class="box box-widget widget-user-2">
+												<!-- Add the bg color to the header using any of the bg-* classes -->
+												<div class="widget-user-header bg-yellow">
+													<div class="widget-user-image">
+														<img class="img-circle" src="./dist/img/user7-128x128.png"
+															alt="User Avatar">
+													</div>
+													<!-- /.widget-user-image -->
+													<h3 class="widget-user-username" th:text="${user.name}">Nadia
+														Carmichael</h3>
 												</div>
-												<!-- /.widget-user-image -->
-												<h3 class="widget-user-username" th:text="${user.name}">Nadia Carmichael</h3>
-											</div>
-											<div class="box-footer no-padding">
-												<ul class="nav nav-stacked">
-													<h4 th:text="#{gym}+': '+${feedbackCourse.course.gym.name}"></h4>
-													<h4 th:text="#{course}+': '+${feedbackCourse.course.name}"></h4>
-													<h4 th:text="#{feedback.rating}+': '+${feedbackCourse.rating}"></h4>
-													<h4 th:text="#{feedback.feed}+': '+${feedbackCourse.feed}"></h4>
-												</ul>
-												<a th:href="@{/feedbackCourse/update/(id=${feedbackCourse.id})}" class="btn btn-default float-left" th:text="#{common.edit}">Modifica</a>
-												<a th:href="@{/feedbackCourse/delete/(id=${feedbackCourse.id})}" class="btn btn-default float-right" id="eliminadestra" th:text="#{common.delete}">Elimina</a>
-											</div>
-										</div>
-										<!-- /.widget-user -->
-									</div>
+												<div class="box-footer no-padding">
+													<ul class="nav nav-stacked">
+														<h4
+															th:text="'Palestra: '+${feedbackCourse.course.gym.name}"></h4>
+														<h4
+															th:text="'Recensione del corso: '+${feedbackCourse.course.name}"></h4>
+														<h4 th:text="'Valutazione: '+${feedbackCourse.rating}"></h4>
+														<h4 th:text="'Recenzione: '+${feedbackCourse.feed}"></h4>
 
-									<br>
+													</ul>
+													<a
+														th:href="@{/feedbackCourse/update/(id=${feedbackCourse.id})}"
+														class="btn btn-default float-left">Modifica</a> <a
+														th:href="@{/feedbackCourse/delete/(id=${feedbackCourse.id})}"
+														class="btn btn-default float-right" id="eliminadestra">Elimina</a>
 
-									<div class="col-md-4"
-										 th:each="feedbackGym : ${feedbackGymList}">
-										<!-- Widget: user widget style 1 -->
-										<div class="box box-widget widget-user-2">
-											<!-- Add the bg color to the header using any of the bg-* classes -->
-											<div class="widget-user-header bg-yellow">
-												<div class="widget-user-image">
-													<img class="img-circle" src="./dist/img/user7-128x128.png"
-														 alt="User Avatar">
 												</div>
-												<!-- /.widget-user-image -->
-												<h3 class="widget-user-username" th:text="${user.name}">Nadia Carmichael</h3>
 											</div>
-											<div class="box-footer no-padding">
-												<ul class="nav nav-stacked">
-													<h4 th:text="#{gym}+': '+${feedbackGym.gym.name}"></h4>
-													<h4 th:text="#{feedback.rating}+': '+${feedbackGym.rating}"></h4>
-													<h4 th:text="#{feedback.feed}+': '+${feedbackGym.feed}"></h4>
-												</ul>
-												<a th:href="@{/feedback/update/(id=${feedbackGym.id})}" class="btn btn-default float-left" th:text="#{common.edit}">Modifica</a>
-												<a th:href="@{/feedback/delete/(id=${feedbackGym.id})}" class="btn btn-default float-right" id="eliminadestra" th:text="#{common.delete}">Elimina</a>
-											</div>
+											<!-- /.widget-user -->
 										</div>
-										<!-- /.widget-user -->
+
+
+
+
+										<br>
+
+										<div class="col-md-4"
+											th:each="feedbackGym : ${feedbackGymList}">
+											<!-- Widget: user widget style 1 -->
+											<div class="box box-widget widget-user-2">
+												<!-- Add the bg color to the header using any of the bg-* classes -->
+												<div class="widget-user-header bg-yellow">
+													<div class="widget-user-image">
+														<img class="img-circle" src="./dist/img/user7-128x128.png"
+															alt="User Avatar">
+													</div>
+													<!-- /.widget-user-image -->
+													<h3 class="widget-user-username" th:text="${user.name}">Nadia
+														Carmichael</h3>
+												</div>
+												<div class="box-footer no-padding">
+													<ul class="nav nav-stacked">
+														<h4 th:text="'Palestra: '+${feedbackGym.gym.name}"></h4>
+														<h4 th:text="'Valutazione: '+${feedbackGym.rating}"></h4>
+														<h4 th:text="'Recenzione: '+${feedbackGym.feed}"></h4>
+
+													</ul>
+													<a th:href="@{/feedback/update/(id=${feedbackGym.id})}"
+														class="btn btn-default float-left">Modifica</a> 
+														<a
+														th:href="@{/feedback/delete/(id=${feedbackGym.id})}"
+														class="btn btn-default float-right" id="eliminadestra">Elimina</a>
+
+
+												</div>
+											</div>
+											<!-- /.widget-user -->
+										</div>
+
 									</div>
 
+									<!-- <div class="form-group">
+										<label for="inputName" class="col-sm-2 control-label">Name</label>
+
+										<div class="col-sm-10">
+											<input type="text" class="form-control" placeholder="Name">
+										</div>
+									</div> -->
+
+									<!-- /.tab-pane -->
+
+									<!-- /.tab-pane -->
 								</div>
-
-								<!-- /.tab-pane -->
-
-								<!-- /.tab-pane -->
+								<!-- /.tab-content -->
 							</div>
-							<!-- /.tab-content -->
+							<!-- /.nav-tabs-custom -->
 						</div>
-						<!-- /.nav-tabs-custom -->
+						<!-- /.col -->
 					</div>
-					<!-- /.col -->
-				</div>
-				<!-- /.row -->
+					<!-- /.row -->
 
-			</section>
+				</section>
 
+			</div>
 		</div>
 	</div>
-</div>
 </body>
 </html>
