@@ -1,59 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+	  xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
 <body>
-	<div layout:fragment="content">
-	<H1>Aggiungi Recensione</H1>
-		<div class="box box-info" id="form-orizzontale">
+<div layout:fragment="content">
+	<H1 th:text="#{feedback.update}">Aggiorna Recensione</H1>
+	<div class="box box-info" id="form-orizzontale">
 
-			<form
-				class="form-horizontal" method="post" th:action="@{/feedbackCourse/update}" th:object="${feedbackCourse}">
-				<input type="hidden" th:field="*{id}" />
-				
-				<input type="hidden" th:value="${feedbackCourse.user.id}" th:attr="name='user.id'" />
-				<input type="hidden" th:value="${feedbackCourse.course.id}" th:attr="name='course.id'" />
-				
-				
-				
-				
-				
+		<form class="form-horizontal" method="post" th:action="@{/feedbackCourse/update}" th:object="${feedbackCourse}">
+			<input type="hidden" th:field="*{id}" />
 
-				
+			<input type="hidden" th:value="${feedbackCourse.user.id}" th:attr="name='user.id'" />
+			<input type="hidden" th:value="${feedbackCourse.course.id}" th:attr="name='course.id'" />
 
-				<div class="box-body">
-				
-				
-					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">Feed
-							</label>
-
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="inputEmail3"
-								placeholder="Descrizione" th:field="*{feed}">
-						</div>
+			<div class="box-body">
+				<div class="form-group">
+					<label for="feed" class="col-sm-2 control-label" th:text="#{feedback.feed}" >Feed
+					</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="feed"
+							   placeholder="Descrizione" th:placeholder="#{feedback.feed}" th:field="*{feed}">
 					</div>
-					<div class="form-group">
-						<label for="inputPassword3" class="col-sm-2 control-label">Rating 1-10
-							</label>
-
-						<div class="col-sm-10">
-							<input type="number" class="form-control" id="inputEmail3"
-								placeholder="1-10" th:field="*{rating}">
-						</div>
+				</div>
+				<div class="form-group">
+					<label for="rating" class="col-sm-2 control-label" th:text="#{feedback.rating} + ' ' + #{feedback.rating.placeholder}" >Rating 1-10
+					</label>
+					<div class="col-sm-10">
+						<input type="number" class="form-control" id="rating"
+							   placeholder="1-10" th:placeholder="#{feedback.rating.placeholder}" th:field="*{rating}">
 					</div>
-					
-					
 				</div>
-				<!-- /.box-body -->
-				<div class="box-footer">
-					<button type="submit" class="btn btn-info pull-right">Aggiungi
-						Recensione</button>
-				</div>
-				<h1 th:text="${message}"></h1>
-				<!-- /.box-footer -->
-			</form>
-		</div>
+			</div>
+			<!-- /.box-body -->
+			<div class="box-footer">
+				<button type="submit" class="btn btn-info pull-right" th:text="#{common.update}">Aggiorna Recensione</button>
+			</div>
+			<h1 th:text="${message}"></h1>
+			<!-- /.box-footer -->
+		</form>
 	</div>
+</div>
 </body>
 </html>
 

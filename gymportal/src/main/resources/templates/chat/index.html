@@ -10,7 +10,7 @@
 			<!-- /. box -->
 			<div class="box box-solid">
 				<div class="box-header with-border">
-					<h3 class="box-title">Lista Chat</h3>
+					<h3 class="box-title" th:text="#{chat.list}" >Lista Chat</h3>
 
 					<div class="box-tools">
 						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -58,9 +58,9 @@
 			<!-- DIRECT CHAT WARNING -->
 			<div class="box box-warning direct-chat direct-chat-warning">
 				<div class="box-header with-border">
-					<h3 class="box-title" th:if="${chat == null}" >Seleziona una Chat</h3>
-					<h3 class="box-title" th:if="${chat != null}" th:text="${chat.gymName + ' - ' + chat.userName}" sec:authorize="hasAuthority('gestore')" >Seleziona una Chat</h3>
-					<h3 class="box-title" th:if="${chat != null}" th:text="${chat.gymName}"  sec:authorize="!hasAuthority('gestore')" >Seleziona una Chat</h3>
+					<h3 class="box-title" th:if="${chat == null}" th:text="#{chat.select}" >Title</h3>
+					<h3 class="box-title" th:if="${chat != null}" th:text="${chat.gymName + ' - ' + chat.userName}" sec:authorize="hasAuthority('gestore')" >Title</h3>
+					<h3 class="box-title" th:if="${chat != null}" th:text="${chat.gymName}" sec:authorize="!hasAuthority('gestore')" >Title</h3>
 
 					<div class="box-tools pull-right">
 						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -117,7 +117,7 @@
 						<div class="input-group">
 							<input type="text" name="message" placeholder="Type Message ..." class="form-control" th:field="*{text}" >
 							<span class="input-group-btn">
-                        <button type="submit" class="btn btn-warning btn-flat">Send</button>
+                        <button type="submit" class="btn btn-warning btn-flat" th:text="#{common.send}" >Send</button>
                       </span>
 						</div>
 					</form>

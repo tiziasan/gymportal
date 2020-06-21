@@ -1,66 +1,86 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<body>
-<header class="main-header" th:fragment="footer">
-    <nav class="navbar navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a href="/gymportal" class="navbar-brand"><b>Gym Portal</b></a>
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-            <i class="fa fa-bars"></i>
-          </button>
-        </div>
+	<body>
+		<header class="main-header" th:fragment="footer">
+			<nav class="navbar navbar-static-top">
+				<div class="container">
+					<div class="navbar-header">
+						<a href="/gymportal" class="navbar-brand" th:text="#{common.applicationtitle}"><b>Gym Portal</b></a>
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+							<i class="fa fa-bars"></i>
+						</button>
+					</div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-   
-        <!-- /.navbar-collapse -->
-        <!-- Navbar Right Menu -->
-        <div class="navbar-custom-menu">
+					<!-- Collect the nav links, forms, and other content for toggling -->
+
+					<!-- /.navbar-collapse -->
+					<!-- Navbar Right Menu -->
+					<div class="navbar-custom-menu">
 						<ul class="nav navbar-nav">
 							<!-- Messages: style can be found in dropdown.less-->
 
-
 							<!-- Notifications Menu -->
+							<!-- Lang Menu -->
+							<li class="dropdown notifications-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<i th:classappend="'flag-icon flag-icon-'+ (${#locale.language}=='en' ? 'gb' : ${#locale.language})"></i>
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<!-- inner menu: contains the actual data -->
+										<ul class="menu">
+											<li>
+												<a href="#" th:href="@{?lang=en}" >
+													<i class="flag-icon flag-icon-gb mr-5"></i> [[#{common.english}]]
+												</a>
+											</li>
+											<li>
+												<a href="#" th:href="@{?lang=it}" >
+													<i class="flag-icon flag-icon-it mr-5"></i> [[#{common.italian}]]
+												</a>
+											</li>
 
-							<!-- Tasks Menu -->
+										</ul>
+									</li>
+								</ul>
+							</li>
 
 							<!-- User Account Menu -->
+							<li class="dropdown user user-menu" sec:authorize="hasAuthority('gestore')">
+								<a href="/gymportal/gym/create" th:text="#{gym.add}" >Aggiungi Palestra</a>
+							</li>
 
 							<li class="dropdown user user-menu" sec:authorize="hasAuthority('gestore')">
-								 <a href="/gymportal/gym/create">Aggiungi Palestra</a>
+								<a href="/gymportal/course/create" th:text="#{course.add}" >Aggiungi Corso</a>
 							</li>
 
-							<li class="dropdown user user-menu" sec:authorize="hasAuthority('gestore')">
-								 <a href="/gymportal/course/create">Aggiungi Corso</a>
+							<li class="dropdown user user-menu" sec:authorize="hasAnyAuthority('utente','gestore')">
+								<a href="/gymportal/login" th:href="@{/chat}" th:text="#{chat}" >Chat</a>
 							</li>
 
-							<li class="dropdown user user-menu">
-								<a href="/gymportal/login" th:href="@{/chat}" sec:authorize="hasAnyAuthority('utente','gestore')">Chat</a>
+							<li class="dropdown user user-menu" sec:authorize="!hasAnyAuthority('utente','gestore')">
+								<a href="/gymportal/login" th:text="#{common.login}" >Login</a>
 							</li>
 
-							<li class="dropdown user user-menu">
-								 <a href="/gymportal/login" sec:authorize="!hasAnyAuthority('utente','gestore')">Login</a>
+							<li class="dropdown user user-menu" sec:authorize="!hasAnyAuthority('utente','gestore')">
+								<a href="/gymportal/registration" th:text="#{common.registration}" >Registrazione</a>
+							</li>
+							<li class="dropdown user user-menu" sec:authorize="hasAnyAuthority('utente','gestore')">
+								<a href="/gymportal/profile" th:text="#{common.profile}" >Profilo</a>
 							</li>
 
-							<li class="dropdown user user-menu">
-								 <a href="/gymportal/registration" sec:authorize="!hasAnyAuthority('utente','gestore')">Registrazione</a>
-							</li>
-							<li class="dropdown user user-menu">
-								 <a href="/gymportal/profile" sec:authorize="hasAnyAuthority('utente','gestore')" >Profilo</a>
-							</li>
-
-							<li class="dropdown user user-menu">
-								 <form th:action="@{/logout}" method="get">
-        								<a><button class="bottonelogout" name="registration" type="Submit" sec:authorize="hasAnyAuthority('utente','gestore')">Logout</button></a>
-								 </form>
+							<li class="dropdown user user-menu" sec:authorize="hasAnyAuthority('utente','gestore')">
+								<form th:action="@{/logout}" method="get">
+									<a><button class="bottonelogout"  name="registration" type="Submit" th:text="#{common.logout}" >Logout</button></a>
+								</form>
 							</li>
 						</ul>
 					</div>
-        <!-- /.navbar-custom-menu -->
-      </div>
-      <!-- /.container-fluid -->
-    </nav>
-    
-  </header>
-</body>
+					<!-- /.navbar-custom-menu -->
+				</div>
+				<!-- /.container-fluid -->
+			</nav>
+
+		</header>
+	</body>
 </html>

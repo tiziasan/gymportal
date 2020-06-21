@@ -1,67 +1,66 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	  xmlns:th="http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org"
       layout:decorate="~{layout/layout}">
 <body>
 <div layout:fragment="content">
-<body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo">
-    <a href="../../index2.html"><b>Gym Portal</b></a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+  <body class="hold-transition login-page">
+  <div class="login-box">
+    <div class="login-logo">
+      <a href="/gymportal" th:text="#{common.applicationtitle}"><b>Gym Portal</b></a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+      <p class="login-box-msg" th:text="#{login.message}">Sign in to start your session</p>
 
-    <form action="../../index2.html" method="post" th:action="@{/login}">
-      <div class="form-group has-feedback">
-        <input class="form-control" type="text" id="user_name" name="user_name" placeholder="User Name">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input class="form-control" type="password" th:placeholder="Password"
-               id="password" name="password">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div>
-       <div align="center" th:if="${param.error}">
-            <p style="font-size: 20; color: #FF1C19;">User Name or Password invalid, please verify</p>
+      <form action="../../index2.html" method="post" th:action="@{/login}">
+        <div class="form-group has-feedback">
+          <input class="form-control" type="text" id="user_name" name="user_name" placeholder="Username">
+          <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         </div>
-      <div class="row">
-        
-        <!-- /.col -->
-        <div class="col-xs-4">
-          <button class="btn btn-primary btn-block btn-flat" name="Submit" value="Login" type="Submit"
-                th:text="Login"></button>
+        <div class="form-group has-feedback">
+          <input class="form-control" type="password"  placeholder="Password"
+                 id="password" name="password">
+          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
+        <div align="center" th:if="${param.error}">
+          <p style="font-size: 20; color: #FF1C19;" th:if="${#locale.language=='it'}"  th:text="#{login.error}">Errore</p>
+          <p style="font-size: 20; color: #FF1C19;" th:if="${#locale.language=='en'}" th:text="#{login.error}">Error</p>
+        </div>
+        <div class="row">
 
-        
-        <!-- /.col -->
-      </div>
-           <a href="/gymportal/registration" class="text-center">Non sei un membro? Registrati!</a>
-      
-    </form>
-    <!-- /.social-auth-links -->
+          <!-- /.col -->
+          <div class="col-xs-4">
+            <button class="btn btn-primary btn-block btn-flat" name="Submit" value="Login" type="Submit"
+                    th:text="Login"></button>
+          </div>
+          <!-- /.col -->
+        </div>
+        <a href="/gymportal/registration" class="text-center" th:text="#{login.noRegistration}">Non sei un membro? Registrati!</a>
+
+      </form>
+      <!-- /.social-auth-links -->
+    </div>
+    <!-- /.login-box-body -->
   </div>
-  <!-- /.login-box-body -->
-</div>
-<!-- /.login-box -->
+  <!-- /.login-box -->
 
-<!-- jQuery 3 -->
-<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- iCheck -->
-<script src="../../plugins/iCheck/icheck.min.js"></script>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' /* optional */
+  <!-- jQuery 3 -->
+  <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap 3.3.7 -->
+  <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- iCheck -->
+  <script src="../../plugins/iCheck/icheck.min.js"></script>
+  <script>
+    $(function () {
+      $('input').iCheck({
+        checkboxClass: 'icheckbox_square-blue',
+        radioClass: 'iradio_square-blue',
+        increaseArea: '20%' /* optional */
+      });
     });
-  });
-</script>
-</body>
+  </script>
+  </body>
 </div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
 <body>
 	<div layout:fragment="content">
-	<H1>Aggiungi Corso</H1>
+	<H1 th:text="#{course.add}">Aggiungi Corso</H1>
 		<div class="box box-info" id="form-orizzontale">
 
 			<form th:action="${#request.getRequestURI()}" th:object="${course}"
@@ -12,37 +12,34 @@
 
 				<div class="box-body">
 					<div class="form-group">
-						<label for="inputEmail3" class="col-sm-2 control-label">Codice
-							Corso</label>
+						<label for="code" class="col-sm-2 control-label" th:text="#{course.code}">Codice Corso</label>
 
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="inputEmail3"
-								placeholder="Codice" th:field="*{code}">
+							<input type="text" class="form-control" id="code" th:field="*{code}"
+								placeholder="Codice" th:placeholder="#{course.code}">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputPassword3" class="col-sm-2 control-label">Nome
-							corso</label>
+						<label for="name" class="col-sm-2 control-label" th:text="#{course.name}">Nome corso</label>
 
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="inputEmail3"
-								placeholder="Nome" th:field="*{name}">
+							<input type="text" class="form-control" id="name" th:field="*{name}"
+								placeholder="Nome" th:placeholder="#{course.name}">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputPassword3" class="col-sm-2 control-label">Descrizione</label>
+						<label for="desc" class="col-sm-2 control-label" th:text="#{course.description}">Descrizione</label>
 
 						<div class="col-sm-10">
-							<input id="w3mission" 
-								placeholder="Massimo 400 caratteri" th:field="*{description}"></input>
+							<textarea id="desc" th:field="*{description}" class="form-control"
+									  placeholder="Massimo 400 caratteri" th:placeholder="#{course.description.placehorder}"></textarea>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="inputPassword3" class="col-sm-2 control-label">Seleziona
-							palestra</label>
+						<label for="gymId" class="col-sm-2 control-label" th:text="#{course.select.gym}" >Seleziona palestra</label>
 
 						<div class="col-sm-10">
-							<select id="areassd_select2" th:field="*{gym.id}"
+							<select id="gymId" th:field="*{gym.id}"
 								class="form-control">
 								<option th:each="gym : ${gyms}" th:value="${gym.id}"
 									th:text="${gym.name}"></option>
@@ -52,8 +49,7 @@
 				</div>
 				<!-- /.box-body -->
 				<div class="box-footer">
-					<button type="submit" class="btn btn-info pull-right">Aggiungi
-						Corso</button>
+					<button type="submit" class="btn btn-info pull-right" th:text="#{course.add}">Aggiungi Corso</button>
 				</div>
 				<h1 th:text="${message}"></h1>
 				<!-- /.box-footer -->
