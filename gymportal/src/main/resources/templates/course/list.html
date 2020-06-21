@@ -26,8 +26,8 @@
 						<a th:href="@{/favoriteCourse/create(id=${course.id})}" sec:authorize="hasAuthority('utente')"><button class="btn-primary" th:text="#{favorite.add}">Aggiungi ai preferiti!</button></a>
 						<a th:href="@{/feedbackCourse/create(id=${course.id})}" sec:authorize="hasAuthority('utente')"><button class="btn-primary" th:text="#{feedback.course.add}">Recensisci Corso</button></a>
 						<a th:href="@{/feedbackCourse/(id=${course.id})}"><button class="btn-primary" th:text="#{course.feedbacks.show}">Vedi le recensioni del corso</button></a>
-						<a th:href="@{/course/update/(id=${course.id})}"><button class="btn-primary" th:text="#{common.edit}">Modifica</button></a>
-						<a th:href="@{/course/delete/(id=${course.id})}"><button class="btn-primary" th:text="#{common.delete}">Elimina</button></a>
+						<a th:href="@{/course/update/(id=${course.id})}" sec:authorize="hasAuthority('gestore')"><button class="btn-primary" th:text="#{common.edit}">Modifica</button></a>
+						<a th:href="@{/course/delete/(id=${course.id})}" sec:authorize="hasAuthority('gestore')"><button class="btn-primary" th:text="#{common.delete}">Elimina</button></a>
 					</div>
 				</div>
 			</div>
@@ -36,7 +36,7 @@
 		<div class="col-md-3" >
 			<div class="box box-warning" style="margin-top: 10px;">
 				<div class="box-header with-border">
-					<h3 class="box-title" th:text="#{feedback}">Recensioni</h3>
+					<h3 class="box-title" th:text="#{feedbacks}">Recensioni</h3>
 
 					<div class="box-tools pull-right">
 						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
