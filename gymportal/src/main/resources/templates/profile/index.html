@@ -50,7 +50,7 @@
 										<div class="user-block">
 											<span class="username"> <a href="#" th:text="#{course}+': '+${favoriteCourse.course.name}">Zumba Fitness</a></span>
 											<span class="description"> <a href="#" th:text="#{gym}+': '+${favoriteCourse.course.gym.name}">Sagittario</a></span>
-											<a th:href="@{/favoriteCourse/delete/(id=${favoriteCourse.id})}" class="btn btn-default float-right" id="eliminadestra" th:text="#{common.delete}">Elimina</a>
+											<a th:href="@{/favoriteCourse/delete/{favoriteCourseId}(favoriteCourseId=${favoriteCourse.id})}" class="btn btn-default float-right" id="eliminadestra" th:text="#{common.delete}">Elimina</a>
 										</div>
 									</div>
 
@@ -65,7 +65,7 @@
 										<div class="user-block">
 											<span class="username"> <a href="#" th:text="#{gym}+': '+${favoriteGym.gym.name}">Sagittario</a></span>
 											<span class="description" th:text="#{gym.address}+': '+${favoriteGym.gym.address}"> villa rasicci, Bellante64020 TE </span>
-											<a th:href="@{/favoriteGym/delete/(id=${favoriteGym.id})}" class="btn btn-default float-right" id="eliminadestra" th:text="#{common.delete}">Elimina</a>
+											<a th:href="@{/favoriteGym/delete/{favoriteGymId}(favoriteGymId=${favoriteGym.id})}" class="btn btn-default float-right" id="eliminadestra" th:text="#{common.delete}">Elimina</a>
 										</div>
 									</div>
 
