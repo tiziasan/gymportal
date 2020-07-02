@@ -94,8 +94,8 @@
 													<h4 th:text="#{feedback.rating}+': '+${feedbackCourse.rating}"></h4>
 													<h4 th:text="#{feedback.feed}+': '+${feedbackCourse.feed}"></h4>
 												</ul>
-												<a th:href="@{/feedbackCourse/update/(id=${feedbackCourse.id})}" class="btn btn-default float-left" th:text="#{common.edit}">Modifica</a>
-												<a th:href="@{/feedbackCourse/delete/(id=${feedbackCourse.id})}" class="btn btn-default float-right" id="eliminadestra" th:text="#{common.delete}">Elimina</a>
+												<a th:href="@{/feedbackCourse/update/{feedbackCourseId}(feedbackCourseId=${feedbackCourse.id})}" class="btn btn-default float-left" th:text="#{common.edit}">Modifica</a>
+												<a th:href="@{/feedbackCourse/delete/{feedbackCourseId}(feedbackCourseId=${feedbackCourse.id})}" class="btn btn-default float-right" id="eliminadestra" th:text="#{common.delete}">Elimina</a>
 											</div>
 										</div>
 										<!-- /.widget-user -->
@@ -122,8 +122,8 @@
 													<h4 th:text="#{feedback.rating}+': '+${feedbackGym.rating}"></h4>
 													<h4 th:text="#{feedback.feed}+': '+${feedbackGym.feed}"></h4>
 												</ul>
-												<a th:href="@{/feedback/update/(id=${feedbackGym.id})}" class="btn btn-default float-left" th:text="#{common.edit}">Modifica</a>
-												<a th:href="@{/feedback/delete/(id=${feedbackGym.id})}" class="btn btn-default float-right" id="eliminadestra" th:text="#{common.delete}">Elimina</a>
+												<a th:href="@{/feedback/update/{feedbackGymId}(feedbackGymId=${feedbackGym.id})}" class="btn btn-default float-left" th:text="#{common.edit}">Modifica</a>
+												<a th:href="@{/feedback/delete/{feedbackGymId}(feedbackGymId=${feedbackGym.id})}" class="btn btn-default float-right" id="eliminadestra" th:text="#{common.delete}">Elimina</a>
 											</div>
 										</div>
 										<!-- /.widget-user -->
