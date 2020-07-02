@@ -8,11 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.CourseBO;
@@ -65,14 +61,14 @@ public class GymController {
 		return "redirect:/course/create";
 	}
 	
-	@GetMapping("/delete")
-    public String deleteStart(@RequestParam Long id, Model model) throws BusinessException {
+	@GetMapping("/delete/{id}")
+    public String deleteStart(@PathVariable long id, Model model) throws BusinessException {
 		Gym gym = serviceGym.findByID(id);
 		model.addAttribute("gym", gym);
 		return "/gym/delete";
     }
 	
-	@PostMapping("/delete")
+	@PostMapping("/delete/{id}")
 	public String delete(@ModelAttribute("gym") Gym gym, Errors errors) throws BusinessException {
 		if (errors.hasErrors()) {
 			return "/common/error";
@@ -89,8 +85,8 @@ public class GymController {
 		return "redirect:/";
 	}
 	
-	@GetMapping("/update")
-	public String updateStart(@RequestParam Long id, Model model) throws BusinessException {
+	@GetMapping("/update/{id}")
+	public String updateStart(@PathVariable long id, Model model) throws BusinessException {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUserName(auth.getName());
 		model.addAttribute("user", user);
@@ -100,7 +96,7 @@ public class GymController {
 		return "/gym/form";
 	}
 
-	@PostMapping("/update")
+	@PostMapping("/update/{id}")
 	public String update(@ModelAttribute("gym") Gym gym, Errors errors) throws BusinessException {
 		if (errors.hasErrors()) {
 			return "/gym/form";
