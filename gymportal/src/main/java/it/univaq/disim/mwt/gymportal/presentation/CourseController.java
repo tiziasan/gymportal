@@ -42,7 +42,6 @@ public class CourseController {
 		Course course = new Course();
 		model.addAttribute("course", course);
 
-		
 		return "/course/form"; 
     }
 	
@@ -79,14 +78,14 @@ public class CourseController {
 		return "/course/list";
 	}
 	
-	@GetMapping("/delete")
-    public String deleteStart(@RequestParam Long id, Model model) throws BusinessException {
+	@GetMapping("/delete/{id}")
+    public String deleteStart(@PathVariable long id, Model model) throws BusinessException {
 		Course course = serviceCourse.findByID(id);
 		model.addAttribute("course", course);
 		return "/course/delete";
     }
 	
-	@PostMapping("/delete")
+	@PostMapping("/delete/{id}")
 	public String delete(@ModelAttribute("course") Course course, Errors errors) throws BusinessException {
 		Course courseComplete = serviceCourse.findByID(course.getId());
 
@@ -99,14 +98,14 @@ public class CourseController {
 		return redirect;
 	}
 	
-	@GetMapping("/update")
-	public String updateStart(@RequestParam Long id, Model model) throws BusinessException {
+	@GetMapping("/update/{id}")
+	public String updateStart(@PathVariable long id, Model model) throws BusinessException {
 		Course course = serviceCourse.findByID(id);
 		model.addAttribute("course", course);
 		return "/course/form";
 	}
 
-	@PostMapping("/update")
+	@PostMapping("/update/{id}")
 	public String update(@Valid @ModelAttribute("course") Course course , Errors errors) throws BusinessException {
 		Course courseComplete = serviceCourse.findByID(course.getId());
 
