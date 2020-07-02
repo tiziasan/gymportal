@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
@@ -82,7 +81,7 @@ public class ProfileController {
 	}
 	
 	@GetMapping("/update")
-	public String updateStart(@RequestParam Long id, Model model) throws BusinessException {
+	public String updateStart(Model model) throws BusinessException {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUserName(auth.getName());
 		model.addAttribute("user", user);
