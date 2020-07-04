@@ -58,7 +58,7 @@ public class FeedbackCourseController {
 		model.addAttribute("course", course);
 		model.addAttribute("user", user);
 		
-		FeedbackGym feedbackCourse = new FeedbackGym();
+		FeedbackCourse feedbackCourse = new FeedbackCourse();
 
 		model.addAttribute("feedbackCourse", feedbackCourse);
 
@@ -66,8 +66,7 @@ public class FeedbackCourseController {
 	} 
 
 	@PostMapping("/create/{id}")
-	public String create(@Valid @ModelAttribute("feedback") FeedbackCourse feedbackCourse, Errors errors, Model model)
-			throws BusinessException {
+	public String create(@Valid @ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, Errors errors, Model model) throws BusinessException {
 		
 		if (errors.hasErrors()) {
 			String message = "Errore nell'inserimento";
@@ -86,6 +85,7 @@ public class FeedbackCourseController {
 
 	@GetMapping("/delete/{id}")
     public String deleteStart(@PathVariable Long id, Model model) throws BusinessException {
+
 		return "/feedback/delete";
     }
 	
