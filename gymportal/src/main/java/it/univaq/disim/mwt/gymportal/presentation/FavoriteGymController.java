@@ -9,11 +9,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.FavoriteGymBO;
@@ -38,11 +39,8 @@ public class FavoriteGymController {
 	private UserService userService;
 
 
-	
-	
-	
-	@GetMapping("/create")
-	public String createStart(Model model,@RequestParam long id) throws BusinessException {
+	@GetMapping("/create/{id}")
+	public String createStart(@PathVariable long id, Model model) throws BusinessException {
 		Gym gym = serviceGym.findByID(id);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUserName(auth.getName());
@@ -55,9 +53,8 @@ public class FavoriteGymController {
 
 		return "/favoriteGym/create";
 	}
-	
 
-	@PostMapping("/create")
+	@PostMapping("/create/{id}")
 	public String create(@Valid @ModelAttribute("favoriteGym") FavoriteGym favoriteGym, Errors errors, Model model)
 			throws BusinessException {
 		
@@ -74,12 +71,12 @@ public class FavoriteGymController {
 		return redirect;
 	}
 	
-	@GetMapping("/delete")
-    public String deleteStart(@RequestParam Long id, Model model) throws BusinessException {
+	@GetMapping("/delete/{id}")
+    public String deleteStart(@PathVariable long id, Model model) throws BusinessException {
 		return "/favoriteGym/delete";
     }
 	
-	@PostMapping("/delete")
+	@PostMapping("/delete/{id}")
 	public String delete(@ModelAttribute("favoriteGym") FavoriteGym favoriteGym, Errors errors) throws BusinessException {
 
 		if (errors.hasErrors()) {

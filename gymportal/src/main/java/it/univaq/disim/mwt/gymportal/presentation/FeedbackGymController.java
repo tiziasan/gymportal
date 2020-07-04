@@ -1,8 +1,6 @@
 
 package it.univaq.disim.mwt.gymportal.presentation;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.FeedbackGymBO;
 import it.univaq.disim.mwt.gymportal.business.GymBO;
 import it.univaq.disim.mwt.gymportal.business.UserService;
-import it.univaq.disim.mwt.gymportal.domain.Course;
-import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.domain.User;
@@ -42,8 +38,8 @@ public class FeedbackGymController {
 	private UserService userService;
 
 
-	@GetMapping("/create")
-	public String createStart(Model model,@RequestParam long id) throws BusinessException {
+	@GetMapping("/create/{id}")
+	public String createStart(Model model,@PathVariable long id) throws BusinessException {
 		Gym gym = serviceGym.findByID(id);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUserName(auth.getName());
@@ -57,7 +53,7 @@ public class FeedbackGymController {
 		return "/feedback/form";
 	}
 
-	@PostMapping("/create")
+	@PostMapping("/create/{id}")
 	public String create(@Valid @ModelAttribute("feedback") FeedbackGym feedback, Errors errors, Model model)
 			throws BusinessException {
 		
@@ -74,13 +70,14 @@ public class FeedbackGymController {
 
 		return redirect;
 	}
-	
-	@GetMapping("/delete")
-    public String deleteStart(@RequestParam Long id, Model model) throws BusinessException {
+
+
+	@GetMapping("/delete/{id}")
+    public String deleteStart(@PathVariable Long id, Model model) throws BusinessException {
 		return "/feedback/delete";
     }
 	
-	@PostMapping("/delete")
+	@PostMapping("/delete/{id}")
 	public String delete(@ModelAttribute("feedback") FeedbackGym feedback, Errors errors) throws BusinessException {
 
 		if (errors.hasErrors()) {
@@ -89,15 +86,16 @@ public class FeedbackGymController {
 		serviceFeedbackGym.deleteFeedbackGym(feedback);
         return "redirect:/profile";
 	}
-	
-	@GetMapping("/update")
-	public String updateStart(@RequestParam Long id, Model model) throws BusinessException {
+
+
+	@GetMapping("/update/{id}")
+	public String updateStart(@PathVariable Long id, Model model) throws BusinessException {
 		FeedbackGym feedback = serviceFeedbackGym.findByID(id);
 		model.addAttribute("feedback", feedback);
 		return "/feedback/update";
 	}
 
-	@PostMapping("/update")
+	@PostMapping("/update/{id}")
 	public String update(@Valid @ModelAttribute("feedback") FeedbackGym feedback , Errors errors) throws BusinessException {
 
 		if (errors.hasErrors()) {

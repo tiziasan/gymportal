@@ -26,7 +26,7 @@
 										<li><h5 th:text="${user.email}"></h5></li>
 										<li><h4>Username</h4></li>
 										<li><h5 th:text="${user.userName}">aaaaaa@gmail.com</h5></li>
-										<li><a th:href="@{/profile/update/(id=${user.id})}"><b th:text="#{profile.edit}">Modifica Profilo</b></a></li>
+										<li><a th:href="@{/profile/update}"><b th:text="#{profile.edit}">Modifica Profilo</b></a></li>
 									</ul>
 								</div>
 							</div>
@@ -50,7 +50,7 @@
 										<div class="user-block">
 											<span class="username"> <a href="#" th:text="#{course}+': '+${favoriteCourse.course.name}">Zumba Fitness</a></span>
 											<span class="description"> <a href="#" th:text="#{gym}+': '+${favoriteCourse.course.gym.name}">Sagittario</a></span>
-											<a th:href="@{/favoriteCourse/delete/(id=${favoriteCourse.id})}" class="btn btn-default float-right" id="eliminadestra" th:text="#{common.delete}">Elimina</a>
+											<a th:href="@{/favoriteCourse/delete/{favoriteCourseId}(favoriteCourseId=${favoriteCourse.id})}" class="btn btn-default float-right" id="eliminadestra" th:text="#{common.delete}">Elimina</a>
 										</div>
 									</div>
 
@@ -65,7 +65,7 @@
 										<div class="user-block">
 											<span class="username"> <a href="#" th:text="#{gym}+': '+${favoriteGym.gym.name}">Sagittario</a></span>
 											<span class="description" th:text="#{gym.address}+': '+${favoriteGym.gym.address}"> villa rasicci, Bellante64020 TE </span>
-											<a th:href="@{/favoriteGym/delete/(id=${favoriteGym.id})}" class="btn btn-default float-right" id="eliminadestra" th:text="#{common.delete}">Elimina</a>
+											<a th:href="@{/favoriteGym/delete/{favoriteGymId}(favoriteGymId=${favoriteGym.id})}" class="btn btn-default float-right" id="eliminadestra" th:text="#{common.delete}">Elimina</a>
 										</div>
 									</div>
 
@@ -94,8 +94,8 @@
 													<h4 th:text="#{feedback.rating}+': '+${feedbackCourse.rating}"></h4>
 													<h4 th:text="#{feedback.feed}+': '+${feedbackCourse.feed}"></h4>
 												</ul>
-												<a th:href="@{/feedbackCourse/update/(id=${feedbackCourse.id})}" class="btn btn-default float-left" th:text="#{common.edit}">Modifica</a>
-												<a th:href="@{/feedbackCourse/delete/(id=${feedbackCourse.id})}" class="btn btn-default float-right" id="eliminadestra" th:text="#{common.delete}">Elimina</a>
+												<a th:href="@{/feedbackCourse/update/{feedbackCourseId}(feedbackCourseId=${feedbackCourse.id})}" class="btn btn-default float-left" th:text="#{common.edit}">Modifica</a>
+												<a th:href="@{/feedbackCourse/delete/{feedbackCourseId}(feedbackCourseId=${feedbackCourse.id})}" class="btn btn-default float-right" id="eliminadestra" th:text="#{common.delete}">Elimina</a>
 											</div>
 										</div>
 										<!-- /.widget-user -->
@@ -122,8 +122,8 @@
 													<h4 th:text="#{feedback.rating}+': '+${feedbackGym.rating}"></h4>
 													<h4 th:text="#{feedback.feed}+': '+${feedbackGym.feed}"></h4>
 												</ul>
-												<a th:href="@{/feedback/update/(id=${feedbackGym.id})}" class="btn btn-default float-left" th:text="#{common.edit}">Modifica</a>
-												<a th:href="@{/feedback/delete/(id=${feedbackGym.id})}" class="btn btn-default float-right" id="eliminadestra" th:text="#{common.delete}">Elimina</a>
+												<a th:href="@{/feedback/update/{feedbackGymId}(feedbackGymId=${feedbackGym.id})}" class="btn btn-default float-left" th:text="#{common.edit}">Modifica</a>
+												<a th:href="@{/feedback/delete/{feedbackGymId}(feedbackGymId=${feedbackGym.id})}" class="btn btn-default float-right" id="eliminadestra" th:text="#{common.delete}">Elimina</a>
 											</div>
 										</div>
 										<!-- /.widget-user -->

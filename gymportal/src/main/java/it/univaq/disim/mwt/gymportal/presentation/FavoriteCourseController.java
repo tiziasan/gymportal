@@ -9,11 +9,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.CourseBO;
@@ -21,7 +22,6 @@ import it.univaq.disim.mwt.gymportal.business.FavoriteCourseBO;
 import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.FavoriteCourse;
-import it.univaq.disim.mwt.gymportal.domain.FavoriteGym;
 import it.univaq.disim.mwt.gymportal.domain.User;
 
 @Controller
@@ -39,11 +39,8 @@ public class FavoriteCourseController {
 	private UserService userService;
 
 
-	
-	
-	
-	@GetMapping("/create")
-	public String createStart(Model model,@RequestParam long id) throws BusinessException {
+	@GetMapping("/create/{id}")
+	public String createStart(@PathVariable long id, Model model) throws BusinessException {
 		Course course = serviceCourse.findByID(id);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUserName(auth.getName());
@@ -56,9 +53,8 @@ public class FavoriteCourseController {
 
 		return "/favoriteCourse/create";
 	}
-	
 
-	@PostMapping("/create")
+	@PostMapping("/create/{id}")
 	public String create(@Valid @ModelAttribute("favoriteCourse") FavoriteCourse favoriteCourse, Errors errors, Model model)
 			throws BusinessException {
 		
@@ -74,13 +70,13 @@ public class FavoriteCourseController {
 
 		return redirect;
 	}
-	
-	@GetMapping("/delete")
-    public String deleteStart(@RequestParam Long id, Model model) throws BusinessException {
+
+	@GetMapping("/delete/{id}")
+	public String deleteStart(@PathVariable long id, Model model) throws BusinessException {
 		return "/favoriteCourse/delete";
     }
 	
-	@PostMapping("/delete")
+	@PostMapping("/delete/{id}")
 	public String delete(@ModelAttribute("favoriteCourse") FavoriteCourse favoriteCourse, Errors errors) throws BusinessException {
 
 		if (errors.hasErrors()) {
