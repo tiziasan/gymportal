@@ -25,7 +25,7 @@
 						<label for="rating" class="col-sm-2 control-label" th:text="#{feedback.rating} + ' ' + #{feedback.rating.placeholder}" >Rating 1-10
 						</label>
 						<div class="col-sm-10">
-							<input type="number" class="form-control" id="rating"
+							<input type="number" class="form-control" id="rating" min="0" max="10"
 								   placeholder="1-10" th:placeholder="#{feedback.rating.placeholder}" th:field="*{rating}">
 						</div>
 					</div>

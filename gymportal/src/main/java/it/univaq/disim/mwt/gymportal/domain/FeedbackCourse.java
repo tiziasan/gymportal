@@ -1,12 +1,6 @@
 package it.univaq.disim.mwt.gymportal.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -16,7 +10,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "feedbackcourse")
+@Table(name = "feedbackcourse", uniqueConstraints = @UniqueConstraint(columnNames={"course_id","user_user_id"}))
 public class FeedbackCourse {
 	
 	@Id

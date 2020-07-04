@@ -1,16 +1,12 @@
 package it.univaq.disim.mwt.gymportal.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "favoritecourse")
+@Table(name = "favoritecourse", uniqueConstraints = @UniqueConstraint(columnNames={"course_id","user_user_id"}))
 public class FavoriteCourse {
 	
 	@Id
