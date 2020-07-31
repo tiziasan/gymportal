@@ -115,7 +115,7 @@
 				<div class="box-footer">
 					<form action="#" method="post" th:action="${#request.getRequestURI() + '?' + #request.getQueryString()}" th:object="${message}">
 						<div class="input-group">
-							<input type="text" name="message" placeholder="Type Message ..." class="form-control" th:field="*{text}" >
+							<input type="text" name="message" placeholder="Type Message..." th:placeholder="#{chat.typemessage}"  class="form-control" th:field="*{text}" >
 							<span class="input-group-btn">
                         <button type="submit" class="btn btn-warning btn-flat" th:text="#{common.send}" >Send</button>
                       </span>
