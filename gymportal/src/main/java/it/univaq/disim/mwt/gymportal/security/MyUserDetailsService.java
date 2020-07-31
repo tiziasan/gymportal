@@ -1,4 +1,4 @@
-package it.univaq.disim.mwt.gymportal.business;
+package it.univaq.disim.mwt.gymportal.security;
 
 
 import java.util.ArrayList;
@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.transaction.Transactional;
 
+import it.univaq.disim.mwt.gymportal.business.UserBO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
