@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import it.univaq.disim.mwt.gymportal.business.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,11 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import it.univaq.disim.mwt.gymportal.business.BusinessException;
-import it.univaq.disim.mwt.gymportal.business.ChatBO;
-import it.univaq.disim.mwt.gymportal.business.GymBO;
-import it.univaq.disim.mwt.gymportal.business.MessageBO;
-import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.domain.Chat;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.domain.Message;
@@ -43,7 +39,7 @@ public class ChatController {
     private ChatBO serviceChat;
 
     @Autowired
-    private UserService userService;
+    private UserBO userService;
 
     @GetMapping(value = {"", "/{idChat}", "?idGym={idGym}"})
     public String createStart(@PathVariable(required = false) String idChat, @RequestParam(required = false) Long idGym, Model model) throws BusinessException {

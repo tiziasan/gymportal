@@ -22,7 +22,7 @@ import it.univaq.disim.mwt.gymportal.domain.User;
 public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserService userService;
+    private UserBO userService;
 
     @Override
     @Transactional

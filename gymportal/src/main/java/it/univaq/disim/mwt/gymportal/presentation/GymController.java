@@ -2,6 +2,7 @@ package it.univaq.disim.mwt.gymportal.presentation;
 
 import javax.validation.Valid;
 
+import it.univaq.disim.mwt.gymportal.business.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,12 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import it.univaq.disim.mwt.gymportal.business.BusinessException;
-import it.univaq.disim.mwt.gymportal.business.CourseBO;
-import it.univaq.disim.mwt.gymportal.business.GymBO;
-import it.univaq.disim.mwt.gymportal.business.UserService;
-import it.univaq.disim.mwt.gymportal.business.ChatBO;
-import it.univaq.disim.mwt.gymportal.business.MessageBO;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.domain.User;
 import it.univaq.disim.mwt.gymportal.domain.Chat;
@@ -34,7 +29,7 @@ public class GymController {
 	private CourseBO serviceCourse;
 	
 	@Autowired
-	private UserService userService;
+	private UserBO userService;
 
 	@Autowired
 	private ChatBO serviceChat;

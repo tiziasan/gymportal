@@ -2,16 +2,15 @@ package it.univaq.disim.mwt.gymportal.presentation;
 
 import javax.validation.Valid;
 
+import it.univaq.disim.mwt.gymportal.business.BusinessException;
+import it.univaq.disim.mwt.gymportal.business.UserBO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.domain.User;
 
 /*
@@ -32,7 +31,7 @@ import it.univaq.disim.mwt.gymportal.domain.User;
 public class LoginController {
 
 	@Autowired
-	private UserService userService;
+	private UserBO userService;
 
 	@GetMapping(value = { "/login" })
 	public ModelAndView login() {
@@ -51,7 +50,7 @@ public class LoginController {
 	}
 
 	@PostMapping(value = "/registration")
-	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
+	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) throws BusinessException {
 		ModelAndView modelAndView = new ModelAndView();
 		User userExists = userService.findUserByUserName(user.getUserName());
 		if (userExists != null) {

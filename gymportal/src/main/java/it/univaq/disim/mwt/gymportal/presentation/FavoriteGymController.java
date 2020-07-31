@@ -3,6 +3,7 @@ package it.univaq.disim.mwt.gymportal.presentation;
 
 import javax.validation.Valid;
 
+import it.univaq.disim.mwt.gymportal.business.UserBO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.FavoriteGymBO;
 import it.univaq.disim.mwt.gymportal.business.GymBO;
-import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.domain.FavoriteGym;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.domain.User;
@@ -36,7 +36,7 @@ public class FavoriteGymController {
 	private GymBO serviceGym;
 
 	@Autowired
-	private UserService userService;
+	private UserBO userService;
 
 
 	@GetMapping("/create/{id}")

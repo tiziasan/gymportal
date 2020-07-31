@@ -3,6 +3,7 @@ package it.univaq.disim.mwt.gymportal.presentation;
 
 import javax.validation.Valid;
 
+import it.univaq.disim.mwt.gymportal.business.UserBO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.CourseBO;
 import it.univaq.disim.mwt.gymportal.business.FavoriteCourseBO;
-import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.FavoriteCourse;
 import it.univaq.disim.mwt.gymportal.domain.User;
@@ -36,8 +36,7 @@ public class FavoriteCourseController {
 	private CourseBO serviceCourse;
 
 	@Autowired
-	private UserService userService;
-
+	private UserBO userService;
 
 	@GetMapping("/create/{id}")
 	public String createStart(@PathVariable long id, Model model) throws BusinessException {
