@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.Id;
 
 @Data
-@Document(collection = "chats")
+@Document(collection = "chat")
 public class Chat {
 
     @Id
