@@ -10,7 +10,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "feedbackcourse", uniqueConstraints = @UniqueConstraint(columnNames={"course_id","user_user_id"}))
+@Table(name = "feedbackcourse", uniqueConstraints = @UniqueConstraint(columnNames={"course_id","user_id"}))
 public class FeedbackCourse {
 	
 	@Id

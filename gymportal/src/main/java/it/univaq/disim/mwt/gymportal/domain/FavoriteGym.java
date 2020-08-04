@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.UniqueElements;
 
 @Data
 @Entity
-@Table(name = "favoritegym", uniqueConstraints = @UniqueConstraint(columnNames={"gym_gym_id","user_user_id"}))
+@Table(name = "favoritegym", uniqueConstraints = @UniqueConstraint(columnNames={"gym_id","user_id"}))
 
 public class FavoriteGym {
 	

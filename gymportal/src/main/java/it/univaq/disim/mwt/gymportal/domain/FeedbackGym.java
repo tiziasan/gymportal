@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "feedbackgym", uniqueConstraints = @UniqueConstraint(columnNames={"gym_gym_id","user_user_id"}))
+@Table(name = "feedbackgym", uniqueConstraints = @UniqueConstraint(columnNames={"gym_id","user_id"}))
 public class FeedbackGym {
 	
 	@Id

@@ -21,7 +21,6 @@ public class Gym {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "gym_id")
 	private Long id;
 	
 	@NotBlank
