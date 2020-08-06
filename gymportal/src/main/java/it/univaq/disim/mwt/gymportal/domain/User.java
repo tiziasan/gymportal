@@ -23,6 +23,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.UniqueElements;
 
 @Data
 @Builder
@@ -36,12 +37,12 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "user_name")
+	@Column(name = "user_name", nullable = false, length = 255, unique = true)
 	@Length(min = 5, message = "*Your user name must have at least 5 characters")
 	@NotEmpty(message = "*Please provide a user name")
 	private String userName;
 	
-	@Column(name = "email")
+	@Column(name = "email", nullable = false, length = 255, unique = true)
 	@Email(message = "*Please provide a valid Email")
 	@NotEmpty(message = "*Please provide an email")
 	private String email;
