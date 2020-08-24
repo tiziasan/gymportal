@@ -173,4 +173,10 @@ $RECYCLE.BIN/
 *.lnk
 
 
+*.logs
+.idea/
+.eclipse
+
+
+
 # End of https://www.gitignore.io/api/git,java,maven,eclipse,windows
