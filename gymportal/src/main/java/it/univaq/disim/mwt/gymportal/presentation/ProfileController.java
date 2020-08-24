@@ -59,10 +59,6 @@ public class ProfileController {
 		List<FavoriteGym> favoriteGymList = serviceFavoriteGym.findAllFavoriteByUserId(user.getId());
 		List<FavoriteCourse> favoriteCourseList = serviceFavoriteCourse.findAllFavoriteByUserId(user.getId());
 
-
-		System.out.println("kadjgVCKadvckagjVCKgha"+feedbackCourseList.size());
-
-
 		model.addAttribute("user",user);
 		model.addAttribute("adminMessage", "Content Available Only for Users with Admin Role");
 		model.addAttribute("feedbackCourseList",feedbackCourseList);
