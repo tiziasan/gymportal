@@ -54,10 +54,6 @@
 										</div>
 									</div>
 
-									<!-- Post -->
-
-									<!-- /.post -->
-
 									<span class="username">
 											<h3 th:text="#{gyms}">Palestre</h3>
 										</span>
@@ -87,13 +83,15 @@
 												<!-- /.widget-user-image -->
 												<h3 class="widget-user-username" th:text="${user.name}">Nadia Carmichael</h3>
 											</div>
-											<div class="box-footer no-padding">
+											<div class="box-footer">
 												<ul class="nav nav-stacked">
 													<h4 th:text="#{gym}+': '+${feedbackCourse.course.gym.name}"></h4>
 													<h4 th:text="#{course}+': '+${feedbackCourse.course.name}"></h4>
 													<h4 th:text="#{feedback.rating}+': '+${feedbackCourse.rating}"></h4>
 													<h4 th:text="#{feedback.feed}+': '+${feedbackCourse.feed}"></h4>
 												</ul>
+											</div>
+											<div class="box-footer no-padding">
 												<a th:href="@{/feedbackCourse/update/{feedbackCourseId}(feedbackCourseId=${feedbackCourse.id})}" class="btn btn-default float-left" th:text="#{common.edit}">Modifica</a>
 												<a th:href="@{/feedbackCourse/delete/{feedbackCourseId}(feedbackCourseId=${feedbackCourse.id})}" class="btn btn-default float-right" id="eliminadestra" th:text="#{common.delete}">Elimina</a>
 											</div>
@@ -116,12 +114,13 @@
 												<!-- /.widget-user-image -->
 												<h3 class="widget-user-username" th:text="${user.name}">Nadia Carmichael</h3>
 											</div>
-											<div class="box-footer no-padding">
+											<div class="box-footer">
 												<ul class="nav nav-stacked">
 													<h4 th:text="#{gym}+': '+${feedbackGym.gym.name}"></h4>
 													<h4 th:text="#{feedback.rating}+': '+${feedbackGym.rating}"></h4>
 													<h4 th:text="#{feedback.feed}+': '+${feedbackGym.feed}"></h4>
-												</ul>
+												</ul></div>
+											<div class="box-footer no-padding">
 												<a th:href="@{/feedback/update/{feedbackGymId}(feedbackGymId=${feedbackGym.id})}" class="btn btn-default float-left" th:text="#{common.edit}">Modifica</a>
 												<a th:href="@{/feedback/delete/{feedbackGymId}(feedbackGymId=${feedbackGym.id})}" class="btn btn-default float-right" id="eliminadestra" th:text="#{common.delete}">Elimina</a>
 											</div>
