@@ -18,7 +18,7 @@ public class FeedbackCourse {
 	private Long id;
 	
 	@NotBlank
-	@Size(max=500)
+	@Size(max=150)
 	@Column(name="FEED")
 	private String feed;
 	
