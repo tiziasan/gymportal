@@ -16,7 +16,7 @@ public class FeedbackGym {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private long id;
 	
 	@NotBlank
 	@Size(max=150)

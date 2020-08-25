@@ -13,11 +13,11 @@ public class Chat {
     @Id
     private String id;
 
-    private Long userId;
+    private long userId;
 
     private String userName;
 
-    private Long gymId;
+    private long gymId;
 
     private String gymName;
 
