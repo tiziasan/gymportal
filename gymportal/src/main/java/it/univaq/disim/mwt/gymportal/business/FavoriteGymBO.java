@@ -12,8 +12,8 @@ public interface FavoriteGymBO {
 	
 	void deleteFavoriteGym (FavoriteGym favoriteGym) throws BusinessException;
 	
-	List <FavoriteGym> findAllFavoritegym (Long id) throws BusinessException;
+	List <FavoriteGym> findAllFavoritegym (long id) throws BusinessException;
 	
-	List <FavoriteGym> findAllFavoriteByUserId (Long id) throws BusinessException;
+	List <FavoriteGym> findAllFavoriteByUserId (long id) throws BusinessException;
 
 }

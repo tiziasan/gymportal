@@ -11,13 +11,13 @@ public interface FeedbackCourseBO {
 	
 	void deleteFeedbackCourse (FeedbackCourse feedbackCourse) throws BusinessException;
 	
-	FeedbackCourse findByID(Long id) throws BusinessException;
+	FeedbackCourse findByID(long id) throws BusinessException;
 	
-	List <FeedbackCourse> findAllFeedbackCourse (Long id) throws BusinessException;
+	List <FeedbackCourse> findAllFeedbackCourse (long id) throws BusinessException;
 	
-	List <FeedbackCourse> findAllFeedbackByCourse (Long id) throws BusinessException;
+	List <FeedbackCourse> findAllFeedbackByCourse (long id) throws BusinessException;
 	
-	List <FeedbackCourse> findAllFeedbackByUserId (Long id) throws BusinessException;
+	List <FeedbackCourse> findAllFeedbackByUserId (long id) throws BusinessException;
 
 
 

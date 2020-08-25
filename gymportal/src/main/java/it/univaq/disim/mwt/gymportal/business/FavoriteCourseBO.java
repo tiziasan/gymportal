@@ -12,8 +12,8 @@ public interface FavoriteCourseBO {
 	
 	void deleteFavoriteCourse (FavoriteCourse favoriteCourse) throws BusinessException;
 	
-	List <FavoriteCourse> findAllFavoriteCourse (Long id) throws BusinessException;
+	List <FavoriteCourse> findAllFavoriteCourse (long id) throws BusinessException;
 	
-	List <FavoriteCourse> findAllFavoriteByUserId (Long id) throws BusinessException;
+	List <FavoriteCourse> findAllFavoriteByUserId (long id) throws BusinessException;
 
 }

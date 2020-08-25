@@ -38,24 +38,24 @@ public class FeedbackGymBOImpl implements FeedbackGymBO {
 	}
 
 	@Override
-	public List<FeedbackGym> findAllFeedbackGym(Long id) throws BusinessException {
+	public List<FeedbackGym> findAllFeedbackGym(long id) throws BusinessException {
 		return feedbackGymRepository.findAllFeedbackGym(id);
 	}
 
 	@Override
-	public List<FeedbackGym> findAllFeedbackByGym(Long id) throws BusinessException {
+	public List<FeedbackGym> findAllFeedbackByGym(long id) throws BusinessException {
 		return feedbackGymRepository.findAllFeedbackByGym(id);
 
 	}
 	
 	@Override
-	public List<FeedbackGym> findAllFeedbackByUserId(Long id) throws BusinessException {
+	public List<FeedbackGym> findAllFeedbackByUserId(long id) throws BusinessException {
 		return feedbackGymRepository.findAllFeedbackByUserId(id);
 
 	}
 	
 	@Override
-	public FeedbackGym findByID(Long id) throws BusinessException {
+	public FeedbackGym findByID(long id) throws BusinessException {
 		return feedbackGymRepository.findByID(id);
 	}
 	

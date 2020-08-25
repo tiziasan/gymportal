@@ -11,12 +11,12 @@ public interface FeedbackGymBO {
 	
 	void deleteFeedbackGym (FeedbackGym feedbackGym) throws BusinessException;
 	
-	FeedbackGym findByID(Long id) throws BusinessException;
+	FeedbackGym findByID(long id) throws BusinessException;
 	
-	List <FeedbackGym> findAllFeedbackGym (Long id) throws BusinessException;
+	List <FeedbackGym> findAllFeedbackGym (long id) throws BusinessException;
 	
-	List <FeedbackGym> findAllFeedbackByGym (Long id) throws BusinessException;
+	List <FeedbackGym> findAllFeedbackByGym (long id) throws BusinessException;
 
-	List <FeedbackGym> findAllFeedbackByUserId (Long id) throws BusinessException;
+	List <FeedbackGym> findAllFeedbackByUserId (long id) throws BusinessException;
 
 }

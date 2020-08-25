@@ -9,12 +9,12 @@ public interface ChatBO {
     Chat saveChat(Chat chat) throws BusinessException;
     void saveAllChats(List<Chat> chatList) throws BusinessException;
 
-    void deleteChatsByGymId(Long gymId) throws BusinessException;
+    void deleteChatsByGymId(long gymId) throws BusinessException;
 
     Chat findChatById(String id) throws BusinessException;
-    List<Chat> findByUserId(Long userId) throws BusinessException;
-    List<Chat> findByGymId(Long gymId) throws BusinessException;
-    Chat findByUserIdAndGymId(Long userId, Long gymId) throws BusinessException;
+    List<Chat> findByUserId(long userId) throws BusinessException;
+    List<Chat> findByGymId(long gymId) throws BusinessException;
+    Chat findByUserIdAndGymId(long userId, long gymId) throws BusinessException;
 
 
 }

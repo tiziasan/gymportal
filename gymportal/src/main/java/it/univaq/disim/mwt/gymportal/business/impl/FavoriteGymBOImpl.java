@@ -38,12 +38,12 @@ public class FavoriteGymBOImpl implements FavoriteGymBO{
 	}
 
 	@Override
-	public List<FavoriteGym> findAllFavoritegym(Long id) throws BusinessException {
+	public List<FavoriteGym> findAllFavoritegym(long id) throws BusinessException {
 		return favoriteGymRepository.findAllFavoriteGym(id);
 	}
 	
 	@Override
-	public List<FavoriteGym> findAllFavoriteByUserId(Long id) throws BusinessException {
+	public List<FavoriteGym> findAllFavoriteByUserId(long id) throws BusinessException {
 		return favoriteGymRepository.findAllFavoriteByUserId(id);
 
 	}

@@ -46,7 +46,7 @@ public class GymBOImpl implements GymBO{
 	}
 
 	@Override
-	public Gym findByID(Long id) throws BusinessException {
+	public Gym findByID(long id) throws BusinessException {
 		return gymRepository.findByID(id);
 	}
 
@@ -56,17 +56,17 @@ public class GymBOImpl implements GymBO{
 	}
 	
 	@Override
-	public List<Gym> searchByRegionAndUser(String region, Long id) throws BusinessException {
+	public List<Gym> searchByRegionAndUser(String region, long id) throws BusinessException {
 		return gymRepository.searchByRegionAndUser(region, id);
 	}
 	
 	@Override
-	public List<Gym> searchByRegionAndNameAndUser(String region, String name, Long id) throws BusinessException {
+	public List<Gym> searchByRegionAndNameAndUser(String region, String name, long id) throws BusinessException {
 		return gymRepository.searchByRegionAndNameAndUser(region, name, id);
 	}
 	
 	@Override
-	public List<Gym> searchByUser(Long id) throws BusinessException {
+	public List<Gym> searchByUser(long id) throws BusinessException {
 		return gymRepository.searchByUser(id);
 	}
 

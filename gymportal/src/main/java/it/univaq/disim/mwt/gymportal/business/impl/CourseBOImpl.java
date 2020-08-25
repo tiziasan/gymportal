@@ -44,22 +44,22 @@ public class CourseBOImpl implements CourseBO {
 	}
 
 	@Override
-	public Course findByID(Long id) throws BusinessException {
+	public Course findByID(long id) throws BusinessException {
 		return courseRepository.findByID(id);
 	}
 
 	@Override
-	public void deleteAllCourseByGymId(Long id) throws BusinessException {
+	public void deleteAllCourseByGymId(long id) throws BusinessException {
 		 courseRepository.deleteAllCourseByGymId(id);
 	}
 
 	@Override
-	public List<Course> searchByIdAndName(Long id, String name) throws BusinessException {
+	public List<Course> searchByIdAndName(long id, String name) throws BusinessException {
 		 return courseRepository.searchByIdAndName(id, name);
 	}
 	
 	@Override
-	public List<Course> searchByIdAndNameAndUser(Long id, String name, Long idUtente) throws BusinessException {
+	public List<Course> searchByIdAndNameAndUser(long id, String name, long idUtente) throws BusinessException {
 		 return courseRepository.searchByIdAndNameAndUser(id, name, idUtente);
 	}
 	
