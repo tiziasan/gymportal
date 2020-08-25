@@ -14,18 +14,18 @@ import it.univaq.disim.mwt.gymportal.domain.Gym;
 		public List<Course> findCourseByGymId(long gym_id);
 		
 		@Query(value = "FROM Course AS c WHERE c.id = :id")
-		public Course findByID(Long id);
+		public Course findByID(long id);
 		
 		@Transactional
 		@Modifying
 		@Query(value = "DELETE FROM Course AS c WHERE c.gym.id = :id")
-		public void deleteAllCourseByGymId(Long id);
+		public void deleteAllCourseByGymId(long id);
 		
 		@Query(value = "FROM Course AS c WHERE c.gym.id = :id AND c.name LIKE CONCAT('%',:name,'%')")
-		public List<Course> searchByIdAndName(Long id, String name);
+		public List<Course> searchByIdAndName(long id, String name);
 		
 		@Query(value = "FROM Course AS c WHERE c.gym.id = :id AND c.gym.user.id = :idUser AND c.name LIKE CONCAT('%',:name,'%')")
-		public List<Course> searchByIdAndNameAndUser(Long id, String name, Long idUser);
+		public List<Course> searchByIdAndNameAndUser(long id, String name, long idUser);
 		
 	}
 
