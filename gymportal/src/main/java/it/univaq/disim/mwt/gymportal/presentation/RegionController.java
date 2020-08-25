@@ -40,7 +40,7 @@ public class RegionController {
 
 		if (auth.toString().contains("gestore")) {
 			User user = userService.findUserByUserName(auth.getName());
-			Long id = user.getId();
+			long id = user.getId();
 			gymList = serviceGym.searchByRegionAndUser(region, id);
 
 		}
@@ -56,7 +56,7 @@ public class RegionController {
 
 		if (search != null && auth.toString().contains("gestore")) {
 			User user = userService.findUserByUserName(auth.getName());
-			Long id = user.getId();
+			long id = user.getId();
 			gymList = serviceGym.searchByRegionAndNameAndUser(region, search, id);
 			model.addAttribute("search", search);
 		}
