@@ -27,7 +27,7 @@ public class ChatBOImpl implements ChatBO {
 	}
 
 	@Override
-	public void deleteChatsByGymId(Long gymId) throws BusinessException {
+	public void deleteChatsByGymId(long gymId) throws BusinessException {
 		chatRepository.deleteChatsByGymId(gymId);
 	}
 
@@ -37,17 +37,17 @@ public class ChatBOImpl implements ChatBO {
 	}
 
 	@Override
-	public List<Chat> findByUserId(Long userId) throws BusinessException {
+	public List<Chat> findByUserId(long userId) throws BusinessException {
 		return chatRepository.findByUserId(userId);
 	}
 
 	@Override
-	public List<Chat> findByGymId(Long gymId) throws BusinessException {
+	public List<Chat> findByGymId(long gymId) throws BusinessException {
 		return chatRepository.findByGymId(gymId);
 	}
 
 	@Override
-	public Chat findByUserIdAndGymId(Long userId, Long gymId) throws BusinessException {
+	public Chat findByUserIdAndGymId(long userId, long gymId) throws BusinessException {
 		return chatRepository.findByUserIdAndGymId(userId, gymId);
 
 	}

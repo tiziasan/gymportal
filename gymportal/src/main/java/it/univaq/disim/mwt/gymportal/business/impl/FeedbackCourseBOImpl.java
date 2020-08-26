@@ -37,24 +37,24 @@ public class FeedbackCourseBOImpl implements FeedbackCourseBO{
 	}
 
 	@Override
-	public List<FeedbackCourse> findAllFeedbackCourse(Long id) throws BusinessException {
+	public List<FeedbackCourse> findAllFeedbackCourse(long id) throws BusinessException {
 		return feedbackCourseRepository.findAllFeedbackCourse(id);
 	}
 
 	@Override
-	public List<FeedbackCourse> findAllFeedbackByCourse(Long id) throws BusinessException {
+	public List<FeedbackCourse> findAllFeedbackByCourse(long id) throws BusinessException {
 		return feedbackCourseRepository.findAllFeedbackByCourse(id);
 
 	}
 	
 	@Override
-	public List<FeedbackCourse> findAllFeedbackByUserId(Long id) throws BusinessException {
+	public List<FeedbackCourse> findAllFeedbackByUserId(long id) throws BusinessException {
 		return feedbackCourseRepository.findAllFeedbackByUserId(id);
 
 	}
 
 	@Override
-	public FeedbackCourse findByID(Long id) throws BusinessException {
+	public FeedbackCourse findByID(long id) throws BusinessException {
 		return feedbackCourseRepository.findByID(id);
 	}
 

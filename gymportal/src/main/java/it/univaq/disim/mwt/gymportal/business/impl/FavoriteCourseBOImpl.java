@@ -38,12 +38,12 @@ public class FavoriteCourseBOImpl implements FavoriteCourseBO{
 	}
 
 	@Override
-	public List<FavoriteCourse> findAllFavoriteCourse(Long id) throws BusinessException {
+	public List<FavoriteCourse> findAllFavoriteCourse(long id) throws BusinessException {
 		return favoriteCourseRepository.findAllFavoriteCourse(id);
 	}
 	
 	@Override
-	public List<FavoriteCourse> findAllFavoriteByUserId(Long id) throws BusinessException {
+	public List<FavoriteCourse> findAllFavoriteByUserId(long id) throws BusinessException {
 		return favoriteCourseRepository.findAllFavoriteByUserId(id);
 
 	}

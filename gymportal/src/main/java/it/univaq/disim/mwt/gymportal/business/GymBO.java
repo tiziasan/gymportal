@@ -16,14 +16,14 @@ public interface GymBO {
 
 	List<Gym> findByRegion(String region) throws BusinessException;
 	
-	Gym findByID(Long id) throws BusinessException;
+	Gym findByID(long id) throws BusinessException;
 	
 	List<Gym> searchByRegionAndName(String region, String name) throws BusinessException;
 	
-	List<Gym> searchByRegionAndUser(String region, Long id) throws BusinessException;
+	List<Gym> searchByRegionAndUser(String region, long id) throws BusinessException;
 
-	List<Gym> searchByRegionAndNameAndUser(String region, String name, Long id) throws BusinessException;
+	List<Gym> searchByRegionAndNameAndUser(String region, String name, long id) throws BusinessException;
 
-	List<Gym> searchByUser(Long id) throws BusinessException;
+	List<Gym> searchByUser(long id) throws BusinessException;
 
 }

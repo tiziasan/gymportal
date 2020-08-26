@@ -15,13 +15,13 @@ public interface CourseBO {
 	
 	List<Course> findCourseByGymId(long id) throws BusinessException;
 	
-	Course findByID(Long id) throws BusinessException;
+	Course findByID(long id) throws BusinessException;
 	
-	void deleteAllCourseByGymId (Long id) throws BusinessException;
+	void deleteAllCourseByGymId (long id) throws BusinessException;
 
-	List<Course> searchByIdAndName(Long id, String name) throws BusinessException;
+	List<Course> searchByIdAndName(long id, String name) throws BusinessException;
 
-	List<Course> searchByIdAndNameAndUser(Long id, String name, Long idUser) throws BusinessException;
+	List<Course> searchByIdAndNameAndUser(long id, String name, long idUser) throws BusinessException;
 
 
 }

@@ -73,7 +73,7 @@ public class FeedbackGymController {
 
 
 	@GetMapping("/delete/{id}")
-    public String deleteStart(@PathVariable Long id, Model model) throws BusinessException {
+    public String deleteStart(@PathVariable long id, Model model) throws BusinessException {
 		return "/feedback/delete";
     }
 	
@@ -89,7 +89,7 @@ public class FeedbackGymController {
 
 
 	@GetMapping("/update/{id}")
-	public String updateStart(@PathVariable Long id, Model model) throws BusinessException {
+	public String updateStart(@PathVariable long id, Model model) throws BusinessException {
 		FeedbackGym feedback = serviceFeedbackGym.findByID(id);
 		model.addAttribute("feedback", feedback);
 		return "/feedback/update";

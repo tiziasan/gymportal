@@ -21,7 +21,7 @@ public class Gym {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private long id;
 	
 	@NotBlank
 	@Size(max=50)

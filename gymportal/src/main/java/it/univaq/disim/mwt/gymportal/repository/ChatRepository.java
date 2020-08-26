@@ -13,11 +13,11 @@ public interface ChatRepository extends CrudRepository <Chat, String>{
 
 	Chat findChatById(String id);
 
-	List<Chat> findByUserId(Long userId);
+	List<Chat> findByUserId(long userId);
 	
-	List<Chat> findByGymId(Long gymId);
+	List<Chat> findByGymId(long gymId);
 
-	Chat findByUserIdAndGymId(Long userId, Long gymId);
+	Chat findByUserIdAndGymId(long userId, long gymId);
 	
-	void deleteChatsByGymId(Long gymId);
+	void deleteChatsByGymId(long gymId);
 }
