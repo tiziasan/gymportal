@@ -17,7 +17,6 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "course")
-
 public class Course {
 	
 	@Id
