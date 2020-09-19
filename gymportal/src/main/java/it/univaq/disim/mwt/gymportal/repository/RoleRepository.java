@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import it.univaq.disim.mwt.gymportal.domain.Role;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Integer> {
+public interface RoleRepository extends JpaRepository<Role, Long> {
     Role findByRole(String role);
 
 }
