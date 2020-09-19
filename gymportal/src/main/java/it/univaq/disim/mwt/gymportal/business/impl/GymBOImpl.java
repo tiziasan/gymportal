@@ -1,7 +1,6 @@
 package it.univaq.disim.mwt.gymportal.business.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,11 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.GymBO;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
-import it.univaq.disim.mwt.gymportal.domain.User;
 import it.univaq.disim.mwt.gymportal.repository.GymRepository;
 
 @Service
-@Transactional
+@Transactional(transactionManager = "transactionManager")
 public class GymBOImpl implements GymBO{
 	
 	@Autowired
