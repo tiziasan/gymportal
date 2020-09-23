@@ -2,6 +2,7 @@ package it.univaq.disim.mwt.gymportal.business.impl;
 
 import java.util.List;
 
+import it.univaq.disim.mwt.gymportal.domain.Gym;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,7 +54,12 @@ public class FeedbackGymBOImpl implements FeedbackGymBO {
 		return feedbackGymRepository.findAllFeedbackByUserId(id);
 
 	}
-	
+
+	@Override
+	public void deleteAllByGym(Gym gym) {
+		feedbackGymRepository.deleteAllByGym(gym);
+	}
+
 	@Override
 	public FeedbackGym findByID(long id) throws BusinessException {
 		return feedbackGymRepository.findByID(id);

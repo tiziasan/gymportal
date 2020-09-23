@@ -2,6 +2,7 @@ package it.univaq.disim.mwt.gymportal.business.impl;
 
 import java.util.List;
 
+import it.univaq.disim.mwt.gymportal.domain.Course;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,6 +52,11 @@ public class FeedbackCourseBOImpl implements FeedbackCourseBO{
 	public List<FeedbackCourse> findAllFeedbackByUserId(long id) throws BusinessException {
 		return feedbackCourseRepository.findAllFeedbackByUserId(id);
 
+	}
+
+	@Override
+	public void deleteAllByCourse(Course course) {
+		feedbackCourseRepository.deleteAllByCourse(course);
 	}
 
 	@Override

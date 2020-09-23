@@ -3,6 +3,7 @@ package it.univaq.disim.mwt.gymportal.presentation;
 import javax.validation.Valid;
 
 import it.univaq.disim.mwt.gymportal.business.*;
+import it.univaq.disim.mwt.gymportal.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,10 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-
-import it.univaq.disim.mwt.gymportal.domain.Gym;
-import it.univaq.disim.mwt.gymportal.domain.User;
-import it.univaq.disim.mwt.gymportal.domain.Chat;
 
 import java.util.List;
 
@@ -24,9 +21,19 @@ public class GymController {
 	
 	@Autowired
 	private GymBO serviceGym;
+
+	@Autowired
+	private FavoriteGymBO serviceFavoriteGym;
+	@Autowired
+	private FeedbackGymBO serviceFeedbackGym;
 	
 	@Autowired
 	private CourseBO serviceCourse;
+
+	@Autowired
+	private FavoriteCourseBO serviceFavoriteCourse;
+	@Autowired
+	private FeedbackCourseBO serviceFeedbackCourse;
 	
 	@Autowired
 	private UserBO userService;
@@ -68,7 +75,15 @@ public class GymController {
 		if (errors.hasErrors()) {
 			return "/common/error";
 		}
+		List<Course> courses = serviceCourse.findCourseByGymId(gym.getId());
+		for (Course c: courses){
+			serviceFavoriteCourse.deleteAllByCourse(c);
+			serviceFeedbackCourse.deleteAllByCourse(c);
+		}
 		serviceCourse.deleteAllCourseByGymId(gym.getId());
+
+		serviceFavoriteGym.deleteAllByGym(gym);
+		serviceFeedbackGym.deleteAllByGym(gym);
 		serviceGym.deleteGym(gym);
 
 		List<Chat> chats = serviceChat.findByGymId(gym.getId());

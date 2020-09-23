@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
+
+import it.univaq.disim.mwt.gymportal.business.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import it.univaq.disim.mwt.gymportal.business.BusinessException;
-import it.univaq.disim.mwt.gymportal.business.CourseBO;
-import it.univaq.disim.mwt.gymportal.business.FeedbackGymBO;
-import it.univaq.disim.mwt.gymportal.business.GymBO;
 import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
@@ -30,6 +28,11 @@ public class CourseController {
 	
 	@Autowired
 	private CourseBO serviceCourse;
+
+	@Autowired
+	private FavoriteCourseBO serviceFavoriteCourse;
+	@Autowired
+	private FeedbackCourseBO serviceFeedbackCourse;
 	
 	@Autowired
 	private GymBO serviceGym;
@@ -94,6 +97,8 @@ public class CourseController {
 		}
 		long id = courseComplete.getGym().getId();
 		String redirect = "redirect:/course/gym?id=" + id;
+		serviceFavoriteCourse.deleteAllByCourse(course);
+		serviceFeedbackCourse.deleteAllByCourse(course);
 		serviceCourse.deleteCourse(course);
 		return redirect;
 	}

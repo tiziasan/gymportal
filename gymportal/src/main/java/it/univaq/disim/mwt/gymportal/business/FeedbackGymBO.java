@@ -2,6 +2,7 @@ package it.univaq.disim.mwt.gymportal.business;
 
 import java.util.List;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
+import it.univaq.disim.mwt.gymportal.domain.Gym;
 
 public interface FeedbackGymBO {
 	
@@ -18,5 +19,8 @@ public interface FeedbackGymBO {
 	List <FeedbackGym> findAllFeedbackByGym (long id) throws BusinessException;
 
 	List <FeedbackGym> findAllFeedbackByUserId (long id) throws BusinessException;
+
+	void deleteAllByGym(Gym gym);
+
 
 }
