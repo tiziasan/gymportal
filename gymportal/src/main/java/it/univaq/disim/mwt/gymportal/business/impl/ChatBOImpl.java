@@ -1,6 +1,5 @@
 package it.univaq.disim.mwt.gymportal.business.impl;
 
-import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.ChatBO;
 import it.univaq.disim.mwt.gymportal.domain.Chat;
 import it.univaq.disim.mwt.gymportal.repository.ChatRepository;
@@ -17,37 +16,37 @@ public class ChatBOImpl implements ChatBO {
     ChatRepository chatRepository;
 
     @Override
-    public Chat saveChat(Chat chat) throws BusinessException {
+    public Chat saveChat(Chat chat)  {
         return chatRepository.save(chat);
     }
 
 	@Override
-	public void saveAllChats(List<Chat> chatList) throws BusinessException {
+	public void saveAllChats(List<Chat> chatList)  {
 		chatRepository.saveAll(chatList);
 	}
 
 	@Override
-	public void deleteChatsByGymId(long gymId) throws BusinessException {
+	public void deleteChatsByGymId(long gymId)  {
 		chatRepository.deleteChatsByGymId(gymId);
 	}
 
 	@Override
-	public Chat findChatById(String id) throws BusinessException {
+	public Chat findChatById(String id)  {
 		return chatRepository.findChatById(id);
 	}
 
 	@Override
-	public List<Chat> findByUserId(long userId) throws BusinessException {
+	public List<Chat> findByUserId(long userId)  {
 		return chatRepository.findByUserId(userId);
 	}
 
 	@Override
-	public List<Chat> findByGymId(long gymId) throws BusinessException {
+	public List<Chat> findByGymId(long gymId)  {
 		return chatRepository.findByGymId(gymId);
 	}
 
 	@Override
-	public Chat findByUserIdAndGymId(long userId, long gymId) throws BusinessException {
+	public Chat findByUserIdAndGymId(long userId, long gymId)  {
 		return chatRepository.findByUserIdAndGymId(userId, gymId);
 
 	}

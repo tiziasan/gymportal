@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.FeedbackGymBO;
-import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
 import it.univaq.disim.mwt.gymportal.repository.FeedbackGymRepository;
 
@@ -21,36 +19,36 @@ public class FeedbackGymBOImpl implements FeedbackGymBO {
 	private FeedbackGymRepository feedbackGymRepository;
 
 	@Override
-	public void createFeedbackGym(FeedbackGym feedbackGym) throws BusinessException {
+	public void createFeedbackGym(FeedbackGym feedbackGym)  {
 		feedbackGymRepository.save(feedbackGym);
 		
 	}
 
 	@Override
-	public void updateFeedbackGym(FeedbackGym feedbackGym) throws BusinessException {
+	public void updateFeedbackGym(FeedbackGym feedbackGym)  {
 		feedbackGymRepository.save(feedbackGym);
 		
 	}
 
 	@Override
-	public void deleteFeedbackGym(FeedbackGym feedbackGym) throws BusinessException {
+	public void deleteFeedbackGym(FeedbackGym feedbackGym)  {
 		feedbackGymRepository.delete(feedbackGym);
 		
 	}
 
 	@Override
-	public List<FeedbackGym> findAllFeedbackGym(long id) throws BusinessException {
+	public List<FeedbackGym> findAllFeedbackGym(long id)  {
 		return feedbackGymRepository.findAllFeedbackGym(id);
 	}
 
 	@Override
-	public List<FeedbackGym> findAllFeedbackByGym(long id) throws BusinessException {
+	public List<FeedbackGym> findAllFeedbackByGym(long id)  {
 		return feedbackGymRepository.findAllFeedbackByGym(id);
 
 	}
 	
 	@Override
-	public List<FeedbackGym> findAllFeedbackByUserId(long id) throws BusinessException {
+	public List<FeedbackGym> findAllFeedbackByUserId(long id)  {
 		return feedbackGymRepository.findAllFeedbackByUserId(id);
 
 	}
@@ -61,7 +59,7 @@ public class FeedbackGymBOImpl implements FeedbackGymBO {
 	}
 
 	@Override
-	public FeedbackGym findByID(long id) throws BusinessException {
+	public FeedbackGym findByID(long id)  {
 		return feedbackGymRepository.findByID(id);
 	}
 	

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.FeedbackGymBO;
 import it.univaq.disim.mwt.gymportal.business.GymBO;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
@@ -39,7 +38,7 @@ public class FeedbackGymController {
 
 
 	@GetMapping("/create/{id}")
-	public String createStart(Model model,@PathVariable long id) throws BusinessException {
+	public String createStart(Model model,@PathVariable long id)  {
 		Gym gym = serviceGym.findByID(id);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUserName(auth.getName());
@@ -55,7 +54,7 @@ public class FeedbackGymController {
 
 	@PostMapping("/create/{id}")
 	public String create(@Valid @ModelAttribute("feedback") FeedbackGym feedback, Errors errors, Model model)
-			throws BusinessException {
+			 {
 		
 		if (errors.hasErrors()) {
 			String message = "Errore nell'inserimento";
@@ -73,12 +72,12 @@ public class FeedbackGymController {
 
 
 	@GetMapping("/delete/{id}")
-    public String deleteStart(@PathVariable long id, Model model) throws BusinessException {
+    public String deleteStart(@PathVariable long id, Model model)  {
 		return "/feedback/delete";
     }
 	
 	@PostMapping("/delete/{id}")
-	public String delete(@ModelAttribute("feedback") FeedbackGym feedback, Errors errors) throws BusinessException {
+	public String delete(@ModelAttribute("feedback") FeedbackGym feedback, Errors errors)  {
 
 		if (errors.hasErrors()) {
 			return "/common/error";
@@ -89,14 +88,14 @@ public class FeedbackGymController {
 
 
 	@GetMapping("/update/{id}")
-	public String updateStart(@PathVariable long id, Model model) throws BusinessException {
+	public String updateStart(@PathVariable long id, Model model)  {
 		FeedbackGym feedback = serviceFeedbackGym.findByID(id);
 		model.addAttribute("feedback", feedback);
 		return "/feedback/update";
 	}
 
 	@PostMapping("/update/{id}")
-	public String update(@Valid @ModelAttribute("feedback") FeedbackGym feedback , Errors errors) throws BusinessException {
+	public String update(@Valid @ModelAttribute("feedback") FeedbackGym feedback , Errors errors)  {
 
 		if (errors.hasErrors()) {
 			return "/common/error";
