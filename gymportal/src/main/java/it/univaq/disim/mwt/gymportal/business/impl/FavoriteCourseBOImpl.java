@@ -6,42 +6,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.FavoriteCourseBO;
 import it.univaq.disim.mwt.gymportal.domain.FavoriteCourse;
+import it.univaq.disim.mwt.gymportal.domain.FavoriteGym;
 import it.univaq.disim.mwt.gymportal.repository.FavoriteCourseRepository;
 
 @Service
-@Transactional(transactionManager = "transactionManager")
+@Transactional
 public class FavoriteCourseBOImpl implements FavoriteCourseBO{
 	
 	@Autowired
 	private FavoriteCourseRepository favoriteCourseRepository;
 
 	@Override
-	public void createFavoriteCourse(FavoriteCourse favoriteCourse)  {
+	public void createFavoriteCourse(FavoriteCourse favoriteCourse) throws BusinessException {
 		favoriteCourseRepository.save(favoriteCourse);
 		
 	}
 
 	@Override
-	public void updateFavoriteCourse(FavoriteCourse favoriteCourse)  {
+	public void updateFavoriteCourse(FavoriteCourse favoriteCourse) throws BusinessException {
 		favoriteCourseRepository.save(favoriteCourse);
 		
 	}
 
 	@Override
-	public void deleteFavoriteCourse(FavoriteCourse favoriteCourse)  {
+	public void deleteFavoriteCourse(FavoriteCourse favoriteCourse) throws BusinessException {
 		favoriteCourseRepository.save(favoriteCourse);
 		
 	}
 
 	@Override
-	public List<FavoriteCourse> findAllFavoriteCourse(long id)  {
+	public List<FavoriteCourse> findAllFavoriteCourse(long id) throws BusinessException {
 		return favoriteCourseRepository.findAllFavoriteCourse(id);
 	}
 	
 	@Override
-	public List<FavoriteCourse> findAllFavoriteByUserId(long id)  {
+	public List<FavoriteCourse> findAllFavoriteByUserId(long id) throws BusinessException {
 		return favoriteCourseRepository.findAllFavoriteByUserId(id);
 
 	}

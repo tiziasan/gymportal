@@ -35,7 +35,7 @@ public class GymController {
 	private ChatBO serviceChat;
 
 	@Autowired
-	private CombinedTransactionalBO serviceCombinedTransactional;
+	private MessageBO serviceMessage;
 	
 	@GetMapping("/create")
     public String createStart(Model model) {
@@ -48,7 +48,7 @@ public class GymController {
     }
 	
 	@PostMapping("/create")
-	public String create(@Valid @ModelAttribute("gym") Gym gym, Errors errors){
+	public String create(@Valid @ModelAttribute("gym") Gym gym, Errors errors) throws BusinessException {
 		if (errors.hasErrors()) {
 			return "/gym/form";
 		}
@@ -57,26 +57,32 @@ public class GymController {
 	}
 	
 	@GetMapping("/delete/{id}")
-    public String deleteStart(@PathVariable long id, Model model){
+    public String deleteStart(@PathVariable long id, Model model) throws BusinessException {
 		Gym gym = serviceGym.findByID(id);
 		model.addAttribute("gym", gym);
 		return "/gym/delete";
     }
 	
 	@PostMapping("/delete/{id}")
-	public String delete(@ModelAttribute("gym") Gym gym, Errors errors){
+	public String delete(@ModelAttribute("gym") Gym gym, Errors errors) throws BusinessException {
 		if (errors.hasErrors()) {
 			return "/common/error";
 		}
 		serviceCourse.deleteAllCourseByGymId(gym.getId());
-		serviceCombinedTransactional.deleteGymAndRelatedChats(gym);
+		serviceGym.deleteGym(gym);
+
+		List<Chat> chats = serviceChat.findByGymId(gym.getId());
+		for ( Chat c: chats ) {
+			serviceMessage.deleteMessagesByChat(c);
+		}
+		serviceChat.deleteChatsByGymId(gym.getId());
 
 		return "redirect:/";
 		
 	}
 	
 	@GetMapping("/update/{id}")
-	public String updateStart(@PathVariable long id, Model model){
+	public String updateStart(@PathVariable long id, Model model) throws BusinessException {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUserName(auth.getName());
 		model.addAttribute("user", user);
@@ -87,7 +93,7 @@ public class GymController {
 	}
 
 	@PostMapping("/update/{id}")
-	public String update(@ModelAttribute("gym") Gym gym, Errors errors){
+	public String update(@ModelAttribute("gym") Gym gym, Errors errors) throws BusinessException {
 		if (errors.hasErrors()) {
 			return "/gym/form";
 		}
