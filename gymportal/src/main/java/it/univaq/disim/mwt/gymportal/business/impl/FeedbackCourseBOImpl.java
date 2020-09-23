@@ -12,7 +12,7 @@ import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
 import it.univaq.disim.mwt.gymportal.repository.FeedbackCourseRepository;
 
 @Service
-@Transactional
+@Transactional(transactionManager = "transactionManager")
 public class FeedbackCourseBOImpl implements FeedbackCourseBO{
 	
 	@Autowired

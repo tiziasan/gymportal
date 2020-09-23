@@ -12,7 +12,7 @@ import it.univaq.disim.mwt.gymportal.domain.FavoriteGym;
 import it.univaq.disim.mwt.gymportal.repository.FavoriteGymRepository;
 
 @Service
-@Transactional
+@Transactional(transactionManager = "transactionManager")
 public class FavoriteGymBOImpl implements FavoriteGymBO{
 	
 	@Autowired

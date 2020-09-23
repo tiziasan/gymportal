@@ -11,7 +11,7 @@ import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.repository.GymRepository;
 
 @Service
-@Transactional
+@Transactional(transactionManager = "transactionManager")
 public class GymBOImpl implements GymBO{
 	
 	@Autowired
