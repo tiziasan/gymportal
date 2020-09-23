@@ -6,15 +6,15 @@ import it.univaq.disim.mwt.gymportal.domain.Chat;
 
 public interface ChatBO {
 
-    Chat saveChat(Chat chat) throws BusinessException;
-    void saveAllChats(List<Chat> chatList) throws BusinessException;
+    Chat saveChat(Chat chat);
+    void saveAllChats(List<Chat> chatList);
 
-    void deleteChatsByGymId(long gymId) throws BusinessException;
+    void deleteChatsByGymId(long gymId);
 
-    Chat findChatById(String id) throws BusinessException;
-    List<Chat> findByUserId(long userId) throws BusinessException;
-    List<Chat> findByGymId(long gymId) throws BusinessException;
-    Chat findByUserIdAndGymId(long userId, long gymId) throws BusinessException;
+    Chat findChatById(String id);
+    List<Chat> findByUserId(long userId);
+    List<Chat> findByGymId(long gymId);
+    Chat findByUserIdAndGymId(long userId, long gymId);
 
 
 }

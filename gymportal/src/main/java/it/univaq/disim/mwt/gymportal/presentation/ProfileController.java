@@ -50,7 +50,7 @@ public class ProfileController {
 	
 	
 	@GetMapping("")
-	public ModelAndView home(Model model) throws BusinessException {
+	public ModelAndView home(Model model) {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUserName(auth.getName());
@@ -71,7 +71,7 @@ public class ProfileController {
 	}
 	
 	@GetMapping("/update")
-	public String updateStart(Model model) throws BusinessException {
+	public String updateStart(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUserName(auth.getName());
 		model.addAttribute("user", user);
@@ -80,7 +80,7 @@ public class ProfileController {
 	}
 
 	@PostMapping("/update")
-	public String update(@Valid @ModelAttribute("user") User user , Errors errors) throws BusinessException {
+	public String update(@Valid @ModelAttribute("user") User user , Errors errors) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 		if (errors.hasErrors()) {

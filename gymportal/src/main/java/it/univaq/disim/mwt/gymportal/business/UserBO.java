@@ -8,9 +8,9 @@ public interface UserBO {
 
 	User findUserByUserName(String userName);
 
-	User saveUser (User user) throws BusinessException;
+	User saveUser (User user);
 
-	User updateUser (User user) throws BusinessException;
+	User updateUser (User user);
 
-	User updateGestore(User user) throws BusinessException;
+	User updateGestore(User user);
 }

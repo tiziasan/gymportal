@@ -18,12 +18,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.CourseBO;
 import it.univaq.disim.mwt.gymportal.business.FeedbackCourseBO;
 import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
-import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
 import it.univaq.disim.mwt.gymportal.domain.User;
 
 @Controller
@@ -42,7 +40,7 @@ public class FeedbackCourseController {
 
 
 	@GetMapping("/{id}")
-	public String listCo(@PathVariable long id, Model model) throws BusinessException {
+	public String listCo(@PathVariable long id, Model model){
 		
 		List<FeedbackCourse> feedbackList = serviceFeedbackCourse.findAllFeedbackByCourse(id);
 		model.addAttribute("feedbackList", feedbackList);
@@ -51,7 +49,7 @@ public class FeedbackCourseController {
 	}
 
 	@GetMapping("/create/{id}")
-	public String createStart(Model model,@PathVariable long id) throws BusinessException {
+	public String createStart(Model model,@PathVariable long id){
 		Course course = serviceCourse.findByID(id);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUserName(auth.getName());
@@ -66,7 +64,7 @@ public class FeedbackCourseController {
 	} 
 
 	@PostMapping("/create/{id}")
-	public String create(@Valid @ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, Errors errors, Model model) throws BusinessException {
+	public String create(@Valid @ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, Errors errors, Model model){
 		
 		if (errors.hasErrors()) {
 			String message = "Errore nell'inserimento";
@@ -84,13 +82,13 @@ public class FeedbackCourseController {
 
 
 	@GetMapping("/delete/{id}")
-    public String deleteStart(@PathVariable long id, Model model) throws BusinessException {
+    public String deleteStart(@PathVariable long id, Model model){
 
 		return "/feedback/delete";
     }
 	
 	@PostMapping("/delete/{id}")
-	public String delete(@ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, Errors errors) throws BusinessException {
+	public String delete(@ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, Errors errors){
 
 		if (errors.hasErrors()) {
 			return "/common/error";
@@ -101,14 +99,14 @@ public class FeedbackCourseController {
 
 
 	@GetMapping("/update/{id}")
-	public String updateStart(@PathVariable long id, Model model) throws BusinessException {
+	public String updateStart(@PathVariable long id, Model model){
 		FeedbackCourse feedback = serviceFeedbackCourse.findByID(id);
 		model.addAttribute("feedbackCourse", feedback);
 		return "/feedbackCourse/update";
 	}
 
 	@PostMapping("/update/{id}")
-	public String update(@Valid @ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse , Errors errors) throws BusinessException {
+	public String update(@Valid @ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse , Errors errors){
 
 		if (errors.hasErrors()) {
 			return "/common/error";

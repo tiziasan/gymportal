@@ -5,19 +5,19 @@ import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
 
 public interface FeedbackCourseBO {
 	
-	void createFeedbackCourse (FeedbackCourse feedbackCourse) throws BusinessException;
+	void createFeedbackCourse (FeedbackCourse feedbackCourse) ;
 	
-	void updateFeedbackCourse (FeedbackCourse feedbackCourse) throws BusinessException;
+	void updateFeedbackCourse (FeedbackCourse feedbackCourse) ;
 	
-	void deleteFeedbackCourse (FeedbackCourse feedbackCourse) throws BusinessException;
+	void deleteFeedbackCourse (FeedbackCourse feedbackCourse) ;
 	
-	FeedbackCourse findByID(long id) throws BusinessException;
+	FeedbackCourse findByID(long id) ;
 	
-	List <FeedbackCourse> findAllFeedbackCourse (long id) throws BusinessException;
+	List <FeedbackCourse> findAllFeedbackCourse (long id) ;
 	
-	List <FeedbackCourse> findAllFeedbackByCourse (long id) throws BusinessException;
+	List <FeedbackCourse> findAllFeedbackByCourse (long id) ;
 	
-	List <FeedbackCourse> findAllFeedbackByUserId (long id) throws BusinessException;
+	List <FeedbackCourse> findAllFeedbackByUserId (long id) ;
 
 
 
