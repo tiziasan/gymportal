@@ -13,8 +13,10 @@ import it.univaq.disim.mwt.gymportal.domain.Role;
 import it.univaq.disim.mwt.gymportal.domain.User;
 import it.univaq.disim.mwt.gymportal.repository.RoleRepository;
 import it.univaq.disim.mwt.gymportal.repository.UserRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional(transactionManager = "transactionManager")
 public class UserBOimpl implements UserBO {
 
     @Autowired
