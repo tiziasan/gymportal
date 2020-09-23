@@ -72,6 +72,7 @@ public class GymController {
 		serviceCombinedTransactional.deleteGymAndRelatedChats(gym);
 
 		return "redirect:/";
+		
 	}
 	
 	@GetMapping("/update/{id}")
