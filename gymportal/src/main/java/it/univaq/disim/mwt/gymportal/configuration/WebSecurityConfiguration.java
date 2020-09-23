@@ -34,8 +34,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.logoutSuccessUrl("/").and().exceptionHandling().accessDeniedPage("/login").and()
 				.authorizeRequests() // Specificare le url che
 				.antMatchers("/", "/static/**", "/favicon.ico","/login").permitAll().antMatchers("/common/**").authenticated()
-				.antMatchers("/gym/**","/course/create","/course/update","/course/delete","/gym/delete","/gym/delete","/gym/delete").hasAuthority("gestore")
-		        .antMatchers("/gym/region","/feedback/**","/feedbackCourse/**").hasAuthority("utente");
+				.antMatchers("/gym/**","/course/create","/course/update","/course/delete","/gym/delete","/gym/delete","/gym/delete","/chat/**").hasAuthority("gestore")
+		        .antMatchers("/gym/region","/feedback/**","/feedbackCourse/**","/chat/**").hasAuthority("utente");
 
 
 	}
