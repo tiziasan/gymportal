@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.FavoriteGymBO;
 import it.univaq.disim.mwt.gymportal.domain.FavoriteGym;
+import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
 import it.univaq.disim.mwt.gymportal.repository.FavoriteGymRepository;
 
 @Service
@@ -18,30 +20,30 @@ public class FavoriteGymBOImpl implements FavoriteGymBO{
 	private FavoriteGymRepository favoriteGymRepository;
 
 	@Override
-	public void createFavoriteGym(FavoriteGym favoriteGym)  {
+	public void createFavoriteGym(FavoriteGym favoriteGym) throws BusinessException {
 		favoriteGymRepository.save(favoriteGym);
 		
 	}
 
 	@Override
-	public void updateFavoriteGym(FavoriteGym favoriteGym)  {
+	public void updateFavoriteGym(FavoriteGym favoriteGym) throws BusinessException {
 		favoriteGymRepository.save(favoriteGym);
 		
 	}
 
 	@Override
-	public void deleteFavoriteGym(FavoriteGym favoriteGym)  {
+	public void deleteFavoriteGym(FavoriteGym favoriteGym) throws BusinessException {
 		favoriteGymRepository.delete(favoriteGym);
 		
 	}
 
 	@Override
-	public List<FavoriteGym> findAllFavoritegym(long id)  {
+	public List<FavoriteGym> findAllFavoritegym(long id) throws BusinessException {
 		return favoriteGymRepository.findAllFavoriteGym(id);
 	}
 	
 	@Override
-	public List<FavoriteGym> findAllFavoriteByUserId(long id)  {
+	public List<FavoriteGym> findAllFavoriteByUserId(long id) throws BusinessException {
 		return favoriteGymRepository.findAllFavoriteByUserId(id);
 
 	}

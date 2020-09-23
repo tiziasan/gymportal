@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.GymBO;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.repository.GymRepository;
@@ -18,52 +19,52 @@ public class GymBOImpl implements GymBO{
 	private GymRepository gymRepository;
 
 	@Override
-	public void deleteGym(Gym gym) {
+	public void deleteGym(Gym gym) throws BusinessException {
 		gymRepository.delete(gym);
 	}
 
 	@Override
-	public void createGym(Gym gym) {
+	public void createGym(Gym gym) throws BusinessException {
 		gymRepository.save(gym);
 	}
 
 	@Override
-	public void updateGym(Gym gym) {
+	public void updateGym(Gym gym) throws BusinessException {
 		gymRepository.save(gym);
 	}
 
 	@Override
-	public List<Gym> findAllGym() {
+	public List<Gym> findAllGym() throws BusinessException {
 		return (List<Gym>) gymRepository.findAll();
 	}
 
 	@Override
-	public List<Gym> findByRegion(String region) {
+	public List<Gym> findByRegion(String region) throws BusinessException {
 		return gymRepository.findByRegionName(region);
 	}
 
 	@Override
-	public Gym findByID(long id) {
+	public Gym findByID(long id) throws BusinessException {
 		return gymRepository.findByID(id);
 	}
 
 	@Override
-	public List<Gym> searchByRegionAndName(String region, String name) {
+	public List<Gym> searchByRegionAndName(String region, String name) throws BusinessException {
 		return gymRepository.searchByRegionAndName(region, name);
 	}
 	
 	@Override
-	public List<Gym> searchByRegionAndUser(String region, long id) {
+	public List<Gym> searchByRegionAndUser(String region, long id) throws BusinessException {
 		return gymRepository.searchByRegionAndUser(region, id);
 	}
 	
 	@Override
-	public List<Gym> searchByRegionAndNameAndUser(String region, String name, long id) {
+	public List<Gym> searchByRegionAndNameAndUser(String region, String name, long id) throws BusinessException {
 		return gymRepository.searchByRegionAndNameAndUser(region, name, id);
 	}
 	
 	@Override
-	public List<Gym> searchByUser(long id) {
+	public List<Gym> searchByUser(long id) throws BusinessException {
 		return gymRepository.searchByUser(id);
 	}
 

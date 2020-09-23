@@ -42,7 +42,7 @@ public class ChatController {
     private UserBO userService;
 
     @GetMapping(value = {"", "/{idChat}", "?idGym={idGym}"})
-    public String createStart(@PathVariable(required = false) String idChat, @RequestParam(required = false) Long idGym, Model model){
+    public String createStart(@PathVariable(required = false) String idChat, @RequestParam(required = false) Long idGym, Model model) throws BusinessException {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
@@ -88,7 +88,7 @@ public class ChatController {
     }
 
     @PostMapping(value = {"", "/{idChat}", "?idGym={idGym}"})
-    public String create(@PathVariable(required = false) String idChat, @RequestParam(required = false) Long idGym, @Valid Message message, Errors errors){
+    public String create(@PathVariable(required = false) String idChat, @RequestParam(required = false) Long idGym, @Valid Message message, Errors errors) throws BusinessException {
         if (errors.hasErrors()) {
             return "/chat/index";
         }

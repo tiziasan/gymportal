@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.FeedbackCourseBO;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
 import it.univaq.disim.mwt.gymportal.repository.FeedbackCourseRepository;
@@ -18,42 +19,42 @@ public class FeedbackCourseBOImpl implements FeedbackCourseBO{
 	private FeedbackCourseRepository feedbackCourseRepository;
 
 	@Override
-	public void createFeedbackCourse(FeedbackCourse feedbackCourse)  {
+	public void createFeedbackCourse(FeedbackCourse feedbackCourse) throws BusinessException {
 		feedbackCourseRepository.save(feedbackCourse);
 		
 	}
 
 	@Override
-	public void updateFeedbackCourse(FeedbackCourse feedbackCourse)  {
+	public void updateFeedbackCourse(FeedbackCourse feedbackCourse) throws BusinessException {
 		feedbackCourseRepository.save(feedbackCourse);
 		
 	}
 
 	@Override
-	public void deleteFeedbackCourse(FeedbackCourse feedbackCourse)  {
+	public void deleteFeedbackCourse(FeedbackCourse feedbackCourse) throws BusinessException {
 		feedbackCourseRepository.delete(feedbackCourse);
 		
 	}
 
 	@Override
-	public List<FeedbackCourse> findAllFeedbackCourse(long id)  {
+	public List<FeedbackCourse> findAllFeedbackCourse(long id) throws BusinessException {
 		return feedbackCourseRepository.findAllFeedbackCourse(id);
 	}
 
 	@Override
-	public List<FeedbackCourse> findAllFeedbackByCourse(long id)  {
+	public List<FeedbackCourse> findAllFeedbackByCourse(long id) throws BusinessException {
 		return feedbackCourseRepository.findAllFeedbackByCourse(id);
 
 	}
 	
 	@Override
-	public List<FeedbackCourse> findAllFeedbackByUserId(long id)  {
+	public List<FeedbackCourse> findAllFeedbackByUserId(long id) throws BusinessException {
 		return feedbackCourseRepository.findAllFeedbackByUserId(id);
 
 	}
 
 	@Override
-	public FeedbackCourse findByID(long id)  {
+	public FeedbackCourse findByID(long id) throws BusinessException {
 		return feedbackCourseRepository.findByID(id);
 	}
 

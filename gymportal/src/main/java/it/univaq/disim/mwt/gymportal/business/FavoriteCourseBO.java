@@ -6,14 +6,14 @@ import it.univaq.disim.mwt.gymportal.domain.FavoriteGym;
 
 public interface FavoriteCourseBO {
 	
-	void createFavoriteCourse (FavoriteCourse favoriteCourse) ;
+	void createFavoriteCourse (FavoriteCourse favoriteCourse) throws BusinessException;
 	
-	void updateFavoriteCourse (FavoriteCourse favoriteCourse) ;
+	void updateFavoriteCourse (FavoriteCourse favoriteCourse) throws BusinessException;
 	
-	void deleteFavoriteCourse (FavoriteCourse favoriteCourse) ;
+	void deleteFavoriteCourse (FavoriteCourse favoriteCourse) throws BusinessException;
 	
-	List <FavoriteCourse> findAllFavoriteCourse (long id) ;
+	List <FavoriteCourse> findAllFavoriteCourse (long id) throws BusinessException;
 	
-	List <FavoriteCourse> findAllFavoriteByUserId (long id) ;
+	List <FavoriteCourse> findAllFavoriteByUserId (long id) throws BusinessException;
 
 }

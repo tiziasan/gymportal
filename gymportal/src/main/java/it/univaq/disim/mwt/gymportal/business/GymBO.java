@@ -6,24 +6,24 @@ import it.univaq.disim.mwt.gymportal.domain.User;
 
 public interface GymBO {
 
-	void deleteGym (Gym gym) ;
+	void deleteGym (Gym gym) throws BusinessException;
 
-	void createGym (Gym gym) ;
+	void createGym (Gym gym) throws BusinessException;
 	
-	void updateGym (Gym gym) ;
+	void updateGym (Gym gym) throws BusinessException;
 	
-	List<Gym> findAllGym() ;
+	List<Gym> findAllGym() throws BusinessException;
 
-	List<Gym> findByRegion(String region) ;
+	List<Gym> findByRegion(String region) throws BusinessException;
 	
-	Gym findByID(long id) ;
+	Gym findByID(long id) throws BusinessException;
 	
-	List<Gym> searchByRegionAndName(String region, String name) ;
+	List<Gym> searchByRegionAndName(String region, String name) throws BusinessException;
 	
-	List<Gym> searchByRegionAndUser(String region, long id) ;
+	List<Gym> searchByRegionAndUser(String region, long id) throws BusinessException;
 
-	List<Gym> searchByRegionAndNameAndUser(String region, String name, long id) ;
+	List<Gym> searchByRegionAndNameAndUser(String region, String name, long id) throws BusinessException;
 
-	List<Gym> searchByUser(long id) ;
+	List<Gym> searchByUser(long id) throws BusinessException;
 
 }

@@ -1,5 +1,6 @@
 package it.univaq.disim.mwt.gymportal.business.impl;
 
+import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.CombinedTransactionalBO;
 import it.univaq.disim.mwt.gymportal.domain.Chat;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
@@ -27,7 +28,7 @@ public class CombinedTransactionalBOImpl implements CombinedTransactionalBO {
 
 
     @Override
-    public void deleteGymAndRelatedChats(Gym gym) {
+    public void deleteGymAndRelatedChats(Gym gym) throws BusinessException {
         List<Chat> chats = chatRepository.findByGymId(gym.getId());
         for ( Chat c: chats ) {
             messageRepository.deleteMessagesByChat(c);
