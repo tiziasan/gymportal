@@ -3,6 +3,7 @@ package it.univaq.disim.mwt.gymportal.presentation;
 import javax.validation.Valid;
 
 import it.univaq.disim.mwt.gymportal.business.*;
+import it.univaq.disim.mwt.gymportal.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,10 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-
-import it.univaq.disim.mwt.gymportal.domain.Gym;
-import it.univaq.disim.mwt.gymportal.domain.User;
-import it.univaq.disim.mwt.gymportal.domain.Chat;
 
 import java.util.List;
 
@@ -24,9 +21,19 @@ public class GymController {
 	
 	@Autowired
 	private GymBO serviceGym;
+
+	@Autowired
+	private FavoriteGymBO serviceFavoriteGym;
+	@Autowired
+	private FeedbackGymBO serviceFeedbackGym;
 	
 	@Autowired
 	private CourseBO serviceCourse;
+
+	@Autowired
+	private FavoriteCourseBO serviceFavoriteCourse;
+	@Autowired
+	private FeedbackCourseBO serviceFeedbackCourse;
 	
 	@Autowired
 	private UserBO userService;
@@ -48,7 +55,7 @@ public class GymController {
     }
 	
 	@PostMapping("/create")
-	public String create(@Valid @ModelAttribute("gym") Gym gym, Errors errors) throws BusinessException {
+	public String create(@Valid @ModelAttribute("gym") Gym gym, Errors errors)  {
 		if (errors.hasErrors()) {
 			return "/gym/form";
 		}
@@ -57,18 +64,26 @@ public class GymController {
 	}
 	
 	@GetMapping("/delete/{id}")
-    public String deleteStart(@PathVariable long id, Model model) throws BusinessException {
+    public String deleteStart(@PathVariable long id, Model model)  {
 		Gym gym = serviceGym.findByID(id);
 		model.addAttribute("gym", gym);
 		return "/gym/delete";
     }
 	
 	@PostMapping("/delete/{id}")
-	public String delete(@ModelAttribute("gym") Gym gym, Errors errors) throws BusinessException {
+	public String delete(@ModelAttribute("gym") Gym gym, Errors errors)  {
 		if (errors.hasErrors()) {
 			return "/common/error";
 		}
+		List<Course> courses = serviceCourse.findCourseByGymId(gym.getId());
+		for (Course c: courses){
+			serviceFavoriteCourse.deleteAllByCourse(c);
+			serviceFeedbackCourse.deleteAllByCourse(c);
+		}
 		serviceCourse.deleteAllCourseByGymId(gym.getId());
+
+		serviceFavoriteGym.deleteAllByGym(gym);
+		serviceFeedbackGym.deleteAllByGym(gym);
 		serviceGym.deleteGym(gym);
 
 		List<Chat> chats = serviceChat.findByGymId(gym.getId());
@@ -82,7 +97,7 @@ public class GymController {
 	}
 	
 	@GetMapping("/update/{id}")
-	public String updateStart(@PathVariable long id, Model model) throws BusinessException {
+	public String updateStart(@PathVariable long id, Model model)  {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUserName(auth.getName());
 		model.addAttribute("user", user);
@@ -93,7 +108,7 @@ public class GymController {
 	}
 
 	@PostMapping("/update/{id}")
-	public String update(@ModelAttribute("gym") Gym gym, Errors errors) throws BusinessException {
+	public String update(@ModelAttribute("gym") Gym gym, Errors errors)  {
 		if (errors.hasErrors()) {
 			return "/gym/form";
 		}

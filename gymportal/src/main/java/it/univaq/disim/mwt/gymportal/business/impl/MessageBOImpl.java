@@ -1,6 +1,5 @@
 package it.univaq.disim.mwt.gymportal.business.impl;
 
-import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.MessageBO;
 import it.univaq.disim.mwt.gymportal.domain.Chat;
 import it.univaq.disim.mwt.gymportal.domain.Message;
@@ -18,17 +17,17 @@ public class MessageBOImpl implements MessageBO {
     MessageRepository messageRepository;
 
     @Override
-    public Message createMessage(Message msg) throws BusinessException {
+    public Message createMessage(Message msg)  {
         return messageRepository.save(msg);
     }
 
 	@Override
-	public List<Message> findByChat(Chat chat) throws BusinessException {
+	public List<Message> findByChat(Chat chat)  {
 		return messageRepository.findByChat(chat);
 	}
 
     @Override
-    public void deleteMessagesByChat(Chat chat) throws BusinessException {
+    public void deleteMessagesByChat(Chat chat)  {
         messageRepository.deleteMessagesByChat(chat);
     }
 }
