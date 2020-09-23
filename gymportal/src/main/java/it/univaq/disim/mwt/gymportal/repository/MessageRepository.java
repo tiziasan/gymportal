@@ -5,11 +5,11 @@ import it.univaq.disim.mwt.gymportal.domain.Message;
 
 import java.util.List;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MessageRepository extends MongoRepository<Message, String> {
+public interface MessageRepository extends CrudRepository<Message, String> {
 	
 	List<Message> findByChat(Chat chat);
 

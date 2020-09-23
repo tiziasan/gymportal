@@ -12,7 +12,7 @@ import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.repository.CourseRepository;
 
 @Service
-@Transactional(transactionManager = "transactionManager")
+@Transactional
 public class CourseBOImpl implements CourseBO {
 	
 	@Autowired

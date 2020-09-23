@@ -35,7 +35,7 @@ public class GymController {
 	private ChatBO serviceChat;
 
 	@Autowired
-	private CombinedTransactionalBO serviceTransactional;
+	private MessageBO serviceMessage;
 	
 	@GetMapping("/create")
     public String createStart(Model model) {
@@ -69,11 +69,13 @@ public class GymController {
 			return "/common/error";
 		}
 		serviceCourse.deleteAllCourseByGymId(gym.getId());
-		serviceTransactional.deleteGymAndRelatedChats(gym);
+		serviceGym.deleteGym(gym);
 
-		if (true) {
-			throw new RuntimeException("Something happened");
+		List<Chat> chats = serviceChat.findByGymId(gym.getId());
+		for ( Chat c: chats ) {
+			serviceMessage.deleteMessagesByChat(c);
 		}
+		serviceChat.deleteChatsByGymId(gym.getId());
 
 		return "redirect:/";
 	}

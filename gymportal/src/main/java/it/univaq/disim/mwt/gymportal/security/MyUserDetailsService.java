@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.transaction.Transactional;
 
 import it.univaq.disim.mwt.gymportal.business.UserBO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +18,15 @@ import org.springframework.stereotype.Service;
 
 import it.univaq.disim.mwt.gymportal.domain.Role;
 import it.univaq.disim.mwt.gymportal.domain.User;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional(transactionManager = "transactionManager")
 public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserBO userService;
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String userName) {
         User user = userService.findUserByUserName(userName);
         List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
