@@ -1,6 +1,7 @@
 package it.univaq.disim.mwt.gymportal.business.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,12 +40,12 @@ public class FavoriteGymBOImpl implements FavoriteGymBO{
 	}
 
 	@Override
-	public List<FavoriteGym> findAllFavoritegym(long id) throws BusinessException {
+	public Set<FavoriteGym> findAllFavoritegym(long id) throws BusinessException {
 		return favoriteGymRepository.findAllFavoriteGym(id);
 	}
 	
 	@Override
-	public List<FavoriteGym> findAllFavoriteByUserId(long id) throws BusinessException {
+	public Set<FavoriteGym> findAllFavoriteByUserId(long id) throws BusinessException {
 		return favoriteGymRepository.findAllFavoriteByUserId(id);
 
 	}

@@ -1,6 +1,7 @@
 package it.univaq.disim.mwt.gymportal.presentation;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -54,10 +55,10 @@ public class ProfileController {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUserName(auth.getName());
-		List<FeedbackCourse> feedbackCourseList = serviceFeedbackCourse.findAllFeedbackByUserId(user.getId());
-		List<FeedbackGym> feedbackGymList = serviceFeedbackGym.findAllFeedbackByUserId(user.getId());
-		List<FavoriteGym> favoriteGymList = serviceFavoriteGym.findAllFavoriteByUserId(user.getId());
-		List<FavoriteCourse> favoriteCourseList = serviceFavoriteCourse.findAllFavoriteByUserId(user.getId());
+		Set<FeedbackCourse> feedbackCourseList = serviceFeedbackCourse.findAllFeedbackByUserId(user.getId());
+		Set<FeedbackGym> feedbackGymList = serviceFeedbackGym.findAllFeedbackByUserId(user.getId());
+		Set<FavoriteGym> favoriteGymList = serviceFavoriteGym.findAllFavoriteByUserId(user.getId());
+		Set<FavoriteCourse> favoriteCourseList = serviceFavoriteCourse.findAllFavoriteByUserId(user.getId());
 
 		model.addAttribute("user",user);
 		model.addAttribute("adminMessage", "Content Available Only for Users with Admin Role");

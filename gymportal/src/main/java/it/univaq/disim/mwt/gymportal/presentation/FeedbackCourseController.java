@@ -2,6 +2,7 @@
 package it.univaq.disim.mwt.gymportal.presentation;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -43,8 +44,8 @@ public class FeedbackCourseController {
 
 	@GetMapping("/{id}")
 	public String listCo(@PathVariable long id, Model model) throws BusinessException {
-		
-		List<FeedbackCourse> feedbackList = serviceFeedbackCourse.findAllFeedbackByCourse(id);
+
+		Set<FeedbackCourse> feedbackList = serviceFeedbackCourse.findAllFeedbackByCourse(id);
 		model.addAttribute("feedbackList", feedbackList);
 		return "/feedback/list";
 

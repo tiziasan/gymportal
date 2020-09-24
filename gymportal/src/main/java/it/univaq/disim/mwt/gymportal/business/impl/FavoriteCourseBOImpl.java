@@ -1,6 +1,7 @@
 package it.univaq.disim.mwt.gymportal.business.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
@@ -40,12 +41,12 @@ public class FavoriteCourseBOImpl implements FavoriteCourseBO{
 	}
 
 	@Override
-	public List<FavoriteCourse> findAllFavoriteCourse(long id) throws BusinessException {
+	public Set<FavoriteCourse> findAllFavoriteCourse(long id) throws BusinessException {
 		return favoriteCourseRepository.findAllFavoriteCourse(id);
 	}
 	
 	@Override
-	public List<FavoriteCourse> findAllFavoriteByUserId(long id) throws BusinessException {
+	public Set<FavoriteCourse> findAllFavoriteByUserId(long id) throws BusinessException {
 		return favoriteCourseRepository.findAllFavoriteByUserId(id);
 	}
 

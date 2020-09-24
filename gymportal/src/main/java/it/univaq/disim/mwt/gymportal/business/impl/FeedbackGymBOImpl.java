@@ -1,6 +1,6 @@
 package it.univaq.disim.mwt.gymportal.business.impl;
 
-import java.util.List;
+import java.util.Set;
 
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,18 +39,18 @@ public class FeedbackGymBOImpl implements FeedbackGymBO {
 	}
 
 	@Override
-	public List<FeedbackGym> findAllFeedbackGym(long id) throws BusinessException {
+	public Set<FeedbackGym> findAllFeedbackGym(long id) throws BusinessException {
 		return feedbackGymRepository.findAllFeedbackGym(id);
 	}
 
 	@Override
-	public List<FeedbackGym> findAllFeedbackByGym(long id) throws BusinessException {
+	public Set<FeedbackGym> findAllFeedbackByGym(long id) throws BusinessException {
 		return feedbackGymRepository.findAllFeedbackByGym(id);
 
 	}
 	
 	@Override
-	public List<FeedbackGym> findAllFeedbackByUserId(long id) throws BusinessException {
+	public Set<FeedbackGym> findAllFeedbackByUserId(long id) throws BusinessException {
 		return feedbackGymRepository.findAllFeedbackByUserId(id);
 
 	}

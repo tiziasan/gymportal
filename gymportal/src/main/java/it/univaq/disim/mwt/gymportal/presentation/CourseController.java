@@ -2,6 +2,7 @@ package it.univaq.disim.mwt.gymportal.presentation;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -72,7 +73,7 @@ public class CourseController {
 		}else {
 			courseList=serviceCourse.findCourseByGymId(id);
 		}
-		List<FeedbackGym> feedbackList = serviseFeedbackGym.findAllFeedbackByGym(id);
+		Set<FeedbackGym> feedbackList = serviseFeedbackGym.findAllFeedbackByGym(id);
 		Gym gym = serviceGym.findByID(id);
         model.addAttribute("courseList", courseList);
         model.addAttribute("feedbackList", feedbackList);
