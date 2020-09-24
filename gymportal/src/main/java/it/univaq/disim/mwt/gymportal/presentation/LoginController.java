@@ -2,6 +2,7 @@ package it.univaq.disim.mwt.gymportal.presentation;
 
 import javax.validation.Valid;
 
+import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.UserBO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,7 +50,7 @@ public class LoginController {
 	}
 
 	@PostMapping(value = "/registration")
-	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult)  {
+	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) throws BusinessException {
 		ModelAndView modelAndView = new ModelAndView();
 		User userExists = userService.findUserByUserName(user.getUserName());
 		if (userExists != null) {

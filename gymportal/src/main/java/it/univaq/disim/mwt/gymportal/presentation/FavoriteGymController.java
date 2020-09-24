@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.FavoriteGymBO;
 import it.univaq.disim.mwt.gymportal.business.GymBO;
 import it.univaq.disim.mwt.gymportal.domain.FavoriteGym;
@@ -39,7 +40,7 @@ public class FavoriteGymController {
 
 
 	@GetMapping("/create/{id}")
-	public String createStart(@PathVariable long id, Model model)  {
+	public String createStart(@PathVariable long id, Model model) throws BusinessException {
 		Gym gym = serviceGym.findByID(id);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByUserName(auth.getName());
@@ -55,7 +56,7 @@ public class FavoriteGymController {
 
 	@PostMapping("/create/{id}")
 	public String create(@Valid @ModelAttribute("favoriteGym") FavoriteGym favoriteGym, Errors errors, Model model)
-			 {
+			throws BusinessException {
 		
 		if (errors.hasErrors()) {
 			String message = "Errore nell'inserimento";
@@ -71,12 +72,12 @@ public class FavoriteGymController {
 	}
 	
 	@GetMapping("/delete/{id}")
-    public String deleteStart(@PathVariable long id, Model model)  {
+    public String deleteStart(@PathVariable long id, Model model) throws BusinessException {
 		return "/favoriteGym/delete";
     }
 	
 	@PostMapping("/delete/{id}")
-	public String delete(@ModelAttribute("favoriteGym") FavoriteGym favoriteGym, Errors errors)  {
+	public String delete(@ModelAttribute("favoriteGym") FavoriteGym favoriteGym, Errors errors) throws BusinessException {
 
 		if (errors.hasErrors()) {
 			return "/common/error";

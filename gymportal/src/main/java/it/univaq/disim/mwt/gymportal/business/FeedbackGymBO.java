@@ -6,19 +6,19 @@ import it.univaq.disim.mwt.gymportal.domain.Gym;
 
 public interface FeedbackGymBO {
 	
-	void createFeedbackGym (FeedbackGym feedbackGym);
+	void createFeedbackGym (FeedbackGym feedbackGym) throws BusinessException;
 	
-	void updateFeedbackGym (FeedbackGym feedbackGym);
+	void updateFeedbackGym (FeedbackGym feedbackGym) throws BusinessException;
 	
-	void deleteFeedbackGym (FeedbackGym feedbackGym);
+	void deleteFeedbackGym (FeedbackGym feedbackGym) throws BusinessException;
 	
-	FeedbackGym findByID(long id);
+	FeedbackGym findByID(long id) throws BusinessException;
 	
-	List <FeedbackGym> findAllFeedbackGym (long id);
+	List <FeedbackGym> findAllFeedbackGym (long id) throws BusinessException;
 	
-	List <FeedbackGym> findAllFeedbackByGym (long id);
+	List <FeedbackGym> findAllFeedbackByGym (long id) throws BusinessException;
 
-	List <FeedbackGym> findAllFeedbackByUserId (long id);
+	List <FeedbackGym> findAllFeedbackByUserId (long id) throws BusinessException;
 
 	void deleteAllByGym(Gym gym);
 
