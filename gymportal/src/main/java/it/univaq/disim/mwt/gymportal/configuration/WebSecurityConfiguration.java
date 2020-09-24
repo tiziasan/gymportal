@@ -1,5 +1,6 @@
 package it.univaq.disim.mwt.gymportal.configuration;
 
+import it.univaq.disim.mwt.gymportal.domain.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -34,8 +35,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.logoutSuccessUrl("/").and().exceptionHandling().accessDeniedPage("/login").and()
 				.authorizeRequests() // Specificare le url che
 				.antMatchers("/", "/static/**", "/favicon.ico","/login","/chat/**").permitAll().antMatchers("/common/**").authenticated()
-				.antMatchers("/gym/**","/course/create","/course/update","/course/delete","/gym/delete","/gym/delete","/gym/delete").hasAuthority("gestore")
-		        .antMatchers("/gym/region","/feedback/**","/feedbackCourse/**").hasAuthority("utente");
+				.antMatchers("/gym/**","/course/create","/course/update","/course/delete","/gym/delete","/gym/delete","/gym/delete").hasAuthority(Role.GESTORE.name())
+		        .antMatchers("/gym/region","/feedback/**","/feedbackCourse/**").hasAuthority(Role.UTENTE.name());
 
 
 	}

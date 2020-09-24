@@ -23,11 +23,11 @@
 						<h4 th:text="${course.code}"></h4>
 						<p th:text="${course.description}"></p>
 
-						<a th:href="@{/favoriteCourse/create/{courseId}(courseId=${course.id})}" sec:authorize="hasAuthority('utente')"><button class="btn-primary" th:text="#{favorite.add}">Aggiungi ai preferiti!</button></a>
-						<a th:href="@{/feedbackCourse/create/{courseId}(courseId=${course.id})}" sec:authorize="hasAuthority('utente')"><button class="btn-primary" th:text="#{feedback.course.add}">Recensisci Corso</button></a>
+						<a th:href="@{/favoriteCourse/create/{courseId}(courseId=${course.id})}" sec:authorize="hasAuthority('UTENTE')"><button class="btn-primary" th:text="#{favorite.add}">Aggiungi ai preferiti!</button></a>
+						<a th:href="@{/feedbackCourse/create/{courseId}(courseId=${course.id})}" sec:authorize="hasAuthority('UTENTE')"><button class="btn-primary" th:text="#{feedback.course.add}">Recensisci Corso</button></a>
 						<a th:href="@{/feedbackCourse/{courseId}(courseId=${course.id})}"><button class="btn-primary" th:text="#{course.feedbacks.show}">Vedi le recensioni del corso</button></a>
-						<a th:href="@{/course/update/{courseId}(courseId=${course.id})}" sec:authorize="hasAuthority('gestore')"><button class="btn-primary" th:text="#{common.edit}">Modifica</button></a>
-						<a th:href="@{/course/delete/{courseId}(courseId=${course.id})}" sec:authorize="hasAuthority('gestore')"><button class="btn-primary" th:text="#{common.delete}">Elimina</button></a>
+						<a th:href="@{/course/update/{courseId}(courseId=${course.id})}" sec:authorize="hasAuthority('GESTORE')"><button class="btn-primary" th:text="#{common.edit}">Modifica</button></a>
+						<a th:href="@{/course/delete/{courseId}(courseId=${course.id})}" sec:authorize="hasAuthority('GESTORE')"><button class="btn-primary" th:text="#{common.delete}">Elimina</button></a>
 					</div>
 				</div>
 			</div>

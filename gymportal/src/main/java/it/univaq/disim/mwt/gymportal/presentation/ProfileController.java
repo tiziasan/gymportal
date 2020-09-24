@@ -6,8 +6,10 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import it.univaq.disim.mwt.gymportal.business.*;
+import it.univaq.disim.mwt.gymportal.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,13 +19,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import it.univaq.disim.mwt.gymportal.domain.FavoriteCourse;
-import it.univaq.disim.mwt.gymportal.domain.FavoriteGym;
-import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
-import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
-import it.univaq.disim.mwt.gymportal.domain.User;
-import it.univaq.disim.mwt.gymportal.domain.Chat;
 
 
 @RequestMapping("/profile")
@@ -88,10 +83,10 @@ public class ProfileController {
 			return "/common/error";
 		}
 
-		if(auth.toString().contains("utente")) {
+		if(auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.UTENTE.name()))) {
 			userService.updateUser(user);
 		}
-		if(auth.toString().contains("gestore")) {
+		if(auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.GESTORE.name()))) {
 			userService.updateGestore(user);
 		}
 
