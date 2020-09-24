@@ -29,17 +29,14 @@ public class MyUserDetailsService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String userName) {
         User user = userService.findUserByUserName(userName);
-        Set<Role> roles = new HashSet<>();
-        roles.add(user.getRole());
-        List<GrantedAuthority> authorities = getUserAuthority(roles);
+        List<GrantedAuthority> authorities = getUserAuthority(user.getRole());
         return buildUserForAuthentication(user, authorities);
     }
 
-    private List<GrantedAuthority> getUserAuthority(Set<Role> userRoles) {
+    private List<GrantedAuthority> getUserAuthority(Role role) {
         Set<GrantedAuthority> roles = new HashSet<>();
-        for (Role role : userRoles) {
-            roles.add(new SimpleGrantedAuthority(role.name()));
-        }
+        roles.add(new SimpleGrantedAuthority(role.name()));
+
         return new ArrayList<>(roles);
     }
 

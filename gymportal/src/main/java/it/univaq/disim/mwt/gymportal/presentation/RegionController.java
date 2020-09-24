@@ -5,8 +5,10 @@ import java.util.List;
 import javax.websocket.server.PathParam;
 
 import it.univaq.disim.mwt.gymportal.business.UserBO;
+import it.univaq.disim.mwt.gymportal.domain.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,23 +40,25 @@ public class RegionController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		List<Gym> gymList = null;
 
-		if (auth.toString().contains("gestore")) {
+		if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.GESTORE.name()))) {
 			User user = userService.findUserByUserName(auth.getName());
 			long id = user.getId();
 			gymList = serviceGym.searchByRegionAndUser(region, id);
 
 		}
 
-		if (auth.toString().contains("ROLE_ANONYMOUS") || auth.toString().contains("utente")) {
+		if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ANONYMOUS")) ||
+				auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.UTENTE.name()))) {
 			gymList = serviceGym.findByRegion(region);
 		}
 
-		if (search != null && (auth.toString().contains("utente") || auth.toString().contains("ROLE_ANONYMOUS") )) {
+		if (search != null && (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.UTENTE.name()))) ||
+				auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ANONYMOUS"))) {
 			gymList = serviceGym.searchByRegionAndName(region, search);
 			model.addAttribute("search", search);
 		}
 
-		if (search != null && auth.toString().contains("gestore")) {
+		if (search != null && auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.GESTORE.name()))) {
 			User user = userService.findUserByUserName(auth.getName());
 			long id = user.getId();
 			gymList = serviceGym.searchByRegionAndNameAndUser(region, search, id);
