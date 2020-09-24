@@ -52,8 +52,9 @@ public class RegionController {
 			gymList = serviceGym.findByRegion(region);
 		}
 
-		if (search != null && (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.UTENTE.name()))) ||
-				auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ANONYMOUS"))) {
+		if (search != null &&
+				( auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.UTENTE.name())) ||
+				auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ANONYMOUS"))) ) {
 			gymList = serviceGym.searchByRegionAndName(region, search);
 			model.addAttribute("search", search);
 		}
