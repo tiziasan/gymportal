@@ -20,13 +20,13 @@ import it.univaq.disim.mwt.gymportal.domain.User;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional(transactionManager = "transactionManager")
 public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserBO userService;
 
     @Override
+    @Transactional(transactionManager = "transactionManager")
     public UserDetails loadUserByUsername(String userName) {
         User user = userService.findUserByUserName(userName);
         List<GrantedAuthority> authorities = getUserAuthority(user.getRoles());
