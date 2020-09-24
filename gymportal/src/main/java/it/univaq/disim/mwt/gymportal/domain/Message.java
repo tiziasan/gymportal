@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @Data
-@Document(collection = "message")
+@Document(collection = "messages")
 public class Message {
 
     @Id
