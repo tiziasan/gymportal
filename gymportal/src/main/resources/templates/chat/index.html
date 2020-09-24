@@ -59,8 +59,8 @@
 			<div class="box box-warning direct-chat direct-chat-warning">
 				<div class="box-header with-border">
 					<h3 class="box-title" th:if="${chat == null}" th:text="#{chat.select}" >Title</h3>
-					<h3 class="box-title" th:if="${chat != null}" th:text="${chat.gymName + ' - ' + chat.userName}" sec:authorize="hasAuthority('gestore')" >Title</h3>
-					<h3 class="box-title" th:if="${chat != null}" th:text="${chat.gymName}" sec:authorize="!hasAuthority('gestore')" >Title</h3>
+					<h3 class="box-title" th:if="${chat != null}" th:text="${chat.gymName + ' - ' + chat.userName}" sec:authorize="hasAuthority('GESTORE')" >Title</h3>
+					<h3 class="box-title" th:if="${chat != null}" th:text="${chat.gymName}" sec:authorize="!hasAuthority('GESTORE')" >Title</h3>
 
 					<div class="box-tools pull-right">
 						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -72,7 +72,7 @@
 					<div class="direct-chat-messages chat-height">
 
 						<!-- Message. Default to the left -->
-						<div class="direct-chat-msg " th:each="message : ${messageList}" sec:authorize="hasAuthority('gestore')" th:classappend="${message.isGym()} ? right : ''">
+						<div class="direct-chat-msg " th:each="message : ${messageList}" sec:authorize="hasAuthority('GESTORE')" th:classappend="${message.isGym()} ? right : ''">
 
 							<div class="direct-chat-info clearfix">
 								<span class="direct-chat-name pull-right" th:if="${message.isGym()}" th:text="${chat.gymName}">Alexander Pierce</span>
@@ -90,7 +90,7 @@
 						<!-- /.direct-chat-msg -->
 
 						<!-- Message to the right -->
-						<div class="direct-chat-msg " th:each="message : ${messageList}" sec:authorize="!hasAuthority('gestore')" th:classappend="${message.isGym()} ? '' : right">
+						<div class="direct-chat-msg " th:each="message : ${messageList}" sec:authorize="!hasAuthority('GESTORE')" th:classappend="${message.isGym()} ? '' : right">
 
 							<div class="direct-chat-info clearfix">
 								<span class="direct-chat-name pull-left" th:if="${message.isGym()}" th:text="${chat.gymName}">Alexander Pierce</span>
