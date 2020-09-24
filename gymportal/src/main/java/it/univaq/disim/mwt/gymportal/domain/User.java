@@ -59,10 +59,10 @@ public class User {
 	@Column(name = "last_name")
 	@NotEmpty(message = "*Please provide your last name")
 	private String lastName;
-	
-	@Column(name = "active")
-	private Boolean active;
-	
+
+	@Column(name = "role")
+	private Role role;
+
 	@OneToMany(mappedBy="user")
 	private List<FeedbackCourse> feedbackCourse;
 	
@@ -74,10 +74,7 @@ public class User {
 	
 	@OneToMany(mappedBy="user")
 	private List<FeedbackGym> feedbackGym;
-	
-	@ManyToMany(cascade = CascadeType.MERGE)
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles;
+
 	
 	@OneToMany(mappedBy="user")
 	private List<Gym> gym;
