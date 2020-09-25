@@ -83,10 +83,10 @@ public class ProfileController {
 			return "/common/error";
 		}
 
-		if(auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.UTENTE.name()))) {
+		if(auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.CUSTOMER.name()))) {
 			userService.updateUser(user);
 		}
-		if(auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.GESTORE.name()))) {
+		if(auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.MANAGER.name()))) {
 			userService.updateGestore(user);
 		}
 

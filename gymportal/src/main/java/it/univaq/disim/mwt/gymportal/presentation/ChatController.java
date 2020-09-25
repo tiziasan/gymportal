@@ -44,7 +44,7 @@ public class ChatController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUserName(auth.getName());
 
-        if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.GESTORE.name()))){ //se gestore restituisco mappa delle palestre e la lista delle chat per ognuna di esse
+        if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.MANAGER.name()))){ //se gestore restituisco mappa delle palestre e la lista delle chat per ognuna di esse
 
             List<Gym> gyms = serviceGym.searchByUser(user.getId());
             Map<String, List<Chat>> chatMap = new HashMap<>();
@@ -93,7 +93,7 @@ public class ChatController {
         User user = userService.findUserByUserName(auth.getName());
 
         Chat chat = new Chat();
-        if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.GESTORE.name()))){
+        if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.MANAGER.name()))){
             if(idChat != null && idGym == null){    //se ho idChat prendo la chat, faccio inserimento del messaggio e aggiorno solo la lista dei messaggi e ritorno a /chat/idchat
                 chat = serviceChat.findChatById(idChat);
                 message.setGym(true);
