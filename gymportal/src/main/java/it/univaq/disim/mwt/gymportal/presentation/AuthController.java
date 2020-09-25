@@ -29,7 +29,7 @@ import it.univaq.disim.mwt.gymportal.domain.User;
  */
 
 @Controller
-public class LoginController {
+public class AuthController {
 
 	@Autowired
 	private UserBO userService;
