@@ -49,7 +49,7 @@ public class ProfileController {
 	public ModelAndView home(Model model) throws BusinessException {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByUserName(auth.getName());
+		User user = userService.findUserByUsername(auth.getName());
 		Set<FeedbackCourse> feedbackCourseList = serviceFeedbackCourse.findAllFeedbackByUserId(user.getId());
 		Set<FeedbackGym> feedbackGymList = serviceFeedbackGym.findAllFeedbackByUserId(user.getId());
 		Set<FavoriteGym> favoriteGymList = serviceFavoriteGym.findAllFavoriteByUserId(user.getId());
@@ -69,7 +69,7 @@ public class ProfileController {
 	@GetMapping("/update")
 	public String updateStart(Model model) throws BusinessException {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByUserName(auth.getName());
+		User user = userService.findUserByUsername(auth.getName());
 		model.addAttribute("user", user);
 		return "/profile/update";
 		
@@ -92,7 +92,7 @@ public class ProfileController {
 
 		List<Chat> chatList = serviceChat.findByUserId(user.getId());
 		for ( Chat c: chatList ) {
-			c.setUserName(user.getName() + " " + user.getLastName());
+			c.setUserName(user.getName() + " " + user.getLastname());
 		}
 		serviceChat.saveAllChats(chatList);
 

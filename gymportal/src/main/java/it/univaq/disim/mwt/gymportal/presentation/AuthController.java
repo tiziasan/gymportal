@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.UserBO;
+import it.univaq.disim.mwt.gymportal.domain.Customer;
 import it.univaq.disim.mwt.gymportal.domain.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,19 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import it.univaq.disim.mwt.gymportal.domain.User;
 
-/*
- * @Controller
- * 
- * @RequestMapping("/login")
- * 
- * public class LoginController {
- * 
- * @GetMapping("") public String login() { return "/login/index";
- * 
- * }
- * 
- * }
- */
+import java.util.function.Consumer;
 
 @Controller
 public class AuthController {
@@ -51,10 +40,9 @@ public class AuthController {
 	}
 
 	@PostMapping(value = "/registration")
-	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) throws BusinessException {
+	public ModelAndView createNewUser(@Valid Customer user, BindingResult bindingResult) throws BusinessException {
 		ModelAndView modelAndView = new ModelAndView();
-		user.setRole(Role.UTENTE);
-		User userExists = userService.findUserByUserName(user.getUserName());
+		User userExists = userService.findUserByUsername(user.getUsername());
 		if (userExists != null) {
 			bindingResult.rejectValue("userName", "error.user",
 					"There is already a user registered with the user name provided");

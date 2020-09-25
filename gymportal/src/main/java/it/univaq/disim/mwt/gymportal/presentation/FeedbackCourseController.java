@@ -55,7 +55,7 @@ public class FeedbackCourseController {
 	public String createStart(Model model,@PathVariable long id) throws BusinessException {
 		Course course = serviceCourse.findByID(id);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByUserName(auth.getName());
+		User user = userService.findUserByUsername(auth.getName());
 		model.addAttribute("course", course);
 		model.addAttribute("user", user);
 		

@@ -43,7 +43,7 @@ public class FavoriteGymController {
 	public String createStart(@PathVariable long id, Model model) throws BusinessException {
 		Gym gym = serviceGym.findByID(id);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByUserName(auth.getName());
+		User user = userService.findUserByUsername(auth.getName());
 		model.addAttribute("gym", gym);
 		model.addAttribute("user", user);
 		

@@ -6,7 +6,7 @@ public interface UserBO {
 
 	User findUserByEmail(String email);
 
-	User findUserByUserName(String userName);
+	User findUserByUsername(String username);
 
 	User saveUser (User user) throws BusinessException;
 

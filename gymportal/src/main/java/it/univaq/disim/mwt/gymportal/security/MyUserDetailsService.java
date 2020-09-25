@@ -27,8 +27,8 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String userName) {
-        User user = userService.findUserByUserName(userName);
+    public UserDetails loadUserByUsername(String username) {
+        User user = userService.findUserByUsername(username);
         List<GrantedAuthority> authorities = getUserAuthority(user.getRole());
         return buildUserForAuthentication(user, authorities);
     }
@@ -41,7 +41,7 @@ public class MyUserDetailsService implements UserDetailsService {
     }
 
     private UserDetails buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
-        return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(),
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 true, true, true, true, authorities);
     }
 }

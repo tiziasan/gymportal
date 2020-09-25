@@ -26,8 +26,8 @@ public class UserBOimpl implements UserBO {
     }
 
     @Override
-    public User findUserByUserName(String userName) {
-        return userRepository.findByUserName(userName);
+    public User findUserByUsername(String username) {
+        return userRepository.findUserByUsername(username);
     }
 
     @Override

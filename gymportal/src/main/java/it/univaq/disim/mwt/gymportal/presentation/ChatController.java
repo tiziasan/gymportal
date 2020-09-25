@@ -44,7 +44,7 @@ public class ChatController {
 
         if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.MANAGER.name()))){ //se gestore restituisco mappa delle palestre e la lista delle chat per ognuna di esse
 
-            User user = userService.findUserByUserName(auth.getName());
+            User user = userService.findUserByUsername(auth.getName());
             List<Gym> gyms = serviceGym.searchByUser(user.getId());
             Map<String, List<Chat>> chatMap = new HashMap<>();
             for (Gym g: gyms ) {
@@ -61,7 +61,7 @@ public class ChatController {
 
         } else { //se utente restituisco lista chat dell'utente con le palestre
 
-            User user = userService.findUserByUserName(auth.getName());
+            User user = userService.findUserByUsername(auth.getName());
             List<Chat> chatList = serviceChat.findByUserId(user.getId());
             model.addAttribute("chatList", chatList);
 
@@ -90,7 +90,7 @@ public class ChatController {
             return "/chat/index";
         }
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUserName(auth.getName());
+        User user = userService.findUserByUsername(auth.getName());
 
         Chat chat = new Chat();
         if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.MANAGER.name()))){
@@ -108,7 +108,7 @@ public class ChatController {
                 if (chat == null){  //se non esiste la creo
                     chat = new Chat();
                     chat.setUserId(user.getId());
-                    chat.setUserName(user.getLastName() + " " + user.getName());
+                    chat.setUserName(user.getLastname() + " " + user.getName());
                     Gym gym = serviceGym.findByID(idGym);
                     chat.setGymId(gym.getId());
                     chat.setGymName(gym.getName());

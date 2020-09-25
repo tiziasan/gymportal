@@ -21,16 +21,16 @@
 									<input id="name" type="text" th:field="*{name}" th:placeholder="#{profile.name}" placeholder="Name" class="form-control" />
 								</div>
 								<div class="form-group has-feedback">
-									<label th:if="${#fields.hasErrors('lastName')}" for="lastname" th:errors="*{lastName}" class="validation-message"></label>
-									<input id="lastname" type="text" th:field="*{lastName}" th:placeholder="#{profile.lastname}" placeholder="Last Name" class="form-control"/>
+									<label th:if="${#fields.hasErrors('lastname')}" for="lastname" th:errors="*{lastname}" class="validation-message"></label>
+									<input id="lastname" type="text" th:field="*{lastname}" th:placeholder="#{profile.lastname}" placeholder="Last Name" class="form-control"/>
 								</div>
 								<div class="form-group has-feedback">
 									<label th:if="${#fields.hasErrors('email')}" for="email" th:errors="*{email}" class="validation-message"></label>
 									<input id="email" type="text" th:field="*{email}" th:placeholder="#{profile.email}" placeholder="Email" class="form-control"/>
 								</div>
 								<div class="form-group has-feedback">
-									<label th:if="${#fields.hasErrors('userName')}" for="username" th:errors="*{userName}" class="validation-message"></label>
-									<input id="username" type="text" th:field="*{userName}" th:placeholder="#{profile.username}" placeholder="User Name" class="form-control"/>
+									<label th:if="${#fields.hasErrors('username')}" for="username" th:errors="*{username}" class="validation-message"></label>
+									<input id="username" type="text" th:field="*{username}" th:placeholder="#{profile.username}" placeholder="User Name" class="form-control"/>
 								</div>
 								<div class="form-group has-feedback">
 									<label th:if="${#fields.hasErrors('password')}" for="password" th:errors="*{password}" class="validation-message"></label>

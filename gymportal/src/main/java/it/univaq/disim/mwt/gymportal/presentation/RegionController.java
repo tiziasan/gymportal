@@ -41,7 +41,7 @@ public class RegionController {
 		List<Gym> gymList = null;
 
 		if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.MANAGER.name()))) {
-			User user = userService.findUserByUserName(auth.getName());
+			User user = userService.findUserByUsername(auth.getName());
 			long id = user.getId();
 			gymList = serviceGym.searchByRegionAndUser(region, id);
 
@@ -60,7 +60,7 @@ public class RegionController {
 		}
 
 		if (search != null && auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.MANAGER.name()))) {
-			User user = userService.findUserByUserName(auth.getName());
+			User user = userService.findUserByUsername(auth.getName());
 			long id = user.getId();
 			gymList = serviceGym.searchByRegionAndNameAndUser(region, search, id);
 			model.addAttribute("search", search);
