@@ -4,17 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
@@ -31,6 +21,7 @@ import org.hibernate.validator.constraints.UniqueElements;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@DiscriminatorColumn(name="role", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "user")
 public class User extends BaseEntity implements Serializable {
 
@@ -59,22 +50,9 @@ public class User extends BaseEntity implements Serializable {
 	@NotEmpty(message = "*Please provide your last name")
 	private String lastName;
 
-	@Column(name = "role")
+	@Column(name = "role", nullable = false, insertable = false, updatable = false)
+	@Enumerated(EnumType.STRING)
 	private Role role;
 
-	@OneToMany(mappedBy="user")
-	private List<FeedbackCourse> feedbackCourse;
-
-	@OneToMany(mappedBy="user")
-	private List<FavoriteGym> favoriteGym;
-
-	@OneToMany(mappedBy="user")
-	private List<FavoriteCourse> favoriteCourse;
-
-	@OneToMany(mappedBy="user")
-	private List<FeedbackGym> feedbackGym;
-
-	@OneToMany(mappedBy="user")
-	private List<Gym> gym;
 
  }
