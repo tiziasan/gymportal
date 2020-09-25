@@ -1,5 +1,6 @@
 package it.univaq.disim.mwt.gymportal.domain;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -31,11 +32,9 @@ import org.hibernate.validator.constraints.UniqueElements;
 @NoArgsConstructor
 @Entity
 @Table(name = "user")
-public class User {
+public class User extends BaseEntity implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private static final long serialVersionUID = 1L;
 	
 	@Column(name = "user_name", nullable = false, length = 255, unique = true)
 	@Length(min = 5, message = "*Your user name must have at least 5 characters")
@@ -65,17 +64,16 @@ public class User {
 
 	@OneToMany(mappedBy="user")
 	private List<FeedbackCourse> feedbackCourse;
-	
+
 	@OneToMany(mappedBy="user")
 	private List<FavoriteGym> favoriteGym;
-	
+
 	@OneToMany(mappedBy="user")
 	private List<FavoriteCourse> favoriteCourse;
-	
+
 	@OneToMany(mappedBy="user")
 	private List<FeedbackGym> feedbackGym;
 
-	
 	@OneToMany(mappedBy="user")
 	private List<Gym> gym;
 

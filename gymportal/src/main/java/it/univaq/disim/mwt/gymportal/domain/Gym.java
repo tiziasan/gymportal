@@ -1,5 +1,6 @@
 package it.univaq.disim.mwt.gymportal.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -17,11 +18,9 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "gym")
-public class Gym {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+public class Gym extends BaseEntity implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	
 	@NotBlank
 	@Size(max=50)

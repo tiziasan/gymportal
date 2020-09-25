@@ -9,14 +9,14 @@ import javax.validation.constraints.Size;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
 @Entity
 @Table(name = "feedbackgym", uniqueConstraints = @UniqueConstraint(columnNames={"gym_id","user_id"}))
-public class FeedbackGym {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+public class FeedbackGym extends BaseEntity implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	
 	@NotBlank
 	@Size(max=150)
