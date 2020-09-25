@@ -40,12 +40,11 @@ public class ChatController {
 
     @GetMapping(value = {"", "/{idChat}", "?idGym={idGym}"})
     public String createStart(@PathVariable(required = false) String idChat, @RequestParam(required = false) Long idGym, Model model) throws BusinessException {
-
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUserName(auth.getName());
 
         if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.MANAGER.name()))){ //se gestore restituisco mappa delle palestre e la lista delle chat per ognuna di esse
 
+            User user = userService.findUserByUserName(auth.getName());
             List<Gym> gyms = serviceGym.searchByUser(user.getId());
             Map<String, List<Chat>> chatMap = new HashMap<>();
             for (Gym g: gyms ) {
@@ -62,6 +61,7 @@ public class ChatController {
 
         } else { //se utente restituisco lista chat dell'utente con le palestre
 
+            User user = userService.findUserByUserName(auth.getName());
             List<Chat> chatList = serviceChat.findByUserId(user.getId());
             model.addAttribute("chatList", chatList);
 
