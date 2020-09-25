@@ -46,30 +46,30 @@
 							</li>
 
 							<!-- User Account Menu -->
-							<li class="dropdown user user-menu" sec:authorize="hasAuthority('GESTORE')">
+							<li class="dropdown user user-menu" sec:authorize="hasAuthority('MANAGER')">
 								<a href="/gymportal/gym/create" th:text="#{gym.add}" >Aggiungi Palestra</a>
 							</li>
 
-							<li class="dropdown user user-menu" sec:authorize="hasAuthority('GESTORE')">
+							<li class="dropdown user user-menu" sec:authorize="hasAuthority('MANAGER')">
 								<a href="/gymportal/course/create" th:text="#{course.add}" >Aggiungi Corso</a>
 							</li>
 
-							<li class="dropdown user user-menu" sec:authorize="hasAnyAuthority('UTENTE','GESTORE')">
+							<li class="dropdown user user-menu" sec:authorize="hasAnyAuthority('CUSTOMER','MANAGER')">
 								<a href="/gymportal/login" th:href="@{/chat}" th:text="#{chat}" >Chat</a>
 							</li>
 
-							<li class="dropdown user user-menu" sec:authorize="!hasAnyAuthority('UTENTE','GESTORE')">
+							<li class="dropdown user user-menu" sec:authorize="!hasAnyAuthority('CUSTOMER','MANAGER')">
 								<a href="/gymportal/login" th:text="#{common.login}" >Login</a>
 							</li>
 
-							<li class="dropdown user user-menu" sec:authorize="!hasAnyAuthority('UTENTE','GESTORE')">
+							<li class="dropdown user user-menu" sec:authorize="!hasAnyAuthority('CUSTOMER','MANAGER')">
 								<a href="/gymportal/registration" th:text="#{common.registration}" >Registrazione</a>
 							</li>
-							<li class="dropdown user user-menu" sec:authorize="hasAnyAuthority('UTENTE','GESTORE')">
+							<li class="dropdown user user-menu" sec:authorize="hasAnyAuthority('CUSTOMER','MANAGER')">
 								<a href="/gymportal/profile" th:text="#{common.profile}" >Profilo</a>
 							</li>
 
-							<li class="dropdown user user-menu" sec:authorize="hasAnyAuthority('UTENTE','GESTORE')">
+							<li class="dropdown user user-menu" sec:authorize="hasAnyAuthority('CUSTOMER','MANAGER')">
 								<form th:action="@{/logout}" method="get">
 									<a><button class="bottonelogout"  name="registration" type="Submit" th:text="#{common.logout}" >Logout</button></a>
 								</form>

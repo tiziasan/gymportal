@@ -20,12 +20,12 @@
 			<h4 th:text="${gym.province}"></h4>
 			<h4 th:text="${gym.address}"></h4>
 
-			<a th:href="@{/favoriteGym/create/{gymId}(gymId=${gym.id})}" sec:authorize="hasAuthority('UTENTE')"><button class="btn-primary" th:text="#{favorite.add}" >Aggiungi ai preferiti!</button></a>
-			<a th:href="@{/feedback/create/{gymId}(gymId=${gym.id})}" sec:authorize="hasAuthority('UTENTE')"><button class="btn-primary" th:text="#{feedback.gym.add}">Recensisci Palestra</button></a>
-			<a th:href="@{/chat(idGym=${gym.id})}" sec:authorize="!hasAnyAuthority('GESTORE')"><button class="btn-primary" th:text="#{chat.message.send}">Invia Messaggio</button></a>
+			<a th:href="@{/favoriteGym/create/{gymId}(gymId=${gym.id})}" sec:authorize="hasAuthority('CUSTOMER')"><button class="btn-primary" th:text="#{favorite.add}" >Aggiungi ai preferiti!</button></a>
+			<a th:href="@{/feedback/create/{gymId}(gymId=${gym.id})}" sec:authorize="hasAuthority('CUSTOMER')"><button class="btn-primary" th:text="#{feedback.gym.add}">Recensisci Palestra</button></a>
+			<a th:href="@{/chat(idGym=${gym.id})}" sec:authorize="!hasAnyAuthority('MANAGER')"><button class="btn-primary" th:text="#{chat.message.send}">Invia Messaggio</button></a>
 			<a th:href="@{/course/gym/{gymId}(gymId=${gym.id})}"><button class="btn-primary" th:text="#{gym.show.courses}">Vai ai corsi</button></a>
-			<a th:href="@{/gym/update/{gymId}(gymId=${gym.id})}" sec:authorize="hasAuthority('GESTORE')"><button class="btn-primary" th:text="#{common.edit}">Modifica</button></a>
-			<a th:href="@{/gym/delete/{gymId}(gymId=${gym.id})}" sec:authorize="hasAuthority('GESTORE')"><button class="btn-primary" th:text="#{common.delete}">Elimina</button></a>
+			<a th:href="@{/gym/update/{gymId}(gymId=${gym.id})}" sec:authorize="hasAuthority('MANAGER')"><button class="btn-primary" th:text="#{common.edit}">Modifica</button></a>
+			<a th:href="@{/gym/delete/{gymId}(gymId=${gym.id})}" sec:authorize="hasAuthority('MANAGER')"><button class="btn-primary" th:text="#{common.delete}">Elimina</button></a>
 		</div>
 	</div>
 </div>
