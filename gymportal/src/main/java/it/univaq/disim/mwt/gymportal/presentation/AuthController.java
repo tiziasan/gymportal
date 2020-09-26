@@ -40,7 +40,7 @@ public class AuthController {
 	}
 
 	@PostMapping(value = "/registration")
-	public ModelAndView createNewUser(@Valid Customer user, BindingResult bindingResult) throws BusinessException {
+	public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) throws BusinessException {
 		ModelAndView modelAndView = new ModelAndView();
 		User userExists = userService.findUserByUsername(user.getUsername());
 		if (userExists != null) {
@@ -50,7 +50,7 @@ public class AuthController {
 		if (bindingResult.hasErrors()) {
 			modelAndView.setViewName("/registration/index");
 		} else {
-			userService.saveUser(user);
+			userService.saveUser(new Customer(user));
 			modelAndView.addObject("successMessage", "Utente registrato correttamente, fai il login per entrare!");
 			modelAndView.addObject("user", new User());
 			modelAndView.setViewName("/registration/index");
