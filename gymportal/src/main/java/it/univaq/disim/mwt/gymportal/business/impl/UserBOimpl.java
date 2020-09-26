@@ -33,12 +33,11 @@ public class UserBOimpl implements UserBO {
     @Override
     public User saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRole(Role.CUSTOMER);
         return userRepository.save(user);
     }
 
     @Override
-    public User updateUser(User user) {
+    public User updateCustomer(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRole(Role.CUSTOMER);
 
@@ -46,7 +45,7 @@ public class UserBOimpl implements UserBO {
     }
 
     @Override
-    public User updateGestore(User user) {
+    public User updateManager(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setRole(Role.MANAGER);
 
