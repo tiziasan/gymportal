@@ -40,7 +40,7 @@ public class RegionController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		List<Gym> gymList = null;
 
-		if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.MANAGER.name()))) {
+		if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
 			User user = userService.findUserByUsername(auth.getName());
 			long id = user.getId();
 			gymList = serviceGym.searchByRegionAndUser(region, id);
@@ -48,18 +48,18 @@ public class RegionController {
 		}
 
 		if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ANONYMOUS")) ||
-				auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.CUSTOMER.name()))) {
+				auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER))) {
 			gymList = serviceGym.findByRegion(region);
 		}
 
 		if (search != null &&
-				( auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.CUSTOMER.name())) ||
+				( auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER)) ||
 				auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ANONYMOUS"))) ) {
 			gymList = serviceGym.searchByRegionAndName(region, search);
 			model.addAttribute("search", search);
 		}
 
-		if (search != null && auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.MANAGER.name()))) {
+		if (search != null && auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
 			User user = userService.findUserByUsername(auth.getName());
 			long id = user.getId();
 			gymList = serviceGym.searchByRegionAndNameAndUser(region, search, id);

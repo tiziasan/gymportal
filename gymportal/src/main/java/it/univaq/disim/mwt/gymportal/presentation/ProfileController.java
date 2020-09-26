@@ -1,5 +1,6 @@
 package it.univaq.disim.mwt.gymportal.presentation;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -83,11 +84,11 @@ public class ProfileController {
 			return "/common/error";
 		}
 
-		if(auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.CUSTOMER.name()))) {
-			userService.updateUser(user);
+		if(auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER))) {
+			userService.updateCustomer(user);
 		}
-		if(auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.MANAGER.name()))) {
-			userService.updateGestore(user);
+		if(auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
+			userService.updateManager(user);
 		}
 
 		List<Chat> chatList = serviceChat.findByUserId(user.getId());

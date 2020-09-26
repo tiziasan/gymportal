@@ -42,7 +42,7 @@ public class ChatController {
     public String createStart(@PathVariable(required = false) String idChat, @RequestParam(required = false) Long idGym, Model model) throws BusinessException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.MANAGER.name()))){ //se gestore restituisco mappa delle palestre e la lista delle chat per ognuna di esse
+        if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))){ //se gestore restituisco mappa delle palestre e la lista delle chat per ognuna di esse
 
             User user = userService.findUserByUsername(auth.getName());
             List<Gym> gyms = serviceGym.searchByUser(user.getId());
@@ -93,7 +93,7 @@ public class ChatController {
         User user = userService.findUserByUsername(auth.getName());
 
         Chat chat = new Chat();
-        if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.MANAGER.name()))){
+        if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))){
             if(idChat != null && idGym == null){    //se ho idChat prendo la chat, faccio inserimento del messaggio e aggiorno solo la lista dei messaggi e ritorno a /chat/idchat
                 chat = serviceChat.findChatById(idChat);
                 message.setGym(true);
