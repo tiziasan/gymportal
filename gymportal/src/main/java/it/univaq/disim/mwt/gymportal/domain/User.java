@@ -18,12 +18,22 @@ import org.hibernate.validator.constraints.UniqueElements;
 
 @Data
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @DiscriminatorColumn(name="role", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "user")
 public class User extends BaseEntity implements Serializable {
+
+	public User() {
+	}
+
+	public User(String username, String email, String password, String name, String lastname, Role role) {
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.name = name;
+		this.lastname = lastname;
+		this.role = role;
+	}
 
 	private static final long serialVersionUID = 1L;
 	

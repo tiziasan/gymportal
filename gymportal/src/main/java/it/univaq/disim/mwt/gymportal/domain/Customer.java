@@ -9,6 +9,17 @@ import java.util.List;
 @DiscriminatorValue(Role.Values.CUSTOMER)
 public class Customer extends User {
 
+    public Customer() {
+    }
+
+    public Customer(String username, String email, String password, String name, String lastname) {
+        super(username, email, password, name, lastname, Role.CUSTOMER);
+    }
+
+    public Customer(User user){
+        super(user.getUsername(), user.getEmail(), user.getPassword(), user.getName(), user.getLastname(), Role.CUSTOMER);
+    }
+
     @OneToMany(mappedBy="user")
     private List<FeedbackCourse> feedbackCourse;
 
