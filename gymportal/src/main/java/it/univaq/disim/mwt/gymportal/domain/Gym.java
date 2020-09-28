@@ -2,56 +2,131 @@ package it.univaq.disim.mwt.gymportal.domain;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import lombok.Data;
 
-@Data
 @Entity
 @Table(name = "gym")
 public class Gym extends BaseEntity implements Serializable {
 
+	public Gym(){
+	}
+
+	public Gym(String name, String address, String province, String region, Manager user) {
+		this.name = name;
+		this.address = address;
+		this.province = province;
+		this.region = region;
+		this.user = user;
+	}
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@NotBlank
 	@Size(max=50)
 	@Column(name="NAME")
 	private String name;
-	
+
 	@NotBlank
 	@Size(max=200)
 	@Column(name="ADDRESS")
 	private String address;
-	
+
 	@NotBlank
 	@Size(max=50)
 	@Column(name="PROVINCE")
 	private String province;
-	
+
 	@NotBlank
 	@Size(max=50)
 	@Column(name="REGION")
 	private String region;
-	
+
 	@OneToMany(mappedBy="gym")
 	private List<FeedbackGym> feedbackGym;
-	
+
 	@OneToMany(mappedBy="gym")
 	private List<FavoriteGym> favoriteGym;
-	
+
 	@OneToMany(mappedBy="gym")
 	private List<Course> course;
 
 	@ManyToOne
 	private Manager user;
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(Manager user) {
+		this.user = user;
+	}
+
+	public List<FeedbackGym> getFeedbackGym() {
+		return feedbackGym;
+	}
+
+	public List<FavoriteGym> getFavoriteGym() {
+		return favoriteGym;
+	}
+
+	public List<Course> getCourse() {
+		return course;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Gym)) return false;
+		Gym gym = (Gym) o;
+		return getName().equals(gym.getName()) &&
+				getAddress().equals(gym.getAddress()) &&
+				getProvince().equals(gym.getProvince()) &&
+				getRegion().equals(gym.getRegion()) &&
+				getUser().equals(gym.getUser());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getName(), getAddress(), getProvince(), getRegion());
+	}
 }
