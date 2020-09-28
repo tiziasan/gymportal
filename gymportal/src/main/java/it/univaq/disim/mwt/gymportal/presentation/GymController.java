@@ -47,7 +47,7 @@ public class GymController {
 	@GetMapping("/create")
     public String createStart(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByUsername(auth.getName());
+		Manager user = userService.findUserByUsername(auth.getName());
 		model.addAttribute("user", user);
 		Gym gym = new Gym();
 		model.addAttribute("gym", gym);
@@ -98,7 +98,7 @@ public class GymController {
 	@GetMapping("/update/{id}")
 	public String updateStart(@PathVariable long id, Model model) throws BusinessException {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByUsername(auth.getName());
+		Manager user = userService.findUserByUsername(auth.getName());
 		model.addAttribute("user", user);
 		Gym gym = serviceGym.findByID(id);
 		gym.setRegion("");

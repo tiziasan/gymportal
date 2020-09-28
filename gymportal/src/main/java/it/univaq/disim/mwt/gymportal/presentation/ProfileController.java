@@ -1,5 +1,6 @@
 package it.univaq.disim.mwt.gymportal.presentation;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -50,11 +51,28 @@ public class ProfileController {
 	public ModelAndView home(Model model) throws BusinessException {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByUsername(auth.getName());
-		Set<FeedbackCourse> feedbackCourseList = serviceFeedbackCourse.findAllFeedbackByUserId(user.getId());
-		Set<FeedbackGym> feedbackGymList = serviceFeedbackGym.findAllFeedbackByUserId(user.getId());
-		Set<FavoriteGym> favoriteGymList = serviceFavoriteGym.findAllFavoriteByUserId(user.getId());
-		Set<FavoriteCourse> favoriteCourseList = serviceFavoriteCourse.findAllFavoriteByUserId(user.getId());
+
+		User user;
+
+		List<FeedbackCourse> feedbackCourseList = new ArrayList<>();
+		List<FeedbackGym> feedbackGymList = new ArrayList<>();
+		List<FavoriteGym> favoriteGymList = new ArrayList<>();
+		List<FavoriteCourse> favoriteCourseList = new ArrayList<>();
+
+		if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER))){
+			Customer customer = userService.findUserByUsername(auth.getName());
+			user = customer;
+			feedbackCourseList = customer.getFeedbackCourse();
+			feedbackGymList = customer.getFeedbackGym();
+			favoriteGymList = customer.getFavoriteGym();
+			favoriteCourseList = customer.getFavoriteCourse();
+//			feedbackCourseList = serviceFeedbackCourse.findAllFeedbackByUserId(user.getId());
+//			feedbackGymList = serviceFeedbackGym.findAllFeedbackByUserId(user.getId());
+//			favoriteGymList = serviceFavoriteGym.findAllFavoriteByUserId(user.getId());
+//			favoriteCourseList = serviceFavoriteCourse.findAllFavoriteByUserId(user.getId());
+		} else {
+			user = userService.findUserByUsername(auth.getName());
+		}
 
 		model.addAttribute("user",user);
 		model.addAttribute("adminMessage", "Content Available Only for Users with Admin Role");

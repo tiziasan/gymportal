@@ -5,6 +5,7 @@ import java.util.List;
 import javax.websocket.server.PathParam;
 
 import it.univaq.disim.mwt.gymportal.business.UserBO;
+import it.univaq.disim.mwt.gymportal.domain.Manager;
 import it.univaq.disim.mwt.gymportal.domain.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -41,10 +42,8 @@ public class RegionController {
 		List<Gym> gymList = null;
 
 		if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
-			User user = userService.findUserByUsername(auth.getName());
-			long id = user.getId();
-			gymList = serviceGym.searchByRegionAndUser(region, id);
-
+			Manager user = userService.findUserByUsername(auth.getName());
+			gymList = user.getGym();
 		}
 
 		if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ANONYMOUS")) ||

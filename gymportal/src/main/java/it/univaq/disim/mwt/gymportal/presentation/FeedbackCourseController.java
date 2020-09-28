@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import it.univaq.disim.mwt.gymportal.business.UserBO;
+import it.univaq.disim.mwt.gymportal.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,10 +23,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.CourseBO;
 import it.univaq.disim.mwt.gymportal.business.FeedbackCourseBO;
-import it.univaq.disim.mwt.gymportal.domain.Course;
-import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
-import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
-import it.univaq.disim.mwt.gymportal.domain.User;
 
 @Controller
 
@@ -55,7 +52,7 @@ public class FeedbackCourseController {
 	public String createStart(Model model,@PathVariable long id) throws BusinessException {
 		Course course = serviceCourse.findByID(id);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByUsername(auth.getName());
+		Customer user = userService.findUserByUsername(auth.getName());
 		model.addAttribute("course", course);
 		model.addAttribute("user", user);
 		

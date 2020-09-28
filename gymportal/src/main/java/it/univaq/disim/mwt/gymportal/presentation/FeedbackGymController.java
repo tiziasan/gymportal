@@ -4,6 +4,7 @@ package it.univaq.disim.mwt.gymportal.presentation;
 import javax.validation.Valid;
 
 import it.univaq.disim.mwt.gymportal.business.UserBO;
+import it.univaq.disim.mwt.gymportal.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -42,7 +43,7 @@ public class FeedbackGymController {
 	public String createStart(Model model,@PathVariable long id) throws BusinessException {
 		Gym gym = serviceGym.findByID(id);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByUsername(auth.getName());
+		Customer user = userService.findUserByUsername(auth.getName());
 		model.addAttribute("gym", gym);
 		model.addAttribute("user", user);
 		

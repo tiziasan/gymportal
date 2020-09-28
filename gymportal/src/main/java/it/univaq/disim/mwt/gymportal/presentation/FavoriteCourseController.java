@@ -4,6 +4,7 @@ package it.univaq.disim.mwt.gymportal.presentation;
 import javax.validation.Valid;
 
 import it.univaq.disim.mwt.gymportal.business.UserBO;
+import it.univaq.disim.mwt.gymportal.domain.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -42,7 +43,7 @@ public class FavoriteCourseController {
 	public String createStart(@PathVariable long id, Model model) throws BusinessException {
 		Course course = serviceCourse.findByID(id);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByUsername(auth.getName());
+		Customer user = userService.findUserByUsername(auth.getName());
 		model.addAttribute("course", course);
 		model.addAttribute("user", user);
 		
