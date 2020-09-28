@@ -11,18 +11,18 @@ public interface GymImplCustom {
 	public List<Gym> findByRegionName(String region);
 	
 	@Query(value = "FROM Gym AS g WHERE g.id = :id")
-	public Gym findByID(Long id);
+	public Gym findByID(long id);
 	
 	@Query(value = "FROM Gym AS g WHERE g.region = :region AND g.name LIKE CONCAT('%',:name,'%')")
 	public List<Gym> searchByRegionAndName(String region, String name);
 	
 	@Query(value = "FROM Gym AS g WHERE g.region = :region AND g.user.id = :id AND g.name LIKE CONCAT('%',:name,'%')")
-	public List<Gym> searchByRegionAndNameAndUser(String region, String name, Long id);
+	public List<Gym> searchByRegionAndNameAndUser(String region, String name, long id);
 	
 	@Query(value = "FROM Gym AS g WHERE g.region = :region AND g.user.id = :id")
-	public List<Gym> searchByRegionAndUser(String region, Long id);
+	public List<Gym> searchByRegionAndUser(String region, long id);
 	
 	@Query(value = "FROM Gym AS g WHERE g.user.id = :id")
-	public List<Gym> searchByUser(Long id);
+	public List<Gym> searchByUser(long id);
 	
 }
