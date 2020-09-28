@@ -23,4 +23,8 @@ public class Manager extends User{
     @OneToMany(mappedBy="user")
     private List<Gym> gym;
 
+    public List<Gym> getGym() {
+        return gym;
+    }
+
 }

@@ -32,4 +32,19 @@ public class Customer extends User {
     @OneToMany(mappedBy="user")
     private List<FeedbackGym> feedbackGym;
 
+    public List<FeedbackCourse> getFeedbackCourse() {
+        return feedbackCourse;
+    }
+
+    public List<FavoriteGym> getFavoriteGym() {
+        return favoriteGym;
+    }
+
+    public List<FavoriteCourse> getFavoriteCourse() {
+        return favoriteCourse;
+    }
+
+    public List<FeedbackGym> getFeedbackGym() {
+        return feedbackGym;
+    }
 }
