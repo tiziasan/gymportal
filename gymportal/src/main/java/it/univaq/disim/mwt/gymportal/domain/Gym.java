@@ -52,6 +52,6 @@ public class Gym extends BaseEntity implements Serializable {
 	private List<Course> course;
 
 	@ManyToOne
-	private User user;
+	private Manager user;
 
 }

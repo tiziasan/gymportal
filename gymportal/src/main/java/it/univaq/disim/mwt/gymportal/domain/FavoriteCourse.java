@@ -14,7 +14,7 @@ public class FavoriteCourse {
 	private long id;
 	
 	@ManyToOne
-	private User user;
+	private Customer user;
 	
 	@ManyToOne
 	private Course course;

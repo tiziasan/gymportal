@@ -30,7 +30,7 @@ public class FeedbackGym extends BaseEntity implements Serializable {
 	private int rating;
 	
 	@ManyToOne
-	private User user;
+	private Customer user;
 	
 	@ManyToOne
 	private Gym gym;

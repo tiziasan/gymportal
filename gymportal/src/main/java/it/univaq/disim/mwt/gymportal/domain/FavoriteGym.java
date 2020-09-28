@@ -16,7 +16,7 @@ public class FavoriteGym {
 	private long id;
 	
 	@ManyToOne
-	private User user;
+	private Customer user;
 	
 	@ManyToOne
 	private Gym gym;
