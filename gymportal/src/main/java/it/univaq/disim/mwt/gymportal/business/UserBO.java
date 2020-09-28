@@ -1,14 +1,17 @@
 package it.univaq.disim.mwt.gymportal.business;
 
+import it.univaq.disim.mwt.gymportal.domain.Role;
 import it.univaq.disim.mwt.gymportal.domain.User;
 
 public interface UserBO {
 
 	User findUserByEmail(String email);
 
-	User findUserByUsername(String username);
+	<U extends User> U findUserByUsername(String username);
 
-	User saveUser (User user) throws BusinessException;
+	<U extends User> U findUserByUsernameAndRole(String username, Role role);
+
+    User saveUser (User user) throws BusinessException;
 
 	User updateCustomer (User user) throws BusinessException;
 

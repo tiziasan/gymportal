@@ -26,8 +26,13 @@ public class UserBOimpl implements UserBO {
     }
 
     @Override
-    public User findUserByUsername(String username) {
+    public <U extends User> U findUserByUsername(String username) {
         return userRepository.findUserByUsername(username);
+    }
+
+    @Override
+    public <U extends User> U findUserByUsernameAndRole(String username, Role role) {
+        return userRepository.findByUsernameAndRole(username, role);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package it.univaq.disim.mwt.gymportal.repository;
 
+import it.univaq.disim.mwt.gymportal.domain.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,6 +10,7 @@ import it.univaq.disim.mwt.gymportal.domain.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByEmail(String email);
-    User findUserByUsername(String username);
+    <U extends User> U findUserByUsername(String username);
+    <U extends User> U findByUsernameAndRole(String username, Role role);
 
 }
