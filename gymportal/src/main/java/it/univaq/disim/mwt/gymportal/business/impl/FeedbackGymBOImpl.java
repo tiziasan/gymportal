@@ -1,17 +1,15 @@
 package it.univaq.disim.mwt.gymportal.business.impl;
 
-import java.util.Set;
-
+import it.univaq.disim.mwt.gymportal.business.BusinessException;
+import it.univaq.disim.mwt.gymportal.business.FeedbackGymBO;
+import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
+import it.univaq.disim.mwt.gymportal.repository.FeedbackGymRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import it.univaq.disim.mwt.gymportal.business.BusinessException;
-import it.univaq.disim.mwt.gymportal.business.FeedbackGymBO;
-import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
-import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
-import it.univaq.disim.mwt.gymportal.repository.FeedbackGymRepository;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -34,7 +32,7 @@ public class FeedbackGymBOImpl implements FeedbackGymBO {
 
 	@Override
 	public void deleteFeedbackGym(FeedbackGym feedbackGym) throws BusinessException {
-		feedbackGymRepository.delete(feedbackGym);
+		feedbackGymRepository.deleteById(feedbackGym.getId());
 		
 	}
 

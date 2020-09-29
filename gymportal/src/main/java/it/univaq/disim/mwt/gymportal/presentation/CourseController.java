@@ -1,27 +1,20 @@
 package it.univaq.disim.mwt.gymportal.presentation;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-
-import javax.validation.Valid;
-
 import it.univaq.disim.mwt.gymportal.business.*;
+import it.univaq.disim.mwt.gymportal.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import it.univaq.disim.mwt.gymportal.domain.Course;
-import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
-import it.univaq.disim.mwt.gymportal.domain.Gym;
+import javax.validation.Valid;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("course")
@@ -40,6 +33,9 @@ public class CourseController {
 	
 	@Autowired
 	private FeedbackGymBO serviseFeedbackGym;
+
+	@Autowired
+	private  UserBO userService;
 	
 	@GetMapping("/create")
     public String createStart(Model model) {
@@ -66,7 +62,7 @@ public class CourseController {
 	
 	@GetMapping(value= {"/gym/{id}", "/gym/{id}?search={search}"})
 	public String listCo(@PathVariable long id, @RequestParam(required = false) String search, Model model) throws BusinessException {
-		List<Course> courseList;
+		Set<Course> courseList;
 		if(search != null) {
 			courseList=serviceCourse.searchByIdAndName(id, search);
 			model.addAttribute("search", search);
@@ -90,19 +86,20 @@ public class CourseController {
     }
 	
 	@PostMapping("/delete/{id}")
-	public String delete(@ModelAttribute("course") Course course, Errors errors) throws BusinessException {
+	public String delete(@ModelAttribute("course") Course course, Errors errors, Model model) throws BusinessException {
 		Course courseComplete = serviceCourse.findByID(course.getId());
 
 		if (errors.hasErrors()) {
 			return "/common/error";
 		}
+
 		long id = courseComplete.getGym().getId();
 		String redirect = "redirect:/course/gym?id=" + id;
 		serviceFavoriteCourse.deleteAllByCourse(course);
 		serviceFeedbackCourse.deleteAllByCourse(course);
 		serviceCourse.deleteCourse(course);
-		return redirect;
-	}
+		model.addAttribute("success", "Eliminazione del corso andata a buon fine");
+		return "/index";	}
 	
 	@GetMapping("/update/{id}")
 	public String updateStart(@PathVariable long id, Model model) throws BusinessException {
@@ -126,8 +123,12 @@ public class CourseController {
 	
 	@ModelAttribute
 	public void addAll(Model model) throws BusinessException {
-		List<Gym> gyms = serviceGym.findAllGym();
-		model.addAttribute("gyms", gyms);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if(auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
+			Manager user = userService.findUserByUsername(auth.getName());
+			Set<Gym> gyms = user.getGym();
+			model.addAttribute("gyms", gyms);
+		}
 	}
 	
 	

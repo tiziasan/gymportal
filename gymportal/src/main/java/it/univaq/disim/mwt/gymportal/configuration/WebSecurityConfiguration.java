@@ -1,6 +1,7 @@
 package it.univaq.disim.mwt.gymportal.configuration;
 
 import it.univaq.disim.mwt.gymportal.domain.Role;
+import it.univaq.disim.mwt.gymportal.security.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -9,8 +10,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import it.univaq.disim.mwt.gymportal.security.MyUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
@@ -35,8 +34,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.logoutSuccessUrl("/").and().exceptionHandling().accessDeniedPage("/login").and()
 				.authorizeRequests() // Specificare le url che
 				.antMatchers("/", "/static/**", "/favicon.ico","/login","/chat/**").permitAll().antMatchers("/common/**").authenticated()
-				.antMatchers("/gym/**","/course/create","/course/update","/course/delete","/gym/delete","/gym/delete","/gym/delete").hasAuthority(Role.Values.MANAGER)
-		        .antMatchers("/gym/region","/feedback/**","/feedbackCourse/**").hasAuthority(Role.Values.CUSTOMER);
+				.antMatchers("/gym/**","/course/create","/course/update","/course/delete","/gym/delete","/gym/delete","/gym/delete","/feedbackCourse/{id}","/feedback/{id}").hasAuthority(Role.Values.MANAGER)
+		        .antMatchers("/gym/region","/feedback/**","/feedbackCourse/**","/feedback/{id}","/feedbackCourse/{id}").hasAuthority(Role.Values.CUSTOMER);
 
 
 	}

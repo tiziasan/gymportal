@@ -2,21 +2,20 @@ package it.univaq.disim.mwt.gymportal.repository;
 
 
 import it.univaq.disim.mwt.gymportal.domain.Chat;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import java.util.Set;
 
 @Repository
 public interface ChatRepository extends MongoRepository<Chat, String> {
 
 	Chat findChatById(String id);
 
-	List<Chat> findByUserId(long userId);
+	Set<Chat> findByUserId(long userId);
 	
-	List<Chat> findByGymId(long gymId);
+	Set<Chat> findByGymId(long gymId);
 
 	Chat findByUserIdAndGymId(long userId, long gymId);
 	

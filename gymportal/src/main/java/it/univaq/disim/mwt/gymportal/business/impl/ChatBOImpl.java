@@ -4,11 +4,11 @@ import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.ChatBO;
 import it.univaq.disim.mwt.gymportal.domain.Chat;
 import it.univaq.disim.mwt.gymportal.repository.ChatRepository;
-
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class ChatBOImpl implements ChatBO {
@@ -22,7 +22,7 @@ public class ChatBOImpl implements ChatBO {
     }
 
 	@Override
-	public void saveAllChats(List<Chat> chatList) throws BusinessException {
+	public void saveAllChats(Set<Chat> chatList) throws BusinessException {
 		chatRepository.saveAll(chatList);
 	}
 
@@ -37,12 +37,12 @@ public class ChatBOImpl implements ChatBO {
 	}
 
 	@Override
-	public List<Chat> findByUserId(long userId) throws BusinessException {
+	public Set<Chat> findByUserId(long userId) throws BusinessException {
 		return chatRepository.findByUserId(userId);
 	}
 
 	@Override
-	public List<Chat> findByGymId(long gymId) throws BusinessException {
+	public Set<Chat> findByGymId(long gymId) throws BusinessException {
 		return chatRepository.findByGymId(gymId);
 	}
 

@@ -1,13 +1,12 @@
 package it.univaq.disim.mwt.gymportal.domain;
 
-import java.io.Serializable;
-import java.util.Objects;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-
-import org.hibernate.validator.constraints.Length;
+import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @DiscriminatorColumn(name="role", discriminatorType = DiscriminatorType.STRING)
@@ -115,5 +114,17 @@ public class User extends BaseEntity implements Serializable {
 	@Override
 	public int hashCode() {
 		return Objects.hash(getUsername(), getEmail());
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"username='" + username + '\'' +
+				", email='" + email + '\'' +
+				", password='" + password + '\'' +
+				", name='" + name + '\'' +
+				", lastname='" + lastname + '\'' +
+				", role=" + role +
+				'}';
 	}
 }

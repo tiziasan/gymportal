@@ -1,16 +1,12 @@
 package it.univaq.disim.mwt.gymportal.domain;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 @Table(name = "gym")
@@ -50,13 +46,13 @@ public class Gym extends BaseEntity implements Serializable {
 	private String region;
 
 	@OneToMany(mappedBy="gym")
-	private List<FeedbackGym> feedbackGym;
+	private Set<FeedbackGym> feedbackGym;
 
 	@OneToMany(mappedBy="gym")
-	private List<FavoriteGym> favoriteGym;
+	private Set<FavoriteGym> favoriteGym;
 
 	@OneToMany(mappedBy="gym")
-	private List<Course> course;
+	private Set<Course> course;
 
 	@ManyToOne
 	private Manager user;
@@ -101,15 +97,15 @@ public class Gym extends BaseEntity implements Serializable {
 		this.user = user;
 	}
 
-	public List<FeedbackGym> getFeedbackGym() {
+	public Set<FeedbackGym> getFeedbackGym() {
 		return feedbackGym;
 	}
 
-	public List<FavoriteGym> getFavoriteGym() {
+	public Set<FavoriteGym> getFavoriteGym() {
 		return favoriteGym;
 	}
 
-	public List<Course> getCourse() {
+	public Set<Course> getCourse() {
 		return course;
 	}
 
@@ -128,5 +124,19 @@ public class Gym extends BaseEntity implements Serializable {
 	@Override
 	public int hashCode() {
 		return Objects.hash(getName(), getAddress(), getProvince(), getRegion());
+	}
+
+	@Override
+	public String toString() {
+		return "Gym{" +
+				"name='" + name + '\'' +
+				", address='" + address + '\'' +
+				", province='" + province + '\'' +
+				", region='" + region + '\'' +
+				", feedbackGym=" + feedbackGym +
+				", favoriteGym=" + favoriteGym +
+				", course=" + course +
+				", user=" + user +
+				'}';
 	}
 }

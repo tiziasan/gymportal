@@ -1,12 +1,5 @@
 package it.univaq.disim.mwt.gymportal.presentation;
 
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.validation.Valid;
-
 import it.univaq.disim.mwt.gymportal.business.*;
 import it.univaq.disim.mwt.gymportal.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +9,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Controller
 @RequestMapping("chat")
@@ -45,8 +41,8 @@ public class ChatController {
         if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))){ //se gestore restituisco mappa delle palestre e la lista delle chat per ognuna di esse
 
             User user = userService.findUserByUsername(auth.getName());
-            List<Gym> gyms = serviceGym.searchByUser(user.getId());
-            Map<String, List<Chat>> chatMap = new HashMap<>();
+            Set<Gym> gyms = serviceGym.searchByUser(user.getId());
+            Map<String, Set<Chat>> chatMap = new HashMap<>();
             for (Gym g: gyms ) {
                 chatMap.put(g.getName(), serviceChat.findByGymId(g.getId()));
             }
@@ -55,26 +51,26 @@ public class ChatController {
             if(idChat != null && idGym == null){
                 Chat chat = serviceChat.findChatById(idChat);
                 model.addAttribute("chat", chat);
-                List<Message> messageList = serviceMessage.findByChat(chat);
+                Set<Message> messageList = serviceMessage.findByChat(chat);
                 model.addAttribute("messageList", messageList);
             }
 
         } else { //se utente restituisco lista chat dell'utente con le palestre
 
             User user = userService.findUserByUsername(auth.getName());
-            List<Chat> chatList = serviceChat.findByUserId(user.getId());
+            Set<Chat> chatList = serviceChat.findByUserId(user.getId());
             model.addAttribute("chatList", chatList);
 
             if(idChat != null && idGym == null){    //se idchat settata allora già esiste
                 Chat chat = serviceChat.findChatById(idChat);
                 model.addAttribute("chat", chat);
-                List<Message> messageList = serviceMessage.findByChat(chat);
+                Set<Message> messageList = serviceMessage.findByChat(chat);
                 model.addAttribute("messageList", messageList);
             }
             if(idChat == null && idGym != null){    //se id gym settato restituisci la chat che fa match con idGym e username e restituisci la lista dei messaggi di quella specifica chat
                 Chat chat = serviceChat.findByUserIdAndGymId(user.getId(), idGym);     //se chat non esiste non bisogna crearla qui ma nel metodo che fa inserimento dei messaggi
                 model.addAttribute("chat", chat);
-                List<Message> messageList = serviceMessage.findByChat(chat);
+                Set<Message> messageList = serviceMessage.findByChat(chat);
                 model.addAttribute("messageList", messageList);
             }
         }

@@ -2,13 +2,12 @@ package it.univaq.disim.mwt.gymportal.business.impl;
 
 
 import it.univaq.disim.mwt.gymportal.business.UserBO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
-
 import it.univaq.disim.mwt.gymportal.domain.Role;
 import it.univaq.disim.mwt.gymportal.domain.User;
 import it.univaq.disim.mwt.gymportal.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
 @Service
 public class UserBOimpl implements UserBO {

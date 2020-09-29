@@ -5,11 +5,10 @@ import it.univaq.disim.mwt.gymportal.business.MessageBO;
 import it.univaq.disim.mwt.gymportal.domain.Chat;
 import it.univaq.disim.mwt.gymportal.domain.Message;
 import it.univaq.disim.mwt.gymportal.repository.MessageRepository;
-
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service
 public class MessageBOImpl implements MessageBO {
@@ -23,7 +22,7 @@ public class MessageBOImpl implements MessageBO {
     }
 
 	@Override
-	public List<Message> findByChat(Chat chat) throws BusinessException {
+	public Set<Message> findByChat(Chat chat) throws BusinessException {
 		return messageRepository.findByChat(chat);
 	}
 

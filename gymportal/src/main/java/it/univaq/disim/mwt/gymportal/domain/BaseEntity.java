@@ -1,5 +1,6 @@
 package it.univaq.disim.mwt.gymportal.domain;
 
+
 import javax.persistence.*;
 import java.io.Serializable;
 

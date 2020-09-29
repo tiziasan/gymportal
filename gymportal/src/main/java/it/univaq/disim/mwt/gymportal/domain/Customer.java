@@ -4,6 +4,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @DiscriminatorValue(Role.Values.CUSTOMER)
@@ -21,30 +22,32 @@ public class Customer extends User {
     }
 
     @OneToMany(mappedBy="user")
-    private List<FeedbackCourse> feedbackCourse;
+    private Set<FeedbackCourse> feedbackCourse;
 
     @OneToMany(mappedBy="user")
-    private List<FavoriteGym> favoriteGym;
+    private Set<FavoriteGym> favoriteGym;
 
     @OneToMany(mappedBy="user")
-    private List<FavoriteCourse> favoriteCourse;
+    private Set<FavoriteCourse> favoriteCourse;
 
     @OneToMany(mappedBy="user")
-    private List<FeedbackGym> feedbackGym;
+    private Set<FeedbackGym> feedbackGym;
 
-    public List<FeedbackCourse> getFeedbackCourse() {
+    public Set<FeedbackCourse> getFeedbackCourse() {
         return feedbackCourse;
     }
 
-    public List<FavoriteGym> getFavoriteGym() {
+    public Set<FavoriteGym> getFavoriteGym() {
         return favoriteGym;
     }
 
-    public List<FavoriteCourse> getFavoriteCourse() {
+    public Set<FavoriteCourse> getFavoriteCourse() {
         return favoriteCourse;
     }
 
-    public List<FeedbackGym> getFeedbackGym() {
+    public Set<FeedbackGym> getFeedbackGym() {
         return feedbackGym;
     }
+
+
 }

@@ -1,11 +1,9 @@
 package it.univaq.disim.mwt.gymportal.presentation;
 
-import javax.validation.Valid;
-
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.UserBO;
 import it.univaq.disim.mwt.gymportal.domain.Customer;
-import it.univaq.disim.mwt.gymportal.domain.Role;
+import it.univaq.disim.mwt.gymportal.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,9 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import it.univaq.disim.mwt.gymportal.domain.User;
-
-import java.util.function.Consumer;
+import javax.validation.Valid;
 
 @Controller
 public class AuthController {

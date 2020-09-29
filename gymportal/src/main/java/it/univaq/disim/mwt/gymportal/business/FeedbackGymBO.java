@@ -1,10 +1,9 @@
 package it.univaq.disim.mwt.gymportal.business;
 
-import java.util.List;
-import java.util.Set;
-
 import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
+
+import java.util.Set;
 
 public interface FeedbackGymBO {
 	

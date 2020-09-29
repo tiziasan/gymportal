@@ -1,12 +1,9 @@
 package it.univaq.disim.mwt.gymportal.business;
 
-import java.util.List;
-import java.util.Set;
-
 import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.FavoriteCourse;
-import it.univaq.disim.mwt.gymportal.domain.FavoriteGym;
-import it.univaq.disim.mwt.gymportal.domain.Gym;
+
+import java.util.Set;
 
 public interface FavoriteCourseBO {
 	

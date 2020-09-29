@@ -1,29 +1,22 @@
 
 package it.univaq.disim.mwt.gymportal.presentation;
 
-import javax.validation.Valid;
-
+import it.univaq.disim.mwt.gymportal.business.BusinessException;
+import it.univaq.disim.mwt.gymportal.business.FavoriteGymBO;
+import it.univaq.disim.mwt.gymportal.business.GymBO;
 import it.univaq.disim.mwt.gymportal.business.UserBO;
 import it.univaq.disim.mwt.gymportal.domain.Customer;
+import it.univaq.disim.mwt.gymportal.domain.FavoriteGym;
+import it.univaq.disim.mwt.gymportal.domain.Gym;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import it.univaq.disim.mwt.gymportal.business.BusinessException;
-import it.univaq.disim.mwt.gymportal.business.FavoriteGymBO;
-import it.univaq.disim.mwt.gymportal.business.GymBO;
-import it.univaq.disim.mwt.gymportal.domain.FavoriteGym;
-import it.univaq.disim.mwt.gymportal.domain.Gym;
-import it.univaq.disim.mwt.gymportal.domain.User;
+import javax.validation.Valid;
 
 @Controller
 
@@ -62,8 +55,10 @@ public class FavoriteGymController {
 		if (errors.hasErrors()) {
 			String message = "Errore nell'inserimento";
 			model.addAttribute("message", message);
-			return "/feedback/form";
+			return "redirect:/profile";
 		}
+		System.out.println(favoriteGym);
+
 		serviceFavoriteGym.createFavoriteGym(favoriteGym);
 		
 

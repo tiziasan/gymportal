@@ -1,15 +1,15 @@
 package it.univaq.disim.mwt.gymportal.business.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.CourseBO;
 import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.repository.CourseRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -20,7 +20,7 @@ public class CourseBOImpl implements CourseBO {
 
 	@Override
 	public void deleteCourse(Course course) throws BusinessException {
-		courseRepository.delete(course);
+		courseRepository.deleteById(course.getId());
 	}
 
 	@Override
@@ -34,12 +34,12 @@ public class CourseBOImpl implements CourseBO {
 	}
 
 	@Override
-	public List<Course> findAllCourse() throws BusinessException {
-		return (List<Course>) courseRepository.findAll();
+	public Set<Course> findAllCourse() throws BusinessException {
+		return (Set<Course>) courseRepository.findAll();
 	}
 
 	@Override
-	public List<Course> findCourseByGymId(long gym_id) throws BusinessException {
+	public Set<Course> findCourseByGymId(long gym_id) throws BusinessException {
 		return courseRepository.findCourseByGymId(gym_id);
 	}
 
@@ -54,12 +54,12 @@ public class CourseBOImpl implements CourseBO {
 	}
 
 	@Override
-	public List<Course> searchByIdAndName(long id, String name) throws BusinessException {
+	public Set<Course> searchByIdAndName(long id, String name) throws BusinessException {
 		 return courseRepository.searchByIdAndName(id, name);
 	}
 	
 	@Override
-	public List<Course> searchByIdAndNameAndUser(long id, String name, long idUtente) throws BusinessException {
+	public Set<Course> searchByIdAndNameAndUser(long id, String name, long idUtente) throws BusinessException {
 		 return courseRepository.searchByIdAndNameAndUser(id, name, idUtente);
 	}
 	

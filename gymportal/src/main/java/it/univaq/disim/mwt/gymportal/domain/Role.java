@@ -7,17 +7,9 @@ public enum Role {
 
     private String value;
 
-    private Role(String role) {
-        switch (role){
-            case "MANAGER":
-                setValue(role);
-                break;
-            case "CUSTOMER":
-                setValue(role);
-                break;
-            default:
-                throw new IllegalArgumentException("Incorrect use of Role");
-        }
+    Role(String role) {
+
+        setValue(role);
     }
 
     public String getValue() {
@@ -29,8 +21,8 @@ public enum Role {
     }
 
     public static class Values {
-        public static final String CUSTOMER= "CUSTOMER";
-        public static final String MANAGER= "MANAGER";
+        public static final String CUSTOMER = "CUSTOMER";
+        public static final String MANAGER = "MANAGER";
     }
 
 //        CUSTOMER('C'),

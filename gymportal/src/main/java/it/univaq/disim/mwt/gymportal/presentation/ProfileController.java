@@ -1,12 +1,5 @@
 package it.univaq.disim.mwt.gymportal.presentation;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import javax.validation.Valid;
-
 import it.univaq.disim.mwt.gymportal.business.*;
 import it.univaq.disim.mwt.gymportal.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +14,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 @RequestMapping("/profile")
@@ -54,10 +53,10 @@ public class ProfileController {
 
 		User user;
 
-		List<FeedbackCourse> feedbackCourseList = new ArrayList<>();
-		List<FeedbackGym> feedbackGymList = new ArrayList<>();
-		List<FavoriteGym> favoriteGymList = new ArrayList<>();
-		List<FavoriteCourse> favoriteCourseList = new ArrayList<>();
+		Set<FeedbackCourse> feedbackCourseList = new HashSet<>();
+		Set<FeedbackGym> feedbackGymList = new HashSet<>();
+		Set<FavoriteGym> favoriteGymList = new HashSet<>();
+		Set<FavoriteCourse> favoriteCourseList = new HashSet<>();
 
 		if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER))){
 			Customer customer = userService.findUserByUsername(auth.getName());
@@ -109,7 +108,7 @@ public class ProfileController {
 			userService.updateManager(user);
 		}
 
-		List<Chat> chatList = serviceChat.findByUserId(user.getId());
+		Set<Chat> chatList = serviceChat.findByUserId(user.getId());
 		for ( Chat c: chatList ) {
 			c.setUserName(user.getName() + " " + user.getLastname());
 		}

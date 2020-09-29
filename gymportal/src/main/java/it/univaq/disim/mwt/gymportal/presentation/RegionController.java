@@ -1,28 +1,25 @@
 package it.univaq.disim.mwt.gymportal.presentation;
 
-import java.util.List;
-
-import javax.websocket.server.PathParam;
-
+import it.univaq.disim.mwt.gymportal.business.BusinessException;
+import it.univaq.disim.mwt.gymportal.business.GymBO;
 import it.univaq.disim.mwt.gymportal.business.UserBO;
+import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.domain.Manager;
 import it.univaq.disim.mwt.gymportal.domain.Role;
+import it.univaq.disim.mwt.gymportal.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import it.univaq.disim.mwt.gymportal.business.BusinessException;
-import it.univaq.disim.mwt.gymportal.business.GymBO;
-import it.univaq.disim.mwt.gymportal.domain.Gym;
-import it.univaq.disim.mwt.gymportal.domain.User;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("region")
@@ -39,11 +36,11 @@ public class RegionController {
 	public String listGym(@PathVariable String region, @RequestParam(required = false) String search, Model model)
 			throws BusinessException {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		List<Gym> gymList = null;
+		Set<Gym> gymList = null;
 
 		if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
 			Manager user = userService.findUserByUsername(auth.getName());
-			gymList = user.getGym();
+			gymList = serviceGym.searchByRegionAndUser(region,user.getId());
 		}
 
 		if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ANONYMOUS")) ||

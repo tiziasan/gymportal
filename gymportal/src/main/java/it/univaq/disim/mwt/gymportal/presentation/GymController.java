@@ -1,9 +1,10 @@
 package it.univaq.disim.mwt.gymportal.presentation;
 
-import javax.validation.Valid;
-
 import it.univaq.disim.mwt.gymportal.business.*;
-import it.univaq.disim.mwt.gymportal.domain.*;
+import it.univaq.disim.mwt.gymportal.domain.Chat;
+import it.univaq.disim.mwt.gymportal.domain.Course;
+import it.univaq.disim.mwt.gymportal.domain.Gym;
+import it.univaq.disim.mwt.gymportal.domain.Manager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,7 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.Valid;
+import java.util.Set;
 
 @Controller
 @RequestMapping("gym")
@@ -71,11 +73,11 @@ public class GymController {
     }
 	
 	@PostMapping("/delete/{id}")
-	public String delete(@ModelAttribute("gym") Gym gym, Errors errors) throws BusinessException {
+	public String delete(@ModelAttribute("gym") Gym gym, Errors errors, Model model) throws BusinessException {
 		if (errors.hasErrors()) {
 			return "/common/error";
 		}
-		List<Course> courses = serviceCourse.findCourseByGymId(gym.getId());
+		Set<Course> courses = serviceCourse.findCourseByGymId(gym.getId());
 		for (Course c: courses){
 			serviceFavoriteCourse.deleteAllByCourse(c);
 			serviceFeedbackCourse.deleteAllByCourse(c);
@@ -86,13 +88,14 @@ public class GymController {
 		serviceFeedbackGym.deleteAllByGym(gym);
 		serviceGym.deleteGym(gym);
 
-		List<Chat> chats = serviceChat.findByGymId(gym.getId());
+		Set<Chat> chats = serviceChat.findByGymId(gym.getId());
 		for ( Chat c: chats ) {
 			serviceMessage.deleteMessagesByChat(c);
 		}
 		serviceChat.deleteChatsByGymId(gym.getId());
+		model.addAttribute("success", "Eliminazione della palestra andata a buon fine");
 
-		return "redirect:/";
+		return "/index";
 	}
 	
 	@GetMapping("/update/{id}")
@@ -113,7 +116,7 @@ public class GymController {
 		}
 		serviceGym.updateGym(gym);
 
-		List<Chat> chatList = serviceChat.findByGymId(gym.getId());
+		Set<Chat> chatList = serviceChat.findByGymId(gym.getId());
 		for ( Chat c: chatList ) {
 			c.setGymName(gym.getName());
 		}

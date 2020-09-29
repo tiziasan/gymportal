@@ -4,6 +4,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @DiscriminatorValue(Role.Values.MANAGER)
@@ -21,9 +22,9 @@ public class Manager extends User{
     }
 
     @OneToMany(mappedBy="user")
-    private List<Gym> gym;
+    private Set<Gym> gym;
 
-    public List<Gym> getGym() {
+    public Set<Gym> getGym() {
         return gym;
     }
 

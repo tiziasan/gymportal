@@ -1,12 +1,9 @@
 package it.univaq.disim.mwt.gymportal.repository;
 
-import java.util.List;
-import java.util.Set;
-
+import it.univaq.disim.mwt.gymportal.domain.FavoriteCourse;
 import org.springframework.data.jpa.repository.Query;
 
-import it.univaq.disim.mwt.gymportal.domain.FavoriteCourse;
-import it.univaq.disim.mwt.gymportal.domain.FavoriteGym;
+import java.util.Set;
 
 public interface FavoriteCourseImplCustom {
 	

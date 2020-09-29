@@ -1,14 +1,9 @@
 package it.univaq.disim.mwt.gymportal.repository;
 
-import java.util.List;
-import java.util.Set;
-
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.transaction.annotation.Transactional;
-
-import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.Set;
 
 public interface FeedbackCourseImplCustom {
 	
