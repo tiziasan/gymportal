@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@Inheritance
 @DiscriminatorColumn(name="role", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "user")
 public class User extends BaseEntity implements Serializable {
@@ -17,6 +18,16 @@ public class User extends BaseEntity implements Serializable {
 	}
 
 	public User(String username, String email, String password, String name, String lastname, Role role) {
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.name = name;
+		this.lastname = lastname;
+		this.role = role;
+	}
+
+	public User(long id, String username, String email, String password, String name, String lastname, Role role) {
+		this.setId(id);
 		this.username = username;
 		this.email = email;
 		this.password = password;
@@ -119,7 +130,8 @@ public class User extends BaseEntity implements Serializable {
 	@Override
 	public String toString() {
 		return "User{" +
-				"username='" + username + '\'' +
+				"id='" + getId() + '\'' +
+				", username='" + username + '\'' +
 				", email='" + email + '\'' +
 				", password='" + password + '\'' +
 				", name='" + name + '\'' +
