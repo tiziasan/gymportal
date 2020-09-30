@@ -128,7 +128,8 @@ public class Gym extends BaseEntity implements Serializable {
 	@Override
 	public String toString() {
 		return "Gym{" +
-				"name='" + name + '\'' +
+				"id='" + getId() + '\'' +
+				", name='" + name + '\'' +
 				", address='" + address + '\'' +
 				", province='" + province + '\'' +
 				", region='" + region + '\'' +

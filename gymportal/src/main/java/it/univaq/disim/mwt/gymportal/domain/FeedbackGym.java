@@ -93,7 +93,8 @@ public class FeedbackGym extends BaseEntity implements Serializable {
 	@Override
 	public String toString() {
 		return "FeedbackGym{" +
-				"feed='" + feed + '\'' +
+				"id='" + getId() + '\'' +
+				", feed='" + feed + '\'' +
 				", rating=" + rating +
 				", user=" + user +
 				", gym=" + gym +

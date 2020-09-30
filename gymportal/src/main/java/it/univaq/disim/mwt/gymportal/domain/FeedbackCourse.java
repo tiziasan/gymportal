@@ -93,7 +93,8 @@ public class FeedbackCourse extends BaseEntity implements Serializable {
 	@Override
 	public String toString() {
 		return "FeedbackCourse{" +
-				"feed='" + feed + '\'' +
+				"id='" + getId() + '\'' +
+				", feed='" + feed + '\'' +
 				", rating=" + rating +
 				", user=" + user +
 				", course=" + course +
