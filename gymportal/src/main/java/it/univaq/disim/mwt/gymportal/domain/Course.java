@@ -123,7 +123,8 @@ public class Course extends BaseEntity implements Serializable {
 	@Override
 	public String toString() {
 		return "Course{" +
-				"name='" + name + '\'' +
+				"id='" + getId() + '\'' +
+				", name='" + name + '\'' +
 				", description='" + description + '\'' +
 				", code='" + code + '\'' +
 				", feedbackCourse=" + feedbackCourse +
