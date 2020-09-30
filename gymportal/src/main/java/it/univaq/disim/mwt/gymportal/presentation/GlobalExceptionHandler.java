@@ -20,11 +20,15 @@ public class GlobalExceptionHandler {
 		PrintWriter printWriter = new PrintWriter(stringWriter);
 		ex.printStackTrace(printWriter);
 		printWriter.flush();
+		if(stringWriter.toString().contains("Duplicate")){
+			model.addAttribute("success", "Hai già inserito il preferito");
+			return "/index";
 
-		String message = (ex.getCause() == null) ? "" : ex.getCause().getMessage();
-		model.addAttribute("errorCause", message);
-		model.addAttribute("errorMessage", stringWriter.toString());
-		return "/common/error";
+		} else {
+			model.addAttribute("errorMessage", stringWriter.toString());
+			return "/common/error";
+
+		}
 	}
 
 }
