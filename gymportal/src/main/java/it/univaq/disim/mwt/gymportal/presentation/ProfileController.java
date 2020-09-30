@@ -106,11 +106,11 @@ public class ProfileController {
 			userService.updateManager(user);
 		}
 
-		/*Set<Chat> chatList = serviceChat.findByUserId(user);
+		Set<Chat> chatList = serviceChat.findByUserId(user);
 		for ( Chat c: chatList ) {
 			c.setUserName(user.getName() + " " + user.getLastname());
 		}
-		serviceChat.saveAllChats(chatList);*/
+		serviceChat.saveAllChats(chatList);
 
 		return "redirect:/login";
 
