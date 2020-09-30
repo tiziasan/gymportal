@@ -20,11 +20,16 @@ public class GlobalExceptionHandler {
 		PrintWriter printWriter = new PrintWriter(stringWriter);
 		ex.printStackTrace(printWriter);
 		printWriter.flush();
-		if(stringWriter.toString().contains("Duplicate")){
-			model.addAttribute("success", "Hai già inserito il preferito");
+		if(stringWriter.toString().contains("UK3720qfodb5fi73gktwatyprks")){
+			model.addAttribute("success", "Hai già inserito la palestra ai preferiti");
 			return "/index";
 
-		} else {
+		} else if (stringWriter.toString().contains("UKmttnhvruuluxke3r6mkni90ht")){
+			model.addAttribute("success", "Hai già inserito il corso ai preferiti");
+			return "/index";
+		}
+
+		else {
 			model.addAttribute("errorMessage", stringWriter.toString());
 			return "/common/error";
 
