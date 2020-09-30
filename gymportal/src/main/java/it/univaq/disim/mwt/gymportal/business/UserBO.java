@@ -15,7 +15,7 @@ public interface UserBO {
 
     User saveUser (User user) throws BusinessException;
 
-	User updateCustomer (Customer user) throws BusinessException;
+	User updateCustomer (User user) throws BusinessException;
 
-	User updateManager (Manager user) throws BusinessException;
+	User updateManager (User user) throws BusinessException;
 }

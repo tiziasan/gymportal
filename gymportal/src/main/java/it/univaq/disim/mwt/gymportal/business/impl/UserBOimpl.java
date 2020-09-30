@@ -43,17 +43,19 @@ public class UserBOimpl implements UserBO {
     }
 
     @Override
-    public User updateCustomer(Customer user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+    public User updateCustomer(User user) {
+        Customer customer = new Customer(user);
+        customer.setPassword(bCryptPasswordEncoder.encode(customer.getPassword()));
 
-        return userRepository.save(user);
+        return userRepository.save(customer);
     }
 
     @Override
-    public User updateManager(Manager user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+    public User updateManager(User user) {
+        Manager manager = new Manager(user);
+        manager.setPassword(bCryptPasswordEncoder.encode(manager.getPassword()));
 
-        return userRepository.save(user);
+        return userRepository.save(manager);
     }
 
 
