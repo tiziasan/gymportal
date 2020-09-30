@@ -25,7 +25,7 @@ public class GymController {
 	private GymBO serviceGym;
 
 	@Autowired
-	private FavoriteGymBO serviceFavoriteGym;
+	private FavoriteBO serviceFavoriteGym;
 	@Autowired
 	private FeedbackGymBO serviceFeedbackGym;
 	
@@ -33,7 +33,7 @@ public class GymController {
 	private CourseBO serviceCourse;
 
 	@Autowired
-	private FavoriteCourseBO serviceFavoriteCourse;
+	private FavoriteBO serviceFavoriteCourse;
 	@Autowired
 	private FeedbackCourseBO serviceFeedbackCourse;
 	

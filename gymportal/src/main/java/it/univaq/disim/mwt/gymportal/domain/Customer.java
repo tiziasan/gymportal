@@ -3,7 +3,6 @@ package it.univaq.disim.mwt.gymportal.domain;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import java.util.List;
 import java.util.Set;
 
 @Entity

@@ -3,9 +3,7 @@ package it.univaq.disim.mwt.gymportal.repository;
 import it.univaq.disim.mwt.gymportal.domain.Course;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Set;
 
 public interface CourseImplCustom {

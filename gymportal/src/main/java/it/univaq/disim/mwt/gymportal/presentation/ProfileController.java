@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
@@ -37,10 +35,10 @@ public class ProfileController {
 	private FeedbackGymBO serviceFeedbackGym;
 	
 	@Autowired
-	private FavoriteGymBO serviceFavoriteGym;
+	private FavoriteBO serviceFavoriteGym;
 	
 	@Autowired
-	private FavoriteCourseBO serviceFavoriteCourse;
+	private FavoriteBO serviceFavoriteCourse;
 
 	@Autowired
 	private ChatBO serviceChat;
@@ -108,11 +106,11 @@ public class ProfileController {
 			userService.updateManager(user);
 		}
 
-		Set<Chat> chatList = serviceChat.findByUserId(user);
+		/*Set<Chat> chatList = serviceChat.findByUserId(user);
 		for ( Chat c: chatList ) {
 			c.setUserName(user.getName() + " " + user.getLastname());
 		}
-		serviceChat.saveAllChats(chatList);
+		serviceChat.saveAllChats(chatList);*/
 
 		return "redirect:/login";
 

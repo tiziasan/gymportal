@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -24,7 +23,7 @@ public class CourseController {
 	private CourseBO serviceCourse;
 
 	@Autowired
-	private FavoriteCourseBO serviceFavoriteCourse;
+	private FavoriteBO serviceFavoriteCourse;
 	@Autowired
 	private FeedbackCourseBO serviceFeedbackCourse;
 	

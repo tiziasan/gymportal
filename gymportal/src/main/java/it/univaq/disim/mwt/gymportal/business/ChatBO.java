@@ -4,7 +4,6 @@ import it.univaq.disim.mwt.gymportal.domain.Chat;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.domain.User;
 
-import java.util.List;
 import java.util.Set;
 
 public interface ChatBO {

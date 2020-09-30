@@ -3,7 +3,6 @@ package it.univaq.disim.mwt.gymportal.business;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.domain.User;
 
-import java.util.List;
 import java.util.Set;
 
 public interface GymBO {

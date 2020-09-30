@@ -2,7 +2,7 @@
 package it.univaq.disim.mwt.gymportal.presentation;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
-import it.univaq.disim.mwt.gymportal.business.FavoriteGymBO;
+import it.univaq.disim.mwt.gymportal.business.FavoriteBO;
 import it.univaq.disim.mwt.gymportal.business.GymBO;
 import it.univaq.disim.mwt.gymportal.business.UserBO;
 import it.univaq.disim.mwt.gymportal.domain.Customer;
@@ -24,7 +24,7 @@ import javax.validation.Valid;
 public class FavoriteGymController {
 
 	@Autowired
-	private FavoriteGymBO serviceFavoriteGym;
+	private FavoriteBO serviceFavoriteGym;
 
 	@Autowired
 	private GymBO serviceGym;
