@@ -3,6 +3,7 @@ package it.univaq.disim.mwt.gymportal.business.impl;
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.GymBO;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
+import it.univaq.disim.mwt.gymportal.domain.User;
 import it.univaq.disim.mwt.gymportal.repository.GymRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,18 +55,18 @@ public class GymBOImpl implements GymBO{
 	}
 	
 	@Override
-	public Set<Gym> searchByRegionAndUser(String region, long id) throws BusinessException {
-		return gymRepository.searchByRegionAndUser(region, id);
+	public Set<Gym> searchByRegionAndUser(String region, User user) throws BusinessException {
+		return gymRepository.searchByRegionAndUser(region, user.getId());
 	}
 	
 	@Override
-	public Set<Gym> searchByRegionAndNameAndUser(String region, String name, long id) throws BusinessException {
-		return gymRepository.searchByRegionAndNameAndUser(region, name, id);
+	public Set<Gym> searchByRegionAndNameAndUser(String region, String name, User user) throws BusinessException {
+		return gymRepository.searchByRegionAndNameAndUser(region, name, user.getId());
 	}
 	
 	@Override
-	public Set<Gym> searchByUser(long id) throws BusinessException {
-		return gymRepository.searchByUser(id);
+	public Set<Gym> searchByUser(User user) throws BusinessException {
+		return gymRepository.searchByUser(user.getId());
 	}
 
 

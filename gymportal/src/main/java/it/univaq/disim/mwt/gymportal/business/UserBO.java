@@ -1,5 +1,6 @@
 package it.univaq.disim.mwt.gymportal.business;
 
+import it.univaq.disim.mwt.gymportal.domain.Customer;
 import it.univaq.disim.mwt.gymportal.domain.Role;
 import it.univaq.disim.mwt.gymportal.domain.User;
 

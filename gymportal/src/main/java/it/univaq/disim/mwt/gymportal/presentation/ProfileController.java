@@ -108,7 +108,7 @@ public class ProfileController {
 			userService.updateManager(user);
 		}
 
-		Set<Chat> chatList = serviceChat.findByUserId(user.getId());
+		Set<Chat> chatList = serviceChat.findByUserId(user);
 		for ( Chat c: chatList ) {
 			c.setUserName(user.getName() + " " + user.getLastname());
 		}

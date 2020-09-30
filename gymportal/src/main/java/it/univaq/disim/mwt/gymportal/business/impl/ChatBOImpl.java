@@ -3,6 +3,8 @@ package it.univaq.disim.mwt.gymportal.business.impl;
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.ChatBO;
 import it.univaq.disim.mwt.gymportal.domain.Chat;
+import it.univaq.disim.mwt.gymportal.domain.Gym;
+import it.univaq.disim.mwt.gymportal.domain.User;
 import it.univaq.disim.mwt.gymportal.repository.ChatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,8 +29,8 @@ public class ChatBOImpl implements ChatBO {
 	}
 
 	@Override
-	public void deleteChatsByGymId(long gymId) throws BusinessException {
-		chatRepository.deleteChatsByGymId(gymId);
+	public void deleteChatsByGymId(Gym gym) throws BusinessException {
+		chatRepository.deleteChatsByGymId(gym.getId());
 	}
 
 	@Override
@@ -37,18 +39,18 @@ public class ChatBOImpl implements ChatBO {
 	}
 
 	@Override
-	public Set<Chat> findByUserId(long userId) throws BusinessException {
-		return chatRepository.findByUserId(userId);
+	public Set<Chat> findByUserId(User user) throws BusinessException {
+		return chatRepository.findByUserId(user.getId());
 	}
 
 	@Override
-	public Set<Chat> findByGymId(long gymId) throws BusinessException {
-		return chatRepository.findByGymId(gymId);
+	public Set<Chat> findByGymId(Gym gym) throws BusinessException {
+		return chatRepository.findByGymId(gym.getId());
 	}
 
 	@Override
-	public Chat findByUserIdAndGymId(long userId, long gymId) throws BusinessException {
-		return chatRepository.findByUserIdAndGymId(userId, gymId);
+	public Chat findByUserIdAndGymId(User user, long gymId) throws BusinessException {
+		return chatRepository.findByUserIdAndGymId(user.getId(), gymId);
 
 	}
 

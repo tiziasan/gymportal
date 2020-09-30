@@ -4,6 +4,7 @@ import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.FeedbackCourseBO;
 import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
+import it.univaq.disim.mwt.gymportal.domain.User;
 import it.univaq.disim.mwt.gymportal.repository.FeedbackCourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,9 +37,10 @@ public class FeedbackCourseBOImpl implements FeedbackCourseBO{
 		
 	}
 
+
 	@Override
-	public Set<FeedbackCourse> findAllFeedbackCourse(long id) throws BusinessException {
-		return feedbackCourseRepository.findAllFeedbackCourse(id);
+	public Set<FeedbackCourse> findAllFeedbackCourse(FeedbackCourse feedbackCourse) throws BusinessException {
+		return feedbackCourseRepository.findAllFeedbackCourse(feedbackCourse.getId());
 	}
 
 	@Override
@@ -48,8 +50,8 @@ public class FeedbackCourseBOImpl implements FeedbackCourseBO{
 	}
 	
 	@Override
-	public Set<FeedbackCourse> findAllFeedbackByUserId(long id) throws BusinessException {
-		return feedbackCourseRepository.findAllFeedbackByUserId(id);
+	public Set<FeedbackCourse> findAllFeedbackByUserId(User user) throws BusinessException {
+		return feedbackCourseRepository.findAllFeedbackByUserId(user.getId());
 
 	}
 

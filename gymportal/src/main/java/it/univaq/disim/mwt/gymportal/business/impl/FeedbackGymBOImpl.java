@@ -4,6 +4,7 @@ import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.FeedbackGymBO;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
+import it.univaq.disim.mwt.gymportal.domain.User;
 import it.univaq.disim.mwt.gymportal.repository.FeedbackGymRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,19 +38,19 @@ public class FeedbackGymBOImpl implements FeedbackGymBO {
 	}
 
 	@Override
-	public Set<FeedbackGym> findAllFeedbackGym(long id) throws BusinessException {
-		return feedbackGymRepository.findAllFeedbackGym(id);
+	public Set<FeedbackGym> findAllFeedbackGym(FeedbackGym feedbackGym) throws BusinessException {
+		return feedbackGymRepository.findAllFeedbackGym(feedbackGym.getId());
 	}
 
 	@Override
-	public Set<FeedbackGym> findAllFeedbackByGym(long id) throws BusinessException {
-		return feedbackGymRepository.findAllFeedbackByGym(id);
+	public Set<FeedbackGym> findAllFeedbackByGym(Gym gym) throws BusinessException {
+		return feedbackGymRepository.findAllFeedbackByGym(gym.getId());
 
 	}
 	
 	@Override
-	public Set<FeedbackGym> findAllFeedbackByUserId(long id) throws BusinessException {
-		return feedbackGymRepository.findAllFeedbackByUserId(id);
+	public Set<FeedbackGym> findAllFeedbackByUserId(User user) throws BusinessException {
+		return feedbackGymRepository.findAllFeedbackByUserId(user.getId());
 
 	}
 

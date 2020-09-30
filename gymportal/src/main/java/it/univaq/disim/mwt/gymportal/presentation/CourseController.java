@@ -32,7 +32,7 @@ public class CourseController {
 	private GymBO serviceGym;
 	
 	@Autowired
-	private FeedbackGymBO serviseFeedbackGym;
+	private FeedbackGymBO serviceFeedbackGym;
 
 	@Autowired
 	private  UserBO userService;
@@ -63,14 +63,15 @@ public class CourseController {
 	@GetMapping(value= {"/gym/{id}", "/gym/{id}?search={search}"})
 	public String listCo(@PathVariable long id, @RequestParam(required = false) String search, Model model) throws BusinessException {
 		Set<Course> courseList;
+		Gym gym = serviceGym.findByID(id);
+
 		if(search != null) {
 			courseList=serviceCourse.searchByIdAndName(id, search);
 			model.addAttribute("search", search);
 		}else {
-			courseList=serviceCourse.findCourseByGymId(id);
+			courseList=serviceCourse.findCourseByGymId(gym);
 		}
-		Set<FeedbackGym> feedbackList = serviseFeedbackGym.findAllFeedbackByGym(id);
-		Gym gym = serviceGym.findByID(id);
+		Set<FeedbackGym> feedbackList = serviceFeedbackGym.findAllFeedbackByGym(gym);
         model.addAttribute("courseList", courseList);
         model.addAttribute("feedbackList", feedbackList);
         model.addAttribute("gym", gym);

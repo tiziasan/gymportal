@@ -13,7 +13,7 @@ public interface FavoriteCourseBO {
 	
 	void deleteFavoriteCourse (FavoriteCourse favoriteCourse) throws BusinessException;
 
-	Set<FavoriteCourse> findAllFavoriteCourse (long id) throws BusinessException;
+	Set<FavoriteCourse> findAllFavoriteCourse (FavoriteCourse favoriteCourse) throws BusinessException;
 
 	Set <FavoriteCourse> findAllFavoriteByUserId (long id) throws BusinessException;
 

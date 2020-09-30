@@ -1,6 +1,7 @@
 package it.univaq.disim.mwt.gymportal.business;
 
 import it.univaq.disim.mwt.gymportal.domain.Gym;
+import it.univaq.disim.mwt.gymportal.domain.User;
 
 import java.util.List;
 import java.util.Set;
@@ -21,10 +22,10 @@ public interface GymBO {
 	
 	Set<Gym> searchByRegionAndName(String region, String name) throws BusinessException;
 	
-	Set<Gym> searchByRegionAndUser(String region, long id) throws BusinessException;
+	Set<Gym> searchByRegionAndUser(String region, User user) throws BusinessException;
 
-	Set<Gym> searchByRegionAndNameAndUser(String region, String name, long id) throws BusinessException;
+	Set<Gym> searchByRegionAndNameAndUser(String region, String name, User user) throws BusinessException;
 
-	Set<Gym> searchByUser(long id) throws BusinessException;
+	Set<Gym> searchByUser(User user) throws BusinessException;
 
 }

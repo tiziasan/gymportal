@@ -37,8 +37,8 @@ public class FavoriteCourseBOImpl implements FavoriteCourseBO{
 	}
 
 	@Override
-	public Set<FavoriteCourse> findAllFavoriteCourse(long id) throws BusinessException {
-		return favoriteCourseRepository.findAllFavoriteCourse(id);
+	public Set<FavoriteCourse> findAllFavoriteCourse(FavoriteCourse favoriteCourse) throws BusinessException {
+		return favoriteCourseRepository.findAllFavoriteCourse(favoriteCourse.getId());
 	}
 	
 	@Override

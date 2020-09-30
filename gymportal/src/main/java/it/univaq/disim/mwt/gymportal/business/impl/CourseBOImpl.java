@@ -3,6 +3,7 @@ package it.univaq.disim.mwt.gymportal.business.impl;
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.CourseBO;
 import it.univaq.disim.mwt.gymportal.domain.Course;
+import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,8 +40,8 @@ public class CourseBOImpl implements CourseBO {
 	}
 
 	@Override
-	public Set<Course> findCourseByGymId(long gym_id) throws BusinessException {
-		return courseRepository.findCourseByGymId(gym_id);
+	public Set<Course> findCourseByGymId(Gym gym) throws BusinessException {
+		return courseRepository.findCourseByGymId(gym.getId());
 	}
 
 	@Override
@@ -49,8 +50,8 @@ public class CourseBOImpl implements CourseBO {
 	}
 
 	@Override
-	public void deleteAllCourseByGymId(long id) throws BusinessException {
-		 courseRepository.deleteAllCourseByGymId(id);
+	public void deleteAllCourseByGymId(Gym gym) throws BusinessException {
+		 courseRepository.deleteAllCourseByGymId(gym.getId());
 	}
 
 	@Override

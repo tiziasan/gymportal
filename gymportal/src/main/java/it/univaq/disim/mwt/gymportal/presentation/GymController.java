@@ -77,22 +77,22 @@ public class GymController {
 		if (errors.hasErrors()) {
 			return "/common/error";
 		}
-		Set<Course> courses = serviceCourse.findCourseByGymId(gym.getId());
+		Set<Course> courses = serviceCourse.findCourseByGymId(gym);
 		for (Course c: courses){
 			serviceFavoriteCourse.deleteAllByCourse(c);
 			serviceFeedbackCourse.deleteAllByCourse(c);
 		}
-		serviceCourse.deleteAllCourseByGymId(gym.getId());
+		serviceCourse.deleteAllCourseByGymId(gym);
 
 		serviceFavoriteGym.deleteAllByGym(gym);
 		serviceFeedbackGym.deleteAllByGym(gym);
 		serviceGym.deleteGym(gym);
 
-		Set<Chat> chats = serviceChat.findByGymId(gym.getId());
+		Set<Chat> chats = serviceChat.findByGymId(gym);
 		for ( Chat c: chats ) {
 			serviceMessage.deleteMessagesByChat(c);
 		}
-		serviceChat.deleteChatsByGymId(gym.getId());
+		serviceChat.deleteChatsByGymId(gym);
 		model.addAttribute("success", "Eliminazione della palestra andata a buon fine");
 
 		return "/index";
@@ -116,7 +116,7 @@ public class GymController {
 		}
 		serviceGym.updateGym(gym);
 
-		Set<Chat> chatList = serviceChat.findByGymId(gym.getId());
+		Set<Chat> chatList = serviceChat.findByGymId(gym);
 		for ( Chat c: chatList ) {
 			c.setGymName(gym.getName());
 		}

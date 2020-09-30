@@ -1,6 +1,7 @@
 package it.univaq.disim.mwt.gymportal.business;
 
 import it.univaq.disim.mwt.gymportal.domain.Course;
+import it.univaq.disim.mwt.gymportal.domain.Gym;
 
 import java.util.Set;
 
@@ -14,11 +15,11 @@ public interface CourseBO {
 	
 	Set<Course> findAllCourse() throws BusinessException;
 	
-	Set<Course> findCourseByGymId(long id) throws BusinessException;
+	Set<Course> findCourseByGymId(Gym gym) throws BusinessException;
 	
 	Course findByID(long id) throws BusinessException;
 	
-	void deleteAllCourseByGymId (long id) throws BusinessException;
+	void deleteAllCourseByGymId (Gym gym) throws BusinessException;
 
 	Set<Course> searchByIdAndName(long id, String name) throws BusinessException;
 
