@@ -1,7 +1,7 @@
 package it.univaq.disim.mwt.gymportal.presentation;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
-import it.univaq.disim.mwt.gymportal.business.UserBO;
+import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.domain.Customer;
 import it.univaq.disim.mwt.gymportal.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import javax.validation.Valid;
 public class AuthController {
 
 	@Autowired
-	private UserBO userService;
+	private UserService userService;
 
 	@GetMapping(value = { "/login" })
 	public ModelAndView login() {

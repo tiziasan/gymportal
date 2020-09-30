@@ -26,7 +26,7 @@
 			<a th:href="@{/course/gym/{gymId}(gymId=${gym.id})}"><button class="btn-primary" th:text="#{gym.show.courses}">Vai ai corsi</button></a>
 			<a th:href="@{/gym/update/{gymId}(gymId=${gym.id})}" sec:authorize="hasAuthority('MANAGER')"><button class="btn-primary" th:text="#{common.edit}">Modifica</button></a>
 			<a th:href="@{/gym/delete/{gymId}(gymId=${gym.id})}" sec:authorize="hasAuthority('MANAGER')"><button class="btn-primary" th:text="#{common.delete}">Elimina</button></a>
-		</div>
+			</div>
 	</div>
 </div>
 </body>

@@ -1,7 +1,7 @@
 package it.univaq.disim.mwt.gymportal.business.impl;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
-import it.univaq.disim.mwt.gymportal.business.ChatBO;
+import it.univaq.disim.mwt.gymportal.business.ChatService;
 import it.univaq.disim.mwt.gymportal.domain.Chat;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.domain.User;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
-public class ChatBOImpl implements ChatBO {
+public class ChatServiceImpl implements ChatService {
 
     @Autowired
     ChatRepository chatRepository;

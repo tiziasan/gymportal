@@ -2,9 +2,9 @@
 package it.univaq.disim.mwt.gymportal.presentation;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
-import it.univaq.disim.mwt.gymportal.business.FavoriteBO;
-import it.univaq.disim.mwt.gymportal.business.GymBO;
-import it.univaq.disim.mwt.gymportal.business.UserBO;
+import it.univaq.disim.mwt.gymportal.business.FavoriteService;
+import it.univaq.disim.mwt.gymportal.business.GymService;
+import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.domain.Customer;
 import it.univaq.disim.mwt.gymportal.domain.FavoriteGym;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
@@ -24,13 +24,13 @@ import javax.validation.Valid;
 public class FavoriteGymController {
 
 	@Autowired
-	private FavoriteBO serviceFavoriteGym;
+	private FavoriteService serviceFavoriteGym;
 
 	@Autowired
-	private GymBO serviceGym;
+	private GymService serviceGym;
 
 	@Autowired
-	private UserBO userService;
+	private UserService userService;
 
 
 	@GetMapping("/create/{id}")

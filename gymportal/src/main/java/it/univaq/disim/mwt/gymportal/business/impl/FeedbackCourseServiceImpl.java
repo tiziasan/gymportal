@@ -1,7 +1,7 @@
 package it.univaq.disim.mwt.gymportal.business.impl;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
-import it.univaq.disim.mwt.gymportal.business.FeedbackCourseBO;
+import it.univaq.disim.mwt.gymportal.business.FeedbackCourseService;
 import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
 import it.univaq.disim.mwt.gymportal.domain.User;
@@ -14,7 +14,7 @@ import java.util.Set;
 
 @Service
 @Transactional
-public class FeedbackCourseBOImpl implements FeedbackCourseBO{
+public class FeedbackCourseServiceImpl implements FeedbackCourseService {
 	
 	@Autowired
 	private FeedbackCourseRepository feedbackCourseRepository;

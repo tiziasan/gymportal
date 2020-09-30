@@ -1,7 +1,7 @@
 package it.univaq.disim.mwt.gymportal.security;
 
 
-import it.univaq.disim.mwt.gymportal.business.UserBO;
+import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.domain.Role;
 import it.univaq.disim.mwt.gymportal.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.util.Set;
 public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserBO userService;
+    private UserService userService;
 
     @Override
     @Transactional

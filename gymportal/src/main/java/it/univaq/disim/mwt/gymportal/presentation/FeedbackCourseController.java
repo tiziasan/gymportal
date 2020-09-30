@@ -2,9 +2,9 @@
 package it.univaq.disim.mwt.gymportal.presentation;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
-import it.univaq.disim.mwt.gymportal.business.CourseBO;
-import it.univaq.disim.mwt.gymportal.business.FeedbackCourseBO;
-import it.univaq.disim.mwt.gymportal.business.UserBO;
+import it.univaq.disim.mwt.gymportal.business.CourseService;
+import it.univaq.disim.mwt.gymportal.business.FeedbackCourseService;
+import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.Customer;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
@@ -25,13 +25,13 @@ import java.util.Set;
 public class FeedbackCourseController {
 
 	@Autowired
-	private FeedbackCourseBO serviceFeedbackCourse;
+	private FeedbackCourseService serviceFeedbackCourse;
 
 	@Autowired
-	private CourseBO serviceCourse;
+	private CourseService serviceCourse;
 
 	@Autowired
-	private UserBO userService;
+	private UserService userService;
 
 
 	@GetMapping("/{id}")

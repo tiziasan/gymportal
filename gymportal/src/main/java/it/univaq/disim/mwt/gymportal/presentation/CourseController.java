@@ -20,21 +20,21 @@ import java.util.Set;
 public class CourseController {
 	
 	@Autowired
-	private CourseBO serviceCourse;
+	private CourseService serviceCourse;
 
 	@Autowired
-	private FavoriteBO serviceFavoriteCourse;
+	private FavoriteService serviceFavoriteCourse;
 	@Autowired
-	private FeedbackCourseBO serviceFeedbackCourse;
+	private FeedbackCourseService serviceFeedbackCourse;
 	
 	@Autowired
-	private GymBO serviceGym;
+	private GymService serviceGym;
 	
 	@Autowired
-	private FeedbackGymBO serviceFeedbackGym;
+	private FeedbackGymService serviceFeedbackGym;
 
 	@Autowired
-	private  UserBO userService;
+	private UserService userService;
 	
 	@GetMapping("/create")
     public String createStart(Model model) {

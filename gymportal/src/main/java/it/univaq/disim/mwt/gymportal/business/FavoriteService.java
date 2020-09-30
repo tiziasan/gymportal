@@ -7,7 +7,7 @@ import it.univaq.disim.mwt.gymportal.domain.Gym;
 
 import java.util.Set;
 
-public interface FavoriteBO {
+public interface FavoriteService {
     void createFavoriteCourse (FavoriteCourse favoriteCourse) throws BusinessException;
 
     void updateFavoriteCourse (FavoriteCourse favoriteCourse) throws BusinessException;

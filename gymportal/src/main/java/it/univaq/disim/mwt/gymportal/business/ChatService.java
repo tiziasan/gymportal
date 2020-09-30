@@ -6,7 +6,7 @@ import it.univaq.disim.mwt.gymportal.domain.User;
 
 import java.util.Set;
 
-public interface ChatBO {
+public interface ChatService {
 
     Chat saveChat(Chat chat) throws BusinessException;
 

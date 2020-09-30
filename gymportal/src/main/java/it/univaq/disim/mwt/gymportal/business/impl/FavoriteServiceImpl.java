@@ -1,7 +1,7 @@
 package it.univaq.disim.mwt.gymportal.business.impl;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
-import it.univaq.disim.mwt.gymportal.business.FavoriteBO;
+import it.univaq.disim.mwt.gymportal.business.FavoriteService;
 import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.FavoriteCourse;
 import it.univaq.disim.mwt.gymportal.domain.FavoriteGym;
@@ -16,7 +16,7 @@ import java.util.Set;
 
 @Service
 @Transactional
-public class FavoriteBOImpl implements FavoriteBO {
+public class FavoriteServiceImpl implements FavoriteService {
     @Autowired
     private FavoriteGymRepository favoriteGymRepository;
     @Autowired

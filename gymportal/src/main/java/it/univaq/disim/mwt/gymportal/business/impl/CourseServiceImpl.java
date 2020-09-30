@@ -1,7 +1,7 @@
 package it.univaq.disim.mwt.gymportal.business.impl;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
-import it.univaq.disim.mwt.gymportal.business.CourseBO;
+import it.univaq.disim.mwt.gymportal.business.CourseService;
 import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.repository.CourseRepository;
@@ -13,7 +13,7 @@ import java.util.Set;
 
 @Service
 @Transactional
-public class CourseBOImpl implements CourseBO {
+public class CourseServiceImpl implements CourseService {
 	
 	@Autowired
 	private CourseRepository courseRepository;

@@ -26,22 +26,22 @@ import java.util.Set;
 public class ProfileController {
 	
 	@Autowired
-	private UserBO userService;
+	private UserService userService;
 	
 	@Autowired
-	private FeedbackCourseBO serviceFeedbackCourse;
+	private FeedbackCourseService serviceFeedbackCourse;
 	
 	@Autowired
-	private FeedbackGymBO serviceFeedbackGym;
+	private FeedbackGymService serviceFeedbackGym;
 	
 	@Autowired
-	private FavoriteBO serviceFavoriteGym;
+	private FavoriteService serviceFavoriteGym;
 	
 	@Autowired
-	private FavoriteBO serviceFavoriteCourse;
+	private FavoriteService serviceFavoriteCourse;
 
 	@Autowired
-	private ChatBO serviceChat;
+	private ChatService serviceChat;
 	
 	
 	@GetMapping("")

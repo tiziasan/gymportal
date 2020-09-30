@@ -5,7 +5,7 @@ import it.univaq.disim.mwt.gymportal.domain.Gym;
 
 import java.util.Set;
 
-public interface CourseBO {
+public interface CourseService {
 	
 	void deleteCourse (Course course) throws BusinessException;
 

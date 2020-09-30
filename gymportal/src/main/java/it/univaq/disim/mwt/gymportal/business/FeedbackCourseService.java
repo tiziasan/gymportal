@@ -6,7 +6,7 @@ import it.univaq.disim.mwt.gymportal.domain.User;
 
 import java.util.Set;
 
-public interface FeedbackCourseBO {
+public interface FeedbackCourseService {
 	
 	void createFeedbackCourse (FeedbackCourse feedbackCourse) throws BusinessException;
 	

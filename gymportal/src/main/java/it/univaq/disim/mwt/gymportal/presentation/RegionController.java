@@ -1,8 +1,8 @@
 package it.univaq.disim.mwt.gymportal.presentation;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
-import it.univaq.disim.mwt.gymportal.business.GymBO;
-import it.univaq.disim.mwt.gymportal.business.UserBO;
+import it.univaq.disim.mwt.gymportal.business.GymService;
+import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.domain.Manager;
 import it.univaq.disim.mwt.gymportal.domain.Role;
@@ -25,10 +25,10 @@ import java.util.Set;
 public class RegionController {
 
 	@Autowired
-	private GymBO serviceGym;
+	private GymService serviceGym;
 
 	@Autowired
-	private UserBO userService;
+	private UserService userService;
 
 	// https://stackoverflow.com/questions/60528613/rest-api-with-mix-of-path-param-and-requestparam
 	@GetMapping(value = { "/{region}", "/{region}?search={search}" })

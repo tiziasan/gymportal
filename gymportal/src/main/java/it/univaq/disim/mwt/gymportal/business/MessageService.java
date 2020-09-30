@@ -5,7 +5,7 @@ import it.univaq.disim.mwt.gymportal.domain.Message;
 
 import java.util.Set;
 
-public interface MessageBO {
+public interface MessageService {
 
     Message createMessage (Message msg) throws BusinessException;
 

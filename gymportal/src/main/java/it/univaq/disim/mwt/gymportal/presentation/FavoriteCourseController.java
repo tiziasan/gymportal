@@ -2,9 +2,9 @@
 package it.univaq.disim.mwt.gymportal.presentation;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
-import it.univaq.disim.mwt.gymportal.business.CourseBO;
-import it.univaq.disim.mwt.gymportal.business.FavoriteBO;
-import it.univaq.disim.mwt.gymportal.business.UserBO;
+import it.univaq.disim.mwt.gymportal.business.CourseService;
+import it.univaq.disim.mwt.gymportal.business.FavoriteService;
+import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.Customer;
 import it.univaq.disim.mwt.gymportal.domain.FavoriteCourse;
@@ -24,13 +24,13 @@ import javax.validation.Valid;
 public class FavoriteCourseController {
 
 	@Autowired
-	private FavoriteBO serviceFavoriteCourse;
+	private FavoriteService serviceFavoriteCourse;
 
 	@Autowired
-	private CourseBO serviceCourse;
+	private CourseService serviceCourse;
 
 	@Autowired
-	private UserBO userService;
+	private UserService userService;
 
 	@GetMapping("/create/{id}")
 	public String createStart(@PathVariable long id, Model model) throws BusinessException {

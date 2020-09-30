@@ -22,16 +22,16 @@ import java.util.Set;
 public class ChatController {
 
     @Autowired
-    private MessageBO serviceMessage;
+    private MessageService serviceMessage;
 
     @Autowired
-    private GymBO serviceGym;
+    private GymService serviceGym;
 
     @Autowired
-    private ChatBO serviceChat;
+    private ChatService serviceChat;
 
     @Autowired
-    private UserBO userService;
+    private UserService userService;
 
     @GetMapping(value = {"", "/{idChat}", "?idGym={idGym}"})
     public String createStart(@PathVariable(required = false) String idChat, @RequestParam(required = false) Long idGym, Model model) throws BusinessException {

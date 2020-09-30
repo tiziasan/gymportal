@@ -5,7 +5,7 @@ import it.univaq.disim.mwt.gymportal.domain.User;
 
 import java.util.Set;
 
-public interface GymBO {
+public interface GymService {
 
 	void deleteGym (Gym gym) throws BusinessException;
 

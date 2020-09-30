@@ -3,7 +3,7 @@ package it.univaq.disim.mwt.gymportal.business;
 import it.univaq.disim.mwt.gymportal.domain.Role;
 import it.univaq.disim.mwt.gymportal.domain.User;
 
-public interface UserBO {
+public interface UserService {
 
 	User findUserByEmail(String email);
 
