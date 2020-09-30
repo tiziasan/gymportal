@@ -2,6 +2,8 @@ package it.univaq.disim.mwt.gymportal.business.impl;
 
 
 import it.univaq.disim.mwt.gymportal.business.UserBO;
+import it.univaq.disim.mwt.gymportal.domain.Customer;
+import it.univaq.disim.mwt.gymportal.domain.Manager;
 import it.univaq.disim.mwt.gymportal.domain.Role;
 import it.univaq.disim.mwt.gymportal.domain.User;
 import it.univaq.disim.mwt.gymportal.repository.UserRepository;
@@ -41,17 +43,15 @@ public class UserBOimpl implements UserBO {
     }
 
     @Override
-    public User updateCustomer(User user) {
+    public User updateCustomer(Customer user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRole(Role.CUSTOMER);
 
         return userRepository.save(user);
     }
 
     @Override
-    public User updateManager(User user) {
+    public User updateManager(Manager user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRole(Role.MANAGER);
 
         return userRepository.save(user);
     }

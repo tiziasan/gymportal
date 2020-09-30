@@ -102,10 +102,12 @@ public class ProfileController {
 		}
 
 		if(auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER))) {
-			userService.updateCustomer(user);
+			Customer customer = new Customer(user);
+			userService.updateCustomer(customer);
 		}
 		if(auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
-			userService.updateManager(user);
+			Manager manager = new Manager(user);
+			userService.updateManager(manager);
 		}
 
 		Set<Chat> chatList = serviceChat.findByUserId(user);
