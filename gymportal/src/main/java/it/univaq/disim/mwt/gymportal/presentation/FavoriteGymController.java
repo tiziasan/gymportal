@@ -25,10 +25,10 @@ import javax.validation.Valid;
 public class FavoriteGymController {
 
 	@Autowired
-	private FavoriteService serviceFavoriteGym;
+	private FavoriteService favoriteService;
 
 	@Autowired
-	private GymService serviceGym;
+	private GymService gymService;
 
 	@Autowired
 	private UserService userService;
@@ -36,7 +36,7 @@ public class FavoriteGymController {
 
 	@GetMapping("/create/{id}")
 	public String createStart(@PathVariable long id, Model model) throws BusinessException {
-		Gym gym = serviceGym.findByID(id);
+		Gym gym = gymService.findByID(id);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Customer user = userService.findUserByUsername(auth.getName());
 		model.addAttribute("gym", gym);
@@ -60,7 +60,7 @@ public class FavoriteGymController {
 		}
 		System.out.println(favoriteGym);
 
-		serviceFavoriteGym.createFavoriteGym(favoriteGym);
+		favoriteService.createFavoriteGym(favoriteGym);
 		redir.addFlashAttribute("message", "palestra aggiunta ai preferiti");
 
 
@@ -76,7 +76,7 @@ public class FavoriteGymController {
 	
 	@PostMapping("/delete/{id}")
 	public String delete(@ModelAttribute("favoriteGym") FavoriteGym favoriteGym, Errors errors) throws BusinessException {
-		serviceFavoriteGym.deleteFavoriteGym(favoriteGym);
+		favoriteService.deleteFavoriteGym(favoriteGym);
 		return "redirect:/profile";
 	}
 	

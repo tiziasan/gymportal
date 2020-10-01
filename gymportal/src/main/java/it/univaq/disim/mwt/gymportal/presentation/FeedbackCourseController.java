@@ -25,10 +25,10 @@ import java.util.Set;
 public class FeedbackCourseController {
 
 	@Autowired
-	private FeedbackCourseService serviceFeedbackCourse;
+	private FeedbackCourseService feedbackCourseService;
 
 	@Autowired
-	private CourseService serviceCourse;
+	private CourseService courseService;
 
 	@Autowired
 	private UserService userService;
@@ -37,7 +37,7 @@ public class FeedbackCourseController {
 	@GetMapping("/{id}")
 	public String listCo(@PathVariable long id, Model model) throws BusinessException {
 
-		Set<FeedbackCourse> feedbackList = serviceFeedbackCourse.findAllFeedbackByCourse(id);
+		Set<FeedbackCourse> feedbackList = feedbackCourseService.findAllFeedbackByCourse(id);
 		model.addAttribute("feedbackList", feedbackList);
 		return "/feedback/list";
 
@@ -45,7 +45,7 @@ public class FeedbackCourseController {
 
 	@GetMapping("/create/{id}")
 	public String createStart(Model model,@PathVariable long id) throws BusinessException {
-		Course course = serviceCourse.findByID(id);
+		Course course = courseService.findByID(id);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Customer user = userService.findUserByUsername(auth.getName());
 		model.addAttribute("course", course);
@@ -66,7 +66,7 @@ public class FeedbackCourseController {
 			model.addAttribute("message", message);
 			return "/feedbackCourse/form";
 		}
-		serviceFeedbackCourse.createFeedbackCourse(feedbackCourse);
+		feedbackCourseService.createFeedbackCourse(feedbackCourse);
 		
 		long id = feedbackCourse.getCourse().getId();
 
@@ -84,14 +84,14 @@ public class FeedbackCourseController {
 	
 	@PostMapping("/delete/{id}")
 	public String delete(@ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, Errors errors) throws BusinessException {
-		serviceFeedbackCourse.deleteFeedbackCourse(feedbackCourse);
+		feedbackCourseService.deleteFeedbackCourse(feedbackCourse);
         return "redirect:/profile";
 	}
 
 
 	@GetMapping("/update/{id}")
 	public String updateStart(@PathVariable long id, Model model) throws BusinessException {
-		FeedbackCourse feedback = serviceFeedbackCourse.findByID(id);
+		FeedbackCourse feedback = feedbackCourseService.findByID(id);
 		model.addAttribute("feedbackCourse", feedback);
 		return "/feedbackCourse/update";
 	}
@@ -103,7 +103,7 @@ public class FeedbackCourseController {
 			return "/common/error";
 		}
 		
-		serviceFeedbackCourse.updateFeedbackCourse(feedbackCourse);
+		feedbackCourseService.updateFeedbackCourse(feedbackCourse);
 		return "redirect:/profile";
 	}
 	

@@ -22,29 +22,28 @@ import java.util.Set;
 public class GymController {
 	
 	@Autowired
-	private GymService serviceGym;
+	private GymService gymService;
+
 
 	@Autowired
-	private FavoriteService serviceFavoriteGym;
-	@Autowired
-	private FeedbackGymService serviceFeedbackGym;
+	private FeedbackGymService feedbackGymService;
 	
 	@Autowired
-	private CourseService serviceCourse;
+	private CourseService courseService;
 
 	@Autowired
-	private FavoriteService serviceFavoriteCourse;
+	private FavoriteService favoriteService;
 	@Autowired
-	private FeedbackCourseService serviceFeedbackCourse;
+	private FeedbackCourseService feedbackCourseService;
 	
 	@Autowired
 	private UserService userService;
 
 	@Autowired
-	private ChatService serviceChat;
+	private ChatService chatService;
 
 	@Autowired
-	private MessageService serviceMessage;
+	private MessageService messageService;
 	
 	@GetMapping("/create")
     public String createStart(Model model) {
@@ -61,13 +60,13 @@ public class GymController {
 		if (errors.hasErrors()) {
 			return "/gym/form";
 		}
-		serviceGym.createGym(gym);
+		gymService.createGym(gym);
 		return "redirect:/course/create";
 	}
 	
 	@GetMapping("/delete/{id}")
     public String deleteStart(@PathVariable long id, Model model) throws BusinessException {
-		Gym gym = serviceGym.findByID(id);
+		Gym gym = gymService.findByID(id);
 		model.addAttribute("gym", gym);
 		return "/gym/delete";
     }
@@ -75,22 +74,22 @@ public class GymController {
 	@PostMapping("/delete/{id}")
 	public String delete(@ModelAttribute("gym") Gym gym, Errors errors, Model model) throws BusinessException {
 
-		Set<Course> courses = serviceCourse.findCourseByGymId(gym);
+		Set<Course> courses = courseService.findCourseByGymId(gym);
 		for (Course c: courses){
-			serviceFavoriteCourse.deleteAllByCourse(c);
-			serviceFeedbackCourse.deleteAllByCourse(c);
+			favoriteService.deleteAllByCourse(c);
+			feedbackCourseService.deleteAllByCourse(c);
 		}
-		serviceCourse.deleteAllCourseByGymId(gym);
+		courseService.deleteAllCourseByGymId(gym);
 
-		serviceFavoriteGym.deleteAllByGym(gym);
-		serviceFeedbackGym.deleteAllByGym(gym);
-		serviceGym.deleteGym(gym);
+		favoriteService.deleteAllByGym(gym);
+		feedbackGymService.deleteAllByGym(gym);
+		gymService.deleteGym(gym);
 
-		Set<Chat> chats = serviceChat.findByGymId(gym);
+		Set<Chat> chats = chatService.findByGymId(gym);
 		for ( Chat c: chats ) {
-			serviceMessage.deleteMessagesByChat(c);
+			messageService.deleteMessagesByChat(c);
 		}
-		serviceChat.deleteChatsByGymId(gym);
+		chatService.deleteChatsByGymId(gym);
 		model.addAttribute("success", "Eliminazione della palestra andata a buon fine");
 
 		return "/index";
@@ -101,7 +100,7 @@ public class GymController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Manager user = userService.findUserByUsername(auth.getName());
 		model.addAttribute("user", user);
-		Gym gym = serviceGym.findByID(id);
+		Gym gym = gymService.findByID(id);
 		gym.setRegion("");
 		model.addAttribute("gym", gym);
 		return "/gym/form";
@@ -112,13 +111,13 @@ public class GymController {
 		if (errors.hasErrors()) {
 			return "/gym/form";
 		}
-		serviceGym.updateGym(gym);
+		gymService.updateGym(gym);
 
-		Set<Chat> chatList = serviceChat.findByGymId(gym);
+		Set<Chat> chatList = chatService.findByGymId(gym);
 		for ( Chat c: chatList ) {
 			c.setGymName(gym.getName());
 		}
-		serviceChat.saveAllChats(chatList);
+		chatService.saveAllChats(chatList);
 
 		return "redirect:/";
 	}

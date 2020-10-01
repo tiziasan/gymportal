@@ -24,10 +24,10 @@ import javax.validation.Valid;
 public class FeedbackGymController {
 
 	@Autowired
-	private FeedbackGymService serviceFeedbackGym;
+	private FeedbackGymService feedbackGymService;
 
 	@Autowired
-	private GymService serviceGym;
+	private GymService gymService;
 
 	@Autowired
 	private UserService userService;
@@ -35,7 +35,7 @@ public class FeedbackGymController {
 
 	@GetMapping("/create/{id}")
 	public String createStart(Model model,@PathVariable long id) throws BusinessException {
-		Gym gym = serviceGym.findByID(id);
+		Gym gym = gymService.findByID(id);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Customer user = userService.findUserByUsername(auth.getName());
 		model.addAttribute("gym", gym);
@@ -57,7 +57,7 @@ public class FeedbackGymController {
 			model.addAttribute("message", message);
 			return "/feedback/form";
 		}
-		serviceFeedbackGym.createFeedbackGym(feedback);
+		feedbackGymService.createFeedbackGym(feedback);
 		
 		long id = feedback.getGym().getId();
 
@@ -74,14 +74,14 @@ public class FeedbackGymController {
 	
 	@PostMapping("/delete/{id}")
 	public String delete(@ModelAttribute("feedback") FeedbackGym feedback, Errors errors) throws BusinessException {
-		serviceFeedbackGym.deleteFeedbackGym(feedback);
+		feedbackGymService.deleteFeedbackGym(feedback);
         return "redirect:/profile";
 	}
 
 
 	@GetMapping("/update/{id}")
 	public String updateStart(@PathVariable long id, Model model) throws BusinessException {
-		FeedbackGym feedback = serviceFeedbackGym.findByID(id);
+		FeedbackGym feedback = feedbackGymService.findByID(id);
 		model.addAttribute("feedback", feedback);
 		return "/feedback/update";
 	}
@@ -93,7 +93,7 @@ public class FeedbackGymController {
 			return "/common/error";
 		}
 		
-		serviceFeedbackGym.updateFeedbackGym(feedback);
+		feedbackGymService.updateFeedbackGym(feedback);
 		return "redirect:/profile";
 	}
 	

@@ -20,18 +20,18 @@ import java.util.Set;
 public class CourseController {
 	
 	@Autowired
-	private CourseService serviceCourse;
+	private CourseService courseService;
 
 	@Autowired
-	private FavoriteService serviceFavoriteCourse;
+	private FavoriteService favoriteService;
 	@Autowired
-	private FeedbackCourseService serviceFeedbackCourse;
+	private FeedbackCourseService feedbackCourseService;
 	
 	@Autowired
-	private GymService serviceGym;
+	private GymService gymService;
 	
 	@Autowired
-	private FeedbackGymService serviceFeedbackGym;
+	private FeedbackGymService feedbackGymService;
 
 	@Autowired
 	private UserService userService;
@@ -51,7 +51,7 @@ public class CourseController {
 			model.addAttribute("message", message);
 			return "/course/form";
 		}
-		serviceCourse.createCourse(course);
+		courseService.createCourse(course);
 		String message = "Operazione andata a buon fine, aggiungi un altro corso!";
 		ra.addFlashAttribute("message", message);
 		return "redirect:/course/create";
@@ -61,15 +61,15 @@ public class CourseController {
 	@GetMapping(value= {"/gym/{id}", "/gym/{id}?search={search}"})
 	public String listCo(@PathVariable long id, @RequestParam(required = false) String search, Model model) throws BusinessException {
 		Set<Course> courseList;
-		Gym gym = serviceGym.findByID(id);
+		Gym gym = gymService.findByID(id);
 
 		if(search != null) {
-			courseList=serviceCourse.searchByIdAndName(id, search);
+			courseList= courseService.searchByIdAndName(id, search);
 			model.addAttribute("search", search);
 		}else {
-			courseList=serviceCourse.findCourseByGymId(gym);
+			courseList= courseService.findCourseByGymId(gym);
 		}
-		Set<FeedbackGym> feedbackList = serviceFeedbackGym.findAllFeedbackByGym(gym);
+		Set<FeedbackGym> feedbackList = feedbackGymService.findAllFeedbackByGym(gym);
         model.addAttribute("courseList", courseList);
         model.addAttribute("feedbackList", feedbackList);
         model.addAttribute("gym", gym);
@@ -79,39 +79,39 @@ public class CourseController {
 	
 	@GetMapping("/delete/{id}")
     public String deleteStart(@PathVariable long id, Model model) throws BusinessException {
-		Course course = serviceCourse.findByID(id);
+		Course course = courseService.findByID(id);
 		model.addAttribute("course", course);
 		return "/course/delete";
     }
 	
 	@PostMapping("/delete/{id}")
 	public String delete(@ModelAttribute("course") Course course, Model model) throws BusinessException {
-		Course courseComplete = serviceCourse.findByID(course.getId());
+		Course courseComplete = courseService.findByID(course.getId());
 		long id = courseComplete.getGym().getId();
 		String redirect = "redirect:/course/gym?id=" + id;
-		serviceFavoriteCourse.deleteAllByCourse(course);
-		serviceFeedbackCourse.deleteAllByCourse(course);
-		serviceCourse.deleteCourse(course);
+		favoriteService.deleteAllByCourse(course);
+		feedbackCourseService.deleteAllByCourse(course);
+		courseService.deleteCourse(course);
 		model.addAttribute("success", "Eliminazione del corso andata a buon fine");
 		return "/index";	}
 	
 	@GetMapping("/update/{id}")
 	public String updateStart(@PathVariable long id, Model model) throws BusinessException {
-		Course course = serviceCourse.findByID(id);
+		Course course = courseService.findByID(id);
 		model.addAttribute("course", course);
 		return "/course/form";
 	}
 
 	@PostMapping("/update/{id}")
 	public String update(@Valid @ModelAttribute("course") Course course , Errors errors) throws BusinessException {
-		Course courseComplete = serviceCourse.findByID(course.getId());
+		Course courseComplete = courseService.findByID(course.getId());
 
 		if (errors.hasErrors()) {
 			return "/common/error";
 		}
 		long id = courseComplete.getGym().getId();
 		String redirect = "redirect:/course/gym/" + id;
-		serviceCourse.updateCourse(course);
+		courseService.updateCourse(course);
 		return redirect;
 	}
 	

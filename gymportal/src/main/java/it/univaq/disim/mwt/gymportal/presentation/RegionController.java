@@ -25,7 +25,7 @@ import java.util.Set;
 public class RegionController {
 
 	@Autowired
-	private GymService serviceGym;
+	private GymService gymService;
 
 	@Autowired
 	private UserService userService;
@@ -39,25 +39,25 @@ public class RegionController {
 
 		if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
 			Manager user = userService.findUserByUsername(auth.getName());
-			gymList = serviceGym.searchByRegionAndUser(region,user);
+			gymList = gymService.searchByRegionAndUser(region,user);
 		}
 
 		if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ANONYMOUS")) ||
 				auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER))) {
-			gymList = serviceGym.findByRegion(region);
+			gymList = gymService.findByRegion(region);
 		}
 
 		if (search != null &&
 				( auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER)) ||
 				auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ANONYMOUS"))) ) {
-			gymList = serviceGym.searchByRegionAndName(region, search);
+			gymList = gymService.searchByRegionAndName(region, search);
 			model.addAttribute("search", search);
 		}
 
 		if (search != null && auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
 			User user = userService.findUserByUsername(auth.getName());
 			long id = user.getId();
-			gymList = serviceGym.searchByRegionAndNameAndUser(region, search, user);
+			gymList = gymService.searchByRegionAndNameAndUser(region, search, user);
 			model.addAttribute("search", search);
 		}
 

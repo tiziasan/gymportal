@@ -27,21 +27,9 @@ public class ProfileController {
 	
 	@Autowired
 	private UserService userService;
-	
-	@Autowired
-	private FeedbackCourseService serviceFeedbackCourse;
-	
-	@Autowired
-	private FeedbackGymService serviceFeedbackGym;
-	
-	@Autowired
-	private FavoriteService serviceFavoriteGym;
-	
-	@Autowired
-	private FavoriteService serviceFavoriteCourse;
 
 	@Autowired
-	private ChatService serviceChat;
+	private ChatService chatService;
 	
 	
 	@GetMapping("")
@@ -63,10 +51,7 @@ public class ProfileController {
 			feedbackGymList = customer.getFeedbackGym();
 			favoriteGymList = customer.getFavoriteGym();
 			favoriteCourseList = customer.getFavoriteCourse();
-//			feedbackCourseList = serviceFeedbackCourse.findAllFeedbackByUserId(user.getId());
-//			feedbackGymList = serviceFeedbackGym.findAllFeedbackByUserId(user.getId());
-//			favoriteGymList = serviceFavoriteGym.findAllFavoriteByUserId(user.getId());
-//			favoriteCourseList = serviceFavoriteCourse.findAllFavoriteByUserId(user.getId());
+
 		} else {
 			user = userService.findUserByUsername(auth.getName());
 		}
@@ -106,11 +91,11 @@ public class ProfileController {
 			userService.updateManager(user);
 		}
 
-		Set<Chat> chatList = serviceChat.findByUserId(user);
+		Set<Chat> chatList = chatService.findByUserId(user);
 		for ( Chat c: chatList ) {
 			c.setUserName(user.getName() + " " + user.getLastname());
 		}
-		serviceChat.saveAllChats(chatList);
+		chatService.saveAllChats(chatList);
 
 		return "redirect:/login";
 
