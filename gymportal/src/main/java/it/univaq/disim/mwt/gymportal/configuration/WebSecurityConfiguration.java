@@ -33,9 +33,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password").and().logout()
 				.logoutSuccessUrl("/").and().exceptionHandling().accessDeniedPage("/login").and()
 				.authorizeRequests() // Specificare le url che
-				.antMatchers("/", "/static/**", "/favicon.ico","/login","/chat/**").permitAll().antMatchers("/common/**").authenticated()
-				.antMatchers("/gym/**","/course/create","/course/update","/course/delete","/gym/delete","/gym/delete","/gym/delete","/feedbackCourse/{id}","/feedback/{id}","/profile").hasAuthority(Role.Values.MANAGER)
-				.antMatchers("/gym/region","/feedback/**","/feedbackCourse/**","/feedback/{id}","/feedbackCourse/{id}","favorite/**","/profile").hasAuthority(Role.Values.CUSTOMER);
+				.antMatchers("/", "/static/**", "/favicon.ico","/login","/chat/**").permitAll()
+				.antMatchers("/common/**","/profile").authenticated()
+				.antMatchers("/gym/**","/course/create","/course/update","/course/delete","/gym/delete","/gym/delete","/gym/delete","/feedbackCourse/{id}","/feedback/{id}").hasAuthority(Role.Values.MANAGER)
+				.antMatchers("/gym/region","/feedback/**","/feedbackCourse/**","/feedback/{id}","/feedbackCourse/{id}","favorite/**").hasAuthority(Role.Values.CUSTOMER);
 
 
 	}
