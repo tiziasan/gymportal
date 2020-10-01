@@ -120,7 +120,7 @@ public class CourseController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if(auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
 			Manager user = userService.findUserByUsername(auth.getName());
-			Set<Gym> gyms = user.getGym();
+			Set<Gym> gyms = user.getGyms();
 			model.addAttribute("gyms", gyms);
 		}
 	}

@@ -21,31 +21,31 @@ public class Customer extends User {
     }
 
     @OneToMany(mappedBy="user")
-    private Set<FeedbackCourse> feedbackCourse;
+    private Set<FeedbackCourse> feedbackCourses;
 
     @OneToMany(mappedBy="user")
-    private Set<FavoriteGym> favoriteGym;
+    private Set<FavoriteGym> favoriteGyms;
 
     @OneToMany(mappedBy="user")
-    private Set<FavoriteCourse> favoriteCourse;
+    private Set<FavoriteCourse> favoriteCourses;
 
     @OneToMany(mappedBy="user")
-    private Set<FeedbackGym> feedbackGym;
+    private Set<FeedbackGym> feedbackGyms;
 
-    public Set<FeedbackCourse> getFeedbackCourse() {
-        return feedbackCourse;
+    public Set<FeedbackCourse> getFeedbackCourses() {
+        return feedbackCourses;
     }
 
-    public Set<FavoriteGym> getFavoriteGym() {
-        return favoriteGym;
+    public Set<FavoriteGym> getFavoriteGyms() {
+        return favoriteGyms;
     }
 
-    public Set<FavoriteCourse> getFavoriteCourse() {
-        return favoriteCourse;
+    public Set<FavoriteCourse> getFavoriteCourses() {
+        return favoriteCourses;
     }
 
-    public Set<FeedbackGym> getFeedbackGym() {
-        return feedbackGym;
+    public Set<FeedbackGym> getFeedbackGyms() {
+        return feedbackGyms;
     }
 
 

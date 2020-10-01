@@ -30,20 +30,20 @@ public class Course extends BaseEntity implements Serializable {
 	private String code;
 	
 	@OneToMany(mappedBy="course")
-	private Set<FeedbackCourse> feedbackCourse;
+	private Set<FeedbackCourse> feedbackCourses;
 	
 	@OneToMany(mappedBy="course")
-	private Set<FavoriteCourse> favoriteCourse;
+	private Set<FavoriteCourse> favoriteCourses;
 	
 	@ManyToOne
 	private Gym gym;
 
-	public Course(@NotBlank @Size(max = 50) String name, @NotBlank @Size(max = 400) String description, @NotBlank @Size(max = 50) String code, Set<FeedbackCourse> feedbackCourse, Set<FavoriteCourse> favoriteCourse, Gym gym) {
+	public Course(@NotBlank @Size(max = 50) String name, @NotBlank @Size(max = 400) String description, @NotBlank @Size(max = 50) String code, Set<FeedbackCourse> feedbackCourses, Set<FavoriteCourse> favoriteCourses, Gym gym) {
 		this.name = name;
 		this.description = description;
 		this.code = code;
-		this.feedbackCourse = feedbackCourse;
-		this.favoriteCourse = favoriteCourse;
+		this.feedbackCourses = feedbackCourses;
+		this.favoriteCourses = favoriteCourses;
 		this.gym = gym;
 	}
 
@@ -78,20 +78,20 @@ public class Course extends BaseEntity implements Serializable {
 		this.code = code;
 	}
 
-	public Set<FeedbackCourse> getFeedbackCourse() {
-		return feedbackCourse;
+	public Set<FeedbackCourse> getFeedbackCourses() {
+		return feedbackCourses;
 	}
 
-	public void setFeedbackCourse(Set<FeedbackCourse> feedbackCourse) {
-		this.feedbackCourse = feedbackCourse;
+	public void setFeedbackCourses(Set<FeedbackCourse> feedbackCourses) {
+		this.feedbackCourses = feedbackCourses;
 	}
 
-	public Set<FavoriteCourse> getFavoriteCourse() {
-		return favoriteCourse;
+	public Set<FavoriteCourse> getFavoriteCourses() {
+		return favoriteCourses;
 	}
 
-	public void setFavoriteCourse(Set<FavoriteCourse> favoriteCourse) {
-		this.favoriteCourse = favoriteCourse;
+	public void setFavoriteCourses(Set<FavoriteCourse> favoriteCourses) {
+		this.favoriteCourses = favoriteCourses;
 	}
 
 	public Gym getGym() {
@@ -110,8 +110,8 @@ public class Course extends BaseEntity implements Serializable {
 		return getName().equals(course.getName()) &&
 				getDescription().equals(course.getDescription()) &&
 				getCode().equals(course.getCode()) &&
-				getFeedbackCourse().equals(course.getFeedbackCourse()) &&
-				getFavoriteCourse().equals(course.getFavoriteCourse()) &&
+				getFeedbackCourses().equals(course.getFeedbackCourses()) &&
+				getFavoriteCourses().equals(course.getFavoriteCourses()) &&
 				getGym().equals(course.getGym());
 	}
 
@@ -127,8 +127,8 @@ public class Course extends BaseEntity implements Serializable {
 				", name='" + name + '\'' +
 				", description='" + description + '\'' +
 				", code='" + code + '\'' +
-				", feedbackCourse=" + feedbackCourse +
-				", favoriteCourse=" + favoriteCourse +
+				", feedbackCourse=" + feedbackCourses +
+				", favoriteCourse=" + favoriteCourses +
 				", gym=" + gym +
 				'}';
 	}

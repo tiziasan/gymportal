@@ -21,10 +21,10 @@ public class Manager extends User{
     }
 
     @OneToMany(mappedBy="user")
-    private Set<Gym> gym;
+    private Set<Gym> gyms;
 
-    public Set<Gym> getGym() {
-        return gym;
+    public Set<Gym> getGyms() {
+        return gyms;
     }
 
 }

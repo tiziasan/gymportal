@@ -45,13 +45,13 @@ public class Gym extends BaseEntity implements Serializable {
 	private String region;
 
 	@OneToMany(mappedBy="gym")
-	private Set<FeedbackGym> feedbackGym;
+	private Set<FeedbackGym> feedbackGyms;
 
 	@OneToMany(mappedBy="gym")
-	private Set<FavoriteGym> favoriteGym;
+	private Set<FavoriteGym> favoriteGyms;
 
 	@OneToMany(mappedBy="gym")
-	private Set<Course> course;
+	private Set<Course> courses;
 
 	@ManyToOne
 	private Manager user;
@@ -96,16 +96,16 @@ public class Gym extends BaseEntity implements Serializable {
 		this.user = user;
 	}
 
-	public Set<FeedbackGym> getFeedbackGym() {
-		return feedbackGym;
+	public Set<FeedbackGym> getFeedbackGyms() {
+		return feedbackGyms;
 	}
 
-	public Set<FavoriteGym> getFavoriteGym() {
-		return favoriteGym;
+	public Set<FavoriteGym> getFavoriteGyms() {
+		return favoriteGyms;
 	}
 
-	public Set<Course> getCourse() {
-		return course;
+	public Set<Course> getCourses() {
+		return courses;
 	}
 
 	@Override
@@ -133,9 +133,9 @@ public class Gym extends BaseEntity implements Serializable {
 				", address='" + address + '\'' +
 				", province='" + province + '\'' +
 				", region='" + region + '\'' +
-				", feedbackGym=" + feedbackGym +
-				", favoriteGym=" + favoriteGym +
-				", course=" + course +
+				", feedbackGym=" + feedbackGyms +
+				", favoriteGym=" + favoriteGyms +
+				", course=" + courses +
 				", user=" + user +
 				'}';
 	}

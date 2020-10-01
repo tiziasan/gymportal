@@ -47,10 +47,10 @@ public class ProfileController {
 		if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER))){
 			Customer customer = userService.findUserByUsername(auth.getName());
 			user = customer;
-			feedbackCourseList = customer.getFeedbackCourse();
-			feedbackGymList = customer.getFeedbackGym();
-			favoriteGymList = customer.getFavoriteGym();
-			favoriteCourseList = customer.getFavoriteCourse();
+			feedbackCourseList = customer.getFeedbackCourses();
+			feedbackGymList = customer.getFeedbackGyms();
+			favoriteGymList = customer.getFavoriteGyms();
+			favoriteCourseList = customer.getFavoriteCourses();
 
 		} else {
 			user = userService.findUserByUsername(auth.getName());
