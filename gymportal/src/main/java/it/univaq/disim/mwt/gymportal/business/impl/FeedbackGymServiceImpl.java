@@ -15,54 +15,54 @@ import java.util.Set;
 @Service
 @Transactional
 public class FeedbackGymServiceImpl implements FeedbackGymService {
-	
-	@Autowired
-	private FeedbackGymRepository feedbackGymRepository;
 
-	@Override
-	public void createFeedbackGym(FeedbackGym feedbackGym) throws BusinessException {
-		feedbackGymRepository.save(feedbackGym);
-		
-	}
+    @Autowired
+    private FeedbackGymRepository feedbackGymRepository;
 
-	@Override
-	public void updateFeedbackGym(FeedbackGym feedbackGym) throws BusinessException {
-		feedbackGymRepository.save(feedbackGym);
-		
-	}
+    @Override
+    public void createFeedbackGym(FeedbackGym feedbackGym) throws BusinessException {
+        feedbackGymRepository.save(feedbackGym);
 
-	@Override
-	public void deleteFeedbackGym(FeedbackGym feedbackGym) throws BusinessException {
-		feedbackGymRepository.deleteById(feedbackGym.getId());
-		
-	}
+    }
 
-	@Override
-	public Set<FeedbackGym> findAllFeedbackGym(FeedbackGym feedbackGym) throws BusinessException {
-		return feedbackGymRepository.findAllFeedbackGym(feedbackGym.getId());
-	}
+    @Override
+    public void updateFeedbackGym(FeedbackGym feedbackGym) throws BusinessException {
+        feedbackGymRepository.save(feedbackGym);
 
-	@Override
-	public Set<FeedbackGym> findAllFeedbackByGym(Gym gym) throws BusinessException {
-		return feedbackGymRepository.findAllFeedbackByGym(gym.getId());
+    }
 
-	}
-	
-	@Override
-	public Set<FeedbackGym> findAllFeedbackByUserId(User user) throws BusinessException {
-		return feedbackGymRepository.findAllFeedbackByUserId(user.getId());
+    @Override
+    public void deleteFeedbackGym(FeedbackGym feedbackGym) throws BusinessException {
+        feedbackGymRepository.deleteById(feedbackGym.getId());
 
-	}
+    }
 
-	@Override
-	public void deleteAllByGym(Gym gym) {
-		feedbackGymRepository.deleteAllByGym(gym);
-	}
+    @Override
+    public Set<FeedbackGym> findAllFeedbackGym(FeedbackGym feedbackGym) throws BusinessException {
+        return feedbackGymRepository.findAllFeedbackGym(feedbackGym.getId());
+    }
 
-	@Override
-	public FeedbackGym findByID(long id) throws BusinessException {
-		return feedbackGymRepository.findByID(id);
-	}
-	
+    @Override
+    public Set<FeedbackGym> findAllFeedbackByGym(Gym gym) throws BusinessException {
+        return feedbackGymRepository.findAllFeedbackByGym(gym.getId());
+
+    }
+
+    @Override
+    public Set<FeedbackGym> findAllFeedbackByUserId(User user) throws BusinessException {
+        return feedbackGymRepository.findAllFeedbackByUserId(user.getId());
+
+    }
+
+    @Override
+    public void deleteAllByGym(Gym gym) {
+        feedbackGymRepository.deleteAllByGym(gym);
+    }
+
+    @Override
+    public FeedbackGym findByID(long id) throws BusinessException {
+        return feedbackGymRepository.findByID(id);
+    }
+
 
 }

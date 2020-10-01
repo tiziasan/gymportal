@@ -11,132 +11,124 @@ import java.util.Set;
 @Table(name = "gym")
 public class Gym extends BaseEntity implements Serializable {
 
-	public Gym(){
-	}
+    private static final long serialVersionUID = 1L;
+    @NotBlank
+    @Size(max = 50)
+    @Column(name = "NAME")
+    private String name;
+    @NotBlank
+    @Size(max = 200)
+    @Column(name = "ADDRESS")
+    private String address;
+    @NotBlank
+    @Size(max = 50)
+    @Column(name = "PROVINCE")
+    private String province;
+    @NotBlank
+    @Size(max = 50)
+    @Column(name = "REGION")
+    private String region;
+    @OneToMany(mappedBy = "gym")
+    private Set<FeedbackGym> feedbackGyms;
+    @OneToMany(mappedBy = "gym")
+    private Set<FavoriteGym> favoriteGyms;
+    @OneToMany(mappedBy = "gym")
+    private Set<Course> courses;
+    @ManyToOne
+    private Manager user;
 
-	public Gym(String name, String address, String province, String region, Manager user) {
-		this.name = name;
-		this.address = address;
-		this.province = province;
-		this.region = region;
-		this.user = user;
-	}
+    public Gym() {
+    }
 
-	private static final long serialVersionUID = 1L;
+    public Gym(String name, String address, String province, String region, Manager user) {
+        this.name = name;
+        this.address = address;
+        this.province = province;
+        this.region = region;
+        this.user = user;
+    }
 
-	@NotBlank
-	@Size(max=50)
-	@Column(name="NAME")
-	private String name;
+    public String getName() {
+        return name;
+    }
 
-	@NotBlank
-	@Size(max=200)
-	@Column(name="ADDRESS")
-	private String address;
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	@NotBlank
-	@Size(max=50)
-	@Column(name="PROVINCE")
-	private String province;
+    public String getAddress() {
+        return address;
+    }
 
-	@NotBlank
-	@Size(max=50)
-	@Column(name="REGION")
-	private String region;
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	@OneToMany(mappedBy="gym")
-	private Set<FeedbackGym> feedbackGyms;
+    public String getProvince() {
+        return province;
+    }
 
-	@OneToMany(mappedBy="gym")
-	private Set<FavoriteGym> favoriteGyms;
+    public void setProvince(String province) {
+        this.province = province;
+    }
 
-	@OneToMany(mappedBy="gym")
-	private Set<Course> courses;
+    public String getRegion() {
+        return region;
+    }
 
-	@ManyToOne
-	private Manager user;
+    public void setRegion(String region) {
+        this.region = region;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setUser(Manager user) {
+        this.user = user;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public Set<FeedbackGym> getFeedbackGyms() {
+        return feedbackGyms;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public Set<FavoriteGym> getFavoriteGyms() {
+        return favoriteGyms;
+    }
 
-	public String getProvince() {
-		return province;
-	}
+    public Set<Course> getCourses() {
+        return courses;
+    }
 
-	public void setProvince(String province) {
-		this.province = province;
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Gym)) return false;
+        Gym gym = (Gym) o;
+        return getName().equals(gym.getName()) &&
+                getAddress().equals(gym.getAddress()) &&
+                getProvince().equals(gym.getProvince()) &&
+                getRegion().equals(gym.getRegion()) &&
+                getUser().equals(gym.getUser());
+    }
 
-	public String getRegion() {
-		return region;
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getAddress(), getProvince(), getRegion());
+    }
 
-	public void setRegion(String region) {
-		this.region = region;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(Manager user) {
-		this.user = user;
-	}
-
-	public Set<FeedbackGym> getFeedbackGyms() {
-		return feedbackGyms;
-	}
-
-	public Set<FavoriteGym> getFavoriteGyms() {
-		return favoriteGyms;
-	}
-
-	public Set<Course> getCourses() {
-		return courses;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (!(o instanceof Gym)) return false;
-		Gym gym = (Gym) o;
-		return getName().equals(gym.getName()) &&
-				getAddress().equals(gym.getAddress()) &&
-				getProvince().equals(gym.getProvince()) &&
-				getRegion().equals(gym.getRegion()) &&
-				getUser().equals(gym.getUser());
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(getName(), getAddress(), getProvince(), getRegion());
-	}
-
-	@Override
-	public String toString() {
-		return "Gym{" +
-				"id='" + getId() + '\'' +
-				", name='" + name + '\'' +
-				", address='" + address + '\'' +
-				", province='" + province + '\'' +
-				", region='" + region + '\'' +
-				", feedbackGym=" + feedbackGyms +
-				", favoriteGym=" + favoriteGyms +
-				", course=" + courses +
-				", user=" + user +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "Gym{" +
+                "id='" + getId() + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", province='" + province + '\'' +
+                ", region='" + region + '\'' +
+                ", feedbackGym=" + feedbackGyms +
+                ", favoriteGym=" + favoriteGyms +
+                ", course=" + courses +
+                ", user=" + user +
+                '}';
+    }
 }

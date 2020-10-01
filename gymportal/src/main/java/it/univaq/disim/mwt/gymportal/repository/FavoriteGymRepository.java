@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FavoriteGymRepository extends CrudRepository<FavoriteGym, Long>, FavoriteGymImplCustom{
+public interface FavoriteGymRepository extends CrudRepository<FavoriteGym, Long>, FavoriteGymImplCustom {
 
     void deleteAllByGym(Gym gym);
 }

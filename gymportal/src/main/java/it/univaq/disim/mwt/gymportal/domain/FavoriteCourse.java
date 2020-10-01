@@ -4,73 +4,73 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "favoritecourse", uniqueConstraints = @UniqueConstraint(columnNames={"course_id","user_id"}))
+@Table(name = "favoritecourse", uniqueConstraints = @UniqueConstraint(columnNames = {"course_id", "user_id"}))
 public class FavoriteCourse {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	
-	@ManyToOne
-	private Customer user;
-	
-	@ManyToOne
-	private Course course;
 
-	public FavoriteCourse(long id, Customer user, Course course) {
-		this.id = id;
-		this.user = user;
-		this.course = course;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-	public FavoriteCourse() {
-	}
+    @ManyToOne
+    private Customer user;
 
-	public long getId() {
-		return id;
-	}
+    @ManyToOne
+    private Course course;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public FavoriteCourse(long id, Customer user, Course course) {
+        this.id = id;
+        this.user = user;
+        this.course = course;
+    }
 
-	public Customer getUser() {
-		return user;
-	}
+    public FavoriteCourse() {
+    }
 
-	public void setUser(Customer user) {
-		this.user = user;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public Course getCourse() {
-		return course;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public void setCourse(Course course) {
-		this.course = course;
-	}
+    public Customer getUser() {
+        return user;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (!(o instanceof FavoriteCourse)) return false;
-		FavoriteCourse that = (FavoriteCourse) o;
-		return getId() == that.getId() &&
-				getUser().equals(that.getUser()) &&
-				getCourse().equals(that.getCourse());
-	}
+    public void setUser(Customer user) {
+        this.user = user;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash( getUser(), getCourse());
-	}
+    public Course getCourse() {
+        return course;
+    }
 
-	@Override
-	public String toString() {
-		return "FavoriteCourse{" +
-				"id=" + id +
-				", user=" + user +
-				", course=" + course +
-				'}';
-	}
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof FavoriteCourse)) return false;
+        FavoriteCourse that = (FavoriteCourse) o;
+        return getId() == that.getId() &&
+                getUser().equals(that.getUser()) &&
+                getCourse().equals(that.getCourse());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUser(), getCourse());
+    }
+
+    @Override
+    public String toString() {
+        return "FavoriteCourse{" +
+                "id=" + id +
+                ", user=" + user +
+                ", course=" + course +
+                '}';
+    }
 }

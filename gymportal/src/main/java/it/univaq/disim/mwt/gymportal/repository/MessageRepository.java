@@ -9,8 +9,8 @@ import java.util.Set;
 
 @Repository
 public interface MessageRepository extends MongoRepository<Message, String> {
-	
-	Set<Message> findByChat(Chat chat);
 
-	void deleteMessagesByChat(Chat chat);
+    Set<Message> findByChat(Chat chat);
+
+    void deleteMessagesByChat(Chat chat);
 }

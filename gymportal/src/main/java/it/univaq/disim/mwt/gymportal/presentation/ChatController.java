@@ -37,17 +37,17 @@ public class ChatController {
     public String createStart(@PathVariable(required = false) String idChat, @RequestParam(required = false) Long idGym, Model model) throws BusinessException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))){ //se gestore restituisco mappa delle palestre e la lista delle chat per ognuna di esse
+        if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) { //se gestore restituisco mappa delle palestre e la lista delle chat per ognuna di esse
 
             User user = userService.findUserByUsername(auth.getName());
             Set<Gym> gyms = gymService.searchByUser(user);
             Map<String, Set<Chat>> chatMap = new HashMap<>();
-            for (Gym g: gyms ) {
+            for (Gym g : gyms) {
                 chatMap.put(g.getName(), chatService.findByGymId(g));
             }
             model.addAttribute("chatMap", chatMap);
 
-            if(idChat != null && idGym == null){
+            if (idChat != null && idGym == null) {
                 Chat chat = chatService.findChatById(idChat);
                 model.addAttribute("chat", chat);
                 Set<Message> messageList = messageService.findByChat(chat);
@@ -60,13 +60,13 @@ public class ChatController {
             Set<Chat> chatList = chatService.findByUserId(user);
             model.addAttribute("chatList", chatList);
 
-            if(idChat != null && idGym == null){    //se idchat settata allora già esiste
+            if (idChat != null && idGym == null) {    //se idchat settata allora già esiste
                 Chat chat = chatService.findChatById(idChat);
                 model.addAttribute("chat", chat);
                 Set<Message> messageList = messageService.findByChat(chat);
                 model.addAttribute("messageList", messageList);
             }
-            if(idChat == null && idGym != null){    //se id gym settato restituisci la chat che fa match con idGym e username e restituisci la lista dei messaggi di quella specifica chat
+            if (idChat == null && idGym != null) {    //se id gym settato restituisci la chat che fa match con idGym e username e restituisci la lista dei messaggi di quella specifica chat
                 Chat chat = chatService.findByUserIdAndGymId(user, idGym);     //se chat non esiste non bisogna crearla qui ma nel metodo che fa inserimento dei messaggi
                 model.addAttribute("chat", chat);
                 Set<Message> messageList = messageService.findByChat(chat);
@@ -88,19 +88,19 @@ public class ChatController {
         User user = userService.findUserByUsername(auth.getName());
 
         Chat chat = new Chat();
-        if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))){
-            if(idChat != null && idGym == null){    //se ho idChat prendo la chat, faccio inserimento del messaggio e aggiorno solo la lista dei messaggi e ritorno a /chat/idchat
+        if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
+            if (idChat != null && idGym == null) {    //se ho idChat prendo la chat, faccio inserimento del messaggio e aggiorno solo la lista dei messaggi e ritorno a /chat/idchat
                 chat = chatService.findChatById(idChat);
                 message.setGym(true);
             }
         } else {
-            if(idChat != null && idGym == null){    //se ho idChat prendo la chat, faccio inserimento del messaggio e aggiorno solo la lista dei messaggi e ritorno a /chat/idchat
+            if (idChat != null && idGym == null) {    //se ho idChat prendo la chat, faccio inserimento del messaggio e aggiorno solo la lista dei messaggi e ritorno a /chat/idchat
                 chat = chatService.findChatById(idChat);
                 message.setGym(false);
             }
-            if(idChat == null && idGym != null){    //se ho idGYm prendo la chat che fa match con userId
+            if (idChat == null && idGym != null) {    //se ho idGYm prendo la chat che fa match con userId
                 chat = chatService.findByUserIdAndGymId(user, idGym);
-                if (chat == null){  //se non esiste la creo
+                if (chat == null) {  //se non esiste la creo
                     chat = new Chat();
                     chat.setUserId(user.getId());
                     chat.setUserName(user.getLastname() + " " + user.getName());

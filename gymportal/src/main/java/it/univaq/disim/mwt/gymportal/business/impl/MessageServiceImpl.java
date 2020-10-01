@@ -21,10 +21,10 @@ public class MessageServiceImpl implements MessageService {
         return messageRepository.save(msg);
     }
 
-	@Override
-	public Set<Message> findByChat(Chat chat) throws BusinessException {
-		return messageRepository.findByChat(chat);
-	}
+    @Override
+    public Set<Message> findByChat(Chat chat) throws BusinessException {
+        return messageRepository.findByChat(chat);
+    }
 
     @Override
     public void deleteMessagesByChat(Chat chat) throws BusinessException {

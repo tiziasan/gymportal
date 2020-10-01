@@ -7,7 +7,7 @@ import java.util.Set;
 
 public interface MessageService {
 
-    Message createMessage (Message msg) throws BusinessException;
+    Message createMessage(Message msg) throws BusinessException;
 
     Set<Message> findByChat(Chat chat) throws BusinessException;
 

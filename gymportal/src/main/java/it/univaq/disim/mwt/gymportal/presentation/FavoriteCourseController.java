@@ -1,4 +1,3 @@
-
 package it.univaq.disim.mwt.gymportal.presentation;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
@@ -24,60 +23,59 @@ import javax.validation.Valid;
 @RequestMapping("favoriteCourse")
 public class FavoriteCourseController {
 
-	@Autowired
-	private FavoriteService favoriteService;
+    @Autowired
+    private FavoriteService favoriteService;
 
-	@Autowired
-	private CourseService courseService;
+    @Autowired
+    private CourseService courseService;
 
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserService userService;
 
-	@GetMapping("/create/{id}")
-	public String createStart(@PathVariable long id, Model model) throws BusinessException {
-		Course course = courseService.findByID(id);
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Customer user = userService.findUserByUsername(auth.getName());
-		model.addAttribute("course", course);
-		model.addAttribute("user", user);
-		
-		FavoriteCourse favoriteCourse = new FavoriteCourse();
+    @GetMapping("/create/{id}")
+    public String createStart(@PathVariable long id, Model model) throws BusinessException {
+        Course course = courseService.findByID(id);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Customer user = userService.findUserByUsername(auth.getName());
+        model.addAttribute("course", course);
+        model.addAttribute("user", user);
 
-		model.addAttribute("favoriteCourse", favoriteCourse);
-		return "/favoriteCourse/create";
-	}
+        FavoriteCourse favoriteCourse = new FavoriteCourse();
 
-	@PostMapping("/create/{id}")
-	public String create(@Valid @ModelAttribute("favoriteCourse") FavoriteCourse favoriteCourse, RedirectAttributes redir, Errors errors, Model model)
-			throws BusinessException {
-		
-		if (errors.hasErrors()) {
-			String message = "Errore nell'inserimento";
-			model.addAttribute("message", message);
-			return "redirect:/profile";
-		}
-		System.out.println(favoriteCourse);
-
-		favoriteService.createFavoriteCourse(favoriteCourse);
-		redir.addFlashAttribute("message", "corso aggiunto ai preferiti");
-
-
-		String redirect = "redirect:/profile";
-
-		return redirect;
-	}
-
-	@GetMapping("/delete/{id}")
-	public String deleteStart(@PathVariable long id, Model model) throws BusinessException {
-		return "/favoriteCourse/delete";
+        model.addAttribute("favoriteCourse", favoriteCourse);
+        return "/favoriteCourse/create";
     }
-	
-	@PostMapping("/delete/{id}")
-	public String delete(@ModelAttribute("favoriteCourse") FavoriteCourse favoriteCourse, Errors errors) throws BusinessException {
-		favoriteService.deleteFavoriteCourse(favoriteCourse);
-		return "redirect:/profile";
-	}
-	
-	
+
+    @PostMapping("/create/{id}")
+    public String create(@Valid @ModelAttribute("favoriteCourse") FavoriteCourse favoriteCourse, RedirectAttributes redir, Errors errors, Model model)
+            throws BusinessException {
+
+        if (errors.hasErrors()) {
+            String message = "Errore nell'inserimento";
+            model.addAttribute("message", message);
+            return "redirect:/profile";
+        }
+        System.out.println(favoriteCourse);
+
+        favoriteService.createFavoriteCourse(favoriteCourse);
+        redir.addFlashAttribute("message", "corso aggiunto ai preferiti");
+
+
+        String redirect = "redirect:/profile";
+
+        return redirect;
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteStart(@PathVariable long id, Model model) throws BusinessException {
+        return "/favoriteCourse/delete";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String delete(@ModelAttribute("favoriteCourse") FavoriteCourse favoriteCourse, Errors errors) throws BusinessException {
+        favoriteService.deleteFavoriteCourse(favoriteCourse);
+        return "redirect:/profile";
+    }
+
 
 }

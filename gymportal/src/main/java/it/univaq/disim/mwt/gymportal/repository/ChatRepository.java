@@ -10,13 +10,13 @@ import java.util.Set;
 @Repository
 public interface ChatRepository extends MongoRepository<Chat, String> {
 
-	Chat findChatById(String id);
+    Chat findChatById(String id);
 
-	Set<Chat> findByUserId(long userId);
-	
-	Set<Chat> findByGymId(long gymId);
+    Set<Chat> findByUserId(long userId);
 
-	Chat findByUserIdAndGymId(long userId, long gymId);
-	
-	void deleteChatsByGymId(long gymId);
+    Set<Chat> findByGymId(long gymId);
+
+    Chat findByUserIdAndGymId(long userId, long gymId);
+
+    void deleteChatsByGymId(long gymId);
 }

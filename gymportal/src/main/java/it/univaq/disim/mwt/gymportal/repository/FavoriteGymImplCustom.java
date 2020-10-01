@@ -7,12 +7,11 @@ import java.util.Set;
 
 public interface FavoriteGymImplCustom {
 
-	@Query(value="FROM FavoriteGym as f WHERE f.id = :id")
-	public Set<FavoriteGym> findAllFavoriteGym(long id);
-	
-	@Query(value="FROM FavoriteGym as f WHERE f.user.id = :id")
-	public Set<FavoriteGym> findAllFavoriteByUserId(long id);
-	
-	
-	
+    @Query(value = "FROM FavoriteGym as f WHERE f.id = :id")
+    Set<FavoriteGym> findAllFavoriteGym(long id);
+
+    @Query(value = "FROM FavoriteGym as f WHERE f.user.id = :id")
+    Set<FavoriteGym> findAllFavoriteByUserId(long id);
+
+
 }

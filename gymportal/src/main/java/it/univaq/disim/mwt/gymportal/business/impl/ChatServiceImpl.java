@@ -22,35 +22,35 @@ public class ChatServiceImpl implements ChatService {
         return chatRepository.save(chat);
     }
 
-	@Override
-	public void saveAllChats(Set<Chat> chatList) throws BusinessException {
-		chatRepository.saveAll(chatList);
-	}
+    @Override
+    public void saveAllChats(Set<Chat> chatList) throws BusinessException {
+        chatRepository.saveAll(chatList);
+    }
 
-	@Override
-	public void deleteChatsByGymId(Gym gym) throws BusinessException {
-		chatRepository.deleteChatsByGymId(gym.getId());
-	}
+    @Override
+    public void deleteChatsByGymId(Gym gym) throws BusinessException {
+        chatRepository.deleteChatsByGymId(gym.getId());
+    }
 
-	@Override
-	public Chat findChatById(String id) throws BusinessException {
-		return chatRepository.findChatById(id);
-	}
+    @Override
+    public Chat findChatById(String id) throws BusinessException {
+        return chatRepository.findChatById(id);
+    }
 
-	@Override
-	public Set<Chat> findByUserId(User user) throws BusinessException {
-		return chatRepository.findByUserId(user.getId());
-	}
+    @Override
+    public Set<Chat> findByUserId(User user) throws BusinessException {
+        return chatRepository.findByUserId(user.getId());
+    }
 
-	@Override
-	public Set<Chat> findByGymId(Gym gym) throws BusinessException {
-		return chatRepository.findByGymId(gym.getId());
-	}
+    @Override
+    public Set<Chat> findByGymId(Gym gym) throws BusinessException {
+        return chatRepository.findByGymId(gym.getId());
+    }
 
-	@Override
-	public Chat findByUserIdAndGymId(User user, long gymId) throws BusinessException {
-		return chatRepository.findByUserIdAndGymId(user.getId(), gymId);
+    @Override
+    public Chat findByUserIdAndGymId(User user, long gymId) throws BusinessException {
+        return chatRepository.findByUserIdAndGymId(user.getId(), gymId);
 
-	}
+    }
 
 }

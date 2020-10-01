@@ -14,59 +14,59 @@ import java.util.Set;
 @Service
 @Transactional
 public class GymServiceImpl implements GymService {
-	
-	@Autowired
-	private GymRepository gymRepository;
 
-	@Override
-	public void deleteGym(Gym gym) throws BusinessException {
-		gymRepository.deleteById(gym.getId());
-	}
+    @Autowired
+    private GymRepository gymRepository;
 
-	@Override
-	public void createGym(Gym gym) throws BusinessException {
-		gymRepository.save(gym);
-	}
+    @Override
+    public void deleteGym(Gym gym) throws BusinessException {
+        gymRepository.deleteById(gym.getId());
+    }
 
-	@Override
-	public void updateGym(Gym gym) throws BusinessException {
-		gymRepository.save(gym);
-	}
+    @Override
+    public void createGym(Gym gym) throws BusinessException {
+        gymRepository.save(gym);
+    }
 
-	@Override
-	public Set<Gym> findAllGym() throws BusinessException {
-		return (Set<Gym>) gymRepository.findAll();
-	}
+    @Override
+    public void updateGym(Gym gym) throws BusinessException {
+        gymRepository.save(gym);
+    }
 
-	@Override
-	public Set<Gym> findByRegion(String region) throws BusinessException {
-		return gymRepository.findByRegionName(region);
-	}
+    @Override
+    public Set<Gym> findAllGym() throws BusinessException {
+        return (Set<Gym>) gymRepository.findAll();
+    }
 
-	@Override
-	public Gym findByID(long id) throws BusinessException {
-		return gymRepository.findByID(id);
-	}
+    @Override
+    public Set<Gym> findByRegion(String region) throws BusinessException {
+        return gymRepository.findByRegionName(region);
+    }
 
-	@Override
-	public Set<Gym> searchByRegionAndName(String region, String name) throws BusinessException {
-		return gymRepository.searchByRegionAndName(region, name);
-	}
-	
-	@Override
-	public Set<Gym> searchByRegionAndUser(String region, User user) throws BusinessException {
-		return gymRepository.searchByRegionAndUser(region, user.getId());
-	}
-	
-	@Override
-	public Set<Gym> searchByRegionAndNameAndUser(String region, String name, User user) throws BusinessException {
-		return gymRepository.searchByRegionAndNameAndUser(region, name, user.getId());
-	}
-	
-	@Override
-	public Set<Gym> searchByUser(User user) throws BusinessException {
-		return gymRepository.searchByUser(user.getId());
-	}
+    @Override
+    public Gym findByID(long id) throws BusinessException {
+        return gymRepository.findByID(id);
+    }
+
+    @Override
+    public Set<Gym> searchByRegionAndName(String region, String name) throws BusinessException {
+        return gymRepository.searchByRegionAndName(region, name);
+    }
+
+    @Override
+    public Set<Gym> searchByRegionAndUser(String region, User user) throws BusinessException {
+        return gymRepository.searchByRegionAndUser(region, user.getId());
+    }
+
+    @Override
+    public Set<Gym> searchByRegionAndNameAndUser(String region, String name, User user) throws BusinessException {
+        return gymRepository.searchByRegionAndNameAndUser(region, name, user.getId());
+    }
+
+    @Override
+    public Set<Gym> searchByUser(User user) throws BusinessException {
+        return gymRepository.searchByUser(user.getId());
+    }
 
 
 }

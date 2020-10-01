@@ -7,7 +7,10 @@ import java.util.Set;
 
 @Entity
 @DiscriminatorValue(Role.Values.MANAGER)
-public class Manager extends User{
+public class Manager extends User {
+
+    @OneToMany(mappedBy = "user")
+    private Set<Gym> gyms;
 
     public Manager() {
     }
@@ -16,12 +19,9 @@ public class Manager extends User{
         super(username, email, password, name, lastname, Role.MANAGER);
     }
 
-    public Manager(User user){
+    public Manager(User user) {
         super(user.getId(), user.getUsername(), user.getEmail(), user.getPassword(), user.getName(), user.getLastname(), Role.MANAGER);
     }
-
-    @OneToMany(mappedBy="user")
-    private Set<Gym> gyms;
 
     public Set<Gym> getGyms() {
         return gyms;

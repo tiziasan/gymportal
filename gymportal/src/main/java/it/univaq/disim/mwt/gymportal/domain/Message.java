@@ -22,8 +22,8 @@ public class Message {
 
     private boolean isGym;
 
-    public Message(){
-    };
+    public Message() {
+    }
 
     public Message(String id, String text, Chat chat, LocalDateTime date, boolean isGym) {
         this.id = id;

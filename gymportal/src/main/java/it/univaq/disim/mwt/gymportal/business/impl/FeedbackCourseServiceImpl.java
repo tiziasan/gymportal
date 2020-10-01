@@ -15,54 +15,54 @@ import java.util.Set;
 @Service
 @Transactional
 public class FeedbackCourseServiceImpl implements FeedbackCourseService {
-	
-	@Autowired
-	private FeedbackCourseRepository feedbackCourseRepository;
 
-	@Override
-	public void createFeedbackCourse(FeedbackCourse feedbackCourse) throws BusinessException {
-		feedbackCourseRepository.save(feedbackCourse);
-		
-	}
+    @Autowired
+    private FeedbackCourseRepository feedbackCourseRepository;
 
-	@Override
-	public void updateFeedbackCourse(FeedbackCourse feedbackCourse) throws BusinessException {
-		feedbackCourseRepository.save(feedbackCourse);
-		
-	}
+    @Override
+    public void createFeedbackCourse(FeedbackCourse feedbackCourse) throws BusinessException {
+        feedbackCourseRepository.save(feedbackCourse);
 
-	@Override
-	public void deleteFeedbackCourse(FeedbackCourse feedbackCourse) throws BusinessException {
-		feedbackCourseRepository.deleteById(feedbackCourse.getId());
-		
-	}
+    }
+
+    @Override
+    public void updateFeedbackCourse(FeedbackCourse feedbackCourse) throws BusinessException {
+        feedbackCourseRepository.save(feedbackCourse);
+
+    }
+
+    @Override
+    public void deleteFeedbackCourse(FeedbackCourse feedbackCourse) throws BusinessException {
+        feedbackCourseRepository.deleteById(feedbackCourse.getId());
+
+    }
 
 
-	@Override
-	public Set<FeedbackCourse> findAllFeedbackCourse(FeedbackCourse feedbackCourse) throws BusinessException {
-		return feedbackCourseRepository.findAllFeedbackCourse(feedbackCourse.getId());
-	}
+    @Override
+    public Set<FeedbackCourse> findAllFeedbackCourse(FeedbackCourse feedbackCourse) throws BusinessException {
+        return feedbackCourseRepository.findAllFeedbackCourse(feedbackCourse.getId());
+    }
 
-	@Override
-	public Set<FeedbackCourse> findAllFeedbackByCourse(long id) throws BusinessException {
-		return feedbackCourseRepository.findAllFeedbackByCourse(id);
+    @Override
+    public Set<FeedbackCourse> findAllFeedbackByCourse(long id) throws BusinessException {
+        return feedbackCourseRepository.findAllFeedbackByCourse(id);
 
-	}
-	
-	@Override
-	public Set<FeedbackCourse> findAllFeedbackByUserId(User user) throws BusinessException {
-		return feedbackCourseRepository.findAllFeedbackByUserId(user.getId());
+    }
 
-	}
+    @Override
+    public Set<FeedbackCourse> findAllFeedbackByUserId(User user) throws BusinessException {
+        return feedbackCourseRepository.findAllFeedbackByUserId(user.getId());
 
-	@Override
-	public void deleteAllByCourse(Course course) {
-		feedbackCourseRepository.deleteAllByCourse(course);
-	}
+    }
 
-	@Override
-	public FeedbackCourse findByID(long id) throws BusinessException {
-		return feedbackCourseRepository.findByID(id);
-	}
+    @Override
+    public void deleteAllByCourse(Course course) {
+        feedbackCourseRepository.deleteAllByCourse(course);
+    }
+
+    @Override
+    public FeedbackCourse findByID(long id) throws BusinessException {
+        return feedbackCourseRepository.findByID(id);
+    }
 
 }

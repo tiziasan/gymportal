@@ -54,6 +54,7 @@ public class FavoriteServiceImpl implements FavoriteService {
     public void deleteAllByCourse(Course course) {
         favoriteCourseRepository.deleteAllByCourse(course);
     }
+
     @Override
     public void createFavoriteGym(FavoriteGym favoriteGym) throws BusinessException {
         favoriteGymRepository.save(favoriteGym);

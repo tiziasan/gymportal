@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FeedbackCourseRepository extends CrudRepository<FeedbackCourse, Long>, FeedbackCourseImplCustom{
+public interface FeedbackCourseRepository extends CrudRepository<FeedbackCourse, Long>, FeedbackCourseImplCustom {
 
     void deleteAllByCourse(Course course);
 }

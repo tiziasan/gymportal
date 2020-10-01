@@ -8,27 +8,27 @@ import it.univaq.disim.mwt.gymportal.domain.Gym;
 import java.util.Set;
 
 public interface FavoriteService {
-    void createFavoriteCourse (FavoriteCourse favoriteCourse) throws BusinessException;
+    void createFavoriteCourse(FavoriteCourse favoriteCourse) throws BusinessException;
 
-    void updateFavoriteCourse (FavoriteCourse favoriteCourse) throws BusinessException;
+    void updateFavoriteCourse(FavoriteCourse favoriteCourse) throws BusinessException;
 
-    void deleteFavoriteCourse (FavoriteCourse favoriteCourse) throws BusinessException;
+    void deleteFavoriteCourse(FavoriteCourse favoriteCourse) throws BusinessException;
 
-    Set<FavoriteCourse> findAllFavoriteCourse (FavoriteCourse favoriteCourse) throws BusinessException;
+    Set<FavoriteCourse> findAllFavoriteCourse(FavoriteCourse favoriteCourse) throws BusinessException;
 
-    Set <FavoriteCourse> findAllFavoriteByUserId (long id) throws BusinessException;
+    Set<FavoriteCourse> findAllFavoriteByUserId(long id) throws BusinessException;
 
     void deleteAllByCourse(Course course);
 
-    void createFavoriteGym (FavoriteGym favoriteGym) throws BusinessException;
+    void createFavoriteGym(FavoriteGym favoriteGym) throws BusinessException;
 
-    void updateFavoriteGym (FavoriteGym favoriteGym) throws BusinessException;
+    void updateFavoriteGym(FavoriteGym favoriteGym) throws BusinessException;
 
-    void deleteFavoriteGym (FavoriteGym favoriteGym) throws BusinessException;
+    void deleteFavoriteGym(FavoriteGym favoriteGym) throws BusinessException;
 
-    Set<FavoriteGym> findAllFavoritegym (FavoriteGym favoriteGym) throws BusinessException;
+    Set<FavoriteGym> findAllFavoritegym(FavoriteGym favoriteGym) throws BusinessException;
 
-    Set <FavoriteGym> findAllFavoriteByUserId (FavoriteGym favoriteGym) throws BusinessException;
+    Set<FavoriteGym> findAllFavoriteByUserId(FavoriteGym favoriteGym) throws BusinessException;
 
     void deleteAllByGym(Gym gym);
 }

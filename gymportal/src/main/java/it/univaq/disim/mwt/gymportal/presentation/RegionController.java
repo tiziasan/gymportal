@@ -24,46 +24,46 @@ import java.util.Set;
 @RequestMapping("region")
 public class RegionController {
 
-	@Autowired
-	private GymService gymService;
+    @Autowired
+    private GymService gymService;
 
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserService userService;
 
-	// https://stackoverflow.com/questions/60528613/rest-api-with-mix-of-path-param-and-requestparam
-	@GetMapping(value = { "/{region}", "/{region}?search={search}" })
-	public String listGym(@PathVariable String region, @RequestParam(required = false) String search, Model model)
-			throws BusinessException {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Set<Gym> gymList = null;
+    // https://stackoverflow.com/questions/60528613/rest-api-with-mix-of-path-param-and-requestparam
+    @GetMapping(value = {"/{region}", "/{region}?search={search}"})
+    public String listGym(@PathVariable String region, @RequestParam(required = false) String search, Model model)
+            throws BusinessException {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Set<Gym> gymList = null;
 
-		if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
-			Manager user = userService.findUserByUsername(auth.getName());
-			gymList = gymService.searchByRegionAndUser(region,user);
-		}
+        if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
+            Manager user = userService.findUserByUsername(auth.getName());
+            gymList = gymService.searchByRegionAndUser(region, user);
+        }
 
-		if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ANONYMOUS")) ||
-				auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER))) {
-			gymList = gymService.findByRegion(region);
-		}
+        if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ANONYMOUS")) ||
+                auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER))) {
+            gymList = gymService.findByRegion(region);
+        }
 
-		if (search != null &&
-				( auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER)) ||
-				auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ANONYMOUS"))) ) {
-			gymList = gymService.searchByRegionAndName(region, search);
-			model.addAttribute("search", search);
-		}
+        if (search != null &&
+                (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER)) ||
+                        auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ANONYMOUS")))) {
+            gymList = gymService.searchByRegionAndName(region, search);
+            model.addAttribute("search", search);
+        }
 
-		if (search != null && auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
-			User user = userService.findUserByUsername(auth.getName());
-			long id = user.getId();
-			gymList = gymService.searchByRegionAndNameAndUser(region, search, user);
-			model.addAttribute("search", search);
-		}
+        if (search != null && auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
+            User user = userService.findUserByUsername(auth.getName());
+            long id = user.getId();
+            gymList = gymService.searchByRegionAndNameAndUser(region, search, user);
+            model.addAttribute("search", search);
+        }
 
-		model.addAttribute("region", region);
-		model.addAttribute("gymList", gymList);
-		return "/region/index";
-	}
+        model.addAttribute("region", region);
+        model.addAttribute("gymList", gymList);
+        return "/region/index";
+    }
 
 }

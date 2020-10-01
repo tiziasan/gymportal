@@ -13,29 +13,29 @@ import java.util.Locale;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-	
-	@Override
-	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/common/welcome").setViewName("/common/welcome");
-		registry.addViewController("/common/operazioneok").setViewName("/common/operazioneok");
-	}
-	
-	@Bean
-	public LocaleResolver localeResolver() {
-	    SessionLocaleResolver slr = new SessionLocaleResolver();
-	    slr.setDefaultLocale(Locale.ITALY);
-	    return slr;
-	}
-	
-	@Bean
-	public LocaleChangeInterceptor localeChangeInterceptor() {
-	    LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
-	    lci.setParamName("lang");
-	    return lci;
-	}
-	
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-	    registry.addInterceptor(localeChangeInterceptor());
-	}
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/common/welcome").setViewName("/common/welcome");
+        registry.addViewController("/common/operazioneok").setViewName("/common/operazioneok");
+    }
+
+    @Bean
+    public LocaleResolver localeResolver() {
+        SessionLocaleResolver slr = new SessionLocaleResolver();
+        slr.setDefaultLocale(Locale.ITALY);
+        return slr;
+    }
+
+    @Bean
+    public LocaleChangeInterceptor localeChangeInterceptor() {
+        LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
+        lci.setParamName("lang");
+        return lci;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(localeChangeInterceptor());
+    }
 }

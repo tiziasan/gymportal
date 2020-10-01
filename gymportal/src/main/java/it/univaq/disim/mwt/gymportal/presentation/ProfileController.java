@@ -1,6 +1,8 @@
 package it.univaq.disim.mwt.gymportal.presentation;
 
-import it.univaq.disim.mwt.gymportal.business.*;
+import it.univaq.disim.mwt.gymportal.business.BusinessException;
+import it.univaq.disim.mwt.gymportal.business.ChatService;
+import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -24,81 +26,81 @@ import java.util.Set;
 
 @Controller
 public class ProfileController {
-	
-	@Autowired
-	private UserService userService;
 
-	@Autowired
-	private ChatService chatService;
-	
-	
-	@GetMapping("")
-	public ModelAndView home(Model model) throws BusinessException {
-		ModelAndView modelAndView = new ModelAndView();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    @Autowired
+    private UserService userService;
 
-		User user;
+    @Autowired
+    private ChatService chatService;
 
-		Set<FeedbackCourse> feedbackCourseList = new HashSet<>();
-		Set<FeedbackGym> feedbackGymList = new HashSet<>();
-		Set<FavoriteGym> favoriteGymList = new HashSet<>();
-		Set<FavoriteCourse> favoriteCourseList = new HashSet<>();
 
-		if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER))){
-			Customer customer = userService.findUserByUsername(auth.getName());
-			user = customer;
-			feedbackCourseList = customer.getFeedbackCourses();
-			feedbackGymList = customer.getFeedbackGyms();
-			favoriteGymList = customer.getFavoriteGyms();
-			favoriteCourseList = customer.getFavoriteCourses();
+    @GetMapping("")
+    public ModelAndView home(Model model) throws BusinessException {
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-		} else {
-			user = userService.findUserByUsername(auth.getName());
-		}
+        User user;
 
-		model.addAttribute("user",user);
-		model.addAttribute("adminMessage", "Content Available Only for Users with Admin Role");
-		model.addAttribute("feedbackCourseList",feedbackCourseList);
-		model.addAttribute("feedbackGymList",feedbackGymList);
-		model.addAttribute("favoriteGymList",favoriteGymList);
-		model.addAttribute("favoriteCourseList",favoriteCourseList);
+        Set<FeedbackCourse> feedbackCourseList = new HashSet<>();
+        Set<FeedbackGym> feedbackGymList = new HashSet<>();
+        Set<FavoriteGym> favoriteGymList = new HashSet<>();
+        Set<FavoriteCourse> favoriteCourseList = new HashSet<>();
 
-		modelAndView.setViewName("/profile/index");
-		return modelAndView;
-	}
-	
-	@GetMapping("/update")
-	public String updateStart(Model model) throws BusinessException {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.findUserByUsername(auth.getName());
-		model.addAttribute("user", user);
-		return "/profile/update";
-		
-	}
+        if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER))) {
+            Customer customer = userService.findUserByUsername(auth.getName());
+            user = customer;
+            feedbackCourseList = customer.getFeedbackCourses();
+            feedbackGymList = customer.getFeedbackGyms();
+            favoriteGymList = customer.getFavoriteGyms();
+            favoriteCourseList = customer.getFavoriteCourses();
 
-	@PostMapping("/update")
-	public String update(@Valid @ModelAttribute("user") User user , Errors errors) throws BusinessException {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        } else {
+            user = userService.findUserByUsername(auth.getName());
+        }
 
-		if (errors.hasErrors()) {
-			return "/common/error";
-		}
+        model.addAttribute("user", user);
+        model.addAttribute("adminMessage", "Content Available Only for Users with Admin Role");
+        model.addAttribute("feedbackCourseList", feedbackCourseList);
+        model.addAttribute("feedbackGymList", feedbackGymList);
+        model.addAttribute("favoriteGymList", favoriteGymList);
+        model.addAttribute("favoriteCourseList", favoriteCourseList);
 
-		if(auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER))) {
-			userService.updateCustomer(user);
-		}
-		if(auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
-			userService.updateManager(user);
-		}
+        modelAndView.setViewName("/profile/index");
+        return modelAndView;
+    }
 
-		Set<Chat> chatList = chatService.findByUserId(user);
-		for ( Chat c: chatList ) {
-			c.setUserName(user.getName() + " " + user.getLastname());
-		}
-		chatService.saveAllChats(chatList);
+    @GetMapping("/update")
+    public String updateStart(Model model) throws BusinessException {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUsername(auth.getName());
+        model.addAttribute("user", user);
+        return "/profile/update";
 
-		return "redirect:/login";
+    }
 
-	}
-	
+    @PostMapping("/update")
+    public String update(@Valid @ModelAttribute("user") User user, Errors errors) throws BusinessException {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (errors.hasErrors()) {
+            return "/common/error";
+        }
+
+        if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER))) {
+            userService.updateCustomer(user);
+        }
+        if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
+            userService.updateManager(user);
+        }
+
+        Set<Chat> chatList = chatService.findByUserId(user);
+        for (Chat c : chatList) {
+            c.setUserName(user.getName() + " " + user.getLastname());
+        }
+        chatService.saveAllChats(chatList);
+
+        return "redirect:/login";
+
+    }
+
 }

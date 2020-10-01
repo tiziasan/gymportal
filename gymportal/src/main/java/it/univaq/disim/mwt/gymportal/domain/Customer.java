@@ -9,6 +9,15 @@ import java.util.Set;
 @DiscriminatorValue(Role.Values.CUSTOMER)
 public class Customer extends User {
 
+    @OneToMany(mappedBy = "user")
+    private Set<FeedbackCourse> feedbackCourses;
+    @OneToMany(mappedBy = "user")
+    private Set<FavoriteGym> favoriteGyms;
+    @OneToMany(mappedBy = "user")
+    private Set<FavoriteCourse> favoriteCourses;
+    @OneToMany(mappedBy = "user")
+    private Set<FeedbackGym> feedbackGyms;
+
     public Customer() {
     }
 
@@ -16,21 +25,9 @@ public class Customer extends User {
         super(username, email, password, name, lastname, Role.CUSTOMER);
     }
 
-    public Customer(User user){
+    public Customer(User user) {
         super(user.getId(), user.getUsername(), user.getEmail(), user.getPassword(), user.getName(), user.getLastname(), Role.CUSTOMER);
     }
-
-    @OneToMany(mappedBy="user")
-    private Set<FeedbackCourse> feedbackCourses;
-
-    @OneToMany(mappedBy="user")
-    private Set<FavoriteGym> favoriteGyms;
-
-    @OneToMany(mappedBy="user")
-    private Set<FavoriteCourse> favoriteCourses;
-
-    @OneToMany(mappedBy="user")
-    private Set<FeedbackGym> feedbackGyms;
 
     public Set<FeedbackCourse> getFeedbackCourses() {
         return feedbackCourses;
