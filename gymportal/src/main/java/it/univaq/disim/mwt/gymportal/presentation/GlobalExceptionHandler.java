@@ -28,6 +28,14 @@ public class GlobalExceptionHandler {
 			model.addAttribute("success", "Hai già inserito il corso ai preferiti");
 			return "/index";
 		}
+		else if (stringWriter.toString().contains("UK2ucpf4y44fsmt5cj767ygmyu2")){
+			model.addAttribute("success", "Hai già scritto una recensione per questa palestra!");
+			return "/index";
+		}
+		else if (stringWriter.toString().contains("UKmlqk03e4td4n6ph6susmvfoh")){
+			model.addAttribute("success", "Hai già scritto una recensione per questo corso!");
+			return "/index";
+		}
 
 		else {
 			model.addAttribute("errorMessage", stringWriter.toString());
