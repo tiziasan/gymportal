@@ -5,6 +5,8 @@
 </head>
 <body>
 <div layout:fragment="content">
+	<div class="alert alert-success" role="alert" th:text="${message}" th:if="${message}"></div>
+
 	<div class="row">
 		<div class="col-12">
 			<section class="content">
@@ -16,7 +18,6 @@
 							<!-- /.box-body -->
 							<div class="profile-sidebar">
 								<div class="profile-usertitle">
-									<div class="alert alert-warning" role="alert" th:text="${message}" th:if="${message}"></div>
 
 									<div class="profile-usertitle-name">
 										<h1 th:text="${user.name}"></h1>

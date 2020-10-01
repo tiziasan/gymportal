@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -49,7 +50,7 @@ public class FavoriteGymController {
 	}
 
 	@PostMapping("/create/{id}")
-	public String create(@Valid @ModelAttribute("favoriteGym") FavoriteGym favoriteGym, Errors errors, Model model)
+	public String create(@Valid @ModelAttribute("favoriteGym") FavoriteGym favoriteGym, RedirectAttributes redir, Errors errors, Model model)
 			throws BusinessException {
 		
 		if (errors.hasErrors()) {
@@ -60,7 +61,8 @@ public class FavoriteGymController {
 		System.out.println(favoriteGym);
 
 		serviceFavoriteGym.createFavoriteGym(favoriteGym);
-		
+		redir.addFlashAttribute("message", "palestra aggiunta ai preferiti");
+
 
 		String redirect = "redirect:/profile";
 

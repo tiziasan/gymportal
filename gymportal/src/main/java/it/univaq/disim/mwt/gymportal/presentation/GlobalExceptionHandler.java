@@ -21,19 +21,19 @@ public class GlobalExceptionHandler {
 		ex.printStackTrace(printWriter);
 		printWriter.flush();
 		if(stringWriter.toString().contains("UK3720qfodb5fi73gktwatyprks")){
-			model.addAttribute("success", "Hai già inserito la palestra ai preferiti");
+			model.addAttribute("error", "Hai già inserito la palestra ai preferiti");
 			return "/index";
 
 		} else if (stringWriter.toString().contains("UKmttnhvruuluxke3r6mkni90ht")){
-			model.addAttribute("success", "Hai già inserito il corso ai preferiti");
+			model.addAttribute("error", "Hai già inserito il corso ai preferiti");
 			return "/index";
 		}
 		else if (stringWriter.toString().contains("UK2ucpf4y44fsmt5cj767ygmyu2")){
-			model.addAttribute("success", "Hai già scritto una recensione per questa palestra!");
+			model.addAttribute("error", "Hai già scritto una recensione per questa palestra!");
 			return "/index";
 		}
 		else if (stringWriter.toString().contains("UKmlqk03e4td4n6ph6susmvfoh")){
-			model.addAttribute("success", "Hai già scritto una recensione per questo corso!");
+			model.addAttribute("error", "Hai già scritto una recensione per questo corso!");
 			return "/index";
 		}
 
