@@ -72,10 +72,6 @@ public class FavoriteCourseController {
 	
 	@PostMapping("/delete/{id}")
 	public String delete(@ModelAttribute("favoriteCourse") FavoriteCourse favoriteCourse, Errors errors) throws BusinessException {
-
-		if (errors.hasErrors()) {
-			return "/common/error";
-		}
 		serviceFavoriteCourse.deleteFavoriteCourse(favoriteCourse);
 		return "redirect:/profile";
 	}

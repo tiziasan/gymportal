@@ -74,9 +74,7 @@ public class GymController {
 	
 	@PostMapping("/delete/{id}")
 	public String delete(@ModelAttribute("gym") Gym gym, Errors errors, Model model) throws BusinessException {
-		if (errors.hasErrors()) {
-			return "/common/error";
-		}
+
 		Set<Course> courses = serviceCourse.findCourseByGymId(gym);
 		for (Course c: courses){
 			serviceFavoriteCourse.deleteAllByCourse(c);

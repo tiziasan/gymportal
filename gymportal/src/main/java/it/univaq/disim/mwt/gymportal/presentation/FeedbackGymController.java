@@ -74,10 +74,6 @@ public class FeedbackGymController {
 	
 	@PostMapping("/delete/{id}")
 	public String delete(@ModelAttribute("feedback") FeedbackGym feedback, Errors errors) throws BusinessException {
-
-		if (errors.hasErrors()) {
-			return "/common/error";
-		}
 		serviceFeedbackGym.deleteFeedbackGym(feedback);
         return "redirect:/profile";
 	}

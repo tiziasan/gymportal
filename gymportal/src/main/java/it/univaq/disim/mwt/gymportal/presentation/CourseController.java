@@ -49,7 +49,6 @@ public class CourseController {
 		if (errors.hasErrors()) {
 			String message = "Errore nell'inserimento";
 			model.addAttribute("message", message);
-
 			return "/course/form";
 		}
 		serviceCourse.createCourse(course);
@@ -86,13 +85,8 @@ public class CourseController {
     }
 	
 	@PostMapping("/delete/{id}")
-	public String delete(@ModelAttribute("course") Course course, Errors errors, Model model) throws BusinessException {
+	public String delete(@ModelAttribute("course") Course course, Model model) throws BusinessException {
 		Course courseComplete = serviceCourse.findByID(course.getId());
-
-		if (errors.hasErrors()) {
-			return "/common/error";
-		}
-
 		long id = courseComplete.getGym().getId();
 		String redirect = "redirect:/course/gym?id=" + id;
 		serviceFavoriteCourse.deleteAllByCourse(course);

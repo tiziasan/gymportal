@@ -84,10 +84,6 @@ public class FeedbackCourseController {
 	
 	@PostMapping("/delete/{id}")
 	public String delete(@ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, Errors errors) throws BusinessException {
-
-		if (errors.hasErrors()) {
-			return "/common/error";
-		}
 		serviceFeedbackCourse.deleteFeedbackCourse(feedbackCourse);
         return "redirect:/profile";
 	}
