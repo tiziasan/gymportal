@@ -37,6 +37,7 @@ public class User extends BaseEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+
     public User() {
     }
 

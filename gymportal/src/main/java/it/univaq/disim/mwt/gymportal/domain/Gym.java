@@ -37,6 +37,7 @@ public class Gym extends BaseEntity implements Serializable {
     @ManyToOne
     private Manager user;
 
+
     public Gym() {
     }
 

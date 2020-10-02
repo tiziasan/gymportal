@@ -14,26 +14,26 @@
 				<div class="row">
 					<div class="col-md-3">
 						<!-- Profile Image -->
-						<div class="box box-primary">
 							<!-- /.box-body -->
-							<div class="profile-sidebar">
-								<div class="profile-usertitle">
-
-									<div class="profile-usertitle-name">
-										<h1 th:text="${user.name}"></h1>
+								<div class="card" style="width: 18rem;">
+									<img class="card-img-top"  th:src="@{${'./dist/img/' + user.username + '/' + user.username + '.jpeg'}}" alt="Card image cap" height="100px" width="100px">
+									<div class="card-body">
+										<h5 class="card-title" th:text="${user.name}">Card title</h5>
+										<h5 class="card-title" th:text="${user.username}">Card title</h5>
+										<h5 class="card-title" th:text="${user.email}">Card title</h5>
+										<a th:href="@{/profile/update}"><b th:text="#{profile.edit}">Modifica Profilo</b></a>
 									</div>
 								</div>
-								<div class="profile-usermenu">
+								<!--<div class="profile-usermenu">
 									<ul class="nav">
 										<li><h4>Email</h4></li>
+										<li></li>
 										<li><h5 th:text="${user.email}"></h5></li>
 										<li><h4>Username</h4></li>
 										<li><h5 th:text="${user.username}">aaaaaa@gmail.com</h5></li>
 										<li><a th:href="@{/profile/update}"><b th:text="#{profile.edit}">Modifica Profilo</b></a></li>
 									</ul>
-								</div>
-							</div>
-						</div>
+								</div>-->
 						<!-- /.box -->
 					</div>
 					<!-- /.col -->
@@ -84,7 +84,7 @@
 												<!-- Add the bg color to the header using any of the bg-* classes -->
 												<div class="widget-user-header bg-yellow">
 													<div class="widget-user-image">
-														<img class="img-circle" src="./dist/img/user7-128x128.png"
+														<img class="img-circle" src="./dist/img/user7-128x128.png" th:src="@{${'./dist/img/' + user.username + '/' + user.username + '.jpeg'}}"
 															 alt="User Avatar">
 													</div>
 													<!-- /.widget-user-image -->
@@ -117,7 +117,7 @@
 												<!-- Add the bg color to the header using any of the bg-* classes -->
 												<div class="widget-user-header bg-yellow">
 													<div class="widget-user-image">
-														<img class="img-circle" src="./dist/img/user7-128x128.png"
+														<img class="img-circle" src="./dist/img/user7-128x128.png" th:src="@{${'./dist/img/' + user.username + '/' + user.username + '.jpeg'}}"
 															 alt="User Avatar">
 													</div>
 													<!-- /.widget-user-image -->

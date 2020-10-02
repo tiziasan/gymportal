@@ -3,6 +3,7 @@ package it.univaq.disim.mwt.gymportal.presentation;
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.ChatService;
 import it.univaq.disim.mwt.gymportal.business.UserService;
+import it.univaq.disim.mwt.gymportal.configuration.FileUploadUtil;
 import it.univaq.disim.mwt.gymportal.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -11,13 +12,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -79,7 +79,7 @@ public class ProfileController {
     }
 
     @PostMapping("/update")
-    public String update(@Valid @ModelAttribute("user") User user, Errors errors) throws BusinessException {
+    public String update(@Valid @ModelAttribute("user") User user, Errors errors, @RequestParam("image") MultipartFile multipartFile) throws BusinessException, IOException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (errors.hasErrors()) {
@@ -88,9 +88,15 @@ public class ProfileController {
 
         if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER))) {
             userService.updateCustomer(user);
+            User newUser = userService.saveUser(new Customer(user));
+            String uploadDir = "src/main/resources/static/dist/img/" + newUser.getUsername();
+            FileUploadUtil.saveFile(uploadDir, newUser.getUsername() + ".jpeg", multipartFile);
         }
         if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
             userService.updateManager(user);
+            User newUser = userService.saveUser(new Customer(user));
+            String uploadDir = "src/main/resources/static/dist/img/" + newUser.getUsername();
+            FileUploadUtil.saveFile(uploadDir, newUser.getUsername() + ".jpeg", multipartFile);
         }
 
         Set<Chat> chatList = chatService.findByUserId(user);
