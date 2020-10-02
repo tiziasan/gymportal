@@ -122,6 +122,7 @@ public class Gym extends BaseEntity implements Serializable {
     public String toString() {
         return "Gym{" +
                 "id='" + getId() + '\'' +
+                ", version='" + getVersion() + '\'' +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", province='" + province + '\'' +

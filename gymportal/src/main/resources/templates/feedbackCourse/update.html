@@ -7,7 +7,9 @@
 	<div class="box box-info" id="form-orizzontale">
 
 		<form class="form-horizontal" method="post" th:action="@{/feedbackCourse/update/{feedbackCourseId}(feedbackCourseId=${feedbackCourse.id})}" th:object="${feedbackCourse}">
+
 			<input type="hidden" th:field="*{id}" />
+			<input type="hidden" th:field="*{version}" />
 
 			<input type="hidden" th:value="${feedbackCourse.user.id}" th:attr="name='user.id'" />
 			<input type="hidden" th:value="${feedbackCourse.course.id}" th:attr="name='course.id'" />

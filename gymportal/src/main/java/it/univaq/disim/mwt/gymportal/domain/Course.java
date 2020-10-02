@@ -124,6 +124,7 @@ public class Course extends BaseEntity implements Serializable {
     public String toString() {
         return "Course{" +
                 "id='" + getId() + '\'' +
+                ", version='" + getVersion() + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", code='" + code + '\'' +

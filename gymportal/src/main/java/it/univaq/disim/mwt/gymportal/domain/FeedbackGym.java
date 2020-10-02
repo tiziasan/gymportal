@@ -94,6 +94,7 @@ public class FeedbackGym extends BaseEntity implements Serializable {
     public String toString() {
         return "FeedbackGym{" +
                 "id='" + getId() + '\'' +
+                ", version='" + getVersion() + '\'' +
                 ", feed='" + feed + '\'' +
                 ", rating=" + rating +
                 ", user=" + user +

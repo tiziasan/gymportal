@@ -17,6 +17,7 @@
 					<form autocomplete="off" action="#" th:action="@{/profile/update}" th:object="${user}" method="post" role="form" enctype="multipart/form-data">
 
 						<input type="hidden" th:field="*{id}" />
+						<input type="hidden" th:field="*{version}" />
 
 						<div class="form-group has-feedback">
 							<label th:if="${#fields.hasErrors('name')}" for="name" th:errors="*{name}" class="validation-message"></label>

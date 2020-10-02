@@ -126,6 +126,7 @@ public class User extends BaseEntity implements Serializable {
     public String toString() {
         return "User{" +
                 "id='" + getId() + '\'' +
+                ", version='" + getVersion() + '\'' +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +

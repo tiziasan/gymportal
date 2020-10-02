@@ -94,6 +94,7 @@ public class FeedbackCourse extends BaseEntity implements Serializable {
     public String toString() {
         return "FeedbackCourse{" +
                 "id='" + getId() + '\'' +
+                ", version='" + getVersion() + '\'' +
                 ", feed='" + feed + '\'' +
                 ", rating=" + rating +
                 ", user=" + user +
