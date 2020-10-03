@@ -55,11 +55,9 @@ public class FavoriteCourseController {
             model.addAttribute("message", message);
             return "redirect:/profile";
         }
-        System.out.println(favoriteCourse);
 
         favoriteService.createFavoriteCourse(favoriteCourse);
         redir.addFlashAttribute("message", "corso aggiunto ai preferiti");
-
 
         String redirect = "redirect:/profile";
 

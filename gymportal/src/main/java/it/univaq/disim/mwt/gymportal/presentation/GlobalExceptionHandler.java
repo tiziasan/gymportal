@@ -23,7 +23,6 @@ public class GlobalExceptionHandler {
         if (stringWriter.toString().contains("UK3720qfodb5fi73gktwatyprks")) {
             model.addAttribute("error", "Hai già inserito la palestra ai preferiti");
             return "/index";
-
         } else if (stringWriter.toString().contains("UKmttnhvruuluxke3r6mkni90ht")) {
             model.addAttribute("error", "Hai già inserito il corso ai preferiti");
             return "/index";
@@ -36,7 +35,6 @@ public class GlobalExceptionHandler {
         } else {
             model.addAttribute("errorMessage", stringWriter.toString());
             return "/common/error";
-
         }
     }
 
