@@ -3,8 +3,11 @@ package it.univaq.disim.mwt.gymportal.business.impl;
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.CourseService;
 import it.univaq.disim.mwt.gymportal.domain.Course;
+import it.univaq.disim.mwt.gymportal.domain.FavoriteCourse;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.repository.CourseRepository;
+import it.univaq.disim.mwt.gymportal.repository.FavoriteCourseRepository;
+import it.univaq.disim.mwt.gymportal.repository.FeedbackCourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,14 +21,22 @@ public class CourseServiceImpl implements CourseService {
     @Autowired
     private CourseRepository courseRepository;
 
+    @Autowired
+    private FavoriteCourseRepository favoriteCourseRepository;
+
+    @Autowired
+    private FeedbackCourseRepository feedbackCourseRepository;
+
     @Override
     public void deleteCourse(Course course) throws BusinessException {
-        courseRepository.deleteById(course.getId());
+        favoriteCourseRepository.deleteAllByCourse(course);
+        feedbackCourseRepository.deleteAllByCourse(course);
+        courseRepository.delete(course);
     }
 
     @Override
-    public void createCourse(Course course) throws BusinessException {
-        courseRepository.save(course);
+    public Course createCourse(Course course) throws BusinessException {
+        return courseRepository.save(course);
     }
 
     @Override

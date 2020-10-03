@@ -4,6 +4,7 @@ import it.univaq.disim.mwt.gymportal.business.*;
 import it.univaq.disim.mwt.gymportal.configuration.FileUploadUtil;
 import it.univaq.disim.mwt.gymportal.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,11 +27,6 @@ public class CourseController {
     private CourseService courseService;
 
     @Autowired
-    private FavoriteService favoriteService;
-    @Autowired
-    private FeedbackCourseService feedbackCourseService;
-
-    @Autowired
     private GymService gymService;
 
     @Autowired
@@ -48,15 +44,18 @@ public class CourseController {
     }
 
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute("course") Course course, Errors errors, Model model, RedirectAttributes ra,@RequestParam("image") MultipartFile multipartFile) throws BusinessException, IOException {
+    public String create(@Valid @ModelAttribute("course") Course course, Errors errors, Model model, RedirectAttributes ra, @RequestParam("image") MultipartFile multipartFile) throws BusinessException, IOException {
         if (errors.hasErrors()) {
             String message = "Errore nell'inserimento";
             model.addAttribute("message", message);
             return "/course/form";
         }
-        courseService.createCourse(course);
-        String uploadDir = "src/main/upload/course/" + course.getId();
-        FileUploadUtil.saveFile(uploadDir, course.getId() + ".jpeg", multipartFile);
+
+        Course newCourse = courseService.createCourse(course);
+
+        String uploadDir = "src/main/upload/course/" + newCourse.getId();
+        FileUploadUtil.saveFile(uploadDir, newCourse.getId() + ".jpeg", multipartFile);
+
         String message = "Operazione andata a buon fine, aggiungi un altro corso!";
         ra.addFlashAttribute("message", message);
         return "redirect:/course/create";
@@ -90,15 +89,20 @@ public class CourseController {
     }
 
     @PostMapping("/delete/{id}")
-    public String delete(@ModelAttribute("course") Course course, Model model) throws BusinessException {
-        Course courseComplete = courseService.findByID(course.getId());
-        long id = courseComplete.getGym().getId();
-        String redirect = "redirect:/course/gym?id=" + id;
-        favoriteService.deleteAllByCourse(course);
-        feedbackCourseService.deleteAllByCourse(course);
-        courseService.deleteCourse(course);
-        model.addAttribute("success", "Eliminazione del corso andata a buon fine");
-        return "/index";
+    public String delete(@PathVariable long id, Model model) throws BusinessException {
+        String redirect;
+//        try{
+            Course course = courseService.findByID(id);
+            redirect = "redirect:/course/gym/" + course.getGym().getId();
+            courseService.deleteCourse(course);
+            model.addAttribute("success", "Eliminazione del corso andata a buon fine");
+//        }
+//        catch (DataAccessException e) {
+//            model.addAttribute("error", "Errore!!! Eliminazione del corso non è andata a buon fine");
+//            return "/index";
+//        }
+        return redirect;
+
     }
 
     @GetMapping("/update/{id}")
@@ -110,15 +114,15 @@ public class CourseController {
 
     @PostMapping("/update/{id}")
     public String update(@Valid @ModelAttribute("course") Course course, Errors errors, @RequestParam("image") MultipartFile multipartFile) throws BusinessException, IOException {
-        Course courseComplete = courseService.findByID(course.getId());
-
         if (errors.hasErrors()) {
             return "/common/error";
         }
-        long id = courseComplete.getGym().getId();
+
         String uploadDir = "src/main/upload/course/" + course.getId();
         FileUploadUtil.saveFile(uploadDir, course.getId() + ".jpeg", multipartFile);
-        String redirect = "redirect:/course/gym/" + id;
+
+        String redirect = "redirect:/course/gym/" + course.getGym().getId();
+
         courseService.updateCourse(course);
         return redirect;
     }

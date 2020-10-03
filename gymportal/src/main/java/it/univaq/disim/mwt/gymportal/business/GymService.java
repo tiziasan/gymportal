@@ -9,7 +9,7 @@ public interface GymService {
 
     void deleteGym(Gym gym) throws BusinessException;
 
-    void createGym(Gym gym) throws BusinessException;
+    Gym createGym(Gym gym) throws BusinessException;
 
     void updateGym(Gym gym) throws BusinessException;
 

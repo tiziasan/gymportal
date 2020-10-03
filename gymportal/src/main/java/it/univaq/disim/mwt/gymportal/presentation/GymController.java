@@ -28,33 +28,16 @@ public class GymController {
     @Autowired
     private GymService gymService;
 
-
-    @Autowired
-    private FeedbackGymService feedbackGymService;
-
-    @Autowired
-    private CourseService courseService;
-
-    @Autowired
-    private FavoriteService favoriteService;
-    @Autowired
-    private FeedbackCourseService feedbackCourseService;
-
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private ChatService chatService;
-
-    @Autowired
-    private MessageService messageService;
 
     @GetMapping("/create")
     public String createStart(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Manager user = userService.findUserByUsername(auth.getName());
-        model.addAttribute("user", user);
         Gym gym = new Gym();
+
+        model.addAttribute("user", user);
         model.addAttribute("gym", gym);
         return "/gym/form";
     }
@@ -64,10 +47,11 @@ public class GymController {
         if (errors.hasErrors()) {
             return "/gym/form";
         }
-        gymService.createGym(gym);
-        String uploadDir = "src/main/upload/gym/" + gym.getId();
-        FileUploadUtil.saveFile(uploadDir, gym.getId() + ".jpeg", multipartFile);
 
+        Gym newGym = gymService.createGym(gym);
+
+        String uploadDir = "src/main/upload/gym/" + newGym.getId();
+        FileUploadUtil.saveFile(uploadDir, newGym.getId() + ".jpeg", multipartFile);
         return "redirect:/course/create";
     }
 
@@ -79,26 +63,10 @@ public class GymController {
     }
 
     @PostMapping("/delete/{id}")
-    public String delete(@ModelAttribute("gym") Gym gym, Errors errors, Model model) throws BusinessException {
-
-        Set<Course> courses = courseService.findCourseByGymId(gym);
-        for (Course c : courses) {
-            favoriteService.deleteAllByCourse(c);
-            feedbackCourseService.deleteAllByCourse(c);
-        }
-        courseService.deleteAllCourseByGymId(gym);
-
-        favoriteService.deleteAllByGym(gym);
-        feedbackGymService.deleteAllByGym(gym);
+    public String delete(@ModelAttribute("gym") Gym gym, Model model) throws BusinessException {
         gymService.deleteGym(gym);
 
-        Set<Chat> chats = chatService.findByGymId(gym);
-        for (Chat c : chats) {
-            messageService.deleteMessagesByChat(c);
-        }
-        chatService.deleteChatsByGymId(gym);
         model.addAttribute("success", "Eliminazione della palestra andata a buon fine");
-
         return "/index";
     }
 
@@ -106,28 +74,24 @@ public class GymController {
     public String updateStart(@PathVariable long id, Model model) throws BusinessException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Manager user = userService.findUserByUsername(auth.getName());
-        model.addAttribute("user", user);
         Gym gym = gymService.findByID(id);
         gym.setRegion("");
+
+        model.addAttribute("user", user);
         model.addAttribute("gym", gym);
         return "/gym/form";
     }
 
     @PostMapping("/update/{id}")
-    public String update(@ModelAttribute("gym") Gym gym, Errors errors,@RequestParam("image") MultipartFile multipartFile) throws BusinessException, IOException {
+    public String update(@ModelAttribute("gym") Gym gym, Errors errors, @RequestParam("image") MultipartFile multipartFile) throws BusinessException, IOException {
         if (errors.hasErrors()) {
             return "/gym/form";
         }
-        gymService.updateGym(gym);
+
         String uploadDir = "src/main/upload/gym/" + gym.getId();
         FileUploadUtil.saveFile(uploadDir, gym.getId() + ".jpeg", multipartFile);
 
-        Set<Chat> chatList = chatService.findByGymId(gym);
-        for (Chat c : chatList) {
-            c.setGymName(gym.getName());
-        }
-        chatService.saveAllChats(chatList);
-
+        gymService.updateGym(gym);
         return "redirect:/";
     }
 

@@ -9,7 +9,7 @@ public interface CourseService {
 
     void deleteCourse(Course course) throws BusinessException;
 
-    void createCourse(Course course) throws BusinessException;
+    Course createCourse(Course course) throws BusinessException;
 
     void updateCourse(Course course) throws BusinessException;
 

@@ -80,33 +80,21 @@ public class ProfileController {
 
     @PostMapping("/update")
     public String update(@Valid @ModelAttribute("user") User user, Errors errors, @RequestParam("image") MultipartFile multipartFile) throws BusinessException, IOException {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
         if (errors.hasErrors()) {
             return "/common/error";
         }
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER))) {
-            userService.updateCustomer(user);
-            User newUser = userService.saveUser(new Customer(user));
-            String uploadDir = "src/main/upload/user/" + newUser.getId();
-            FileUploadUtil.saveFile(uploadDir, newUser.getId() + ".jpeg", multipartFile);
-        }
-        if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
-            userService.updateManager(user);
-            User newUser = userService.saveUser(new Customer(user));
-            String uploadDir = "src/main/upload/user/" + newUser.getId();
-            FileUploadUtil.saveFile(uploadDir, newUser.getId()+ ".jpeg", multipartFile);
+            userService.updateUser(user, Role.CUSTOMER);
+        } else if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
+            userService.updateUser(user, Role.MANAGER);
         }
 
-        Set<Chat> chatList = chatService.findByUserId(user);
-        for (Chat c : chatList) {
-            c.setUserName(user.getName() + " " + user.getLastname());
-        }
-        chatService.saveAllChats(chatList);
+        String uploadDir = "src/main/upload/user/" + user.getId();
+        FileUploadUtil.saveFile(uploadDir, user.getId() + ".jpeg", multipartFile);
 
         return "redirect:/login";
-
     }
 
 }

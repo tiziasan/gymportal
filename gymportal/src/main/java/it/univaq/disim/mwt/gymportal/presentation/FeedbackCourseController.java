@@ -35,7 +35,6 @@ public class FeedbackCourseController {
 
     @GetMapping("/{id}")
     public String listCo(@PathVariable long id, Model model) throws BusinessException {
-
         Set<FeedbackCourse> feedbackList = feedbackCourseService.findAllFeedbackByCourse(id);
         model.addAttribute("feedbackList", feedbackList);
         return "/feedback/list";
@@ -59,7 +58,6 @@ public class FeedbackCourseController {
 
     @PostMapping("/create/{id}")
     public String create(@Valid @ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, Errors errors, Model model) throws BusinessException {
-
         if (errors.hasErrors()) {
             String message = "Errore nell'inserimento";
             model.addAttribute("message", message);
@@ -67,11 +65,7 @@ public class FeedbackCourseController {
         }
         feedbackCourseService.createFeedbackCourse(feedbackCourse);
 
-        long id = feedbackCourse.getCourse().getId();
-
-        String redirect = "redirect:/feedbackCourse/" + id;
-
-        return redirect;
+        return "redirect:/feedbackCourse/" + feedbackCourse.getCourse().getId();
     }
 
 
@@ -97,7 +91,6 @@ public class FeedbackCourseController {
 
     @PostMapping("/update/{id}")
     public String update(@Valid @ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, Errors errors) throws BusinessException {
-
         if (errors.hasErrors()) {
             return "/common/error";
         }

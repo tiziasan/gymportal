@@ -48,9 +48,7 @@ public class FeedbackGymController {
     }
 
     @PostMapping("/create/{id}")
-    public String create(@Valid @ModelAttribute("feedback") FeedbackGym feedback, Errors errors, Model model)
-            throws BusinessException {
-
+    public String create(@Valid @ModelAttribute("feedback") FeedbackGym feedback, Errors errors, Model model) throws BusinessException {
         if (errors.hasErrors()) {
             String message = "Errore nell'inserimento";
             model.addAttribute("message", message);
@@ -58,11 +56,7 @@ public class FeedbackGymController {
         }
         feedbackGymService.createFeedbackGym(feedback);
 
-        long id = feedback.getGym().getId();
-
-        String redirect = "redirect:/course/gym/" + id;
-
-        return redirect;
+        return "redirect:/course/gym/" + feedback.getGym().getId();
     }
 
 
@@ -74,6 +68,7 @@ public class FeedbackGymController {
     @PostMapping("/delete/{id}")
     public String delete(@ModelAttribute("feedback") FeedbackGym feedback, Errors errors) throws BusinessException {
         feedbackGymService.deleteFeedbackGym(feedback);
+
         return "redirect:/profile";
     }
 
@@ -81,13 +76,13 @@ public class FeedbackGymController {
     @GetMapping("/update/{id}")
     public String updateStart(@PathVariable long id, Model model) throws BusinessException {
         FeedbackGym feedback = feedbackGymService.findByID(id);
+
         model.addAttribute("feedback", feedback);
         return "/feedback/update";
     }
 
     @PostMapping("/update/{id}")
     public String update(@Valid @ModelAttribute("feedback") FeedbackGym feedback, Errors errors) throws BusinessException {
-
         if (errors.hasErrors()) {
             return "/common/error";
         }

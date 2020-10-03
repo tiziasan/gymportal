@@ -2,20 +2,23 @@ package it.univaq.disim.mwt.gymportal.business.impl;
 
 
 import it.univaq.disim.mwt.gymportal.business.UserService;
-import it.univaq.disim.mwt.gymportal.domain.Customer;
-import it.univaq.disim.mwt.gymportal.domain.Manager;
-import it.univaq.disim.mwt.gymportal.domain.Role;
-import it.univaq.disim.mwt.gymportal.domain.User;
+import it.univaq.disim.mwt.gymportal.domain.*;
+import it.univaq.disim.mwt.gymportal.repository.ChatRepository;
 import it.univaq.disim.mwt.gymportal.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ChatRepository chatRepository;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -43,20 +46,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateCustomer(User user) {
-        Customer customer = new Customer(user);
-        customer.setPassword(bCryptPasswordEncoder.encode(customer.getPassword()));
+    public User updateUser(User user, Role role) {
+        Set<Chat> chatList = chatRepository.findByUserId(user.getId());
+        for (Chat c : chatList) {
+            c.setUserName(user.getName() + " " + user.getLastname());
+        }
+        chatRepository.saveAll(chatList);
 
-        return userRepository.save(customer);
+        if ( role == Role.CUSTOMER) {
+            Customer customer = new Customer(user);
+            customer.setVersion(user.getVersion());
+            customer.setPassword(bCryptPasswordEncoder.encode(customer.getPassword()));
+
+            return userRepository.save(customer);
+
+        } else {
+            Manager manager = new Manager(user);
+            manager.setVersion(user.getVersion());
+            manager.setPassword(bCryptPasswordEncoder.encode(manager.getPassword()));
+
+            return userRepository.save(manager);
+        }
     }
 
-    @Override
-    public User updateManager(User user) {
-        Manager manager = new Manager(user);
-        manager.setPassword(bCryptPasswordEncoder.encode(manager.getPassword()));
-
-        return userRepository.save(manager);
-    }
 
 
 }

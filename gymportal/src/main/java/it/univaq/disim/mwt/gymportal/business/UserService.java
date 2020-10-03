@@ -13,7 +13,6 @@ public interface UserService {
 
     User saveUser(User user) throws BusinessException;
 
-    User updateCustomer(User user) throws BusinessException;
+    User updateUser(User user, Role role) throws BusinessException;
 
-    User updateManager(User user) throws BusinessException;
 }

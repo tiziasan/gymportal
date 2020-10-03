@@ -52,7 +52,6 @@ public class AuthController {
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("/registration/index");
         } else {
-
             User newUser = userService.saveUser(new Customer(user));
             String uploadDir = "src/main/upload/user/" + newUser.getId();
             FileUploadUtil.saveFile(uploadDir, newUser.getId() + ".jpeg", multipartFile);
@@ -60,7 +59,6 @@ public class AuthController {
             modelAndView.addObject("successMessage", "Utente registrato correttamente, fai il login per entrare!");
             modelAndView.addObject("user", new User());
             modelAndView.setViewName("/registration/index");
-
         }
         return modelAndView;
     }

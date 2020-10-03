@@ -2,9 +2,11 @@ package it.univaq.disim.mwt.gymportal.business.impl;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.GymService;
+import it.univaq.disim.mwt.gymportal.domain.Chat;
+import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.domain.User;
-import it.univaq.disim.mwt.gymportal.repository.GymRepository;
+import it.univaq.disim.mwt.gymportal.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,18 +20,61 @@ public class GymServiceImpl implements GymService {
     @Autowired
     private GymRepository gymRepository;
 
+    @Autowired
+    private FavoriteGymRepository favoriteGymRepository;
+
+    @Autowired
+    private FeedbackGymRepository feedbackGymRepository;
+
+    @Autowired
+    private CourseRepository courseRepository;
+
+    @Autowired
+    private FavoriteCourseRepository favoriteCourseRepository;
+
+    @Autowired
+    private FeedbackCourseRepository feedbackCourseRepository;
+
+    @Autowired
+    private ChatRepository chatRepository;
+
+    @Autowired
+    private MessageRepository messageRepository;
+
     @Override
     public void deleteGym(Gym gym) throws BusinessException {
+        Set<Course> courses = courseRepository.findCourseByGymId(gym.getId());
+        for (Course c : courses) {
+            favoriteCourseRepository.deleteAllByCourse(c);
+            feedbackCourseRepository.deleteAllByCourse(c);
+        }
+        courseRepository.deleteAllCourseByGymId(gym.getId());
+
+        favoriteGymRepository.deleteAllByGym(gym);
+        feedbackGymRepository.deleteAllByGym(gym);
+
+        Set<Chat> chats = chatRepository.findByGymId(gym.getId());
+        for (Chat c : chats) {
+            messageRepository.deleteMessagesByChat(c);
+        }
+        chatRepository.deleteChatsByGymId(gym.getId());
+
         gymRepository.deleteById(gym.getId());
     }
 
     @Override
-    public void createGym(Gym gym) throws BusinessException {
-        gymRepository.save(gym);
+    public Gym createGym(Gym gym) throws BusinessException {
+        return gymRepository.save(gym);
     }
 
     @Override
     public void updateGym(Gym gym) throws BusinessException {
+        Set<Chat> chatList = chatRepository.findByGymId(gym.getId());
+        for (Chat c : chatList) {
+            c.setGymName(gym.getName());
+        }
+        chatRepository.saveAll(chatList);
+
         gymRepository.save(gym);
     }
 
