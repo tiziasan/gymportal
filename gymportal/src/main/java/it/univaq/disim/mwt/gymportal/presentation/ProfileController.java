@@ -89,14 +89,14 @@ public class ProfileController {
         if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER))) {
             userService.updateCustomer(user);
             User newUser = userService.saveUser(new Customer(user));
-            String uploadDir = "src/main/resources/static/dist/img/" + newUser.getUsername();
-            FileUploadUtil.saveFile(uploadDir, newUser.getUsername() + ".jpeg", multipartFile);
+            String uploadDir = "src/main/upload/user/" + newUser.getId();
+            FileUploadUtil.saveFile(uploadDir, newUser.getId() + ".jpeg", multipartFile);
         }
         if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
             userService.updateManager(user);
             User newUser = userService.saveUser(new Customer(user));
-            String uploadDir = "src/main/resources/static/dist/img/" + newUser.getUsername();
-            FileUploadUtil.saveFile(uploadDir, newUser.getUsername() + ".jpeg", multipartFile);
+            String uploadDir = "src/main/upload/user/" + newUser.getId();
+            FileUploadUtil.saveFile(uploadDir, newUser.getId()+ ".jpeg", multipartFile);
         }
 
         Set<Chat> chatList = chatService.findByUserId(user);

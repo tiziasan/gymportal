@@ -54,8 +54,8 @@ public class AuthController {
         } else {
 
             User newUser = userService.saveUser(new Customer(user));
-            String uploadDir = "src/main/resources/static/dist/img/" + newUser.getUsername();
-            FileUploadUtil.saveFile(uploadDir, newUser.getUsername() + ".jpeg", multipartFile);
+            String uploadDir = "src/main/upload/user/" + newUser.getId();
+            FileUploadUtil.saveFile(uploadDir, newUser.getId() + ".jpeg", multipartFile);
 
             modelAndView.addObject("successMessage", "Utente registrato correttamente, fai il login per entrare!");
             modelAndView.addObject("user", new User());
