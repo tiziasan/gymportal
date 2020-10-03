@@ -6,7 +6,7 @@
 	<H1 th:text="#{course.add}">Aggiungi Corso</H1>
 		<div class="box box-info" id="form-orizzontale">
 
-			<form th:action="${#request.getRequestURI()}" th:object="${course}"
+			<form th:action="${#request.getRequestURI()}" th:object="${course}" enctype="multipart/form-data"
 				class="form-horizontal" method="post">
 
 				<input type="hidden" th:field="*{id}" />
@@ -49,6 +49,8 @@
 						</div>
 					</div>
 				</div>
+			<label>Photos: </label>
+			<input type="file" name="image" accept="image/png, image/jpeg" />
 				<!-- /.box-body -->
 				<div class="box-footer">
 					<button type="submit" class="btn btn-info pull-right" th:text="#{course.add}">Aggiungi Corso</button>

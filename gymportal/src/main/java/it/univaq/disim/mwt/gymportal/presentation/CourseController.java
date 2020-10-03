@@ -1,6 +1,7 @@
 package it.univaq.disim.mwt.gymportal.presentation;
 
 import it.univaq.disim.mwt.gymportal.business.*;
+import it.univaq.disim.mwt.gymportal.configuration.FileUploadUtil;
 import it.univaq.disim.mwt.gymportal.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -10,9 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Set;
 
 @Controller
@@ -45,13 +48,15 @@ public class CourseController {
     }
 
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute("course") Course course, Errors errors, Model model, RedirectAttributes ra) throws BusinessException {
+    public String create(@Valid @ModelAttribute("course") Course course, Errors errors, Model model, RedirectAttributes ra,@RequestParam("image") MultipartFile multipartFile) throws BusinessException, IOException {
         if (errors.hasErrors()) {
             String message = "Errore nell'inserimento";
             model.addAttribute("message", message);
             return "/course/form";
         }
         courseService.createCourse(course);
+        String uploadDir = "src/main/upload/course/" + course.getId();
+        FileUploadUtil.saveFile(uploadDir, course.getId() + ".jpeg", multipartFile);
         String message = "Operazione andata a buon fine, aggiungi un altro corso!";
         ra.addFlashAttribute("message", message);
         return "redirect:/course/create";
@@ -104,13 +109,15 @@ public class CourseController {
     }
 
     @PostMapping("/update/{id}")
-    public String update(@Valid @ModelAttribute("course") Course course, Errors errors) throws BusinessException {
+    public String update(@Valid @ModelAttribute("course") Course course, Errors errors, @RequestParam("image") MultipartFile multipartFile) throws BusinessException, IOException {
         Course courseComplete = courseService.findByID(course.getId());
 
         if (errors.hasErrors()) {
             return "/common/error";
         }
         long id = courseComplete.getGym().getId();
+        String uploadDir = "src/main/upload/course/" + course.getId();
+        FileUploadUtil.saveFile(uploadDir, course.getId() + ".jpeg", multipartFile);
         String redirect = "redirect:/course/gym/" + id;
         courseService.updateCourse(course);
         return redirect;

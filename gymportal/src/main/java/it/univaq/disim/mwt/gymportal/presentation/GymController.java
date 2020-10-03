@@ -60,12 +60,13 @@ public class GymController {
     }
 
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute("gym") Gym gym, Errors errors) throws BusinessException, IOException {
+    public String create(@Valid @ModelAttribute("gym") Gym gym, Errors errors, @RequestParam("image") MultipartFile multipartFile) throws BusinessException, IOException {
         if (errors.hasErrors()) {
             return "/gym/form";
         }
-
         gymService.createGym(gym);
+        String uploadDir = "src/main/upload/gym/" + gym.getId();
+        FileUploadUtil.saveFile(uploadDir, gym.getId() + ".jpeg", multipartFile);
 
         return "redirect:/course/create";
     }
@@ -113,11 +114,13 @@ public class GymController {
     }
 
     @PostMapping("/update/{id}")
-    public String update(@ModelAttribute("gym") Gym gym, Errors errors) throws BusinessException {
+    public String update(@ModelAttribute("gym") Gym gym, Errors errors,@RequestParam("image") MultipartFile multipartFile) throws BusinessException, IOException {
         if (errors.hasErrors()) {
             return "/gym/form";
         }
         gymService.updateGym(gym);
+        String uploadDir = "src/main/upload/gym/" + gym.getId();
+        FileUploadUtil.saveFile(uploadDir, gym.getId() + ".jpeg", multipartFile);
 
         Set<Chat> chatList = chatService.findByGymId(gym);
         for (Chat c : chatList) {

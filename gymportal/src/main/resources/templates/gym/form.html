@@ -214,7 +214,7 @@
 	<h1 th:text="#{gym.add}">Aggiungi Palestra</h1>
 	<div class="box box-info" id="form-orizzontale">
 
-		<form th:action="${#request.getRequestURI()}" th:object="${gym}" class="form-horizontal" method="post">
+		<form th:action="${#request.getRequestURI()}" th:object="${gym}" class="form-horizontal" method="post" enctype="multipart/form-data">
 			<input type="hidden" th:field="*{id}" />
 			<input type="hidden" th:field="*{version}" />
 
@@ -275,6 +275,8 @@
 					</div>
 				</div>
 			</div>
+			<label>Photos: </label>
+			<input type="file" name="image" accept="image/png, image/jpeg" />
 			<!-- /.box-body -->
 			<div class="box-footer">
 				<button type="submit" class="btn btn-info pull-right" th:text="#{common.submit}">Salva</button>
