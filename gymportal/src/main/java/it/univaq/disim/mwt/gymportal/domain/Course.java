@@ -110,8 +110,6 @@ public class Course extends BaseEntity implements Serializable {
         return getName().equals(course.getName()) &&
                 getDescription().equals(course.getDescription()) &&
                 getCode().equals(course.getCode()) &&
-                getFeedbackCourses().equals(course.getFeedbackCourses()) &&
-                getFavoriteCourses().equals(course.getFavoriteCourses()) &&
                 getGym().equals(course.getGym());
     }
 
@@ -128,8 +126,8 @@ public class Course extends BaseEntity implements Serializable {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", code='" + code + '\'' +
-                ", feedbackCourse=" + feedbackCourses +
-                ", favoriteCourse=" + favoriteCourses +
+//                ", feedbackCourse=" + feedbackCourses +
+//                ", favoriteCourse=" + favoriteCourses +
                 ", gym=" + gym +
                 '}';
     }

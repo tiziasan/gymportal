@@ -89,10 +89,9 @@ public class CourseController {
     }
 
     @PostMapping("/delete/{id}")
-    public String delete(@PathVariable long id, Model model) throws BusinessException {
+    public String delete(@ModelAttribute("course") Course course, Model model) throws BusinessException {
         String redirect;
 //        try{
-            Course course = courseService.findByID(id);
             redirect = "redirect:/course/gym/" + course.getGym().getId();
             courseService.deleteCourse(course);
             model.addAttribute("success", "Eliminazione del corso andata a buon fine");
