@@ -20,7 +20,7 @@ public class Manager extends User {
     }
 
     public Manager(User user) {
-        super(user.getId(), user.getUsername(), user.getEmail(), user.getPassword(), user.getName(), user.getLastname(), Role.MANAGER);
+        super(user.getId(), user.getVersion(), user.getUsername(), user.getEmail(), user.getPassword(), user.getName(), user.getLastname(), Role.MANAGER);
     }
 
     public Set<Gym> getGyms() {

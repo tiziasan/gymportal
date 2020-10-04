@@ -55,14 +55,12 @@ public class UserServiceImpl implements UserService {
 
         if ( role == Role.CUSTOMER) {
             Customer customer = new Customer(user);
-            customer.setVersion(user.getVersion());
             customer.setPassword(bCryptPasswordEncoder.encode(customer.getPassword()));
 
             return userRepository.save(customer);
 
         } else {
             Manager manager = new Manager(user);
-            manager.setVersion(user.getVersion());
             manager.setPassword(bCryptPasswordEncoder.encode(manager.getPassword()));
 
             return userRepository.save(manager);

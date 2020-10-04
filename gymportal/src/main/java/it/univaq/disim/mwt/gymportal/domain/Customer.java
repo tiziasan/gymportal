@@ -26,7 +26,7 @@ public class Customer extends User {
     }
 
     public Customer(User user) {
-        super(user.getId(), user.getUsername(), user.getEmail(), user.getPassword(), user.getName(), user.getLastname(), Role.CUSTOMER);
+        super(user.getId(), user.getVersion(), user.getUsername(), user.getEmail(), user.getPassword(), user.getName(), user.getLastname(), Role.CUSTOMER);
     }
 
     public Set<FeedbackCourse> getFeedbackCourses() {
