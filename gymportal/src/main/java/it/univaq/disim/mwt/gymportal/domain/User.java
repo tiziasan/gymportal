@@ -136,7 +136,7 @@ public class User extends BaseEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUsername(), getEmail());
+        return Objects.hash(getUsername(), getEmail(), getPassword(), getName(), getLastname(), getRole());
     }
 
     @Override

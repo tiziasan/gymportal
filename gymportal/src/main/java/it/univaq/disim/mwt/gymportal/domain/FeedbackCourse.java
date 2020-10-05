@@ -87,7 +87,7 @@ public class FeedbackCourse extends BaseEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUser(), getCourse());
+        return Objects.hash(getFeed(), getRating(), getUser().getId(), getCourse().getId());
     }
 
     @Override

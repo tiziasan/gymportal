@@ -63,7 +63,7 @@ public class FavoriteGym {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUser(), getGym());
+        return Objects.hash(getId(), getUser().getId(), getGym().getId());
     }
 
     @Override

@@ -123,7 +123,7 @@ public class Gym extends BaseEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getAddress(), getProvince(), getRegion());
+        return Objects.hash(getName(), getAddress(), getProvince(), getRegion(), getUser().getId());
     }
 
     @Override

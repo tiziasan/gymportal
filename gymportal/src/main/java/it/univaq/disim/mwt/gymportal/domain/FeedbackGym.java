@@ -87,7 +87,7 @@ public class FeedbackGym extends BaseEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUser(), getGym());
+        return Objects.hash(getFeed(), getRating(), getUser().getId(), getGym().getId());
     }
 
     @Override
