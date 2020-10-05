@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+
+<div layout:fragment="content">
+	<div>
+		<div class="search-bar">
+			<form class="plr-5" th:action="${#request.getRequestURI()}" method="get">
+				<input type="text" name="search" id="search" placeholder="Ricerca" th:value="${search}"/>
+				<button class="btn-primary" type="Submit">Cerca</button>
+			</form>
+		</div>
+
+		<h1 th:text="${gym.name}"></h1>
+	</div>
+	<div class="row">
+		<div class="col-md-9">
+			<div class="row">
+				<div class="column" th:each="course : ${courseList}">
+					<div class="card">
+						<img class="card-img-top" src="./testo.jpeg" th:src="@{${'../../../gymportal/upload/course/' + course.id + '/' + course.id + '.jpeg'}}" alt="Card image cap" height="100px" width="100px">
+
+						<h3 th:text="${course.name}"></h3>
+						<h4 th:text="${course.code}"></h4>
+						<p th:text="${course.description}"></p>
+
+						<a th:href="@{/favoriteCourse/create/{courseId}(courseId=${course.id})}" sec:authorize="hasAuthority('CUSTOMER')"><button class="btn-primary" th:text="#{favorite.add}">Aggiungi ai preferiti!</button></a>
+						<a th:href="@{/feedbackCourse/create/{courseId}(courseId=${course.id})}" sec:authorize="hasAuthority('CUSTOMER')"><button class="btn-primary" th:text="#{feedback.course.add}">Recensisci Corso</button></a>
+						<a th:href="@{/feedbackCourse/{courseId}(courseId=${course.id})}"><button class="btn-primary" th:text="#{course.feedbacks.show}">Vedi le recensioni del corso</button></a>
+						<a th:href="@{/course/update/{courseId}(courseId=${course.id})}" sec:authorize="hasAuthority('MANAGER')"><button class="btn-primary" th:text="#{common.edit}">Modifica</button></a>
+						<a th:href="@{/course/delete/{courseId}(courseId=${course.id})}" sec:authorize="hasAuthority('MANAGER')"><button class="btn-primary" th:text="#{common.delete}">Elimina</button></a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-3" >
+			<div class="box box-warning" style="margin-top: 10px;">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="#{feedbacks}">Recensioni</h3>
+
+					<div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+						</button>
+					</div>
+					<!-- /.box-tools -->
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<!-- Widget: user widget style 1 -->
+					<div class="box box-widget widget-user-2" th:each="feedback : ${feedbackList}">
+						<!-- Add the bg color to the header using any of the bg-* classes -->
+						<div class="widget-user-header bg-yellow">
+							<div class="widget-user-image">
+								<img class="img-circle" src="../dist/img/user7-128x128.png" th:src="@{${'../../../gymportal/upload/user/' + feedback.user.id + '/' + feedback.user.id + '.jpeg'}}" alt="User Avatar">
+							</div>
+							<!-- /.widget-user-image -->
+							<h3 class="widget-user-username" th:text="${feedback.user.name}">Nadia Carmichael</h3>
+						</div>
+						<div class="box-footer no-padding">
+							<ul class="nav nav-stacked"  style="background: #d8d8d8">
+								<h3 th:text="${feedback.rating}"></h3>
+								<h3 th:text="${feedback.feed}"></h3>
+							</ul>
+						</div>
+					</div>
+					<!-- /.widget-user -->
+				</div>
+				<!-- /.box-body -->
+			</div>
+		</div>
+
+	</div>
+</div>
+</body>
+</html>
