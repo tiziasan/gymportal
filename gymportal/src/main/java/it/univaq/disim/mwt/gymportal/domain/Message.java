@@ -87,7 +87,7 @@ public class Message {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getText());
+        return Objects.hash(getId(), getChat().getId());
     }
 
     @Override

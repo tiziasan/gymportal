@@ -62,7 +62,7 @@ public class FavoriteCourse {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUser(), getCourse());
+        return Objects.hash(getId(), getUser().getId(), getCourse().getId());
     }
 
     @Override
