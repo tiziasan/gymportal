@@ -54,6 +54,10 @@
 								<a href="/gymportal/course/create" th:text="#{course.add}" >Aggiungi Corso</a>
 							</li>
 
+							<li class="dropdown user user-menu" sec:authorize="hasAuthority('MANAGER')">
+								<a href="/gymportal/courseschedules/create" th:text="#{courseSchedules.add}" >Aggiungi Orario Corso</a>
+							</li>
+
 							<li class="dropdown user user-menu" sec:authorize="hasAnyAuthority('CUSTOMER','MANAGER')">
 								<a href="/gymportal/login" th:href="@{/chat}" th:text="#{chat}" >Chat</a>
 							</li>
