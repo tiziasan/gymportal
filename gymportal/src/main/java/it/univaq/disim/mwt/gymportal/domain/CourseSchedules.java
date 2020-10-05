@@ -85,7 +85,7 @@ public class CourseSchedules extends BaseEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getDay(), getStart(), getEnd(), getCourse());
+        return Objects.hash(getDay(), getStart(), getEnd(), getCourse().getId());
     }
 
     @Override

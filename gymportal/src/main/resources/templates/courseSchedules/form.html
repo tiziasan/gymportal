@@ -44,7 +44,7 @@
 							<select id="courseId" th:field="*{course.id}"
 								class="form-control">
 								<option th:each="course : ${courses}" th:value="${course.id}"
-									th:text="${course.gym.name} - ${course.name}"></option>
+									th:text="${course.gym.name} +' - '+${course.name}"></option>
 							</select>
 						</div>
 					</div>

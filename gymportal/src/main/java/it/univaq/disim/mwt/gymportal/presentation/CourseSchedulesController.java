@@ -96,25 +96,12 @@ public class CourseSchedulesController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
             Manager user = userService.findUserByUsername(auth.getName());
-            Set<Gym> gyms = new HashSet<Gym>();
-            Set<Course> courses = new HashSet<Course>();
-            gyms.addAll(user.getGyms());
-            System.out.println("funziona");
-            System.out.println(gyms.iterator().next());
-//            for (Gym gym : gyms) {
-//              Set<Course> courseOfGym;
-//                courseOfGym = gym.getCourses();
-//                System.out.println(courseOfGym);
-//                for (Course c : courseOfGym) {
-//                    System.out.println("sono qui prima");
-//                    courses.add(c);
-//                    System.out.println("sono qui dopo");
-//                }
-//            }
-//
-//                System.out.println(courses);
-//
-               model.addAttribute("courses", courses);
+            Set<Course> courses = new HashSet<>();
+            Set<Gym> gyms = new HashSet<>(user.getGyms());
+            for (Gym gym : gyms) {
+                courses.addAll(gym.getCourses());
+            }
+            model.addAttribute("courses", courses);
         }
 
     }
