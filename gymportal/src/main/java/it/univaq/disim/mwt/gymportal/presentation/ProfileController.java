@@ -83,6 +83,8 @@ public class ProfileController {
         if (errors.hasErrors()) {
             return "/common/error";
         }
+        String uploadDir = "src/main/upload/user/" + user.getId();
+        FileUploadUtil.saveFile(uploadDir, user.getId() + ".jpeg", multipartFile);
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER))) {
@@ -91,8 +93,7 @@ public class ProfileController {
             userService.updateUser(user, Role.MANAGER);
         }
 
-        String uploadDir = "src/main/upload/user/" + user.getId();
-        FileUploadUtil.saveFile(uploadDir, user.getId() + ".jpeg", multipartFile);
+
 
         return "redirect:/login";
     }
