@@ -58,7 +58,7 @@ public class CourseController {
 
         String message = "Operazione andata a buon fine, aggiungi un altro corso!";
         ra.addFlashAttribute("message", message);
-        return "redirect:/course/create";
+        return "redirect:/courseschedules/create";
     }
 
 
