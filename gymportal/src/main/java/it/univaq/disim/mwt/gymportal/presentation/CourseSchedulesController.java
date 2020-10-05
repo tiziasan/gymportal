@@ -48,21 +48,21 @@ public class CourseSchedulesController {
         if (errors.hasErrors()) {
             String message = "Errore nell'inserimento";
             model.addAttribute("message", message);
-            return "/courseSchedules/form";
+            return "/courseschedules/form";
         }
 
         courseSchedulesService.addCourseSchedules(courseSchedules);
 
         String message = "Operazione andata a buon fine, aggiungi un altro orario per il corso!";
         ra.addFlashAttribute("message", message);
-        return "redirect:/courseSchedules/create";
+        return "redirect:/courseschedules/create";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteStart(@PathVariable long id, Model model) throws BusinessException {
         CourseSchedules courseSchedules = courseSchedulesService.findCourseSchedulesById(id);
         model.addAttribute("courseSchedules", courseSchedules);
-        return "/courseSchedules/delete";
+        return "/courseschedules/delete";
     }
 
     @PostMapping("/delete/{id}")
@@ -78,13 +78,13 @@ public class CourseSchedulesController {
         CourseSchedules courseSchedules = courseSchedulesService.findCourseSchedulesById(id);
 
         model.addAttribute("courseSchedules", courseSchedules);
-        return "/courseSchedules/form";
+        return "/courseschedules/form";
     }
 
     @PostMapping("/update/{id}")
     public String update(@ModelAttribute("courseSchedules") CourseSchedules courseSchedules, Errors errors) throws BusinessException, IOException {
         if (errors.hasErrors()) {
-            return "/CourseSchedules/form";
+            return "/courseschedules/form";
         }
 
         courseSchedulesService.updateCourseschedules(courseSchedules);
