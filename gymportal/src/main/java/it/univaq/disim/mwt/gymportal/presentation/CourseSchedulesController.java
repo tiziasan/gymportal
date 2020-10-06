@@ -67,10 +67,13 @@ public class CourseSchedulesController {
 
     @PostMapping("/delete/{id}")
     public String delete(@ModelAttribute("courseSchedules") CourseSchedules courseSchedules, Model model) throws BusinessException {
+
+        Course course = courseSchedules.getCourse();
+
         courseSchedulesService.deleteCourseSchedules(courseSchedules);
 
         model.addAttribute("success", "Eliminazione dell'orario del corso andata a buon fine");
-        return "/index";
+        return "gymportal/course/gym/" + course.getGym().getId();
     }
 
     @GetMapping("/update/{id}")

@@ -23,10 +23,10 @@ public class CourseSchedules extends BaseEntity implements Serializable {
     private String day;
 
     @Column(name = "START")
-    private LocalTime start = LocalTime.MIN;
+    private LocalTime start;
 
     @Column(name = "END")
-    private LocalTime end = LocalTime.MIN;
+    private LocalTime end;
 
     @ManyToOne
     private Course course;
