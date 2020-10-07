@@ -17,8 +17,15 @@
 						<label for="day" class="col-sm-2 control-label" th:text="#{courseSchedules.day}">Giorno del corso</label>
 
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="day" th:field="*{day}"
-								placeholder="Giorno" th:placeholder="#{courseSchedules.day}">
+							<select id="day" th:field="*{day}" class="form-control">
+								<option th:text="#{week.monday}" th:value="MONDAY"></option>
+								<option th:text="#{week.tuesday}" th:value="TUESDAY"></option>
+								<option th:text="#{week.wednesday}" th:value="WEDNESDAY"></option>
+								<option th:text="#{week.thursday}" th:value="THURSDAY"></option>
+								<option th:text="#{week.friday}" th:value="FRIDAY"></option>
+								<option th:text="#{week.saturday}" th:value="SATURDAY"></option>
+								<option th:text="#{week.sunday}" th:value="SUNDAY"></option>
+							</select>
 						</div>
 					</div>
 					<div class="form-group">

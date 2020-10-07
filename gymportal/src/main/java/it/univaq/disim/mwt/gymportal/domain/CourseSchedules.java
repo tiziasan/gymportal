@@ -1,26 +1,19 @@
 package it.univaq.disim.mwt.gymportal.domain;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.DayOfWeek;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 @Entity
 @Table(name = "courseschedules")
 public class CourseSchedules extends BaseEntity implements Serializable {
 
-    @NotBlank
-    @Size(max = 15)
     @Column(name = "DAY")
-    private String day;
+    private DayOfWeek day;
 
     @Column(name = "START")
     private LocalTime start;
@@ -34,18 +27,18 @@ public class CourseSchedules extends BaseEntity implements Serializable {
     public CourseSchedules() {
     }
 
-    public CourseSchedules(@NotBlank @Size(max = 15) String day, @NotBlank LocalTime start, @NotBlank LocalTime end, Course course) {
-        this.day = day;
+    public CourseSchedules(String day, LocalTime start, LocalTime end, Course course) {
+        this.day = DayOfWeek.valueOf(day);
         this.start = start;
         this.end = end;
         this.course = course;
     }
 
-    public String getDay() {
+    public DayOfWeek getDay() {
         return day;
     }
 
-    public void setDay(String day) {
+    public void setDay(DayOfWeek day) {
         this.day = day;
     }
 
