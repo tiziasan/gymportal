@@ -142,7 +142,7 @@ public class Course extends BaseEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getDescription(), getCode(), getInstructor(), getGym().getId());
+        return Objects.hash(getName(), getDescription(), getCode(), getInstructor() , getGym().getId());
     }
 
     @Override
