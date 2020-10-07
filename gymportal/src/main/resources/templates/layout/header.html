@@ -59,7 +59,7 @@
 							</li>
 
 							<li class="dropdown user user-menu" sec:authorize="hasAnyAuthority('CUSTOMER','MANAGER')">
-								<a href="/gymportal/login" th:href="@{/chat}" th:text="#{chat}" >Chat</a>
+								<a href="/gymportal/chat" th:href="@{/chat}" th:text="#{chat}" >Chat</a>
 							</li>
 
 							<li class="dropdown user user-menu" sec:authorize="!hasAnyAuthority('CUSTOMER','MANAGER')">
