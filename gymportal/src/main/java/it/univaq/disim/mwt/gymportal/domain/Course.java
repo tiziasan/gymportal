@@ -108,7 +108,6 @@ public class Course extends BaseEntity implements Serializable {
         if (!(o instanceof Course)) return false;
         Course course = (Course) o;
         return getName().equals(course.getName()) &&
-                getDescription().equals(course.getDescription()) &&
                 getCode().equals(course.getCode()) &&
                 getGym().equals(course.getGym());
     }
