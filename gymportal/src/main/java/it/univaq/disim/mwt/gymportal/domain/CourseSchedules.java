@@ -76,7 +76,7 @@ public class CourseSchedules extends BaseEntity implements Serializable {
         return getDay() == that.getDay() &&
                 getStart().equals(that.getStart()) &&
                 getEnd().equals(that.getEnd()) &&
-                (getCourse().getId() == that.getCourse().getId());
+                getCourse().equals(that.getCourse());
     }
 
     @Override
