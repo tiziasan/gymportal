@@ -1,8 +1,7 @@
 package it.univaq.disim.mwt.gymportal.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -13,12 +12,15 @@ import java.util.Objects;
 public class CourseSchedules extends BaseEntity implements Serializable {
 
     @Column(name = "DAY")
+    @NotNull
     private DayOfWeek day;
 
     @Column(name = "START")
+    @NotNull
     private LocalTime start;
 
     @Column(name = "END")
+    @NotNull
     private LocalTime end;
 
     @ManyToOne
@@ -69,12 +71,12 @@ public class CourseSchedules extends BaseEntity implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof CourseSchedules)) return false;
         CourseSchedules that = (CourseSchedules) o;
-        return day.equals(that.day) &&
-                start.equals(that.start) &&
-                end.equals(that.end) &&
-                course.equals(that.course);
+        return getDay() == that.getDay() &&
+                getStart().equals(that.getStart()) &&
+                getEnd().equals(that.getEnd()) &&
+                (getCourse().getId() == that.getCourse().getId());
     }
 
     @Override

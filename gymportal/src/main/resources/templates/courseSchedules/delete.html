@@ -7,6 +7,9 @@
 	<div class="box box-info" id="form-orizzontale">
 		<form  method="post">
 			<h1 th:text="'| '+ #{courseSchedules.delete.checkMessage} + ' ' +  ${courseSchedules.course.name} + '? |'">|Sicuro di voler eliminare l'orario per il  corso?|</h1>
+
+			<input type="hidden" th:value="${courseSchedules.course.gym.id}" th:attr="name='course.gym.id'" />
+
 			<div class="box-footer">
 				<button type="submit" class="btn btn-info pull-right" th:text="#{common.delete}">Elimina</button>
 				<a href="#" th:href="@{/}" class="btn btn-default float-left" th:text="#{common.cancel}" >Annulla</a>
