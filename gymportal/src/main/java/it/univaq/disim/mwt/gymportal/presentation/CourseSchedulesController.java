@@ -74,24 +74,6 @@ public class CourseSchedulesController {
         return "redirect:/course/gym/" + courseSchedules.getCourse().getGym().getId();
     }
 
-    @GetMapping("/update/{id}")
-    public String updateStart(@PathVariable long id, Model model) throws BusinessException {
-        CourseSchedules courseSchedules = courseSchedulesService.findCourseSchedulesById(id);
-
-        model.addAttribute("courseSchedules", courseSchedules);
-        return "/courseschedules/form";
-    }
-
-    @PostMapping("/update/{id}")
-    public String update(@ModelAttribute("courseSchedules") CourseSchedules courseSchedules, Errors errors) throws BusinessException, IOException {
-        if (errors.hasErrors()) {
-            return "/courseschedules/form";
-        }
-
-        courseSchedulesService.updateCourseschedules(courseSchedules);
-        return "redirect:/";
-    }
-
     @ModelAttribute
     public void addAll(Model model) throws BusinessException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
