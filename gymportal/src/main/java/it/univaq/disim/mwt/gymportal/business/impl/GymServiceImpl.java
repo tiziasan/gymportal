@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Set;
 
 @Service
-@Transactional
 public class GymServiceImpl implements GymService {
 
     @Autowired
@@ -42,6 +41,7 @@ public class GymServiceImpl implements GymService {
     private MessageRepository messageRepository;
 
     @Override
+    @Transactional(transactionManager = "chainedTransactionManager")
     public void deleteGym(Gym gym) throws BusinessException {
         Set<Course> courses = courseRepository.findCourseByGymId(gym.getId());
         for (Course c : courses) {
@@ -63,11 +63,13 @@ public class GymServiceImpl implements GymService {
     }
 
     @Override
+    @Transactional(transactionManager = "standardtrans")
     public Gym createGym(Gym gym) throws BusinessException {
         return gymRepository.save(gym);
     }
 
     @Override
+    @Transactional(transactionManager = "chainedTransactionManager")
     public void updateGym(Gym gym) throws BusinessException {
         Set<Chat> chatList = chatRepository.findByGymId(gym.getId());
         for (Chat c : chatList) {
@@ -79,36 +81,43 @@ public class GymServiceImpl implements GymService {
     }
 
     @Override
+    @Transactional(transactionManager = "standardtrans")
     public Set<Gym> findAllGym() throws BusinessException {
         return (Set<Gym>) gymRepository.findAll();
     }
 
     @Override
+    @Transactional(transactionManager = "standardtrans")
     public Set<Gym> findByRegion(String region) throws BusinessException {
         return gymRepository.findByRegionName(region);
     }
 
     @Override
+    @Transactional(transactionManager = "standardtrans")
     public Gym findByID(long id) throws BusinessException {
         return gymRepository.findByID(id);
     }
 
     @Override
+    @Transactional(transactionManager = "standardtrans")
     public Set<Gym> searchByRegionAndName(String region, String name) throws BusinessException {
         return gymRepository.searchByRegionAndName(region, name);
     }
 
     @Override
+    @Transactional(transactionManager = "standardtrans")
     public Set<Gym> searchByRegionAndUser(String region, User user) throws BusinessException {
         return gymRepository.searchByRegionAndUser(region, user.getId());
     }
 
     @Override
+    @Transactional(transactionManager = "standardtrans")
     public Set<Gym> searchByRegionAndNameAndUser(String region, String name, User user) throws BusinessException {
         return gymRepository.searchByRegionAndNameAndUser(region, name, user.getId());
     }
 
     @Override
+    @Transactional(transactionManager = "standardtrans")
     public Set<Gym> searchByUser(User user) throws BusinessException {
         return gymRepository.searchByUser(user.getId());
     }

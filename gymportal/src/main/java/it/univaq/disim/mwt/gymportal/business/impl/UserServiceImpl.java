@@ -8,6 +8,7 @@ import it.univaq.disim.mwt.gymportal.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 
@@ -25,27 +26,32 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    @Transactional(transactionManager = "standardtrans")
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
     @Override
+    @Transactional(transactionManager = "standardtrans")
     public <U extends User> U findUserByUsername(String username) {
         return userRepository.findUserByUsername(username);
     }
 
     @Override
+    @Transactional(transactionManager = "standardtrans")
     public <U extends User> U findUserByUsernameAndRole(String username, Role role) {
         return userRepository.findByUsernameAndRole(username, role);
     }
 
     @Override
+    @Transactional(transactionManager = "standardtrans")
     public User saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
     @Override
+    @Transactional(transactionManager = "chainedTransactionManager")
     public User updateUser(User user, Role role) {
         Set<Chat> chatList = chatRepository.findByUserId(user.getId());
         for (Chat c : chatList) {

@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Set;
 
 @Service
-@Transactional
+@Transactional(transactionManager = "standardtrans")
 public class FeedbackCourseServiceImpl implements FeedbackCourseService {
 
     @Autowired

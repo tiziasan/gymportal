@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Set;
 
 @Service
-@Transactional
+@Transactional(transactionManager = "standardtrans")
 public class FavoriteServiceImpl implements FavoriteService {
     @Autowired
     private FavoriteGymRepository favoriteGymRepository;

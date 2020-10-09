@@ -10,8 +10,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,7 +22,7 @@ public class MyUserDetailsService implements UserDetailsService {
     private UserService userService;
 
     @Override
-    @Transactional
+    @Transactional(transactionManager = "standardtrans")
     public UserDetails loadUserByUsername(String username) {
         User user = userService.findUserByUsername(username);
         Set<GrantedAuthority> authorities = getUserAuthority(user.getRole());
