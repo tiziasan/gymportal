@@ -16,7 +16,7 @@
 	</div>
 	<div class="column" th:each="gym : ${gymList}">
 		<div class="card">
-			<img class="card-img-top" src="./testo.jpeg" th:src="@{${'../../../gymportal/upload/gym/' + gym.id + '/' + gym.id + '.jpeg'}}" alt="Card image cap" height="100px" width="100px">
+			<img class="card-img-top" src="./testo.jpeg" th:src="@{${'/upload/gym/' + gym.id + '/' + gym.id + '.jpeg'}}" alt="Card image cap" height="100px" width="100px">
 
 			<h3 th:text="${gym.name}"></h3>
 			<h4 th:text="${gym.province}"></h4>
