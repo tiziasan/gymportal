@@ -1,9 +1,11 @@
 package it.univaq.disim.mwt.gymportal.presentation;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataAccessException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.PrintWriter;
@@ -36,6 +38,15 @@ public class GlobalExceptionHandler {
             model.addAttribute("errorMessage", stringWriter.toString());
             return "/common/error";
         }
+    }
+
+    @ExceptionHandler(DataAccessException.class)
+    public ModelAndView exception(DataAccessException e) {
+        ModelAndView mav = new ModelAndView("exception");
+        mav.addObject("name", e.getClass().getSimpleName());
+        mav.addObject("message", e.getMessage());
+
+        return mav;
     }
 
 }

@@ -33,11 +33,13 @@ public class CourseSchedulesImpl implements CourseSchedulesService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Set<CourseSchedules> findAllCourseSchedulesByCourse(Course course) {
         return courseSchedulesRepository.findAllByCourse(course);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public CourseSchedules findCourseSchedulesById(long id) {
         return courseSchedulesRepository.findCourseSchedulesById(id);
     }

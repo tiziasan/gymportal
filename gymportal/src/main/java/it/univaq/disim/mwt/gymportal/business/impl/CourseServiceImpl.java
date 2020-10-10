@@ -45,16 +45,19 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Set<Course> findAllCourse() throws BusinessException {
         return (Set<Course>) courseRepository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Set<Course> findCourseByGymId(Gym gym) throws BusinessException {
         return courseRepository.findCourseByGymId(gym.getId());
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Course findByID(long id) throws BusinessException {
         return courseRepository.findByID(id);
     }
@@ -65,11 +68,13 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Set<Course> searchByIdAndName(long id, String name) throws BusinessException {
         return courseRepository.searchByIdAndName(id, name);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Set<Course> searchByIdAndNameAndUser(long id, String name, long idUtente) throws BusinessException {
         return courseRepository.searchByIdAndNameAndUser(id, name, idUtente);
     }

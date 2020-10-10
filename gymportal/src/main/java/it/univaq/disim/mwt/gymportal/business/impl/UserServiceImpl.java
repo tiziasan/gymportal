@@ -8,10 +8,12 @@ import it.univaq.disim.mwt.gymportal.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -25,11 +27,13 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    @Transactional(readOnly = true)
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public <U extends User> U findUserByUsername(String username) {
         return userRepository.findUserByUsername(username);
     }

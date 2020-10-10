@@ -79,36 +79,43 @@ public class GymServiceImpl implements GymService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Set<Gym> findAllGym() throws BusinessException {
         return (Set<Gym>) gymRepository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Set<Gym> findByRegion(String region) throws BusinessException {
         return gymRepository.findByRegionName(region);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Gym findByID(long id) throws BusinessException {
         return gymRepository.findByID(id);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Set<Gym> searchByRegionAndName(String region, String name) throws BusinessException {
         return gymRepository.searchByRegionAndName(region, name);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Set<Gym> searchByRegionAndUser(String region, User user) throws BusinessException {
         return gymRepository.searchByRegionAndUser(region, user.getId());
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Set<Gym> searchByRegionAndNameAndUser(String region, String name, User user) throws BusinessException {
         return gymRepository.searchByRegionAndNameAndUser(region, name, user.getId());
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Set<Gym> searchByUser(User user) throws BusinessException {
         return gymRepository.searchByUser(user.getId());
     }
