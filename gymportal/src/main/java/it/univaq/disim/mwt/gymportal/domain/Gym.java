@@ -12,28 +12,36 @@ import java.util.Set;
 public class Gym extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @NotBlank
     @Size(max = 50)
     @Column(name = "NAME")
     private String name;
+
     @NotBlank
     @Size(max = 200)
     @Column(name = "ADDRESS")
     private String address;
+
     @NotBlank
     @Size(max = 50)
     @Column(name = "PROVINCE")
     private String province;
+
     @NotBlank
     @Size(max = 50)
     @Column(name = "REGION")
     private String region;
+
     @OneToMany(mappedBy = "gym")
     private Set<FeedbackGym> feedbackGyms;
+
     @OneToMany(mappedBy = "gym")
     private Set<FavoriteGym> favoriteGyms;
+
     @OneToMany(mappedBy = "gym")
     private Set<Course> courses;
+
     @ManyToOne
     private Manager user;
 
@@ -127,8 +135,6 @@ public class Gym extends BaseEntity implements Serializable {
                 ", address='" + address + '\'' +
                 ", province='" + province + '\'' +
                 ", region='" + region + '\'' +
-                ", feedbackGym=" + feedbackGyms +
-                ", favoriteGym=" + favoriteGyms +
                 ", course=" + courses +
                 ", user=" + user +
                 '}';

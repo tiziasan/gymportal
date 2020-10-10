@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+	<H1 th:text="#{courseSchedules.add}">Aggiungi Orario</H1>
+		<div class="box box-info" id="form-orizzontale">
+
+			<form th:action="${#request.getRequestURI()}" th:object="${courseSchedules}" enctype="multipart/form-data"
+				class="form-horizontal" method="post">
+
+				<input type="hidden" th:field="*{id}" />
+				<input type="hidden" th:field="*{version}" />
+
+				<div class="box-body">
+					<div class="form-group">
+						<label for="day" class="col-sm-2 control-label" th:text="#{courseSchedules.day}">Giorno del corso</label>
+
+						<div class="col-sm-10">
+							<select id="day" th:field="*{day}" class="form-control">
+								<option th:text="#{week.monday}" th:value="MONDAY"></option>
+								<option th:text="#{week.tuesday}" th:value="TUESDAY"></option>
+								<option th:text="#{week.wednesday}" th:value="WEDNESDAY"></option>
+								<option th:text="#{week.thursday}" th:value="THURSDAY"></option>
+								<option th:text="#{week.friday}" th:value="FRIDAY"></option>
+								<option th:text="#{week.saturday}" th:value="SATURDAY"></option>
+								<option th:text="#{week.sunday}" th:value="SUNDAY"></option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="start" class="col-sm-2 control-label" th:text="#{courseSchedules.start}">Orario inizio corso</label>
+
+						<div class="col-sm-4">
+							<select id="start" th:field="*{start}" class="form-control">
+								<option th:value=09.00>09:00 </option>
+								<option th:value=09.30>09:30 </option>
+								<option th:value=10.00>10:00 </option>
+								<option th:value=10.30>10:30 </option>
+								<option th:value=11.00>11:00 </option>
+								<option th:value=11.30>11:30 </option>
+								<option th:value=12.00>12:00 </option>
+								<option th:value=12.30>12:30 </option>
+								<option th:value=13.00>13:00 </option>
+								<option th:value=13.30>13:30 </option>
+								<option th:value=14.00>14:00 </option>
+								<option th:value=14.30>14:30 </option>
+								<option th:value=15.00>15:00 </option>
+								<option th:value=15.30>15:30 </option>
+								<option th:value=16.00>16:00 </option>
+								<option th:value=16.30>16:30 </option>
+								<option th:value=17.00>17:00 </option>
+								<option th:value=17.30>17:30 </option>
+								<option th:value=18.00>18:00 </option>
+								<option th:value=18.30>18:30 </option>
+								<option th:value=19.00>19:00 </option>
+								<option th:value=19.30>19:30 </option>
+								<option th:value=20.00>20:00 </option>
+								<option th:value=20.30>20:30 </option>
+								<option th:value=21.00>21:00 </option>
+								<option th:value=21.30>21:30 </option>
+								<option th:value=22.00>22:00 </option>
+								<option th:value=22.30>22:30 </option>
+								<option th:value=23.00>23:00 </option>
+								<option th:value=23.30>23:30 </option>
+								<option th:value=24.00>24:00 </option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+					<label for="end" class="col-sm-2 control-label" th:text="#{courseSchedules.end}">Orario fine corso</label>
+
+					<div class="col-sm-4">
+						<select id="end" th:field="*{end}" class="form-control">
+							<option th:value=09.00>09:00 </option>
+							<option th:value=09.30>09:30 </option>
+							<option th:value=10.00>10:00 </option>
+							<option th:value=10.30>10:30 </option>
+							<option th:value=11.00>11:00 </option>
+							<option th:value=11.30>11:30 </option>
+							<option th:value=12.00>12:00 </option>
+							<option th:value=12.30>12:30 </option>
+							<option th:value=13.00>13:00 </option>
+							<option th:value=13.30>13:30 </option>
+							<option th:value=14.00>14:00 </option>
+							<option th:value=14.30>14:30 </option>
+							<option th:value=15.00>15:00 </option>
+							<option th:value=15.30>15:30 </option>
+							<option th:value=16.00>16:00 </option>
+							<option th:value=16.30>16:30 </option>
+							<option th:value=17.00>17:00 </option>
+							<option th:value=17.30>17:30 </option>
+							<option th:value=18.00>18:00 </option>
+							<option th:value=18.30>18:30 </option>
+							<option th:value=19.00>19:00 </option>
+							<option th:value=19.30>19:30 </option>
+							<option th:value=20.00>20:00 </option>
+							<option th:value=20.30>20:30 </option>
+							<option th:value=21.00>21:00 </option>
+							<option th:value=21.30>21:30 </option>
+							<option th:value=22.00>22:00 </option>
+							<option th:value=22.30>22:30 </option>
+							<option th:value=23.00>23:00 </option>
+							<option th:value=23.30>23:30 </option>
+							<option th:value=24.00>24:00 </option>
+						</select>
+					</div>
+				</div>
+
+					<div class="form-group">
+						<label for="courseId" class="col-sm-2 control-label" th:text="#{courseSchedules.select.course}" >Seleziona Corso</label>
+
+						<div class="col-sm-10">
+							<select id="courseId" th:field="*{course.id}"
+								class="form-control">
+								<option th:each="course : ${courses}" th:value="${course.id}"
+									th:text="${course.gym.name} +' - '+${course.name}"></option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<!-- /.box-body -->
+				<div class="box-footer">
+					<button type="submit" class="btn btn-info pull-right" th:text="#{courseSchedules.add}">Aggiungi Orario</button>
+				</div>
+				<div class="alert alert-success" role="alert" th:text="${message}" th:if="${message}"></div>
+
+				<!-- /.box-footer -->
+			</form>
+		</div>
+	</div>
+</body>
+</html>
+
+
+
+
+
