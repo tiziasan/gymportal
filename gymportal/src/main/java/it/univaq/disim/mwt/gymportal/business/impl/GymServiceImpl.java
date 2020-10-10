@@ -2,10 +2,7 @@ package it.univaq.disim.mwt.gymportal.business.impl;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.GymService;
-import it.univaq.disim.mwt.gymportal.domain.Chat;
-import it.univaq.disim.mwt.gymportal.domain.Course;
-import it.univaq.disim.mwt.gymportal.domain.Gym;
-import it.univaq.disim.mwt.gymportal.domain.User;
+import it.univaq.disim.mwt.gymportal.domain.*;
 import it.univaq.disim.mwt.gymportal.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +27,9 @@ public class GymServiceImpl implements GymService {
     private CourseRepository courseRepository;
 
     @Autowired
+    private CourseSchedulesRepository schedulesRepository;
+
+    @Autowired
     private FavoriteCourseRepository favoriteCourseRepository;
 
     @Autowired
@@ -43,12 +43,19 @@ public class GymServiceImpl implements GymService {
 
     @Override
     public void deleteGym(Gym gym) throws BusinessException {
-        Set<Course> courses = courseRepository.findCourseByGymId(gym.getId());
+        Set<Course> courses = gym.getCourses();
+
         for (Course c : courses) {
+            schedulesRepository.deleteAll(c.getCourseSchedules());
+
             favoriteCourseRepository.deleteAllByCourse(c);
             feedbackCourseRepository.deleteAllByCourse(c);
+//            favoriteCourseRepository.deleteAll(c.getFavoriteCourses());
+//            feedbackCourseRepository.deleteAll(c.getFeedbackCourses());
         }
+
         courseRepository.deleteAllCourseByGymId(gym.getId());
+        courseRepository.deleteAll(courses);
 
         favoriteGymRepository.deleteAllByGym(gym);
         feedbackGymRepository.deleteAllByGym(gym);

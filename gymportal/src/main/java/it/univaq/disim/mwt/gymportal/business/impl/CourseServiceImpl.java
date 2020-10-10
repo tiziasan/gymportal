@@ -6,6 +6,7 @@ import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.FavoriteCourse;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.repository.CourseRepository;
+import it.univaq.disim.mwt.gymportal.repository.CourseSchedulesRepository;
 import it.univaq.disim.mwt.gymportal.repository.FavoriteCourseRepository;
 import it.univaq.disim.mwt.gymportal.repository.FeedbackCourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class CourseServiceImpl implements CourseService {
     private CourseRepository courseRepository;
 
     @Autowired
+    private CourseSchedulesRepository schedulesRepository;
+
+    @Autowired
     private FavoriteCourseRepository favoriteCourseRepository;
 
     @Autowired
@@ -29,6 +33,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public void deleteCourse(Course course) throws BusinessException {
+        schedulesRepository.deleteAll(course.getCourseSchedules());
         favoriteCourseRepository.deleteAllByCourse(course);
         feedbackCourseRepository.deleteAllByCourse(course);
         courseRepository.delete(course);
