@@ -33,7 +33,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public void deleteCourse(Course course) throws BusinessException {
-        schedulesRepository.deleteAll(course.getCourseSchedules());
+        schedulesRepository.deleteByCourse(course);
         favoriteCourseRepository.deleteAllByCourse(course);
         feedbackCourseRepository.deleteAllByCourse(course);
         courseRepository.delete(course);

@@ -11,4 +11,6 @@ import java.util.Set;
 public interface CourseSchedulesRepository extends CrudRepository<CourseSchedules, Long>, CourseSchedulesImplCustom {
 
     Set<CourseSchedules> findAllByCourse(Course course);
+
+    void deleteByCourse(Course course);
 }

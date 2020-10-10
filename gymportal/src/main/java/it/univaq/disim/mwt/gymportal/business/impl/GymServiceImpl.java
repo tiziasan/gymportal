@@ -43,19 +43,15 @@ public class GymServiceImpl implements GymService {
 
     @Override
     public void deleteGym(Gym gym) throws BusinessException {
-        Set<Course> courses = gym.getCourses();
-
+        Set<Course> courses = courseRepository.findCourseByGymId(gym.getId());
+        System.out.println(gym);
+        System.out.println(courses.size());
         for (Course c : courses) {
-            schedulesRepository.deleteAll(c.getCourseSchedules());
-
             favoriteCourseRepository.deleteAllByCourse(c);
             feedbackCourseRepository.deleteAllByCourse(c);
-//            favoriteCourseRepository.deleteAll(c.getFavoriteCourses());
-//            feedbackCourseRepository.deleteAll(c.getFeedbackCourses());
+            schedulesRepository.deleteByCourse(c);
+            courseRepository.delete(c);
         }
-
-        courseRepository.deleteAllCourseByGymId(gym.getId());
-        courseRepository.deleteAll(courses);
 
         favoriteGymRepository.deleteAllByGym(gym);
         feedbackGymRepository.deleteAllByGym(gym);
