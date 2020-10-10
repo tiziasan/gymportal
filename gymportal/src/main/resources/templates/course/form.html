@@ -30,6 +30,14 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<label for="instructor" class="col-sm-2 control-label" th:text="#{course.instructor}">Istruttore corso</label>
+
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="instructor" th:field="*{instructor}"
+								   placeholder="Nome" th:placeholder="#{course.instructor}">
+						</div>
+					</div>
+					<div class="form-group">
 						<label for="desc" class="col-sm-2 control-label" th:text="#{course.description}">Descrizione</label>
 
 						<div class="col-sm-10">

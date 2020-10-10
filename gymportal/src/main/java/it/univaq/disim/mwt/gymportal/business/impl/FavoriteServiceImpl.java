@@ -17,35 +17,36 @@ import java.util.Set;
 @Service
 @Transactional(transactionManager = "standardtrans")
 public class FavoriteServiceImpl implements FavoriteService {
+
     @Autowired
     private FavoriteGymRepository favoriteGymRepository;
+
     @Autowired
     private FavoriteCourseRepository favoriteCourseRepository;
 
     @Override
     public void createFavoriteCourse(FavoriteCourse favoriteCourse) throws BusinessException {
         favoriteCourseRepository.save(favoriteCourse);
-
     }
 
     @Override
     public void updateFavoriteCourse(FavoriteCourse favoriteCourse) throws BusinessException {
         favoriteCourseRepository.save(favoriteCourse);
-
     }
 
     @Override
     public void deleteFavoriteCourse(FavoriteCourse favoriteCourse) throws BusinessException {
         favoriteCourseRepository.deleteById(favoriteCourse.getId());
-
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Set<FavoriteCourse> findAllFavoriteCourse(FavoriteCourse favoriteCourse) throws BusinessException {
         return favoriteCourseRepository.findAllFavoriteCourse(favoriteCourse.getId());
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Set<FavoriteCourse> findAllFavoriteByUserId(long id) throws BusinessException {
         return favoriteCourseRepository.findAllFavoriteByUserId(id);
     }
@@ -58,30 +59,28 @@ public class FavoriteServiceImpl implements FavoriteService {
     @Override
     public void createFavoriteGym(FavoriteGym favoriteGym) throws BusinessException {
         favoriteGymRepository.save(favoriteGym);
-
     }
 
     @Override
     public void updateFavoriteGym(FavoriteGym favoriteGym) throws BusinessException {
         favoriteGymRepository.save(favoriteGym);
-
     }
 
     @Override
     public void deleteFavoriteGym(FavoriteGym favoriteGym) throws BusinessException {
         favoriteGymRepository.deleteById(favoriteGym.getId());
-
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Set<FavoriteGym> findAllFavoritegym(FavoriteGym favoriteGym) throws BusinessException {
         return favoriteGymRepository.findAllFavoriteGym(favoriteGym.getId());
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Set<FavoriteGym> findAllFavoriteByUserId(FavoriteGym favoriteGym) throws BusinessException {
         return favoriteGymRepository.findAllFavoriteByUserId(favoriteGym.getId());
-
     }
 
     @Override

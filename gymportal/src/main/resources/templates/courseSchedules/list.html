@@ -19,21 +19,11 @@
 			<div class="row">
 				<div class="column" th:each="course : ${courseList}">
 					<div class="card">
-						<img class="card-img-top" src="./testo.jpeg" th:src="@{${'/upload/course/' + course.id + '/' + course.id + '.jpeg'}}" alt="Card image cap" height="100px" width="100px">
+						<img class="card-img-top" src="./testo.jpeg" th:src="@{${'../../../gymportal/upload/course/' + course.id + '/' + course.id + '.jpeg'}}" alt="Card image cap" height="100px" width="100px">
 
 						<h3 th:text="${course.name}"></h3>
 						<h4 th:text="${course.code}"></h4>
 						<p th:text="${course.description}"></p>
-
-						<div id="schedules">
-							<div th:each="c : ${course.getCourseSchedules()}">
-
-								<p th:text="${c.day} + ':' + ' ' + ${c.start} + '-' + ${c.end}"></p>
-								<a th:href="@{/courseschedules/delete/{courseSchedulesId}(courseSchedulesId=${c.id})}" sec:authorize="hasAuthority('MANAGER')">
-									<button class="btn-primary" th:text="#{common.delete}">Elimina</button>
-								</a>
-							</div>
-						</div>
 
 						<a th:href="@{/favoriteCourse/create/{courseId}(courseId=${course.id})}" sec:authorize="hasAuthority('CUSTOMER')"><button class="btn-primary" th:text="#{favorite.add}">Aggiungi ai preferiti!</button></a>
 						<a th:href="@{/feedbackCourse/create/{courseId}(courseId=${course.id})}" sec:authorize="hasAuthority('CUSTOMER')"><button class="btn-primary" th:text="#{feedback.course.add}">Recensisci Corso</button></a>

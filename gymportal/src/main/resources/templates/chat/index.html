@@ -81,7 +81,9 @@
 							</div>
 
 							<!-- /.direct-chat-info -->
-							<img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" th:src="@{/dist/img/avatar5.png}" alt="Message User Image"><!-- /.direct-chat-img -->
+							<img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" th:if="${message.isGym()}" th:src="@{${'../../../gymportal/upload/gym/' + chat.getGymId() + '/' + chat.getGymId() + '.jpeg'}}" alt="Message User Image"><!-- /.direct-chat-img -->
+							<img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" th:if="${!message.isGym()}" th:src="@{${'../../../gymportal/upload/user/' + chat.getUserId() + '/' + chat.getUserId() + '.jpeg'}}" alt="Message User Image"><!-- /.direct-chat-img -->
+
 							<div class="direct-chat-text" th:text="${message.text}">
 								You better believe it!
 							</div>
@@ -100,7 +102,9 @@
 							</div>
 
 							<!-- /.direct-chat-info -->
-							<img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" th:src="@{/dist/img/avatar5.png}" alt="Message User Image"><!-- /.direct-chat-img -->
+							<img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" th:if="${message.isGym()}" th:src="@{${'../../../gymportal/upload/gym/' + chat.getGymId() + '/' + chat.getGymId() + '.jpeg'}}" alt="Message User Image"><!-- /.direct-chat-img -->
+							<img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" th:if="${!message.isGym()}" th:src="@{${'../../../gymportal/upload/user/' + chat.getUserId() + '/' + chat.getUserId() + '.jpeg'}}" alt="Message User Image"><!-- /.direct-chat-img -->
+
 							<div class="direct-chat-text" th:text="${message.text}">
 								You better believe it!
 							</div>

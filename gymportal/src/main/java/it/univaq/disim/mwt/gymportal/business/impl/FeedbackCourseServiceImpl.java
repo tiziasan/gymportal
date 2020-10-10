@@ -39,20 +39,21 @@ public class FeedbackCourseServiceImpl implements FeedbackCourseService {
 
 
     @Override
+    @Transactional(readOnly = true)
     public Set<FeedbackCourse> findAllFeedbackCourse(FeedbackCourse feedbackCourse) throws BusinessException {
         return feedbackCourseRepository.findAllFeedbackCourse(feedbackCourse.getId());
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Set<FeedbackCourse> findAllFeedbackByCourse(long id) throws BusinessException {
         return feedbackCourseRepository.findAllFeedbackByCourse(id);
-
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Set<FeedbackCourse> findAllFeedbackByUserId(User user) throws BusinessException {
         return feedbackCourseRepository.findAllFeedbackByUserId(user.getId());
-
     }
 
     @Override
@@ -61,6 +62,7 @@ public class FeedbackCourseServiceImpl implements FeedbackCourseService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public FeedbackCourse findByID(long id) throws BusinessException {
         return feedbackCourseRepository.findByID(id);
     }

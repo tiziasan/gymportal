@@ -2,10 +2,7 @@ package it.univaq.disim.mwt.gymportal.business.impl;
 
 import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.GymService;
-import it.univaq.disim.mwt.gymportal.domain.Chat;
-import it.univaq.disim.mwt.gymportal.domain.Course;
-import it.univaq.disim.mwt.gymportal.domain.Gym;
-import it.univaq.disim.mwt.gymportal.domain.User;
+import it.univaq.disim.mwt.gymportal.domain.*;
 import it.univaq.disim.mwt.gymportal.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +26,9 @@ public class GymServiceImpl implements GymService {
     private CourseRepository courseRepository;
 
     @Autowired
+    private CourseSchedulesRepository schedulesRepository;
+
+    @Autowired
     private FavoriteCourseRepository favoriteCourseRepository;
 
     @Autowired
@@ -47,8 +47,9 @@ public class GymServiceImpl implements GymService {
         for (Course c : courses) {
             favoriteCourseRepository.deleteAllByCourse(c);
             feedbackCourseRepository.deleteAllByCourse(c);
+            schedulesRepository.deleteByCourse(c);
+            courseRepository.delete(c);
         }
-        courseRepository.deleteAllCourseByGymId(gym.getId());
 
         favoriteGymRepository.deleteAllByGym(gym);
         feedbackGymRepository.deleteAllByGym(gym);
@@ -81,43 +82,43 @@ public class GymServiceImpl implements GymService {
     }
 
     @Override
-    @Transactional(transactionManager = "standardtrans")
+    @Transactional(readOnly = true, transactionManager = "standardtrans")
     public Set<Gym> findAllGym() throws BusinessException {
         return (Set<Gym>) gymRepository.findAll();
     }
 
     @Override
-    @Transactional(transactionManager = "standardtrans")
+    @Transactional(readOnly = true, transactionManager = "standardtrans")
     public Set<Gym> findByRegion(String region) throws BusinessException {
         return gymRepository.findByRegionName(region);
     }
 
     @Override
-    @Transactional(transactionManager = "standardtrans")
+    @Transactional(readOnly = true, transactionManager = "standardtrans")
     public Gym findByID(long id) throws BusinessException {
         return gymRepository.findByID(id);
     }
 
     @Override
-    @Transactional(transactionManager = "standardtrans")
+    @Transactional(readOnly = true, transactionManager = "standardtrans")
     public Set<Gym> searchByRegionAndName(String region, String name) throws BusinessException {
         return gymRepository.searchByRegionAndName(region, name);
     }
 
     @Override
-    @Transactional(transactionManager = "standardtrans")
+    @Transactional(readOnly = true, transactionManager = "standardtrans")
     public Set<Gym> searchByRegionAndUser(String region, User user) throws BusinessException {
         return gymRepository.searchByRegionAndUser(region, user.getId());
     }
 
-    @Override
-    @Transactional(transactionManager = "standardtrans")
+    @Override    
+    @Transactional(readOnly = true, transactionManager = "standardtrans")
     public Set<Gym> searchByRegionAndNameAndUser(String region, String name, User user) throws BusinessException {
         return gymRepository.searchByRegionAndNameAndUser(region, name, user.getId());
     }
 
     @Override
-    @Transactional(transactionManager = "standardtrans")
+    @Transactional(readOnly = true, transactionManager = "standardtrans")
     public Set<Gym> searchByUser(User user) throws BusinessException {
         return gymRepository.searchByUser(user.getId());
     }

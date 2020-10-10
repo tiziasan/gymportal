@@ -38,20 +38,21 @@ public class FeedbackGymServiceImpl implements FeedbackGymService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Set<FeedbackGym> findAllFeedbackGym(FeedbackGym feedbackGym) throws BusinessException {
         return feedbackGymRepository.findAllFeedbackGym(feedbackGym.getId());
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Set<FeedbackGym> findAllFeedbackByGym(Gym gym) throws BusinessException {
         return feedbackGymRepository.findAllFeedbackByGym(gym.getId());
-
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Set<FeedbackGym> findAllFeedbackByUserId(User user) throws BusinessException {
         return feedbackGymRepository.findAllFeedbackByUserId(user.getId());
-
     }
 
     @Override
@@ -60,6 +61,7 @@ public class FeedbackGymServiceImpl implements FeedbackGymService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public FeedbackGym findByID(long id) throws BusinessException {
         return feedbackGymRepository.findByID(id);
     }

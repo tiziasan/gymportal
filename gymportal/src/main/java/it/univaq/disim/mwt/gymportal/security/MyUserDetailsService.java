@@ -1,6 +1,5 @@
 package it.univaq.disim.mwt.gymportal.security;
 
-
 import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.domain.Role;
 import it.univaq.disim.mwt.gymportal.domain.User;
@@ -22,7 +21,7 @@ public class MyUserDetailsService implements UserDetailsService {
     private UserService userService;
 
     @Override
-    @Transactional(transactionManager = "standardtrans")
+    @Transactional(readOnly = true, transactionManager = "standardtrans")
     public UserDetails loadUserByUsername(String username) {
         User user = userService.findUserByUsername(username);
         Set<GrantedAuthority> authorities = getUserAuthority(user.getRole());

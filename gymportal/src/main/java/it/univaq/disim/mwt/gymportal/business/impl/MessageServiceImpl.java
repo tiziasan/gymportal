@@ -7,10 +7,12 @@ import it.univaq.disim.mwt.gymportal.domain.Message;
 import it.univaq.disim.mwt.gymportal.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 
 @Service
+@Transactional
 public class MessageServiceImpl implements MessageService {
 
     @Autowired
@@ -22,6 +24,7 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Set<Message> findByChat(Chat chat) throws BusinessException {
         return messageRepository.findByChat(chat);
     }

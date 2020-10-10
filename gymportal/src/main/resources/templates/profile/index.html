@@ -16,7 +16,7 @@
 						<!-- Profile Image -->
 							<!-- /.box-body -->
 								<div class="card" style="width: 18rem;">
-									<img class="card-img-top" src="./testo.jpeg" th:src="@{${'../../../gymportal/upload/user/' + user.id + '/' + user.id + '.jpeg'}}" alt="Card image cap" height="100px" width="100px">
+									<img class="card-img-top" src="./testo.jpeg" th:src="@{${'/upload/user/' + user.id + '/' + user.id + '.jpeg'}}" alt="Card image cap" height="100px" width="100px">
 									<div class="card-body">
 										<h5 class="card-title" th:text="${user.name}">Card title</h5>
 										<h5 class="card-title" th:text="${user.username}">Card title</h5>

@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Set;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -26,13 +27,13 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    @Transactional(transactionManager = "standardtrans")
+    @Transactional(readOnly = true, transactionManager = "standardtrans")
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
     @Override
-    @Transactional(transactionManager = "standardtrans")
+    @Transactional(readOnly = true, transactionManager = "standardtrans")
     public <U extends User> U findUserByUsername(String username) {
         return userRepository.findUserByUsername(username);
     }
