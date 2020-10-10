@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+<div layout:fragment="content">
+	<h1 th:text="${courseSchedules.course.name}"></h1>
+	<div class="box box-info" id="form-orizzontale">
+		<form  method="post">
+			<h1 th:text="'| '+ #{courseSchedules.delete.checkMessage} + ' ' +  ${courseSchedules.course.name} + '? |'">|Sicuro di voler eliminare l'orario per il  corso?|</h1>
+
+			<input type="hidden" th:value="${courseSchedules.course.gym.id}" th:attr="name='course.gym.id'" />
+
+			<div class="box-footer">
+				<button type="submit" class="btn btn-info pull-right" th:text="#{common.delete}">Elimina</button>
+				<a href="#" th:href="@{/}" class="btn btn-default float-left" th:text="#{common.cancel}" >Annulla</a>
+			</div>
+			<!-- /.box-footer -->
+		</form>
+	</div>
+
+</div>
+</body>
+</html>

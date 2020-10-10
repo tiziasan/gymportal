@@ -29,21 +29,31 @@ public class Course extends BaseEntity implements Serializable {
     @Column(name = "CODE")
     private String code;
 
+    @NotBlank
+    @Size(max = 50)
+    @Column(name = "INSTRUCTOR")
+    private String instructor;
+
     @OneToMany(mappedBy = "course")
     private Set<FeedbackCourse> feedbackCourses;
 
     @OneToMany(mappedBy = "course")
     private Set<FavoriteCourse> favoriteCourses;
 
+    @OneToMany(mappedBy = "course")
+    private Set<CourseSchedules> courseSchedules;
+
     @ManyToOne
     private Gym gym;
 
-    public Course(@NotBlank @Size(max = 50) String name, @NotBlank @Size(max = 400) String description, @NotBlank @Size(max = 50) String code, Set<FeedbackCourse> feedbackCourses, Set<FavoriteCourse> favoriteCourses, Gym gym) {
+    public Course(@NotBlank @Size(max = 50) String name, @NotBlank @Size(max = 400) String description, @NotBlank @Size(max = 50) String code, @NotBlank @Size(max = 50) String instructor, Set<FeedbackCourse> feedbackCourses, Set<FavoriteCourse> favoriteCourses, Set<CourseSchedules> courseSchedules, Gym gym) {
         this.name = name;
         this.description = description;
         this.code = code;
+        this.instructor = instructor;
         this.feedbackCourses = feedbackCourses;
         this.favoriteCourses = favoriteCourses;
+        this.courseSchedules = courseSchedules;
         this.gym = gym;
     }
 
@@ -78,6 +88,14 @@ public class Course extends BaseEntity implements Serializable {
         this.code = code;
     }
 
+    public String getInstructor() {
+        return instructor;
+    }
+
+    public void setInstructor(String instructor) {
+        this.instructor = instructor;
+    }
+
     public Set<FeedbackCourse> getFeedbackCourses() {
         return feedbackCourses;
     }
@@ -94,6 +112,14 @@ public class Course extends BaseEntity implements Serializable {
         this.favoriteCourses = favoriteCourses;
     }
 
+    public Set<CourseSchedules> getCourseSchedules() {
+        return courseSchedules;
+    }
+
+    public void setCourseSchedules(Set<CourseSchedules> courseSchedules) {
+        this.courseSchedules = courseSchedules;
+    }
+
     public Gym getGym() {
         return gym;
     }
@@ -108,14 +134,14 @@ public class Course extends BaseEntity implements Serializable {
         if (!(o instanceof Course)) return false;
         Course course = (Course) o;
         return getName().equals(course.getName()) &&
-                getDescription().equals(course.getDescription()) &&
                 getCode().equals(course.getCode()) &&
+                getInstructor().equals(course.getInstructor()) &&
                 getGym().equals(course.getGym());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getDescription(), getCode(), getInstructor(), getGym().getId());
+        return Objects.hash(getName(), getDescription(), getCode(), getInstructor() , getGym().getId());
     }
 
     @Override
@@ -126,8 +152,7 @@ public class Course extends BaseEntity implements Serializable {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", code='" + code + '\'' +
-//                ", feedbackCourse=" + feedbackCourses +
-//                ", favoriteCourse=" + favoriteCourses +
+                ", instructor='" + instructor + '\'' +
                 ", gym=" + gym +
                 '}';
     }
