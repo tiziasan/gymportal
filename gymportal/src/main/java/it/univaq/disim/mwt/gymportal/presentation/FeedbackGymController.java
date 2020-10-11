@@ -63,6 +63,7 @@ public class FeedbackGymController {
                 redir.addFlashAttribute("error", "Hai già scritto una recensione per questa palestra!");
                 return "redirect:/profile";
             }
+            throw new BusinessException();
         }
 
         return "redirect:/course/gym/" + feedback.getGym().getId();

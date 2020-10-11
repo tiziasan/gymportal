@@ -64,6 +64,7 @@ public class FavoriteCourseController {
                 redir.addFlashAttribute("message", "Hai già inserito il corso ai preferiti");
                 return "redirect:/profile";
             }
+            throw new BusinessException();
         }
 
         return "redirect:/profile";

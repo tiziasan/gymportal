@@ -72,6 +72,7 @@ public class FeedbackCourseController {
                 redir.addFlashAttribute("error", "Hai già scritto una recensione per questo corso!");
                 return "/index";
             }
+            throw new BusinessException();
         }
 
         return "redirect:/feedbackCourse/" + feedbackCourse.getCourse().getId();

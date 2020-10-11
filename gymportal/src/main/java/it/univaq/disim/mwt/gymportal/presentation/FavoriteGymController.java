@@ -67,7 +67,7 @@ public class FavoriteGymController {
                 redir.addFlashAttribute("message", "Hai già inserito la palestra ai preferiti");
                 return "redirect:/profile";
             }
-
+            throw new BusinessException();
         }
 
         return "redirect:/profile";
