@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/layout}">
+<body>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-info">
+                <h1>Errore</h1>
+                <div class="card-header"><h3 class="card-title" th:text="#{common.errore.title}"></h3></div>
+                <div class="card-body">
+                    <div>
+                        <h3 th:text="${name}"></h3>
+                        <p th:text="${message}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

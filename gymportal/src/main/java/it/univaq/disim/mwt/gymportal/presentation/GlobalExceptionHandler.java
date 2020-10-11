@@ -1,6 +1,7 @@
 package it.univaq.disim.mwt.gymportal.presentation;
 
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.exception.JDBCConnectionException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -18,35 +19,33 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public String handleException(HttpServletRequest request, Exception ex, Model model) {
         log.info("Exception Occured:: URL=" + request.getRequestURL() + ", method=" + request.getMethod());
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(stringWriter);
-        ex.printStackTrace(printWriter);
-        printWriter.flush();
-        if (stringWriter.toString().contains("UK3720qfodb5fi73gktwatyprks")) {
-            model.addAttribute("error", "Hai già inserito la palestra ai preferiti");
-            return "/index";
-        } else if (stringWriter.toString().contains("UKmttnhvruuluxke3r6mkni90ht")) {
-            model.addAttribute("error", "Hai già inserito il corso ai preferiti");
-            return "/index";
-        } else if (stringWriter.toString().contains("UK2ucpf4y44fsmt5cj767ygmyu2")) {
-            model.addAttribute("error", "Hai già scritto una recensione per questa palestra!");
-            return "/index";
-        } else if (stringWriter.toString().contains("UKmlqk03e4td4n6ph6susmvfoh")) {
-            model.addAttribute("error", "Hai già scritto una recensione per questo corso!");
-            return "/index";
-        } else {
-            model.addAttribute("errorMessage", stringWriter.toString());
-            return "/common/error";
-        }
+//        StringWriter stringWriter = new StringWriter();
+//        PrintWriter printWriter = new PrintWriter(stringWriter);
+//        ex.printStackTrace(printWriter);
+//        printWriter.flush();
+//        model.addAttribute("errorMessage", stringWriter.toString());
+        model.addAttribute("errorMessage", "Errore!!! Contatta l'assistenza di GymPortal");
+        return "/common/error";
     }
 
-    @ExceptionHandler(DataAccessException.class)
-    public ModelAndView exception(DataAccessException e) {
-        ModelAndView mav = new ModelAndView("exception");
+    @ExceptionHandler(JDBCConnectionException.class)
+    public ModelAndView handleJDBCConnectionException(JDBCConnectionException e) {
+        log.error("GlobalExceptionHandler - JDBCConnectionException catched:", e);
+
+        ModelAndView mav = new ModelAndView("common/genericError");
         mav.addObject("name", e.getClass().getSimpleName());
         mav.addObject("message", e.getMessage());
 
         return mav;
+    }
+
+    @ExceptionHandler(DataAccessException.class)
+    public String handleDataAccessException(HttpServletRequest request, DataAccessException e, Model model) {
+        log.info("Exception Occured:: URL=" + request.getRequestURL() + ", method=" + request.getMethod());
+
+        model.addAttribute("name", e.getClass().getSimpleName());
+        model.addAttribute("message", e.getMessage());
+        return "/common/genericError";
     }
 
 }
