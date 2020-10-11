@@ -35,7 +35,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests() // Specificare le url che
                 .antMatchers("/", "/static/**", "/favicon.ico", "/login", "/chat/**").permitAll()
                 .antMatchers("/common/**", "/profile").authenticated()
-                .antMatchers("/gym/**", "/course/create", "/course/update", "/course/delete", "/gym/delete", "/gym/delete", "/gym/delete", "/feedbackCourse/{id}", "/feedback/{id}").hasAuthority(Role.Values.MANAGER)
+                .antMatchers("/gym/**", "/course/create", "/course/update", "/course/delete", "/gym/delete", "/gym/delete", "/gym/delete", "/feedbackCourse/*", "/feedback/*").hasAuthority(Role.Values.MANAGER)
                 .antMatchers("/gym/region", "/feedback/**", "/feedbackCourse/**", "/feedback/{id}", "/feedbackCourse/{id}", "favorite/**").hasAuthority(Role.Values.CUSTOMER);
 
 
