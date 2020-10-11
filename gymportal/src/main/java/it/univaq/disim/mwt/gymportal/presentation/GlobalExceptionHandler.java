@@ -28,17 +28,6 @@ public class GlobalExceptionHandler {
         return "/common/error";
     }
 
-    @ExceptionHandler(JDBCConnectionException.class)
-    public ModelAndView handleJDBCConnectionException(JDBCConnectionException e) {
-        log.error("GlobalExceptionHandler - JDBCConnectionException catched:", e);
-
-        ModelAndView mav = new ModelAndView("common/genericError");
-        mav.addObject("name", e.getClass().getSimpleName());
-        mav.addObject("message", e.getMessage());
-
-        return mav;
-    }
-
     @ExceptionHandler(DataAccessException.class)
     public String handleDataAccessException(HttpServletRequest request, DataAccessException e, Model model) {
         log.info("Exception Occured:: URL=" + request.getRequestURL() + ", method=" + request.getMethod());
