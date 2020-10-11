@@ -8,6 +8,7 @@ import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.Customer;
 import it.univaq.disim.mwt.gymportal.domain.FavoriteCourse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -49,19 +50,23 @@ public class FavoriteCourseController {
     @PostMapping("/create/{id}")
     public String create(@Valid @ModelAttribute("favoriteCourse") FavoriteCourse favoriteCourse, RedirectAttributes redir, Errors errors, Model model)
             throws BusinessException {
-
         if (errors.hasErrors()) {
             String message = "Errore nell'inserimento";
             model.addAttribute("message", message);
             return "redirect:/profile";
         }
 
-        favoriteService.createFavoriteCourse(favoriteCourse);
-        redir.addFlashAttribute("message", "corso aggiunto ai preferiti");
+        try {
+            favoriteService.createFavoriteCourse(favoriteCourse);
+            redir.addFlashAttribute("message", "corso aggiunto ai preferiti");
+        } catch (DataAccessException e) {
+            if (e.getMessage().contains("UKmttnhvruuluxke3r6mkni90ht") ){
+                redir.addFlashAttribute("message", "Hai già inserito il corso ai preferiti");
+                return "redirect:/profile";
+            }
+        }
 
-        String redirect = "redirect:/profile";
-
-        return redirect;
+        return "redirect:/profile";
     }
 
     @GetMapping("/delete/{id}")

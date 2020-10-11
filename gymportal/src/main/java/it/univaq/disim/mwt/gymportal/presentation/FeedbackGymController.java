@@ -8,12 +8,14 @@ import it.univaq.disim.mwt.gymportal.domain.Customer;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -48,13 +50,20 @@ public class FeedbackGymController {
     }
 
     @PostMapping("/create/{id}")
-    public String create(@Valid @ModelAttribute("feedback") FeedbackGym feedback, Errors errors, Model model) throws BusinessException {
+    public String create(@Valid @ModelAttribute("feedback") FeedbackGym feedback, RedirectAttributes redir, Errors errors, Model model) throws BusinessException {
         if (errors.hasErrors()) {
             String message = "Errore nell'inserimento";
             model.addAttribute("message", message);
             return "/feedback/form";
         }
-        feedbackGymService.createFeedbackGym(feedback);
+        try {
+            feedbackGymService.createFeedbackGym(feedback);
+        } catch (DataAccessException e) {
+            if (e.getMessage().contains("UK2ucpf4y44fsmt5cj767ygmyu2") ){
+                redir.addFlashAttribute("error", "Hai già scritto una recensione per questa palestra!");
+                return "redirect:/profile";
+            }
+        }
 
         return "redirect:/course/gym/" + feedback.getGym().getId();
     }

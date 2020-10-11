@@ -8,12 +8,14 @@ import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.Customer;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.Set;
@@ -57,13 +59,20 @@ public class FeedbackCourseController {
     }
 
     @PostMapping("/create/{id}")
-    public String create(@Valid @ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, Errors errors, Model model) throws BusinessException {
+    public String create(@Valid @ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, RedirectAttributes redir, Errors errors, Model model) throws BusinessException {
         if (errors.hasErrors()) {
             String message = "Errore nell'inserimento";
             model.addAttribute("message", message);
             return "/feedbackCourse/form";
         }
-        feedbackCourseService.createFeedbackCourse(feedbackCourse);
+        try {
+            feedbackCourseService.createFeedbackCourse(feedbackCourse);
+        } catch (DataAccessException e) {
+            if (e.getMessage().contains("UKmlqk03e4td4n6ph6susmvfoh")) {
+                redir.addFlashAttribute("error", "Hai già scritto una recensione per questo corso!");
+                return "/index";
+            }
+        }
 
         return "redirect:/feedbackCourse/" + feedbackCourse.getCourse().getId();
     }

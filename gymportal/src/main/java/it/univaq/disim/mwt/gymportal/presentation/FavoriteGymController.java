@@ -8,6 +8,7 @@ import it.univaq.disim.mwt.gymportal.domain.Customer;
 import it.univaq.disim.mwt.gymportal.domain.FavoriteGym;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -57,15 +58,19 @@ public class FavoriteGymController {
             model.addAttribute("message", message);
             return "redirect:/profile";
         }
-        System.out.println(favoriteGym);
 
-        favoriteService.createFavoriteGym(favoriteGym);
-        redir.addFlashAttribute("message", "palestra aggiunta ai preferiti");
+        try {
+            favoriteService.createFavoriteGym(favoriteGym);
+            redir.addFlashAttribute("message", "palestra aggiunta ai preferiti");
+        } catch (DataAccessException e) {
+            if (e.getMessage().contains("UK3720qfodb5fi73gktwatyprks")) {
+                redir.addFlashAttribute("message", "Hai già inserito la palestra ai preferiti");
+                return "redirect:/profile";
+            }
 
+        }
 
-        String redirect = "redirect:/profile";
-
-        return redirect;
+        return "redirect:/profile";
     }
 
     @GetMapping("/delete/{id}")
