@@ -44,7 +44,7 @@ public class CourseController {
     }
 
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute("course") Course course, Errors errors, Model model, RedirectAttributes ra, @RequestParam("image") MultipartFile multipartFile) throws BusinessException, IOException {
+    public String create(@Valid @ModelAttribute("course") Course course, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra, Model model, Errors errors) throws BusinessException, IOException {
         if (errors.hasErrors()) {
             String message = "Errore nell'inserimento";
             model.addAttribute("message", message);
@@ -89,17 +89,17 @@ public class CourseController {
     }
 
     @PostMapping("/delete/{id}")
-    public String delete(@ModelAttribute("course") Course course, Model model) throws BusinessException {
+    public String delete(@ModelAttribute("course") Course course, RedirectAttributes ra, Model model) throws BusinessException {
         String redirect;
-//        try{
+        try{
             redirect = "redirect:/course/gym/" + course.getGym().getId();
             courseService.deleteCourse(course);
             model.addAttribute("success", "Eliminazione del corso andata a buon fine");
-//        }
-//        catch (DataAccessException e) {
-//            model.addAttribute("error", "Errore!!! Eliminazione del corso non è andata a buon fine");
-//            return "/index";
-//        }
+        }
+        catch (DataAccessException e) {
+            ra.addAttribute("error", "Errore!!! Eliminazione del corso non è andata a buon fine");
+            return "/index";
+        }
         return redirect;
 
     }
@@ -112,7 +112,7 @@ public class CourseController {
     }
 
     @PostMapping("/update/{id}")
-    public String update(@Valid @ModelAttribute("course") Course course, Errors errors, @RequestParam("image") MultipartFile multipartFile) throws BusinessException, IOException {
+    public String update(@Valid @ModelAttribute("course") Course course, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra, Errors errors) throws BusinessException, IOException {
         if (errors.hasErrors()) {
             return "/common/error";
         }

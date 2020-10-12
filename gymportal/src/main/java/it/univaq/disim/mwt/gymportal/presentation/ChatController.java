@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
@@ -80,7 +81,7 @@ public class ChatController {
     }
 
     @PostMapping(value = {"", "/{idChat}", "?idGym={idGym}"})
-    public String create(@PathVariable(required = false) String idChat, @RequestParam(required = false) Long idGym, @Valid Message message, Errors errors) throws BusinessException {
+    public String create(@PathVariable(required = false) String idChat, @RequestParam(required = false) Long idGym, @Valid Message message, RedirectAttributes ra, Errors errors) throws BusinessException {
         if (errors.hasErrors()) {
             return "/chat/index";
         }

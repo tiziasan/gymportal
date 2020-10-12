@@ -50,7 +50,7 @@ public class FavoriteGymController {
     }
 
     @PostMapping("/create/{id}")
-    public String create(@Valid @ModelAttribute("favoriteGym") FavoriteGym favoriteGym, RedirectAttributes redir, Errors errors, Model model)
+    public String create(@Valid @ModelAttribute("favoriteGym") FavoriteGym favoriteGym, RedirectAttributes ra, Model model, Errors errors)
             throws BusinessException {
 
         if (errors.hasErrors()) {
@@ -61,10 +61,10 @@ public class FavoriteGymController {
 
         try {
             favoriteService.createFavoriteGym(favoriteGym);
-            redir.addFlashAttribute("message", "palestra aggiunta ai preferiti");
+            ra.addFlashAttribute("message", "palestra aggiunta ai preferiti");
         } catch (DataAccessException e) {
             if (e.getMessage().contains("UK3720qfodb5fi73gktwatyprks")) {
-                redir.addFlashAttribute("message", "Hai già inserito la palestra ai preferiti");
+                ra.addFlashAttribute("message", "Hai già inserito la palestra ai preferiti");
                 return "redirect:/profile";
             }
             throw new BusinessException();
@@ -79,7 +79,7 @@ public class FavoriteGymController {
     }
 
     @PostMapping("/delete/{id}")
-    public String delete(@ModelAttribute("favoriteGym") FavoriteGym favoriteGym, Errors errors) throws BusinessException {
+    public String delete(@ModelAttribute("favoriteGym") FavoriteGym favoriteGym, RedirectAttributes ra, Errors errors) throws BusinessException {
         favoriteService.deleteFavoriteGym(favoriteGym);
         return "redirect:/profile";
     }

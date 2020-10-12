@@ -7,6 +7,7 @@ import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.domain.Manager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -43,15 +46,18 @@ public class GymController {
     }
 
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute("gym") Gym gym, Errors errors, @RequestParam("image") MultipartFile multipartFile) throws BusinessException, IOException {
+    public String create(@Valid @ModelAttribute("gym") Gym gym, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra, Errors errors) throws BusinessException, IOException {
         if (errors.hasErrors()) {
             return "/gym/form";
         }
+        try {
+            Gym newGym = gymService.createGym(gym);
 
-        Gym newGym = gymService.createGym(gym);
+            String uploadDir = "src/main/upload/gym/" + newGym.getId();
+            FileUploadUtil.saveFile(uploadDir, newGym.getId() + ".jpeg", multipartFile);
+        } catch (DataAccessException e) {
 
-        String uploadDir = "src/main/upload/gym/" + newGym.getId();
-        FileUploadUtil.saveFile(uploadDir, newGym.getId() + ".jpeg", multipartFile);
+        }
         return "redirect:/course/create";
     }
 
@@ -63,7 +69,7 @@ public class GymController {
     }
 
     @PostMapping("/delete/{id}")
-    public String delete(@ModelAttribute("gym") Gym gym, Model model) throws BusinessException {
+    public String delete(@ModelAttribute("gym") Gym gym, RedirectAttributes ra, Model model) throws BusinessException {
         gymService.deleteGym(gym);
 
         model.addAttribute("success", "Eliminazione della palestra andata a buon fine");
@@ -83,7 +89,7 @@ public class GymController {
     }
 
     @PostMapping("/update/{id}")
-    public String update(@ModelAttribute("gym") Gym gym, Errors errors, @RequestParam("image") MultipartFile multipartFile) throws BusinessException, IOException {
+    public String update(@ModelAttribute("gym") Gym gym, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra, Errors errors) throws BusinessException, IOException {
         if (errors.hasErrors()) {
             return "/gym/form";
         }

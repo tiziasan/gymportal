@@ -48,7 +48,7 @@ public class FavoriteCourseController {
     }
 
     @PostMapping("/create/{id}")
-    public String create(@Valid @ModelAttribute("favoriteCourse") FavoriteCourse favoriteCourse, RedirectAttributes redir, Errors errors, Model model)
+    public String create(@Valid @ModelAttribute("favoriteCourse") FavoriteCourse favoriteCourse, RedirectAttributes ra, Model model, Errors errors)
             throws BusinessException {
         if (errors.hasErrors()) {
             String message = "Errore nell'inserimento";
@@ -58,13 +58,12 @@ public class FavoriteCourseController {
 
         try {
             favoriteService.createFavoriteCourse(favoriteCourse);
-            redir.addFlashAttribute("message", "corso aggiunto ai preferiti");
+            ra.addFlashAttribute("message", "corso aggiunto ai preferiti");
         } catch (DataAccessException e) {
             if (e.getMessage().contains("UKmttnhvruuluxke3r6mkni90ht") ){
-                redir.addFlashAttribute("message", "Hai già inserito il corso ai preferiti");
+                ra.addFlashAttribute("message", "Hai già inserito il corso ai preferiti");
                 return "redirect:/profile";
             }
-            throw new BusinessException();
         }
 
         return "redirect:/profile";
@@ -76,7 +75,7 @@ public class FavoriteCourseController {
     }
 
     @PostMapping("/delete/{id}")
-    public String delete(@ModelAttribute("favoriteCourse") FavoriteCourse favoriteCourse, Errors errors) throws BusinessException {
+    public String delete(@ModelAttribute("favoriteCourse") FavoriteCourse favoriteCourse, RedirectAttributes ra, Errors errors) throws BusinessException {
         favoriteService.deleteFavoriteCourse(favoriteCourse);
         return "redirect:/profile";
     }

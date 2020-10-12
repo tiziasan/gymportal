@@ -59,7 +59,7 @@ public class FeedbackCourseController {
     }
 
     @PostMapping("/create/{id}")
-    public String create(@Valid @ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, RedirectAttributes redir, Errors errors, Model model) throws BusinessException {
+    public String create(@Valid @ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, RedirectAttributes ra, Model model, Errors errors) throws BusinessException {
         if (errors.hasErrors()) {
             String message = "Errore nell'inserimento";
             model.addAttribute("message", message);
@@ -69,10 +69,9 @@ public class FeedbackCourseController {
             feedbackCourseService.createFeedbackCourse(feedbackCourse);
         } catch (DataAccessException e) {
             if (e.getMessage().contains("UKmlqk03e4td4n6ph6susmvfoh")) {
-                redir.addFlashAttribute("error", "Hai già scritto una recensione per questo corso!");
+                ra.addFlashAttribute("error", "Hai già scritto una recensione per questo corso!");
                 return "/index";
             }
-            throw new BusinessException();
         }
 
         return "redirect:/feedbackCourse/" + feedbackCourse.getCourse().getId();
@@ -86,7 +85,7 @@ public class FeedbackCourseController {
     }
 
     @PostMapping("/delete/{id}")
-    public String delete(@ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, Errors errors) throws BusinessException {
+    public String delete(@ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, RedirectAttributes ra, Errors errors) throws BusinessException {
         feedbackCourseService.deleteFeedbackCourse(feedbackCourse);
         return "redirect:/profile";
     }
@@ -100,7 +99,7 @@ public class FeedbackCourseController {
     }
 
     @PostMapping("/update/{id}")
-    public String update(@Valid @ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, Errors errors) throws BusinessException {
+    public String update(@Valid @ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, RedirectAttributes ra, Errors errors) throws BusinessException {
         if (errors.hasErrors()) {
             return "/common/error";
         }

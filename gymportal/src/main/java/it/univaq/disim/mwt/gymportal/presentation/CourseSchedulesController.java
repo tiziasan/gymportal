@@ -44,7 +44,7 @@ public class CourseSchedulesController {
     }
 
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute("courseSchedules") CourseSchedules courseSchedules, Errors errors, Model model, RedirectAttributes ra) throws BusinessException, IOException {
+    public String create(@Valid @ModelAttribute("courseSchedules") CourseSchedules courseSchedules, RedirectAttributes ra, Model model, Errors errors) throws BusinessException, IOException {
         if (errors.hasErrors()) {
             String message = "Errore nell'inserimento";
             model.addAttribute("message", message);
@@ -66,7 +66,7 @@ public class CourseSchedulesController {
     }
 
     @PostMapping("/delete/{id}")
-    public String delete(@ModelAttribute("courseSchedules") CourseSchedules courseSchedules, Model model) throws BusinessException {
+    public String delete(@ModelAttribute("courseSchedules") CourseSchedules courseSchedules, RedirectAttributes ra, Model model) throws BusinessException {
 
         courseSchedulesService.deleteCourseSchedules(courseSchedules);
 

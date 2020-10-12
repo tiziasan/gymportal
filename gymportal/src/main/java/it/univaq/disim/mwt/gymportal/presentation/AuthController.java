@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class AuthController {
     }
 
     @PostMapping(value = "/registration")
-    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult, @RequestParam("image") MultipartFile multipartFile) throws BusinessException, IOException {
+    public ModelAndView createNewUser(@Valid User user, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra, BindingResult bindingResult) throws BusinessException, IOException {
         ModelAndView modelAndView = new ModelAndView();
         User userExists = userService.findUserByUsername(user.getUsername());
 

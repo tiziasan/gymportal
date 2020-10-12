@@ -15,6 +15,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -29,10 +30,6 @@ public class ProfileController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private ChatService chatService;
-
 
     @GetMapping("")
     public ModelAndView home(Model model) throws BusinessException {
@@ -74,12 +71,12 @@ public class ProfileController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(auth.getName());
         model.addAttribute("user", user);
-        return "/profile/update";
 
+        return "/profile/update";
     }
 
     @PostMapping("/update")
-    public String update(@Valid @ModelAttribute("user") User user, Errors errors, @RequestParam("image") MultipartFile multipartFile) throws BusinessException, IOException {
+    public String update(@Valid @ModelAttribute("user") User user, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra, Errors errors) throws BusinessException, IOException {
         if (errors.hasErrors()) {
             return "/common/error";
         }
@@ -92,8 +89,6 @@ public class ProfileController {
         } else if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
             userService.updateUser(user, Role.MANAGER);
         }
-
-
 
         return "redirect:/login";
     }

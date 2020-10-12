@@ -50,7 +50,7 @@ public class FeedbackGymController {
     }
 
     @PostMapping("/create/{id}")
-    public String create(@Valid @ModelAttribute("feedback") FeedbackGym feedback, RedirectAttributes redir, Errors errors, Model model) throws BusinessException {
+    public String create(@Valid @ModelAttribute("feedback") FeedbackGym feedback, RedirectAttributes ra, Model model, Errors errors) throws BusinessException {
         if (errors.hasErrors()) {
             String message = "Errore nell'inserimento";
             model.addAttribute("message", message);
@@ -59,11 +59,10 @@ public class FeedbackGymController {
         try {
             feedbackGymService.createFeedbackGym(feedback);
         } catch (DataAccessException e) {
-            if (e.getMessage().contains("UK2ucpf4y44fsmt5cj767ygmyu2") ){
-                redir.addFlashAttribute("error", "Hai già scritto una recensione per questa palestra!");
+            if (e.getMessage().contains("UK2ucpf4y44fsmt5cj767ygmyu2")){
+                ra.addFlashAttribute("error", "Hai già scritto una recensione per questa palestra!");
                 return "redirect:/profile";
             }
-            throw new BusinessException();
         }
 
         return "redirect:/course/gym/" + feedback.getGym().getId();
@@ -76,7 +75,7 @@ public class FeedbackGymController {
     }
 
     @PostMapping("/delete/{id}")
-    public String delete(@ModelAttribute("feedback") FeedbackGym feedback, Errors errors) throws BusinessException {
+    public String delete(@ModelAttribute("feedback") FeedbackGym feedback, RedirectAttributes ra, Errors errors) throws BusinessException {
         feedbackGymService.deleteFeedbackGym(feedback);
 
         return "redirect:/profile";
@@ -92,7 +91,7 @@ public class FeedbackGymController {
     }
 
     @PostMapping("/update/{id}")
-    public String update(@Valid @ModelAttribute("feedback") FeedbackGym feedback, Errors errors) throws BusinessException {
+    public String update(@Valid @ModelAttribute("feedback") FeedbackGym feedback, RedirectAttributes ra, Errors errors) throws BusinessException {
         if (errors.hasErrors()) {
             return "/common/error";
         }
