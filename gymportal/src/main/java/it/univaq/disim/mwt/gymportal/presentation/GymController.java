@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.FileDescriptor;
 import java.io.IOException;
 import java.util.Set;
 
@@ -65,7 +67,8 @@ public class GymController {
     @PostMapping("/delete/{id}")
     public String delete(@ModelAttribute("gym") Gym gym, Model model) throws BusinessException {
         gymService.deleteGym(gym);
-
+        File photo = new File("src/main/upload/gym/"+gym.getId()+"/"+gym.getId()+".jpeg");
+        photo.delete();
         model.addAttribute("success", "Eliminazione della palestra andata a buon fine");
         return "/index";
     }
