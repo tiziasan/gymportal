@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.io.File;
 import java.io.IOException;
 import java.util.Set;
 
@@ -97,6 +98,8 @@ public class CourseController {
     public String delete(@ModelAttribute("course") Course course, RedirectAttributes ra, Model model) throws BusinessException {
         try{
             courseService.deleteCourse(course);
+            File photo = new File("src/main/upload/gym/"+course.getId()+"/"+course.getId()+".jpeg");
+            photo.delete();
             model.addAttribute("success", "Eliminazione del corso andata a buon fine");
         }
         catch (DataAccessException e) {

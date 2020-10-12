@@ -36,7 +36,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/static/**", "/favicon.ico", "/login", "/chat/**").permitAll()
                 .antMatchers("/common/**", "/profile").authenticated()
                 .antMatchers("/gym/**", "/course/create", "/course/update", "/course/delete", "/gym/delete", "/gym/delete", "/gym/delete", "/feedbackCourse/*", "/feedback/*").hasAuthority(Role.Values.MANAGER)
-                .antMatchers("/gym/region", "/feedback/**", "/feedbackCourse/**", "/feedback/{id}", "/feedbackCourse/{id}", "favorite/**").hasAuthority(Role.Values.CUSTOMER);
+                .antMatchers("/gym/region", "/feedback/*", "/feedbackCourse/*", "/feedback/{id}", "/feedbackCourse/{id}", "favorite/**").hasAuthority(Role.Values.CUSTOMER);
 
 
     }

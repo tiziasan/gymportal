@@ -20,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.FileDescriptor;
 import java.io.IOException;
 import java.util.Set;
 
@@ -76,12 +78,17 @@ public class GymController {
     public String delete(@ModelAttribute("gym") Gym gym, RedirectAttributes ra, Model model) throws BusinessException {
         try {
             gymService.deleteGym(gym);
+
+            File photo = new File("src/main/upload/gym/"+gym.getId()+"/"+gym.getId()+".jpeg");
+            photo.delete();
+
             model.addAttribute("success", "Eliminazione della palestra andata a buon fine");
 
         } catch (DataAccessException e) {
             ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
             return "redirect:/";
         }
+
         return "/index";
     }
 

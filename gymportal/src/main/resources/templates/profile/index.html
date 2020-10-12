@@ -83,7 +83,7 @@
 												<!-- Add the bg color to the header using any of the bg-* classes -->
 												<div class="widget-user-header bg-yellow">
 													<div class="widget-user-image">
-														<img class="img-circle" src="./dist/img/user7-128x128.png" th:src="@{${'./dist/img/' + user.username + '/' + user.username + '.jpeg'}}"
+														<img class="img-circle" src="./dist/img/user7-128x128.png" th:src="@{${'/upload/user/' + user.id + '/' + user.id + '.jpeg'}}"
 															 alt="User Avatar">
 													</div>
 													<!-- /.widget-user-image -->
@@ -116,7 +116,7 @@
 												<!-- Add the bg color to the header using any of the bg-* classes -->
 												<div class="widget-user-header bg-yellow">
 													<div class="widget-user-image">
-														<img class="img-circle" src="./dist/img/user7-128x128.png" th:src="@{${'./dist/img/' + user.username + '/' + user.username + '.jpeg'}}"
+														<img class="img-circle" src="./dist/img/user7-128x128.png" th:src="@{${'/upload/user/' + user.id + '/' + user.id + '.jpeg'}}"
 															 alt="User Avatar">
 													</div>
 													<!-- /.widget-user-image -->
