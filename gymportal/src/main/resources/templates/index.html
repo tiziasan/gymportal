@@ -133,8 +133,22 @@
 		<!-- Full Width Column -->
 		<div class="content-wrapper">
 			<div class="container">
-				<div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}">
+
+				<div class="alert alert-danger alert-dismissible" th:if="${error}">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="margin-top: 0">&times;</button>
+					<strong th:text="${error}"><i class="icon fa fa-ban"></i> Alert!</strong>
 				</div>
+
+				<div class="alert alert-warning alert-dismissible" th:if="${warning}">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="margin-top: 0">&times;</button>
+					<strong th:text="${warning}"><i class="icon fa fa-warning"></i> Alert!</strong>
+				</div>
+
+				<div class="alert alert-success alert-dismissible" th:if="${message}">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="margin-top: 0">&times;</button>
+					<strong th:text="${message}"><i class="icon fa fa-check"></i> Alert!</strong>
+				</div>
+
 				<h1 th:text="#{common.title}">Lorem Ipsum</h1>
 
 				<p th:text="#{common.desc}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
