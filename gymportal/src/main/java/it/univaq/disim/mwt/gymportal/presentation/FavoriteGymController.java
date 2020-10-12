@@ -74,12 +74,12 @@ public class FavoriteGymController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteStart(@PathVariable long id, Model model) throws BusinessException {
+    public String deleteStart(@PathVariable long id) throws BusinessException {
         return "/favoriteGym/delete";
     }
 
     @PostMapping("/delete/{id}")
-    public String delete(@ModelAttribute("favoriteGym") FavoriteGym favoriteGym, RedirectAttributes ra, Errors errors) throws BusinessException {
+    public String delete(@ModelAttribute("favoriteGym") FavoriteGym favoriteGym, RedirectAttributes ra) throws BusinessException {
         favoriteService.deleteFavoriteGym(favoriteGym);
         return "redirect:/profile";
     }

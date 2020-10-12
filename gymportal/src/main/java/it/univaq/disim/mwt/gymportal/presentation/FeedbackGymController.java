@@ -70,12 +70,12 @@ public class FeedbackGymController {
 
 
     @GetMapping("/delete/{id}")
-    public String deleteStart(@PathVariable long id, Model model) throws BusinessException {
+    public String deleteStart(@PathVariable long id) throws BusinessException {
         return "/feedback/delete";
     }
 
     @PostMapping("/delete/{id}")
-    public String delete(@ModelAttribute("feedback") FeedbackGym feedback, RedirectAttributes ra, Errors errors) throws BusinessException {
+    public String delete(@ModelAttribute("feedback") FeedbackGym feedback, RedirectAttributes ra) throws BusinessException {
         feedbackGymService.deleteFeedbackGym(feedback);
 
         return "redirect:/profile";

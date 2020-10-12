@@ -79,13 +79,12 @@ public class FeedbackCourseController {
 
 
     @GetMapping("/delete/{id}")
-    public String deleteStart(@PathVariable long id, Model model) throws BusinessException {
-
+    public String deleteStart(@PathVariable long id) throws BusinessException {
         return "/feedback/delete";
     }
 
     @PostMapping("/delete/{id}")
-    public String delete(@ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, RedirectAttributes ra, Errors errors) throws BusinessException {
+    public String delete(@ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, RedirectAttributes ra) throws BusinessException {
         feedbackCourseService.deleteFeedbackCourse(feedbackCourse);
         return "redirect:/profile";
     }
