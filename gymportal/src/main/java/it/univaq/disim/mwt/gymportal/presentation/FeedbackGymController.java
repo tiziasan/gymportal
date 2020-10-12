@@ -9,6 +9,7 @@ import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -58,11 +59,15 @@ public class FeedbackGymController {
         }
         try {
             feedbackGymService.createFeedbackGym(feedback);
+            ra.addFlashAttribute("success", "La recensione è stata aggiunta al corso");
+
         } catch (DataAccessException e) {
-            if (e.getMessage().contains("UK2ucpf4y44fsmt5cj767ygmyu2")){
-                ra.addFlashAttribute("error", "Hai già scritto una recensione per questa palestra!");
+            if (e instanceof DataIntegrityViolationException) {
+                ra.addFlashAttribute("warning", "Hai già scritto una recensione per questa palestra!");
                 return "redirect:/profile";
             }
+            ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
+            return "redirect:/";
         }
 
         return "redirect:/course/gym/" + feedback.getGym().getId();
@@ -76,7 +81,14 @@ public class FeedbackGymController {
 
     @PostMapping("/delete/{id}")
     public String delete(@ModelAttribute("feedback") FeedbackGym feedback, RedirectAttributes ra) throws BusinessException {
-        feedbackGymService.deleteFeedbackGym(feedback);
+        try {
+            feedbackGymService.deleteFeedbackGym(feedback);
+            ra.addFlashAttribute("success", "Eliminazione avvenuta con successo");
+
+        } catch (DataAccessException e) {
+            ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
+            return "redirect:/";
+        }
 
         return "redirect:/profile";
     }
@@ -96,7 +108,15 @@ public class FeedbackGymController {
             return "/common/error";
         }
 
-        feedbackGymService.updateFeedbackGym(feedback);
+        try {
+            feedbackGymService.updateFeedbackGym(feedback);
+            ra.addFlashAttribute("success", "Aggiornamento eseguito con successo");
+
+        } catch (DataAccessException e) {
+            ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
+            return "redirect:/";
+        }
+
         return "redirect:/profile";
     }
 

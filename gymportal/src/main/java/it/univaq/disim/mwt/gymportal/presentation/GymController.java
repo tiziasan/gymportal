@@ -55,8 +55,12 @@ public class GymController {
 
             String uploadDir = "src/main/upload/gym/" + newGym.getId();
             FileUploadUtil.saveFile(uploadDir, newGym.getId() + ".jpeg", multipartFile);
-        } catch (DataAccessException e) {
 
+            ra.addFlashAttribute("success", "Creazione avvenuta con successo");
+
+        } catch (DataAccessException e) {
+            ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
+            return "redirect:/";
         }
         return "redirect:/course/create";
     }
@@ -70,9 +74,14 @@ public class GymController {
 
     @PostMapping("/delete/{id}")
     public String delete(@ModelAttribute("gym") Gym gym, RedirectAttributes ra, Model model) throws BusinessException {
-        gymService.deleteGym(gym);
+        try {
+            gymService.deleteGym(gym);
+            model.addAttribute("success", "Eliminazione della palestra andata a buon fine");
 
-        model.addAttribute("success", "Eliminazione della palestra andata a buon fine");
+        } catch (DataAccessException e) {
+            ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
+            return "redirect:/";
+        }
         return "/index";
     }
 
@@ -94,10 +103,18 @@ public class GymController {
             return "/gym/form";
         }
 
-        String uploadDir = "src/main/upload/gym/" + gym.getId();
-        FileUploadUtil.saveFile(uploadDir, gym.getId() + ".jpeg", multipartFile);
+        try {
+            gymService.updateGym(gym);
 
-        gymService.updateGym(gym);
+            String uploadDir = "src/main/upload/gym/" + gym.getId();
+            FileUploadUtil.saveFile(uploadDir, gym.getId() + ".jpeg", multipartFile);
+
+            ra.addFlashAttribute("success", "Aggiornamento eseguito con successo");
+        } catch (DataAccessException e) {
+            ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
+            return "redirect:/";
+        }
+
         return "redirect:/";
     }
 

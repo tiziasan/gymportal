@@ -46,18 +46,23 @@ public class CourseController {
     @PostMapping("/create")
     public String create(@Valid @ModelAttribute("course") Course course, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra, Model model, Errors errors) throws BusinessException, IOException {
         if (errors.hasErrors()) {
-            String message = "Errore nell'inserimento";
-            model.addAttribute("message", message);
+            model.addAttribute("error", "Errore nell'inserimento");
             return "/course/form";
         }
 
-        Course newCourse = courseService.createCourse(course);
+        try {
+            Course newCourse = courseService.createCourse(course);
 
-        String uploadDir = "src/main/upload/course/" + newCourse.getId();
-        FileUploadUtil.saveFile(uploadDir, newCourse.getId() + ".jpeg", multipartFile);
+            String uploadDir = "src/main/upload/course/" + newCourse.getId();
+            FileUploadUtil.saveFile(uploadDir, newCourse.getId() + ".jpeg", multipartFile);
 
-        String message = "Operazione andata a buon fine, aggiungi un altro corso!";
-        ra.addFlashAttribute("message", message);
+            ra.addFlashAttribute("success", "Operazione andata a buon fine, ora aggiungi gli orari!");
+
+        } catch (DataAccessException e) {
+            ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
+            return "redirect:/";
+        }
+
         return "redirect:/courseschedules/create";
     }
 
@@ -90,18 +95,15 @@ public class CourseController {
 
     @PostMapping("/delete/{id}")
     public String delete(@ModelAttribute("course") Course course, RedirectAttributes ra, Model model) throws BusinessException {
-        String redirect;
         try{
-            redirect = "redirect:/course/gym/" + course.getGym().getId();
             courseService.deleteCourse(course);
             model.addAttribute("success", "Eliminazione del corso andata a buon fine");
         }
         catch (DataAccessException e) {
             ra.addAttribute("error", "Errore!!! Eliminazione del corso non è andata a buon fine");
-            return "/index";
+            return "redirect:/";
         }
-        return redirect;
-
+        return "redirect:/course/gym/" + course.getGym().getId();
     }
 
     @GetMapping("/update/{id}")
@@ -117,13 +119,20 @@ public class CourseController {
             return "/common/error";
         }
 
-        String uploadDir = "src/main/upload/course/" + course.getId();
-        FileUploadUtil.saveFile(uploadDir, course.getId() + ".jpeg", multipartFile);
+        try {
+            courseService.updateCourse(course);
 
-        String redirect = "redirect:/course/gym/" + course.getGym().getId();
+            String uploadDir = "src/main/upload/course/" + course.getId();
+            FileUploadUtil.saveFile(uploadDir, course.getId() + ".jpeg", multipartFile);
 
-        courseService.updateCourse(course);
-        return redirect;
+            ra.addAttribute("success", "Aggiornamento avvenuto con successo!");
+
+        } catch (DataAccessException e) {
+            ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
+            return "redirect:/";
+        }
+
+        return "redirect:/course/gym/" + course.getGym().getId();
     }
 
     @ModelAttribute

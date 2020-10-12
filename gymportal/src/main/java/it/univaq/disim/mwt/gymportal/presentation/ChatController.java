@@ -3,6 +3,7 @@ package it.univaq.disim.mwt.gymportal.presentation;
 import it.univaq.disim.mwt.gymportal.business.*;
 import it.univaq.disim.mwt.gymportal.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -85,37 +86,42 @@ public class ChatController {
         if (errors.hasErrors()) {
             return "/chat/index";
         }
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUsername(auth.getName());
 
         Chat chat = new Chat();
-        if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
-            if (idChat != null && idGym == null) {    //se ho idChat prendo la chat, faccio inserimento del messaggio e aggiorno solo la lista dei messaggi e ritorno a /chat/idchat
-                chat = chatService.findChatById(idChat);
-                message.setGym(true);
-            }
-        } else {
-            if (idChat != null && idGym == null) {    //se ho idChat prendo la chat, faccio inserimento del messaggio e aggiorno solo la lista dei messaggi e ritorno a /chat/idchat
-                chat = chatService.findChatById(idChat);
-                message.setGym(false);
-            }
-            if (idChat == null && idGym != null) {    //se ho idGYm prendo la chat che fa match con userId
-                chat = chatService.findByUserIdAndGymId(user, idGym);
-                if (chat == null) {  //se non esiste la creo
-                    chat = new Chat();
-                    chat.setUserId(user.getId());
-                    chat.setUserName(user.getLastname() + " " + user.getName());
-                    Gym gym = gymService.findByID(idGym);
-                    chat.setGymId(gym.getId());
-                    chat.setGymName(gym.getName());
-                    chat = chatService.saveChat(chat);
+        try {
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            User user = userService.findUserByUsername(auth.getName());
+            if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
+                if (idChat != null && idGym == null) {    //se ho idChat prendo la chat, faccio inserimento del messaggio e aggiorno solo la lista dei messaggi e ritorno a /chat/idchat
+                    chat = chatService.findChatById(idChat);
+                    message.setGym(true);
                 }
-                message.setGym(false);
+            } else {
+                if (idChat != null && idGym == null) {    //se ho idChat prendo la chat, faccio inserimento del messaggio e aggiorno solo la lista dei messaggi e ritorno a /chat/idchat
+                    chat = chatService.findChatById(idChat);
+                    message.setGym(false);
+                }
+                if (idChat == null && idGym != null) {    //se ho idGYm prendo la chat che fa match con userId
+                    chat = chatService.findByUserIdAndGymId(user, idGym);
+                    if (chat == null) {  //se non esiste la creo
+                        chat = new Chat();
+                        chat.setUserId(user.getId());
+                        chat.setUserName(user.getLastname() + " " + user.getName());
+                        Gym gym = gymService.findByID(idGym);
+                        chat.setGymId(gym.getId());
+                        chat.setGymName(gym.getName());
+                        chat = chatService.saveChat(chat);
+                    }
+                    message.setGym(false);
+                }
             }
+            message.setChat(chat);
+            message.setDate(LocalDateTime.now());
+            messageService.createMessage(message);
+        } catch (DataAccessException e) {
+            ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
+            return "redirect:/";
         }
-        message.setChat(chat);
-        message.setDate(LocalDateTime.now());
-        messageService.createMessage(message);
 
         return "redirect:/chat/" + chat.getId();
     }

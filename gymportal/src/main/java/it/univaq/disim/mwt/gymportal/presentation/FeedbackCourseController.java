@@ -4,11 +4,13 @@ import it.univaq.disim.mwt.gymportal.business.BusinessException;
 import it.univaq.disim.mwt.gymportal.business.CourseService;
 import it.univaq.disim.mwt.gymportal.business.FeedbackCourseService;
 import it.univaq.disim.mwt.gymportal.business.UserService;
+import it.univaq.disim.mwt.gymportal.domain.Chat;
 import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.Customer;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackCourse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -67,11 +69,15 @@ public class FeedbackCourseController {
         }
         try {
             feedbackCourseService.createFeedbackCourse(feedbackCourse);
+            ra.addFlashAttribute("success", "La recensione è stata aggiunta alla palestra");
+
         } catch (DataAccessException e) {
-            if (e.getMessage().contains("UKmlqk03e4td4n6ph6susmvfoh")) {
-                ra.addFlashAttribute("error", "Hai già scritto una recensione per questo corso!");
-                return "/index";
+            if (e instanceof DataIntegrityViolationException) {
+                ra.addFlashAttribute("warning", "Hai già scritto una recensione per questo corso!");
+                return "redirect:/profile";
             }
+            ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
+            return "redirect:/";
         }
 
         return "redirect:/feedbackCourse/" + feedbackCourse.getCourse().getId();
@@ -85,7 +91,15 @@ public class FeedbackCourseController {
 
     @PostMapping("/delete/{id}")
     public String delete(@ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, RedirectAttributes ra) throws BusinessException {
-        feedbackCourseService.deleteFeedbackCourse(feedbackCourse);
+        try {
+            feedbackCourseService.deleteFeedbackCourse(feedbackCourse);
+            ra.addFlashAttribute("success", "Eliminazione avvenuta con successo");
+
+        } catch (DataAccessException e) {
+            ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
+            return "redirect:/";
+        }
+
         return "redirect:/profile";
     }
 
@@ -102,8 +116,15 @@ public class FeedbackCourseController {
         if (errors.hasErrors()) {
             return "/common/error";
         }
+        try {
+            feedbackCourseService.updateFeedbackCourse(feedbackCourse);
+            ra.addFlashAttribute("success", "Aggiornamento eseguito con successo");
 
-        feedbackCourseService.updateFeedbackCourse(feedbackCourse);
+        } catch (DataAccessException e) {
+            ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
+            return "redirect:/";
+        }
+
         return "redirect:/profile";
     }
 

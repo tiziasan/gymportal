@@ -9,6 +9,7 @@ import it.univaq.disim.mwt.gymportal.domain.FavoriteGym;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -52,24 +53,22 @@ public class FavoriteGymController {
     @PostMapping("/create/{id}")
     public String create(@Valid @ModelAttribute("favoriteGym") FavoriteGym favoriteGym, RedirectAttributes ra, Model model, Errors errors)
             throws BusinessException {
-
         if (errors.hasErrors()) {
             String message = "Errore nell'inserimento";
             model.addAttribute("message", message);
             return "redirect:/profile";
         }
-
         try {
             favoriteService.createFavoriteGym(favoriteGym);
-            ra.addFlashAttribute("message", "palestra aggiunta ai preferiti");
+            ra.addFlashAttribute("success", "palestra aggiunta ai preferiti");
         } catch (DataAccessException e) {
-            if (e.getMessage().contains("UK3720qfodb5fi73gktwatyprks")) {
-                ra.addFlashAttribute("message", "Hai già inserito la palestra ai preferiti");
+            if (e instanceof DataIntegrityViolationException) {
+                ra.addFlashAttribute("warning", "Hai già inserito la palestra ai preferiti");
                 return "redirect:/profile";
             }
-            throw new BusinessException();
+            ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
+            return "redirect:/";
         }
-
         return "redirect:/profile";
     }
 
@@ -80,7 +79,14 @@ public class FavoriteGymController {
 
     @PostMapping("/delete/{id}")
     public String delete(@ModelAttribute("favoriteGym") FavoriteGym favoriteGym, RedirectAttributes ra) throws BusinessException {
-        favoriteService.deleteFavoriteGym(favoriteGym);
+        try {
+            favoriteService.deleteFavoriteGym(favoriteGym);
+            ra.addFlashAttribute("success", "Eliminazione avvenuta con successo");
+
+        } catch (DataAccessException e) {
+            ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
+            return "redirect:/";
+        }
         return "redirect:/profile";
     }
 

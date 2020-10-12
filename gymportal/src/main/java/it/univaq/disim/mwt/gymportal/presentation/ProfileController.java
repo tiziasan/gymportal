@@ -6,6 +6,7 @@ import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.configuration.FileUploadUtil;
 import it.univaq.disim.mwt.gymportal.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -80,14 +81,23 @@ public class ProfileController {
         if (errors.hasErrors()) {
             return "/common/error";
         }
-        String uploadDir = "src/main/upload/user/" + user.getId();
-        FileUploadUtil.saveFile(uploadDir, user.getId() + ".jpeg", multipartFile);
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER))) {
-            userService.updateUser(user, Role.CUSTOMER);
-        } else if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
-            userService.updateUser(user, Role.MANAGER);
+        try {
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER))) {
+                userService.updateUser(user, Role.CUSTOMER);
+            } else if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
+                userService.updateUser(user, Role.MANAGER);
+            }
+
+            String uploadDir = "src/main/upload/user/" + user.getId();
+            FileUploadUtil.saveFile(uploadDir, user.getId() + ".jpeg", multipartFile);
+
+            ra.addFlashAttribute("success", "Aggiornamento eseguito con successo");
+
+        } catch (DataAccessException e) {
+            ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
+            return "redirect:/";
         }
 
         return "redirect:/login";

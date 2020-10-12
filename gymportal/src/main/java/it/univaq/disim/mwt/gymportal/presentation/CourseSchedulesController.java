@@ -7,6 +7,7 @@ import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.configuration.FileUploadUtil;
 import it.univaq.disim.mwt.gymportal.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -50,11 +51,15 @@ public class CourseSchedulesController {
             model.addAttribute("message", message);
             return "/courseschedules/form";
         }
+        try {
+            courseSchedulesService.addCourseSchedules(courseSchedules);
+            ra.addFlashAttribute("success", "Operazione andata a buon fine, aggiungi un altro orario per il corso!");
 
-        courseSchedulesService.addCourseSchedules(courseSchedules);
+        } catch (DataAccessException e) {
+            ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
+            return "redirect:/";
+        }
 
-        String message = "Operazione andata a buon fine, aggiungi un altro orario per il corso!";
-        ra.addFlashAttribute("message", message);
         return "redirect:/courseschedules/create";
     }
 
@@ -67,10 +72,15 @@ public class CourseSchedulesController {
 
     @PostMapping("/delete/{id}")
     public String delete(@ModelAttribute("courseSchedules") CourseSchedules courseSchedules, RedirectAttributes ra, Model model) throws BusinessException {
+        try {
+            courseSchedulesService.deleteCourseSchedules(courseSchedules);
+            model.addAttribute("success", "Eliminazione dell'orario del corso andata a buon fine");
 
-        courseSchedulesService.deleteCourseSchedules(courseSchedules);
+        } catch (DataAccessException e) {
+            ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
+            return "redirect:/";
+        }
 
-        model.addAttribute("success", "Eliminazione dell'orario del corso andata a buon fine");
         return "redirect:/course/gym/" + courseSchedules.getCourse().getGym().getId();
     }
 

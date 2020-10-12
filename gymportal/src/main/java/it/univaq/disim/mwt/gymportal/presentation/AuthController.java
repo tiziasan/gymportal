@@ -6,6 +6,8 @@ import it.univaq.disim.mwt.gymportal.configuration.FileUploadUtil;
 import it.univaq.disim.mwt.gymportal.domain.Customer;
 import it.univaq.disim.mwt.gymportal.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
@@ -42,25 +44,33 @@ public class AuthController {
     }
 
     @PostMapping(value = "/registration")
-    public ModelAndView createNewUser(@Valid User user, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra, BindingResult bindingResult) throws BusinessException, IOException {
+    public ModelAndView createNewUser(@Valid User user, @RequestParam("image") MultipartFile multipartFile, BindingResult bindingResult) throws BusinessException, IOException {
         ModelAndView modelAndView = new ModelAndView();
-        User userExists = userService.findUserByUsername(user.getUsername());
 
-        if (userExists != null) {
-            bindingResult.rejectValue("username", "error.user",
-                    "There is already a user registered with the user name provided");
-        }
-        if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("/registration/index");
-        } else {
-            User newUser = userService.saveUser(new Customer(user));
-            String uploadDir = "src/main/upload/user/" + newUser.getId();
-            FileUploadUtil.saveFile(uploadDir, newUser.getId() + ".jpeg", multipartFile);
+        try {
+            User userExists = userService.findUserByUsername(user.getUsername());
 
-            modelAndView.addObject("successMessage", "Utente registrato correttamente, fai il login per entrare!");
-            modelAndView.addObject("user", new User());
-            modelAndView.setViewName("/registration/index");
+            if (userExists != null) {
+                bindingResult.rejectValue("username", "error.user",
+                        "There is already a user registered with the user name provided");
+            }
+            if (bindingResult.hasErrors()) {
+                modelAndView.setViewName("/registration/index");
+            } else {
+                User newUser = userService.saveUser(new Customer(user));
+                String uploadDir = "src/main/upload/user/" + newUser.getId();
+                FileUploadUtil.saveFile(uploadDir, newUser.getId() + ".jpeg", multipartFile);
+
+                modelAndView.addObject("successMessage", "Utente registrato correttamente, fai il login per entrare!");
+                modelAndView.addObject("user", new User());
+                modelAndView.setViewName("/registration/index");
+            }
+        } catch (DataAccessException e) {
+            modelAndView.setViewName("/index");
+            modelAndView.addObject("error", "Errore!!! Riprova o contatta l'assistenza");
+            return modelAndView;
         }
+
         return modelAndView;
     }
 

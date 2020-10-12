@@ -9,6 +9,7 @@ import it.univaq.disim.mwt.gymportal.domain.Customer;
 import it.univaq.disim.mwt.gymportal.domain.FavoriteCourse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -58,12 +59,14 @@ public class FavoriteCourseController {
 
         try {
             favoriteService.createFavoriteCourse(favoriteCourse);
-            ra.addFlashAttribute("message", "corso aggiunto ai preferiti");
+            ra.addFlashAttribute("success", "corso aggiunto ai preferiti");
         } catch (DataAccessException e) {
-            if (e.getMessage().contains("UKmttnhvruuluxke3r6mkni90ht") ){
-                ra.addFlashAttribute("message", "Hai già inserito il corso ai preferiti");
+            if (e instanceof DataIntegrityViolationException) {
+                ra.addFlashAttribute("warning", "Hai già inserito il corso ai preferiti");
                 return "redirect:/profile";
             }
+            ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
+            return "redirect:/";
         }
 
         return "redirect:/profile";
@@ -76,7 +79,15 @@ public class FavoriteCourseController {
 
     @PostMapping("/delete/{id}")
     public String delete(@ModelAttribute("favoriteCourse") FavoriteCourse favoriteCourse, RedirectAttributes ra) throws BusinessException {
-        favoriteService.deleteFavoriteCourse(favoriteCourse);
+        try {
+            favoriteService.deleteFavoriteCourse(favoriteCourse);
+            ra.addFlashAttribute("success", "Eliminazione avvenuta con successo");
+
+        } catch (DataAccessException e) {
+            ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
+            return "redirect:/";
+        }
+
         return "redirect:/profile";
     }
 
