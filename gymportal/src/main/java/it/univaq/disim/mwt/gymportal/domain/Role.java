@@ -25,35 +25,4 @@ public enum Role {
         public static final String MANAGER = "MANAGER";
     }
 
-//        CUSTOMER('C'),
-//    MANAGER('M');
-//
-//    private char value;
-//
-//    private Role(char role) {
-//        switch (role){
-//            case 'M':
-//                setValue('M');
-//                break;
-//            case 'C':
-//                setValue('C');
-//                break;
-//            default:
-//                throw new IllegalArgumentException("Incorrect use of Role");
-//        }
-//    }
-//
-//    public char getValue() {
-//        return value;
-//    }
-//
-//    public void setValue(char value) {
-//        this.value = value;
-//    }
-//
-//    public static class Values {
-//        public static final String CUSTOMER= "C";
-//        public static final String MANAGER= "M";
-//    }
-
 }
