@@ -19,15 +19,22 @@ public class Chat {
 
     private String gymName;
 
-    public Chat(String id, long userId, String userName, long gymId, String gymName) {
-        this.id = id;
+    public Chat() {
+    }
+
+    public Chat(long userId, String userName, long gymId, String gymName) {
         this.userId = userId;
         this.userName = userName;
         this.gymId = gymId;
         this.gymName = gymName;
     }
 
-    public Chat() {
+    public Chat(String id, long userId, String userName, long gymId, String gymName) {
+        this.id = id;
+        this.userId = userId;
+        this.userName = userName;
+        this.gymId = gymId;
+        this.gymName = gymName;
     }
 
     public String getId() {

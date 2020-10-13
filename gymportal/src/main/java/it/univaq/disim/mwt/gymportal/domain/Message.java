@@ -4,6 +4,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -13,6 +14,7 @@ public class Message {
     @Id
     private String id;
 
+    @NotBlank
     private String text;
 
     @DBRef

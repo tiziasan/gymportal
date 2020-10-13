@@ -45,9 +45,9 @@
         <strong th:text="${error}"><i class="icon fa fa-ban"></i> Alert!</strong>
       </div>
 
-      <div class="alert alert-info alert-dismissible" th:if="${message}">
+      <div class="alert alert-info alert-dismissible" th:if="${info}">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="margin-top: 0">&times;</button>
-        <strong th:text="${message}"><i class="icon fa fa-info"></i> Alert!</strong>
+        <strong th:text="${info}"><i class="icon fa fa-info"></i> Alert!</strong>
       </div>
 
       <div class="alert alert-warning alert-dismissible" th:if="${warning}">

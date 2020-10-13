@@ -67,8 +67,7 @@ public class ChatController {
                 model.addAttribute("chat", chat);
                 Set<Message> messageList = messageService.findByChat(chat);
                 model.addAttribute("messageList", messageList);
-            }
-            if (idChat == null && idGym != null) {    //se id gym settato restituisci la chat che fa match con idGym e username e restituisci la lista dei messaggi di quella specifica chat
+            } else if (idChat == null && idGym != null) {    //se id gym settato restituisci la chat che fa match con idGym e username e restituisci la lista dei messaggi di quella specifica chat
                 Chat chat = chatService.findByUserIdAndGymId(user, idGym);     //se chat non esiste non bisogna crearla qui ma nel metodo che fa inserimento dei messaggi
                 model.addAttribute("chat", chat);
                 Set<Message> messageList = messageService.findByChat(chat);
@@ -82,9 +81,13 @@ public class ChatController {
     }
 
     @PostMapping(value = {"", "/{idChat}", "?idGym={idGym}"})
-    public String create(@PathVariable(required = false) String idChat, @RequestParam(required = false) Long idGym, @Valid Message message, RedirectAttributes ra, Errors errors) throws BusinessException {
+    public String create(@PathVariable(required = false) String idChat, @RequestParam(required = false) Long idGym, @ModelAttribute("message") @Valid Message message, RedirectAttributes ra, Errors errors) throws BusinessException {
         if (errors.hasErrors()) {
-            return "/chat/index";
+            ra.addFlashAttribute("error", "Il messaggio non può essere vuoto");
+            if (idChat != null) {
+                return "redirect:/chat" + idChat;
+            }
+            return "redirect:/chat";
         }
 
         Chat chat = new Chat();
@@ -93,30 +96,25 @@ public class ChatController {
             User user = userService.findUserByUsername(auth.getName());
             if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
                 if (idChat != null && idGym == null) {    //se ho idChat prendo la chat, faccio inserimento del messaggio e aggiorno solo la lista dei messaggi e ritorno a /chat/idchat
-                    chat = chatService.findChatById(idChat);
+                    chat.setId(idChat);
                     message.setGym(true);
                 }
             } else {
                 if (idChat != null && idGym == null) {    //se ho idChat prendo la chat, faccio inserimento del messaggio e aggiorno solo la lista dei messaggi e ritorno a /chat/idchat
-                    chat = chatService.findChatById(idChat);
-                    message.setGym(false);
+                    chat.setId(idChat);
                 }
-                if (idChat == null && idGym != null) {    //se ho idGYm prendo la chat che fa match con userId
+                if (idChat == null && idGym != null) {    //se ho idGym prendo la chat che fa match con userId
                     chat = chatService.findByUserIdAndGymId(user, idGym);
-                    if (chat == null) {  //se non esiste la creo
-                        chat = new Chat();
-                        chat.setUserId(user.getId());
-                        chat.setUserName(user.getLastname() + " " + user.getName());
+                    if (chat == null) {     //se non esiste la creo
+                        String userName = user.getLastname() + " " + user.getName();
                         Gym gym = gymService.findByID(idGym);
-                        chat.setGymId(gym.getId());
-                        chat.setGymName(gym.getName());
+                        chat = new Chat(user.getId(), userName, gym.getId(), gym.getName());
                         chat = chatService.saveChat(chat);
                     }
-                    message.setGym(false);
                 }
+                message.setGym(false);
             }
             message.setChat(chat);
-            message.setDate(LocalDateTime.now());
             messageService.createMessage(message);
         } catch (DataAccessException e) {
             ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
