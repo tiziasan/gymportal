@@ -47,8 +47,6 @@ public class CourseSchedulesController {
     @PostMapping("/create")
     public String create(@Valid @ModelAttribute("courseSchedules") CourseSchedules courseSchedules, Errors errors, RedirectAttributes ra, Model model) throws BusinessException, IOException {
         if (errors.hasErrors()) {
-            String message = "Errore nell'inserimento";
-            model.addAttribute("message", message);
             return "/courseschedules/form";
         }
         try {

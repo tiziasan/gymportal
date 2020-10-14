@@ -54,9 +54,9 @@ public class FavoriteGymController {
     public String create(@Valid @ModelAttribute("favoriteGym") FavoriteGym favoriteGym, Errors errors, RedirectAttributes ra, Model model)
             throws BusinessException {
         if (errors.hasErrors()) {
-            String message = "Errore nell'inserimento";
-            model.addAttribute("message", message);
-            return "redirect:/profile";
+            model.addAttribute("course", favoriteGym.getGym());
+            model.addAttribute("user", favoriteGym.getUser());
+            return "/favoriteGym/create";
         }
         try {
             favoriteService.createFavoriteGym(favoriteGym);

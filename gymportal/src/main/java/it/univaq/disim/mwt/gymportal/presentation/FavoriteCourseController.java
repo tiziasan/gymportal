@@ -52,11 +52,10 @@ public class FavoriteCourseController {
     public String create(@Valid @ModelAttribute("favoriteCourse") FavoriteCourse favoriteCourse, Errors errors, RedirectAttributes ra, Model model)
             throws BusinessException {
         if (errors.hasErrors()) {
-            String message = "Errore nell'inserimento";
-            model.addAttribute("message", message);
-            return "redirect:/profile";
+            model.addAttribute("course", favoriteCourse.getCourse());
+            model.addAttribute("user", favoriteCourse.getUser());
+            return "/favoriteCourse/create";
         }
-
         try {
             favoriteService.createFavoriteCourse(favoriteCourse);
             ra.addFlashAttribute("success", "corso aggiunto ai preferiti");

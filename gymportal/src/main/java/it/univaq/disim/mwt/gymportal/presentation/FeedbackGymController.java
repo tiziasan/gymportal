@@ -7,7 +7,6 @@ import it.univaq.disim.mwt.gymportal.business.UserService;
 import it.univaq.disim.mwt.gymportal.domain.Customer;
 import it.univaq.disim.mwt.gymportal.domain.FeedbackGym;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
-import it.univaq.disim.mwt.gymportal.presentation.utility.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -54,7 +53,8 @@ public class FeedbackGymController {
     @PostMapping("/create/{id}")
     public String create(@Valid @ModelAttribute("feedback") FeedbackGym feedback, Errors errors, RedirectAttributes ra, Model model) throws BusinessException {
         if (errors.hasErrors()) {
-            model.addAttribute("warning", "Errore nell'inserimento");
+            model.addAttribute("gym", feedback.getGym());
+            model.addAttribute("user", feedback.getUser());
             return "/feedback/form";
         }
         try {
@@ -105,7 +105,7 @@ public class FeedbackGymController {
     @PostMapping("/update/{id}")
     public String update(@Valid @ModelAttribute("feedback") FeedbackGym feedback, Errors errors, RedirectAttributes ra) throws BusinessException {
         if (errors.hasErrors()) {
-            return "/common/error";
+            return "/feedback/update";
         }
 
         try {

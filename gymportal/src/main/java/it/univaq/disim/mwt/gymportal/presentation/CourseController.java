@@ -48,10 +48,8 @@ public class CourseController {
 
     public String create(@Valid @ModelAttribute("course") Course course, Errors errors, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra, Model model) throws BusinessException, IOException {
         if (errors.hasErrors()) {
-            model.addAttribute("error", "Errore nell'inserimento");
             return "/course/form";
         }
-
         try {
             Course newCourse = courseService.createCourse(course);
 
@@ -120,7 +118,7 @@ public class CourseController {
     @PostMapping("/update/{id}")
     public String update(@Valid @ModelAttribute("course") Course course, Errors errors, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra) throws BusinessException, IOException {
         if (errors.hasErrors()) {
-            return "/common/error";
+            return "/course/form";
         }
         try {
             courseService.updateCourse(course);

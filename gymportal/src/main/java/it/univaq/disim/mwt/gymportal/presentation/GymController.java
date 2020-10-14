@@ -2,8 +2,6 @@ package it.univaq.disim.mwt.gymportal.presentation;
 
 import it.univaq.disim.mwt.gymportal.business.*;
 import it.univaq.disim.mwt.gymportal.configuration.FileUploadUtil;
-import it.univaq.disim.mwt.gymportal.domain.Chat;
-import it.univaq.disim.mwt.gymportal.domain.Course;
 import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.domain.Manager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,18 +10,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.File;
-import java.io.FileDescriptor;
 import java.io.IOException;
-import java.util.Set;
 
 @Controller
 @RequestMapping("gym")
@@ -48,8 +42,9 @@ public class GymController {
     }
 
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute("gym") Gym gym, Errors errors, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra) throws BusinessException, IOException {
+    public String create(@Valid @ModelAttribute("gym") Gym gym, Errors errors, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra, Model model) throws BusinessException, IOException {
         if (errors.hasErrors()) {
+            model.addAttribute("user", gym.getUser());
             return "/gym/form";
         }
         try {
@@ -105,11 +100,11 @@ public class GymController {
     }
 
     @PostMapping("/update/{id}")
-    public String update(@ModelAttribute("gym") Gym gym, Errors errors, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra) throws BusinessException, IOException {
+    public String update(@ModelAttribute("gym") Gym gym, Errors errors, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra, Model model) throws BusinessException, IOException {
         if (errors.hasErrors()) {
+            model.addAttribute("user", gym.getUser());
             return "/gym/form";
         }
-
         try {
             gymService.updateGym(gym);
 
@@ -124,7 +119,6 @@ public class GymController {
 
         return "redirect:/";
     }
-
 
     @GetMapping("/list")
     public String list() {

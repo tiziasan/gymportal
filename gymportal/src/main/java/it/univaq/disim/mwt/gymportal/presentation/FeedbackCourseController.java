@@ -63,8 +63,8 @@ public class FeedbackCourseController {
     @PostMapping("/create/{id}")
     public String create(@Valid @ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, Errors errors, RedirectAttributes ra, Model model) throws BusinessException {
         if (errors.hasErrors()) {
-            String message = "Errore nell'inserimento";
-            model.addAttribute("message", message);
+            model.addAttribute("course", feedbackCourse.getCourse());
+            model.addAttribute("user", feedbackCourse.getUser());
             return "/feedbackCourse/form";
         }
         try {
@@ -114,7 +114,7 @@ public class FeedbackCourseController {
     @PostMapping("/update/{id}")
     public String update(@Valid @ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, Errors errors, RedirectAttributes ra) throws BusinessException {
         if (errors.hasErrors()) {
-            return "/common/error";
+            return "/feedbackCourse/update";
         }
         try {
             feedbackCourseService.updateFeedbackCourse(feedbackCourse);
