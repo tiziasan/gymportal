@@ -46,14 +46,11 @@ public class Course extends BaseEntity implements Serializable {
     @ManyToOne
     private Gym gym;
 
-    public Course(@NotBlank @Size(max = 50) String name, @NotBlank @Size(max = 400) String description, @NotBlank @Size(max = 50) String code, @NotBlank @Size(max = 50) String instructor, Set<FeedbackCourse> feedbackCourses, Set<FavoriteCourse> favoriteCourses, Set<CourseSchedules> courseSchedules, Gym gym) {
+    public Course(String name, String description, String code, String instructor, Gym gym) {
         this.name = name;
         this.description = description;
         this.code = code;
         this.instructor = instructor;
-        this.feedbackCourses = feedbackCourses;
-        this.favoriteCourses = favoriteCourses;
-        this.courseSchedules = courseSchedules;
         this.gym = gym;
     }
 

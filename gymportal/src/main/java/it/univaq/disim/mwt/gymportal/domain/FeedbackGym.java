@@ -28,7 +28,7 @@ public class FeedbackGym extends BaseEntity implements Serializable {
     @ManyToOne
     private Gym gym;
 
-    public FeedbackGym(@NotBlank @Size(max = 150) String feed, @NotNull @Min(0) @Max(5) int rating, Customer user, Gym gym) {
+    public FeedbackGym(String feed, int rating, Customer user, Gym gym) {
         this.feed = feed;
         this.rating = rating;
         this.user = user;

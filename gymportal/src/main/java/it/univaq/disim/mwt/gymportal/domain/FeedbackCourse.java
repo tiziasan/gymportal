@@ -28,7 +28,7 @@ public class FeedbackCourse extends BaseEntity implements Serializable {
     @ManyToOne
     private Course course;
 
-    public FeedbackCourse(@NotBlank @Size(max = 150) String feed, @NotNull @Min(0) @Max(5) int rating, Customer user, Course course) {
+    public FeedbackCourse(String feed, int rating, Customer user, Course course) {
         this.feed = feed;
         this.rating = rating;
         this.user = user;
