@@ -48,7 +48,7 @@ public class GymController {
     }
 
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute("gym") Gym gym, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra, Errors errors) throws BusinessException, IOException {
+    public String create(@Valid @ModelAttribute("gym") Gym gym, Errors errors, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra) throws BusinessException, IOException {
         if (errors.hasErrors()) {
             return "/gym/form";
         }
@@ -105,7 +105,7 @@ public class GymController {
     }
 
     @PostMapping("/update/{id}")
-    public String update(@ModelAttribute("gym") Gym gym, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra, Errors errors) throws BusinessException, IOException {
+    public String update(@ModelAttribute("gym") Gym gym, Errors errors, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra) throws BusinessException, IOException {
         if (errors.hasErrors()) {
             return "/gym/form";
         }

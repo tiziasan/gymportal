@@ -77,7 +77,7 @@ public class ProfileController {
     }
 
     @PostMapping("/update")
-    public String update(@Valid @ModelAttribute("user") User user, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra, Errors errors) throws BusinessException, IOException {
+    public String update(@Valid @ModelAttribute("user") User user, Errors errors, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra) throws BusinessException, IOException {
         if (errors.hasErrors()) {
             return "/common/error";
         }

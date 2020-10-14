@@ -81,7 +81,7 @@ public class ChatController {
     }
 
     @PostMapping(value = {"", "/{idChat}", "?idGym={idGym}"})
-    public String create(@PathVariable(required = false) String idChat, @RequestParam(required = false) Long idGym, @ModelAttribute("message") @Valid Message message, RedirectAttributes ra, Errors errors) throws BusinessException {
+    public String create(@PathVariable(required = false) String idChat, @RequestParam(required = false) Long idGym, @ModelAttribute("message") @Valid Message message, Errors errors, RedirectAttributes ra) throws BusinessException {
         if (errors.hasErrors()) {
             ra.addFlashAttribute("error", "Il messaggio non può essere vuoto");
             if (idChat != null) {

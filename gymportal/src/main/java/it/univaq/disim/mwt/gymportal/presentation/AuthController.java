@@ -44,7 +44,7 @@ public class AuthController {
     }
 
     @PostMapping(value = "/registration")
-    public ModelAndView createNewUser(@Valid User user, @RequestParam("image") MultipartFile multipartFile, BindingResult bindingResult) throws BusinessException, IOException {
+    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult, @RequestParam("image") MultipartFile multipartFile) throws BusinessException, IOException {
         ModelAndView modelAndView = new ModelAndView();
 
         try {

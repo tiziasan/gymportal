@@ -61,7 +61,7 @@ public class FeedbackCourseController {
     }
 
     @PostMapping("/create/{id}")
-    public String create(@Valid @ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, RedirectAttributes ra, Model model, Errors errors) throws BusinessException {
+    public String create(@Valid @ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, Errors errors, RedirectAttributes ra, Model model) throws BusinessException {
         if (errors.hasErrors()) {
             String message = "Errore nell'inserimento";
             model.addAttribute("message", message);
@@ -112,7 +112,7 @@ public class FeedbackCourseController {
     }
 
     @PostMapping("/update/{id}")
-    public String update(@Valid @ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, RedirectAttributes ra, Errors errors) throws BusinessException {
+    public String update(@Valid @ModelAttribute("feedbackCourse") FeedbackCourse feedbackCourse, Errors errors, RedirectAttributes ra) throws BusinessException {
         if (errors.hasErrors()) {
             return "/common/error";
         }

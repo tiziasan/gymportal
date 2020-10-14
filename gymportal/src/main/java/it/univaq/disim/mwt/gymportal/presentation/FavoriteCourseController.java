@@ -49,7 +49,7 @@ public class FavoriteCourseController {
     }
 
     @PostMapping("/create/{id}")
-    public String create(@Valid @ModelAttribute("favoriteCourse") FavoriteCourse favoriteCourse, RedirectAttributes ra, Model model, Errors errors)
+    public String create(@Valid @ModelAttribute("favoriteCourse") FavoriteCourse favoriteCourse, Errors errors, RedirectAttributes ra, Model model)
             throws BusinessException {
         if (errors.hasErrors()) {
             String message = "Errore nell'inserimento";
