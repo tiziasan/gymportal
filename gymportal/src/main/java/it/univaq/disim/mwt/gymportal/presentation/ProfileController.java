@@ -88,18 +88,17 @@ public class ProfileController {
             }
             if (bindingResult.hasErrors()) {
                 return "/profile/update";
-            } else {
-                if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER))) {
-                    userService.updateUser(user, Role.CUSTOMER);
-                } else if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
-                    userService.updateUser(user, Role.MANAGER);
-                }
-
-                String uploadDir = "src/main/upload/user/" + user.getId();
-                FileUploadUtil.saveFile(uploadDir, user.getId() + ".jpeg", multipartFile);
-
-                ra.addFlashAttribute("success", "Aggiornamento eseguito con successo");
             }
+            if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER))) {
+                userService.updateUser(user, Role.CUSTOMER);
+            } else if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
+                userService.updateUser(user, Role.MANAGER);
+            }
+
+            String uploadDir = "src/main/upload/user/" + user.getId();
+            FileUploadUtil.saveFile(uploadDir, user.getId() + ".jpeg", multipartFile);
+
+            ra.addFlashAttribute("success", "Aggiornamento eseguito con successo");
         } catch (DataAccessException e) {
             ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
             return "redirect:/";
