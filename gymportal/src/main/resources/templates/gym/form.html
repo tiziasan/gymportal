@@ -221,26 +221,25 @@
 			<input type="hidden" th:value="${user.id}" th:attr="name='user.id'" />
 
 			<div class="box-body">
-				<div class="form-group">
+				<div class="form-group" th:classappend="${#fields.hasErrors('name')} ? 'has-error' : ''">
 					<label for="gym-name" class="col-sm-2 control-label" th:text="#{gym.name}">Nome</label>
-
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="gym-name"
 							   placeholder="Nome" th:placeholder="#{gym.name}" th:field="*{name}">
+						<span class="help-block" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" th:classappend="${#fields.hasErrors('address')} ? 'has-error' : ''">
 					<label for="gym-address" class="col-sm-2 control-label" th:text="#{gym.address}">Indirizzo</label>
-
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="gym-address"
 							   placeholder="Indirizzo" th:placeholder="#{gym.address.placehorder}" th:field="*{address}">
+						<span class="help-block" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
 					</div>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group" th:classappend="${#fields.hasErrors('region')} ? 'has-error' : ''">
 					<label for="region" class="col-sm-2 control-label" th:text="#{gym.region}">Regione</label>
-
 					<div class="col-sm-10" id="region">
 						<select id="regioni" onchange="regione(this.value)"
 								th:field="*{region}">
@@ -266,17 +265,25 @@
 							<option value="Valle">Valle D'Aosta</option>
 							<option value="Veneto">Veneto</option>
 						</select>
+						<span class="help-block" th:if="${#fields.hasErrors('region')}" th:errors="*{region}"></span>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" th:classappend="${#fields.hasErrors('province')} ? 'has-error' : ''">
 					<label for="province" class="col-sm-2 control-label" th:text="#{gym.province}">Provincia</label>
 					<div class="col-sm-10">
 						<select id="province" th:field="*{province}"></select>
+						<span class="help-block" th:if="${#fields.hasErrors('province')}" th:errors="*{province}"></span>
 					</div>
 				</div>
 			</div>
-			<label>Inserisci la foto della palestra: </label>
-			<input type="file" name="image" accept="image/png, image/jpeg" />
+
+			<div class="form-group">
+				<label for="image" class="col-sm-2 control-label" >Inserisci la foto della palestra: </label>
+				<div class="col-sm-10">
+					<input type="file" id="image" name="image" accept="image/png, image/jpeg" />
+				</div>
+			</div>
+
 			<!-- /.box-body -->
 			<div class="box-footer">
 				<button type="submit" class="btn btn-info pull-right" th:text="#{common.submit}">Salva</button>

@@ -6,7 +6,7 @@
 		<div class="row">
 			<div class="col-12">
 				<body class="hold-transition register-page">
-					<div class="register-box">
+					<div class="register-box" style="margin-top: 2%">
 						<div class="register-logo">
 							<a href="/gymportal"><b th:text="#{common.applicationtitle}">Gym Portal</b></a>
 						</div>
@@ -16,28 +16,31 @@
 
 							<form autocomplete="off" action="#" th:action="@{/registration}" th:object="${user}" method="post" role="form" enctype="multipart/form-data">
 
-								<div class="form-group has-feedback">
-									<label th:if="${#fields.hasErrors('name')}" for="name" th:errors="*{name}" class="validation-message"></label>
+								<div class="form-group has-feedback" th:classappend="${#fields.hasErrors('name')} ? 'has-error' : ''">
 									<input id="name" type="text" th:field="*{name}" th:placeholder="#{profile.name}" placeholder="Name" class="form-control" />
+									<span class="help-block" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
 								</div>
+								<div class="form-group has-feedback" th:classappend="${#fields.hasErrors('lastname')} ? 'has-error' : ''">
+									<input id="lastname" type="text" th:field="*{lastname}" th:placeholder="#{profile.lastname}" placeholder="Last Name" class="form-control" />
+									<span class="help-block" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"></span>
+								</div>
+								<div class="form-group has-feedback" th:classappend="${#fields.hasErrors('email')} ? 'has-error' : ''">
+									<input id="email" type="text" th:field="*{email}" th:placeholder="#{profile.email}" placeholder="Email" class="form-control" />
+									<span class="help-block" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+								</div>
+								<div class="form-group has-feedback" th:classappend="${#fields.hasErrors('username')} ? 'has-error' : ''">
+									<input id="username" type="text" th:field="*{username}" th:placeholder="#{profile.username}" placeholder="User Name" class="form-control" />
+									<span class="help-block" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+								</div>
+								<div class="form-group has-feedback" th:classappend="${#fields.hasErrors('password')} ? 'has-error' : ''">
+									<input id="password" type="password" th:field="*{password}" th:placeholder="#{profile.password}" placeholder="Password" class="form-control" />
+									<span class="help-block" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+								</div>
+
 								<div class="form-group has-feedback">
-									<label th:if="${#fields.hasErrors('lastname')}" for="lastname" th:errors="*{lastname}" class="validation-message"></label>
-									<input id="lastname" type="text" th:field="*{lastname}" th:placeholder="#{profile.lastname}" placeholder="Last Name" class="form-control"/>
+									<label>Inserisci la foto del profilo: </label>
+									<input type="file" name="image" accept="image/png, image/jpeg" />
 								</div>
-								<div class="form-group has-feedback">
-									<label th:if="${#fields.hasErrors('email')}" for="email" th:errors="*{email}" class="validation-message"></label>
-									<input id="email" type="text" th:field="*{email}" th:placeholder="#{profile.email}" placeholder="Email" class="form-control"/>
-								</div>
-								<div class="form-group has-feedback">
-									<label th:if="${#fields.hasErrors('username')}" for="username" th:errors="*{username}" class="validation-message"></label>
-									<input id="username" type="text" th:field="*{username}" th:placeholder="#{profile.username}" placeholder="User Name" class="form-control"/>
-								</div>
-								<div class="form-group has-feedback">
-									<label th:if="${#fields.hasErrors('password')}" for="password" th:errors="*{password}" class="validation-message"></label>
-									<input id="password" type="password" th:field="*{password}" th:placeholder="#{profile.password}" placeholder="Password" class="form-control"/>
-								</div>
-								<label>Inserisci la foto del profilo: </label>
-								<input type="file" name="image" accept="image/png, image/jpeg" />
 
 								<div class="row">
 									<!-- /.col -->

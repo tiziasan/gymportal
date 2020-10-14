@@ -15,20 +15,22 @@
 			<input type="hidden" th:value="${feedbackCourse.course.id}" th:attr="name='course.id'" />
 
 			<div class="box-body">
-				<div class="form-group">
+				<div class="form-group" th:classappend="${#fields.hasErrors('feed')} ? 'has-error' : ''">
 					<label for="feed" class="col-sm-2 control-label" th:text="#{feedback.feed}" >Feed
 					</label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="feed"
 							   placeholder="Descrizione" th:placeholder="#{feedback.feed}" th:field="*{feed}">
+						<span class="help-block" th:if="${#fields.hasErrors('feed')}" th:errors="*{feed}"></span>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" th:classappend="${#fields.hasErrors('rating')} ? 'has-error' : ''">
 					<label for="rating" class="col-sm-2 control-label" th:text="#{feedback.rating} + ' ' + #{feedback.rating.placeholder}" >Rating 1-10
 					</label>
 					<div class="col-sm-10">
 						<input type="number" class="form-control" id="rating" min="0" max="5"
 							   placeholder="1-5" th:placeholder="#{feedback.rating.placeholder}" th:field="*{rating}">
+						<span class="help-block" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></span>
 					</div>
 				</div>
 			</div>
