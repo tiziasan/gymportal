@@ -12,6 +12,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -77,24 +78,28 @@ public class ProfileController {
     }
 
     @PostMapping("/update")
-    public String update(@Valid @ModelAttribute("user") User user, Errors errors, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra) throws BusinessException, IOException {
-        if (errors.hasErrors()) {
-            return "/common/error";
-        }
-
+    public String update(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes ra, Model model) throws BusinessException, IOException {
         try {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER))) {
-                userService.updateUser(user, Role.CUSTOMER);
-            } else if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
-                userService.updateUser(user, Role.MANAGER);
+            User userExists = userService.findUserByUsername(user.getUsername());
+            if (userExists != null && !(auth.getName().equals(user.getUsername()))) {
+                bindingResult.rejectValue("username", "error.user",
+                        "There is already a user registered with the user name provided");
             }
+            if (bindingResult.hasErrors()) {
+                return "/profile/update";
+            } else {
+                if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.CUSTOMER))) {
+                    userService.updateUser(user, Role.CUSTOMER);
+                } else if (auth.getAuthorities().contains(new SimpleGrantedAuthority(Role.Values.MANAGER))) {
+                    userService.updateUser(user, Role.MANAGER);
+                }
 
-            String uploadDir = "src/main/upload/user/" + user.getId();
-            FileUploadUtil.saveFile(uploadDir, user.getId() + ".jpeg", multipartFile);
+                String uploadDir = "src/main/upload/user/" + user.getId();
+                FileUploadUtil.saveFile(uploadDir, user.getId() + ".jpeg", multipartFile);
 
-            ra.addFlashAttribute("success", "Aggiornamento eseguito con successo");
-
+                ra.addFlashAttribute("success", "Aggiornamento eseguito con successo");
+            }
         } catch (DataAccessException e) {
             ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
             return "redirect:/";
