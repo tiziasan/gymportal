@@ -58,7 +58,7 @@ public class GymController {
 
         } catch (DataAccessException e) {
             if (e instanceof DataIntegrityViolationException) {
-                ra.addFlashAttribute("warning", "La palestra inserita esiste già");
+                ra.addFlashAttribute("warning", "Hai già inserito questa palestra");
                 return "redirect:/gym/create";
             }
             ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
