@@ -1,10 +1,6 @@
 package it.univaq.disim.mwt.gymportal.domain;
 
-import it.univaq.disim.mwt.gymportal.configuration.LessEgualsThen;
-
 import javax.persistence.*;
-import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.DayOfWeek;
@@ -12,19 +8,19 @@ import java.time.LocalTime;
 import java.util.Objects;
 
 @Entity
-@Table(name = "courseschedules")
+@Table(name = "courseschedules", uniqueConstraints = @UniqueConstraint(columnNames = {"DAY", "START", "END", "course_id"}))
 public class CourseSchedules extends BaseEntity implements Serializable {
 
-    @NotBlank
     @Column(name = "DAY")
+    @NotNull
     private DayOfWeek day;
 
-    @NotBlank
     @Column(name = "START")
+    @NotNull
     private LocalTime start;
 
-    @NotBlank
     @Column(name = "END")
+    @NotNull
     private LocalTime end;
 
     @ManyToOne

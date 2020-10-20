@@ -6,6 +6,7 @@ import it.univaq.disim.mwt.gymportal.domain.Gym;
 import it.univaq.disim.mwt.gymportal.domain.Manager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -56,6 +57,10 @@ public class GymController {
             ra.addFlashAttribute("success", "Creazione avvenuta con successo");
 
         } catch (DataAccessException e) {
+            if (e instanceof DataIntegrityViolationException) {
+                ra.addFlashAttribute("warning", "La palestra inserita esiste già");
+                return "redirect:/gym/create";
+            }
             ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
             return "redirect:/";
         }
