@@ -7,8 +7,8 @@
 	<div>
 		<div class="search-bar">
 			<form class="plr-5" th:action="${#request.getRequestURI()}" method="get">
-				<input type="text" name="search" id="search" placeholder="Ricerca" th:value="${search}"/>
-				<button class="btn-primary" type="Submit">Cerca</button>
+				<input type="text" name="search" id="search" placeholder="Ricerca" th:placeholder="#{common.search}" th:value="${search}"/>
+				<button class="btn-primary" type="Submit" th:text="#{common.search}">Cerca</button>
 			</form>
 		</div>
 
@@ -28,7 +28,7 @@
 						<div id="schedules">
 							<div th:each="c : ${course.getCourseSchedules()}">
 
-								<p th:text="${c.day} + ':' + ' ' + ${c.start} + '-' + ${c.end}"></p>
+								<p th:text="#{${c.day}} + ':' + ' ' + ${c.start} + '-' + ${c.end}"></p>
 								<a th:href="@{/courseschedules/delete/{courseSchedulesId}(courseSchedulesId=${c.id})}" sec:authorize="hasAuthority('MANAGER')">
 									<button class="btn-primary" th:text="#{common.delete}">Elimina</button>
 								</a>
