@@ -39,79 +39,37 @@ public class CourseSchedulesController {
     @Autowired
     GymService gymService;
 
-    /*@GetMapping("/create")
+    @GetMapping("/create")
     public String createStart(Model model) {
         CourseSchedules courseSchedules = new CourseSchedules();
         model.addAttribute("courseSchedules", courseSchedules);
 
         return "/courseSchedules/form";
     }
-
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute("courseSchedules") CourseSchedules courseSchedules, Errors errors, RedirectAttributes ra, Model model) throws BusinessException, IOException {
+    public String create(@Valid @ModelAttribute("courseSchedules") CourseSchedules courseSchedules, Errors errors, RedirectAttributes ra, BindingResult bindingResult) throws BusinessException, IOException {
         if (errors.hasErrors()) {
             return "/courseschedules/form";
         }
-
-        if(courseSchedules.getEnd().isAfter(courseSchedules.getStart())) {
-            try {
-                courseSchedulesService.addCourseSchedules(courseSchedules);
-                ra.addFlashAttribute("success", "Operazione andata a buon fine, aggiungi un altro orario per il corso!");
-            } catch (DataAccessException e) {
-                if (e instanceof DataIntegrityViolationException) {
-                    ra.addFlashAttribute("warning", "L'orario inserito esiste già per questo corso");
-                    return "redirect:/courseschedules/create";
-                }
-                ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
-                return "redirect:/";
-            }
-
-        }else {
-            ra.addFlashAttribute("error", "L'Orario di fine del corso non può essere minore/uguale di quello dell'inizio");
-        }
-
-        return "redirect:/courseschedules/create";
-    }*/
-
-    @GetMapping(value = "/create")
-    public ModelAndView createStart() {
-        ModelAndView modelAndView = new ModelAndView();
-        CourseSchedules courseSchedules = new CourseSchedules();
-        modelAndView.addObject("courseSchedules", courseSchedules);
-        modelAndView.setViewName("/courseSchedules/form");
-        return modelAndView;
-    }
-
-    @PostMapping(value = "/create")
-    public ModelAndView create(@Valid CourseSchedules courseSchedules, BindingResult bindingResult) throws BusinessException, IOException {
-        ModelAndView modelAndView = new ModelAndView();
-
-        if(courseSchedules.getEnd().isAfter(courseSchedules.getStart())) {
-            try {
-                courseSchedulesService.addCourseSchedules(courseSchedules);
-                modelAndView.addObject("success", "Operazione andata a buon fine, aggiungi un altro orario per il corso!");
-                modelAndView.addObject("courseSchedules", new CourseSchedules());
-                modelAndView.setViewName("/courseSchedules/form");
-            } catch (DataAccessException e) {
-                if (e instanceof DataIntegrityViolationException) {
-                    modelAndView.setViewName("/courseSchedules/form");
-                    modelAndView.addObject("error", "L'Orario inserito esiste già");
-                    return modelAndView;
-                }
-                modelAndView.setViewName("/index");
-                modelAndView.addObject("error", "Errore!!! Riprova o contatta l'assistenza");
-                return modelAndView;
-            }
-
-        }else {
+        if(! courseSchedules.getEnd().isAfter(courseSchedules.getStart())) {
             bindingResult.rejectValue("end", "error.courseschedules",
                     "L'Orario di fine del corso non può essere minore/uguale di quello dell'inizio");
-            modelAndView.setViewName("/courseSchedules/form");
+            return "/courseSchedules/form";
         }
 
-        return modelAndView;
+        try {
+            courseSchedulesService.addCourseSchedules(courseSchedules);
+            ra.addFlashAttribute("success", "Operazione andata a buon fine, aggiungi un altro orario per il corso!");
+        } catch (DataAccessException e) {
+            if (e instanceof DataIntegrityViolationException) {
+                ra.addFlashAttribute("warning", "L'orario inserito esiste già per questo corso");
+                return "redirect:/courseschedules/create";
+            }
+            ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
+            return "redirect:/";
+        }
+        return "redirect:/courseschedules/create";
     }
-
 
     @GetMapping("/delete/{id}")
     public String deleteStart(@PathVariable long id, Model model) throws BusinessException {
