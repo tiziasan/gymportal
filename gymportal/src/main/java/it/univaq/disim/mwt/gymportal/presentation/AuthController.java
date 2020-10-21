@@ -52,7 +52,7 @@ public class AuthController {
 
             if (userExists != null) {
                 bindingResult.rejectValue("username", "error.user",
-                        "There is already a user registered with the user name provided");
+                        "Esiste già un utente con questa username");
             }
             if (bindingResult.hasErrors()) {
                 modelAndView.setViewName("/registration/index");

@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "gym")
+@Table(name = "gym", uniqueConstraints = @UniqueConstraint(columnNames = {"NAME", "ADDRESS", "PROVINCE", "REGION", "user_id"}))
 public class Gym extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

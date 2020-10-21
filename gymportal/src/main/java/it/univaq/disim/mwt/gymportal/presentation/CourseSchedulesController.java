@@ -8,14 +8,17 @@ import it.univaq.disim.mwt.gymportal.configuration.FileUploadUtil;
 import it.univaq.disim.mwt.gymportal.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -43,21 +46,28 @@ public class CourseSchedulesController {
 
         return "/courseSchedules/form";
     }
-
     @PostMapping("/create")
-    public String create(@Valid @ModelAttribute("courseSchedules") CourseSchedules courseSchedules, Errors errors, RedirectAttributes ra, Model model) throws BusinessException, IOException {
+    public String create(@Valid @ModelAttribute("courseSchedules") CourseSchedules courseSchedules, Errors errors, RedirectAttributes ra, BindingResult bindingResult) throws BusinessException, IOException {
         if (errors.hasErrors()) {
             return "/courseschedules/form";
         }
+        if(! courseSchedules.getEnd().isAfter(courseSchedules.getStart())) {
+            bindingResult.rejectValue("end", "error.courseschedules",
+                    "L'Orario di fine del corso non può essere minore/uguale di quello dell'inizio");
+            return "/courseSchedules/form";
+        }
+
         try {
             courseSchedulesService.addCourseSchedules(courseSchedules);
             ra.addFlashAttribute("success", "Operazione andata a buon fine, aggiungi un altro orario per il corso!");
-
         } catch (DataAccessException e) {
+            if (e instanceof DataIntegrityViolationException) {
+                ra.addFlashAttribute("warning", "L'orario inserito esiste già per questo corso");
+                return "redirect:/courseschedules/create";
+            }
             ra.addFlashAttribute("error", "Errore!!! Riprova o contatta l'assistenza");
             return "redirect:/";
         }
-
         return "redirect:/courseschedules/create";
     }
 

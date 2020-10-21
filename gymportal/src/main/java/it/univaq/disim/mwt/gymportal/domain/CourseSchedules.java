@@ -8,7 +8,7 @@ import java.time.LocalTime;
 import java.util.Objects;
 
 @Entity
-@Table(name = "courseschedules")
+@Table(name = "courseschedules", uniqueConstraints = @UniqueConstraint(columnNames = {"DAY", "START", "END", "course_id"}))
 public class CourseSchedules extends BaseEntity implements Serializable {
 
     @Column(name = "DAY")

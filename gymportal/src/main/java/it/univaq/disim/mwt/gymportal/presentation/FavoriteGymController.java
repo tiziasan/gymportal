@@ -54,7 +54,7 @@ public class FavoriteGymController {
     public String create(@Valid @ModelAttribute("favoriteGym") FavoriteGym favoriteGym, Errors errors, RedirectAttributes ra, Model model)
             throws BusinessException {
         if (errors.hasErrors()) {
-            model.addAttribute("course", favoriteGym.getGym());
+            model.addAttribute("gym", favoriteGym.getGym());
             model.addAttribute("user", favoriteGym.getUser());
             return "/favoriteGym/create";
         }
